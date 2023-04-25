@@ -137,7 +137,7 @@ onMounted(() => {
   }
 
   &__title {
-    padding-block: 10px;
+    padding-block: 20px 10px;
   }
 
   &__container {
