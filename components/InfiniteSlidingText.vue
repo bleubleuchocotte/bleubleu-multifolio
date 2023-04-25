@@ -43,7 +43,7 @@ defineProps({
         transform: translateX(100%);
       }
     }
-    span {
+    h1 {
       padding-left: $InfiniteSlidingText-gap;
       &::before {
         content: attr(data-text);
