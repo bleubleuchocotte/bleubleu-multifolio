@@ -2,6 +2,7 @@
   <main>
     <div class="left">
       <ProjectsList />
+      <div class="content-images"></div>
     </div>
     <div class="right"></div>
   </main>
@@ -13,11 +14,18 @@ main {
   height: 100%;
 
   display: flex;
+  justify-content: space-between;
 }
 .left {
-  height: 100%;
-  width: 50%;
-  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .content-images {
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+  }
 }
 
 .right {
