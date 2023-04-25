@@ -24,6 +24,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.11",
     "sass": "^1.62.0",
     "sass-loader": "^13.2.2"
   }
