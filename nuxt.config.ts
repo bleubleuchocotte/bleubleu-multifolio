@@ -10,4 +10,5 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/reset.css", "@/assets/lenis.css"],
+  modules: ["@vueuse/nuxt"],
 });
