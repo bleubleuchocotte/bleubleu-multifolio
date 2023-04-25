@@ -10,7 +10,7 @@ const links: HeaderLinkType[] = [
 </script>
 
 <template>
-  <div class="container">
+  <header class="container">
     <div class="container__logo"></div>
     <div class="container__text">
       <InfiniteSlidingText
@@ -25,7 +25,7 @@ const links: HeaderLinkType[] = [
         :properties="property"
       />
     </div>
-  </div>
+  </header>
 </template>
 
 <style lang="scss" scoped>
