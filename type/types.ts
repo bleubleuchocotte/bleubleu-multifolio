@@ -8,3 +8,9 @@ export type ProjectType = {
   name: string;
   year: number;
 };
+
+export type ProjectInformationsType = {
+  name: string;
+  skills: string[];
+  content: string;
+};
