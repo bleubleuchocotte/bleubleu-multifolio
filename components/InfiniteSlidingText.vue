@@ -10,9 +10,9 @@ defineProps({
 <template>
   <div class="infinite-sliding-text__container">
     <div class="infinite-sliding-text__animation">
-      <span v-for="(text, index) in texts" :key="index" :data-text="text">
+      <h1 v-for="(text, index) in texts" :key="index" :data-text="text">
         {{ text }}
-      </span>
+      </h1>
     </div>
   </div>
 </template>
@@ -20,8 +20,10 @@ defineProps({
 <style scoped lang="scss">
 .infinite-sliding-text {
   &__container {
+    display: flex;
+    align-items: center;
     width: 100%;
-
+    height: 100%;
     border: 1px solid black;
     border-radius: 50px;
 
@@ -30,6 +32,7 @@ defineProps({
 
   &__animation {
     position: relative;
+    width: 100%;
     animation: Scroll 10s linear infinite;
 
     @keyframes Scroll {

@@ -1,3 +1,3 @@
 <template>
-  <Header />
+  <HeaderComponent />
 </template>
