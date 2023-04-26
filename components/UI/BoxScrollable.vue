@@ -57,7 +57,11 @@ onMounted(() => {
     bottom: 0;
     width: 100%;
     height: 5vh;
-    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #ffffff);
+    background: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0),
+      $background-color
+    );
 
     pointer-events: none;
     z-index: 1;

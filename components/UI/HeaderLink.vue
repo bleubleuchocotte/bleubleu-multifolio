@@ -17,7 +17,8 @@ defineProps({
 <style scoped lang="scss">
 a {
   padding: 10px 32px;
-  border: 1px solid black;
+  border: 1px solid $border-color;
   border-radius: 12px;
+  background-color: $cta-background-color;
 }
 </style>

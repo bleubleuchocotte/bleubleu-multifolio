@@ -47,9 +47,8 @@ const links: HeaderLinkType[] = [
 
   &__logo {
     width: 75px;
-    // height: 100%;
 
-    background-color: gray;
+    background-color: $accent-color;
   }
 }
 </style>

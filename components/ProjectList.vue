@@ -86,7 +86,7 @@ const projects: ProjectType[] = [
       class="projects-list__item"
     >
       <p>{{ project.name }}</p>
-      <p>{{ index < 10 ? "0" + index : index }}</p>
+      <p>{{ index + 1 < 10 ? "0" + (index + 1) : index + 1 }}</p>
       <p>{{ project.year }}</p>
     </div>
   </BoxScrollable>
@@ -101,6 +101,7 @@ const projects: ProjectType[] = [
     padding-block: 5px;
 
     border-bottom: 1px solid black;
+    cursor: pointer;
   }
 }
 </style>

@@ -14,7 +14,7 @@ defineProps({
 <style scoped lang="scss">
 span {
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid $border-color;
   border-radius: 12px;
 }
 </style>

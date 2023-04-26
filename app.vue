@@ -17,5 +17,8 @@
   width: 100vw;
   padding-inline: $body-padding-inline;
   padding-block: $body-padding-block;
+
+  background-color: $background-color;
+  color: $text-color;
 }
 </style>
