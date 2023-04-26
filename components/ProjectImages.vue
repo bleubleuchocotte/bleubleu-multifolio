@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import BoxScrollable from "./UI/BoxScrollable.vue";
+</script>
+
 <template>
   <BoxScrollable :title="''">
     <div class="content-images"></div>

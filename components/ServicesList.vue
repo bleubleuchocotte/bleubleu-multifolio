@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BoxScrollable from "./UI/BoxScrollable.vue";
 const services = ref([
   "Strategy",
   "Visual identity",

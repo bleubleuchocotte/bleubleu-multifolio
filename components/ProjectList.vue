@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BoxScrollable from "./UI/BoxScrollable.vue";
 import { ProjectType } from "~/type/types";
 
 const projects: ProjectType[] = [

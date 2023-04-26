@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import BoxScrollable from "./UI/BoxScrollable.vue";
+import SkillComponent from "./UI/SkillComponent.vue";
 import { ProjectInformationsType } from "~/type/types";
 
 const project: ProjectInformationsType = {

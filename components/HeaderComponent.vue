@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import InfiniteSlidingText from "./UI/InfiniteSlidingText.vue";
+import HeaderLink from "./UI/HeaderLink.vue";
 import { HeaderLinkType } from "type/types";
 
 const links: HeaderLinkType[] = [
