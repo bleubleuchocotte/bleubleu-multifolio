@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import Lenis from "@studio-freight/lenis";
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     required: false,
     default: null,
   },
+  hasToEmit: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
+
+const emit = defineEmits(["scroll"]);
 
 const container = ref<HTMLElement>();
 const content = ref<HTMLElement>();
@@ -22,6 +29,12 @@ onMounted(() => {
   function raf(time: number) {
     lenis.raf(time);
     requestAnimationFrame(raf);
+  }
+
+  if (props.hasToEmit) {
+    lenis.on("scroll", (e: any) => {
+      emit("scroll", e);
+    });
   }
 
   requestAnimationFrame(raf);
