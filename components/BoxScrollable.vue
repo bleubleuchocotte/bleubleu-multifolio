@@ -54,7 +54,8 @@ onMounted(() => {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 100%;
+    height: 5vh;
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #ffffff);
 
     pointer-events: none;
     z-index: 1;
