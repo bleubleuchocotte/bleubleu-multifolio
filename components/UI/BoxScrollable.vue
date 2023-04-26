@@ -4,7 +4,8 @@ import Lenis from "@studio-freight/lenis";
 defineProps({
   title: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
 });
 
@@ -29,7 +30,7 @@ onMounted(() => {
 
 <template>
   <section class="section">
-    <p class="section__title">{{ title }}</p>
+    <p v-if="title" class="section__title">{{ title }}</p>
 
     <div ref="container" class="section__container">
       <div ref="content">

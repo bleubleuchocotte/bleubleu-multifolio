@@ -7,10 +7,11 @@ export type HeaderLinkType = {
 export type ProjectType = {
   name: string;
   year: number;
-};
-
-export type ProjectInformationsType = {
-  name: string;
-  skills: string[];
-  content: string;
+  about: {
+    skills: string[];
+    content: string;
+  };
+  images: {
+    url: string;
+  }[];
 };

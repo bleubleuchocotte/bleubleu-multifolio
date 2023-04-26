@@ -1,36 +1,28 @@
 <script setup lang="ts">
 import BoxScrollable from "./UI/BoxScrollable.vue";
 import SkillComponent from "./UI/SkillComponent.vue";
-import { ProjectInformationsType } from "~/type/types";
+import { ProjectType } from "~/type/types";
 
-const project: ProjectInformationsType = {
-  name: "Mo-ka",
-  skills: [
-    "Compétence 1",
-    "Compétence 2",
-    "Jeux",
-    "Vidéos",
-    "Débat",
-    "Compétence 1",
-    "Compétence 1",
-  ],
-  content:
-    "Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, inar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus. Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentessuscipit sem. Maecenas ullamcorper gravida sem sit amet cursus. Etiam pulvinar purus vitae justo pharetra consequat. Mauris id mi ut arcu feugiat maximus. Mauris consequat tellus id tempus aliquet.",
-};
+defineProps({
+  project: {
+    type: Object as PropType<ProjectType>,
+    required: true,
+  },
+});
 </script>
 
 <template>
   <BoxScrollable :title="`À propos du projet : ${project.name}`">
     <div class="about-list__skills">
       <SkillComponent
-        v-for="(skill, index) in project.skills"
+        v-for="(skill, index) in project.about.skills"
         :key="index"
         :text="skill"
       />
     </div>
     <div class="about-list__content">
-      <p>{{ project.content }}</p>
-      <p>{{ project.content }}</p>
+      <p>{{ project.about.content }}</p>
+      <p>{{ project.about.content }}</p>
     </div>
   </BoxScrollable>
 </template>
