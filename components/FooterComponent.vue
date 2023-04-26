@@ -12,6 +12,7 @@
 
 <style scoped lang="scss">
 footer {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
