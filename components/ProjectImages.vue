@@ -8,11 +8,28 @@ defineProps({
     required: true,
   },
 });
+
+function updateBox(arg: any) {
+  if (arg.direction === 1) {
+    // On scroll vers le bas
+    isBoxHidden.value = true;
+  } else if (arg.targetScroll === 0) {
+    // On scroll vers le haut et on atteint le début du scroll
+    isBoxHidden.value = false;
+  }
+}
+
+const isBoxHidden = ref<boolean>(false);
 </script>
 
 <template>
-  <div style="position: relative">
-    <BoxScrollable :title="''" class="pb-0">
+  <div class="foo">
+    <BoxScrollable
+      :title="''"
+      :has-to-emit="true"
+      class="pb-0"
+      @scroll="updateBox"
+    >
       <img
         v-for="(image, index) in project.images"
         :key="index"
@@ -21,7 +38,7 @@ defineProps({
       />
     </BoxScrollable>
 
-    <div class="help">
+    <div class="help" :class="{ 'hide-box': isBoxHidden }">
       <p>
         Don't forget to scroll <i><IconArrowDown /></i>
       </p>
@@ -30,6 +47,10 @@ defineProps({
 </template>
 
 <style scoped lang="scss">
+.foo {
+  position: relative;
+  overflow: hidden;
+}
 .pb-0 {
   padding-bottom: 0;
 }
@@ -39,6 +60,13 @@ defineProps({
   bottom: 0;
 
   width: 100%;
+
+  transition: all ease-out 0.4s;
+
+  &.hide-box {
+    opacity: 0;
+    transform: translateY(100%);
+  }
 
   p {
     display: flex;
