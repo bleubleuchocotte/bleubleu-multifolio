@@ -1,12 +1,25 @@
 <template>
   <main>
-    <ProjectsList style="grid-area: 1 / 1 / 3 / 2" />
-    <AboutProject style="grid-area: 1 / 2 / 3 / 3" />
-    <ServicesList style="grid-area: 1 / 3 / 4 / 4" />
+    <ProjectList
+      style="grid-area: 1 / 1 / 3 / 2; border-right: 1px solid black"
+    />
+    <ProjectAbout style="grid-area: 1 / 2 / 3 / 3" />
+    <ServicesList
+      style="
+        grid-area: 1 / 3 / 4 / 4;
+        border: 1px solid black;
+        border-top: none;
+      "
+    />
 
-    <div class="content-images" style="grid-area: 3 / 1 / 6 / 3"></div>
-
-    <div class="me" style="grid-area: 4 / 3 / 6 / 4"></div>
+    <ProjectImages style="grid-area: 3 / 1 / 6 / 3" />
+    <AboutMe
+      style="
+        grid-area: 4 / 3 / 6 / 4;
+        border: 1px solid black;
+        border-top: none;
+      "
+    />
   </main>
 </template>
 
@@ -19,22 +32,9 @@ main {
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-}
 
-.services {
-  height: 100%;
-  width: 100%;
-  background-color: green;
-}
-
-.content-images {
-  height: 100%;
-  width: 100%;
-  background-color: blue;
-}
-.me {
-  height: 100%;
-  width: 100%;
-  background-color: pink;
+  border: 1px solid black;
+  border-bottom: none;
+  border-right: none;
 }
 </style>

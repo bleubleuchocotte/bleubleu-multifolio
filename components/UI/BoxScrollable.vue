@@ -49,6 +49,8 @@ onMounted(() => {
   height: 100%;
   overflow: hidden;
 
+  padding: 12px 15px;
+
   &:before {
     content: "";
     position: absolute;
@@ -62,7 +64,7 @@ onMounted(() => {
   }
 
   &__title {
-    padding-block: 10px 20px;
+    padding-bottom: 10px;
   }
 
   &__container {
