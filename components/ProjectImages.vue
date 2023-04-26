@@ -24,5 +24,6 @@ defineProps({
 <style scoped lang="scss">
 img {
   border-radius: 12px;
+  width: 100%;
 }
 </style>
