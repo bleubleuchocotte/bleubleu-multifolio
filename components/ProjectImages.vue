@@ -23,7 +23,7 @@ const isBoxHidden = ref<boolean>(false);
 </script>
 
 <template>
-  <div class="foo">
+  <div class="container">
     <BoxScrollable
       :title="''"
       :has-to-emit="true"
@@ -47,7 +47,7 @@ const isBoxHidden = ref<boolean>(false);
 </template>
 
 <style scoped lang="scss">
-.foo {
+.container {
   position: relative;
   overflow: hidden;
 }
