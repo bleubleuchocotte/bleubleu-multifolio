@@ -12,9 +12,8 @@
 
 <style scoped lang="scss">
 main {
-  width: 100%;
-  height: 100%;
-
+  flex: 1;
+  height: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
