@@ -10,5 +10,6 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/reset.css", "@/assets/lenis.css"],
-  modules: ["@vueuse/nuxt"],
+  modules: ["@vueuse/nuxt", "@nuxtjs/prismic"],
+  prismic: { endpoint: "https://test-duofolio.cdn.prismic.io/api/v2" },
 });
