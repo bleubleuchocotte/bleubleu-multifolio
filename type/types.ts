@@ -1,3 +1,5 @@
+import { RichTextField, ImageField } from "@prismicio/types";
+
 export type HeaderLinkType = {
   url: string;
   text: string;
@@ -14,4 +16,12 @@ export type ProjectType = {
   images: {
     url: string;
   }[];
+};
+
+export type ProjectPrismicType = {
+  date: string;
+  description: RichTextField;
+  images: { image: ImageField }[];
+  skills: any[];
+  title: any[];
 };
