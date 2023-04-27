@@ -12,6 +12,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  isTitleColored: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["scroll"]);
@@ -43,7 +48,9 @@ onMounted(() => {
 
 <template>
   <section class="section">
-    <p v-if="title" class="section__title">{{ title }}</p>
+    <p v-if="title" class="section__title" :class="{ colored: isTitleColored }">
+      {{ title }}
+    </p>
 
     <div ref="container" class="section__container">
       <div ref="content">
@@ -83,6 +90,10 @@ onMounted(() => {
 
   &__title {
     padding-bottom: 10px;
+
+    &.colored {
+      color: $accent-color;
+    }
   }
 
   &__container {
