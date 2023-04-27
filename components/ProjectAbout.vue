@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <BoxScrollable :title="`À propos du projet : ${project.title[0].text}`">
+  <BoxScrollable :title="`${project.title[0].text}`" :is-title-colored="true">
     <div class="about-list__skills">
       <SkillComponent
         v-for="(skill, index) in project.skills.map((el) => el.skill[0].text)"
