@@ -1,4 +1,9 @@
-import { RichTextField, ImageField } from "@prismicio/types";
+import {
+  RichTextField,
+  ImageField,
+  LinkField,
+  TitleField,
+} from "@prismicio/types";
 
 export type HeaderLinkType = {
   url: string;
@@ -24,4 +29,10 @@ export type ProjectPrismicType = {
   images: { image: ImageField }[];
   skills: any[];
   title: any[];
+};
+
+export type HeaderPrismicType = {
+  catchphrase: TitleField;
+  links: { name: TitleField; link: LinkField; image: ImageField | {} }[];
+  logo: ImageField;
 };
