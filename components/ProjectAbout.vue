@@ -1,28 +1,27 @@
 <script setup lang="ts">
 import BoxScrollable from "./UI/BoxScrollable.vue";
 import SkillComponent from "./UI/SkillComponent.vue";
-import { ProjectType } from "~/type/types";
+import { ProjectPrismicType } from "~/type/types";
 
 defineProps({
   project: {
-    type: Object as PropType<ProjectType>,
+    type: Object as PropType<ProjectPrismicType>,
     required: true,
   },
 });
 </script>
 
 <template>
-  <BoxScrollable :title="`À propos du projet : ${project.name}`">
+  <BoxScrollable :title="`À propos du projet : ${project.title[0].text}`">
     <div class="about-list__skills">
       <SkillComponent
-        v-for="(skill, index) in project.about.skills"
+        v-for="(skill, index) in project.skills.map((el) => el.skill[0].text)"
         :key="index"
         :text="skill"
       />
     </div>
     <div class="about-list__content">
-      <p>{{ project.about.content }}</p>
-      <p>{{ project.about.content }}</p>
+      <PrismicRichText :field="project.description" />
     </div>
   </BoxScrollable>
 </template>

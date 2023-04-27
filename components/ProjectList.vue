@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import BoxScrollable from "./UI/BoxScrollable.vue";
-import { ProjectType } from "~/type/types";
+import { ProjectPrismicType } from "~/type/types";
 
 defineEmits(["project"]);
 
 defineProps({
   projects: {
-    type: Array<ProjectType>,
+    type: Array<ProjectPrismicType>,
     required: true,
   },
 });
@@ -25,9 +25,9 @@ const marker = ref<string>(
       tabindex="0"
       @click="$emit('project', project)"
     >
-      <p class="projects-list__item-title">{{ project.name }}</p>
+      <p class="projects-list__item-title">{{ project.title[0].text }}</p>
       <p>{{ index + 1 < 10 ? "0" + (index + 1) : index + 1 }}</p>
-      <p>{{ project.year }}</p>
+      <p>{{ project.date }}</p>
     </div>
   </BoxScrollable>
 </template>

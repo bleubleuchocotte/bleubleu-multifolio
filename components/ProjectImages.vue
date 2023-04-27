@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import BoxScrollable from "./UI/BoxScrollable.vue";
-import { ProjectType } from "~/type/types";
+import { ProjectPrismicType } from "~/type/types";
 
 defineProps({
   project: {
-    type: Object as PropType<ProjectType>,
+    type: Object as PropType<ProjectPrismicType>,
     required: true,
   },
 });
@@ -30,11 +30,10 @@ const isBoxHidden = ref<boolean>(false);
       class="pb-0"
       @scroll="updateBox"
     >
-      <img
+      <PrismicImage
         v-for="(image, index) in project.images"
         :key="index"
-        :src="image.url"
-        alt=""
+        :field="image.image"
       />
     </BoxScrollable>
 
