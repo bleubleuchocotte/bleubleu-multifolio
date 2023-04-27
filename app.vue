@@ -51,8 +51,6 @@ async function addHeader(arg: Record<string, any>) {
     links: links.value?.results.map((el) => el.data as any) ?? [],
     logo: headerPrismic.value?.data.logo,
   };
-
-  console.log(header.value);
 }
 
 init();
