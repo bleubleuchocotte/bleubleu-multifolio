@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProjectPrismicType } from "type/types";
+import { ProjectPrismicType, HeaderPrismicType } from "type/types";
 const { client } = usePrismic();
 
 async function init() {
@@ -8,34 +8,62 @@ async function init() {
     client.getAllByType("website")
   );
 
-  if (!website.value) return;
+  if (website.value === null) return;
 
+  const datas = website.value[0].data;
+
+  // On récupère tous les projets
+  await addProjects(datas);
+
+  // On récupère le header
+  await addHeader(datas);
+}
+
+async function addProjects(arg: Record<string, any>) {
   const ids: Array<string> = [];
 
   // On récupère les ids de tous les projets
-  website.value[0].data.projets.forEach((el: any) => {
+  arg.projets.forEach((el: any) => {
     ids.push(el.projet.id);
   });
-
-  // On récupère tous les projets
-  await addProjects(ids);
-}
-
-async function addProjects(ids: Array<string>) {
   const { data: el } = await useAsyncData(() => client.getByIDs(ids));
 
   projects.value =
     el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
 }
+async function addHeader(arg: Record<string, any>) {
+  // On récupère les informations du header
+  const { data: headerPrismic } = await useAsyncData(() =>
+    client.getByID(arg.header.id)
+  );
+
+  const ids: Array<string> = [];
+
+  // On récupère les ids de tous les liens
+  headerPrismic.value?.data.links.forEach((el: any) => {
+    ids.push(el.link.id);
+  });
+
+  const { data: links } = await useAsyncData(() => client.getByIDs(ids));
+
+  header.value = {
+    catchphrase: headerPrismic.value?.data.catchphrase,
+    links: links.value?.results.map((el) => el.data as any) ?? [],
+    logo: headerPrismic.value?.data.logo,
+  };
+
+  console.log(header.value);
+}
 
 init();
 
 const projects = ref<ProjectPrismicType[]>([]);
+const header = ref<HeaderPrismicType>();
 </script>
 
 <template>
   <div class="body">
-    <HeaderComponent />
+    <HeaderComponent v-if="header" :header="header" />
     <MainComponent v-if="projects.length > 0" :projects="projects" />
     <FooterComponent />
   </div>

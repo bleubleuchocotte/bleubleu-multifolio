@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
-  texts: {
-    type: Array<String>,
+  text: {
+    type: String,
     required: true,
   },
 });
@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div class="infinite-sliding-text__container">
     <div class="infinite-sliding-text__animation">
-      <h1 v-for="(text, index) in texts" :key="index" :data-text="text">
+      <h1 :data-text="text">
         {{ text }}
       </h1>
     </div>
