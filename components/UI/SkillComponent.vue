@@ -16,5 +16,7 @@ span {
   padding: 10px;
   border: 1px solid $border-color;
   border-radius: 12px;
+
+  background-color: $cta-background-color;
 }
 </style>
