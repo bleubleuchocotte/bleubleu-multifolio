@@ -2,49 +2,123 @@
 import { ProjectPrismicType, HeaderPrismicType } from "type/types";
 const { client } = usePrismic();
 
-async function init() {
-  // On récupère le document global
-  const { data: website } = await useAsyncData(() =>
-    client.getAllByType("website")
-  );
+// async function init() {
+//   // On récupère le document global
+//   const { data: website } = await useAsyncData(() =>
+//     client.getAllByType("website")
+//   );
 
-  if (website.value === null) return;
+//   if (website.value === null) return;
 
+//   const datas = website.value[0].data;
+
+//   const ids: Array<string> = [];
+
+//   // On récupère les ids de tous les projets
+//   datas.projets.forEach((el: any) => {
+//     ids.push(el.projet.id);
+//   });
+//   const { data: el } = await useAsyncData(() => client.getByIDs(ids));
+
+//   projects.value =
+//     el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
+
+//   // On récupère les informations du header
+//   const { data: headerPrismic } = await useAsyncData(() =>
+//     client.getByID(arg.header.id)
+//   );
+
+//   const idss: Array<string> = [];
+
+//   // On récupère les ids de tous les liens
+//   headerPrismic.value?.data.links.forEach((el: any) => {
+//     idss.push(el.link.id);
+//   });
+
+//   const { data: links } = await useAsyncData(() => client.getByIDs(idss));
+
+//   header.value = {
+//     catchphrase: headerPrismic.value?.data.catchphrase,
+//     links: links.value?.results.map((el) => el.data as any) ?? [],
+//     logo: headerPrismic.value?.data.logo,
+//   };
+
+//   // // On récupère tous les projets
+//   // addProjects(datas);
+
+//   // // On récupère le header
+//   // addHeader(datas);
+// }
+
+// async function addProjects(arg: Record<string, any>) {
+//   const ids: Array<string> = [];
+
+//   // On récupère les ids de tous les projets
+//   arg.projets.forEach((el: any) => {
+//     ids.push(el.projet.id);
+//   });
+//   const { data: el } = await useAsyncData(() => client.getByIDs(ids));
+
+//   projects.value =
+//     el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
+// }
+// async function addHeader(arg: Record<string, any>) {
+//   // On récupère les informations du header
+//   const { data: headerPrismic } = await useAsyncData(() =>
+//     client.getByID(arg.header.id)
+//   );
+
+//   const ids: Array<string> = [];
+
+//   // On récupère les ids de tous les liens
+//   headerPrismic.value?.data.links.forEach((el: any) => {
+//     ids.push(el.link.id);
+//   });
+
+//   const { data: links } = await useAsyncData(() => client.getByIDs(ids));
+
+//   header.value = {
+//     catchphrase: headerPrismic.value?.data.catchphrase,
+//     links: links.value?.results.map((el) => el.data as any) ?? [],
+//     logo: headerPrismic.value?.data.logo,
+//   };
+// }
+
+// init();
+// On récupère le document global
+const { data: website } = await useAsyncData(() =>
+  client.getAllByType("website")
+);
+const projects = ref<ProjectPrismicType[]>([]);
+const header = ref<HeaderPrismicType>();
+
+if (website.value) {
   const datas = website.value[0].data;
 
-  // On récupère tous les projets
-  await addProjects(datas);
-
-  // On récupère le header
-  await addHeader(datas);
-}
-
-async function addProjects(arg: Record<string, any>) {
   const ids: Array<string> = [];
 
   // On récupère les ids de tous les projets
-  arg.projets.forEach((el: any) => {
+  datas.projets.forEach((el: any) => {
     ids.push(el.projet.id);
   });
   const { data: el } = await useAsyncData(() => client.getByIDs(ids));
 
   projects.value =
     el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
-}
-async function addHeader(arg: Record<string, any>) {
+
   // On récupère les informations du header
   const { data: headerPrismic } = await useAsyncData(() =>
-    client.getByID(arg.header.id)
+    client.getByID(datas.header.id)
   );
 
-  const ids: Array<string> = [];
+  const idss: Array<string> = [];
 
   // On récupère les ids de tous les liens
   headerPrismic.value?.data.links.forEach((el: any) => {
-    ids.push(el.link.id);
+    idss.push(el.link.id);
   });
 
-  const { data: links } = await useAsyncData(() => client.getByIDs(ids));
+  const { data: links } = await useAsyncData(() => client.getByIDs(idss));
 
   header.value = {
     catchphrase: headerPrismic.value?.data.catchphrase,
@@ -52,11 +126,6 @@ async function addHeader(arg: Record<string, any>) {
     logo: headerPrismic.value?.data.logo,
   };
 }
-
-init();
-
-const projects = ref<ProjectPrismicType[]>([]);
-const header = ref<HeaderPrismicType>();
 </script>
 
 <template>
