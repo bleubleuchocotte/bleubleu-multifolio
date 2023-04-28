@@ -49,6 +49,8 @@ header {
     margin-inline: -10px;
     width: 100%;
     height: calc(100% + 20px);
+
+    pointer-events: none;
   }
 }
 
