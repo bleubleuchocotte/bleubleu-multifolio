@@ -38,13 +38,29 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+header {
+  position: relative;
+  padding-inline: 10px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    border-inline: 1px solid $border-color;
+    margin-inline: -10px;
+    width: 100%;
+    height: calc(100% + 20px);
+  }
+}
+
 a {
   padding: 10px 32px;
   border: 1px solid $border-color;
   border-radius: 12px;
   background-color: $cta-background-color;
 
-  margin: auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .container {
   display: flex;
