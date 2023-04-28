@@ -39,9 +39,11 @@ const projectsRef = ref<HTMLElement[]>([]);
       :class="{ active: index === 0 }"
       @focus="(e) => updateActiveProject(e, project)"
     >
-      <p class="projects-list__item-title">{{ project.title[0].text }}</p>
-      <p>{{ index + 1 < 10 ? "0" + (index + 1) : index + 1 }}</p>
-      <p>{{ project.date }}</p>
+      <div>
+        <p class="projects-list__item-title">{{ project.title[0].text }}</p>
+        <p>{{ index + 1 < 10 ? "0" + (index + 1) : index + 1 }}</p>
+      </div>
+      <p>{{ project.date.slice(0, 4) }}</p>
     </div>
   </BoxScrollable>
 </template>
@@ -52,12 +54,21 @@ const projectsRef = ref<HTMLElement[]>([]);
     width: 100%;
 
     display: flex;
+    justify-content: space-between;
     gap: 10px;
 
     padding-block: 5px;
 
     border-bottom: 1px solid $border-color;
     cursor: pointer;
+
+    div {
+      display: flex;
+      flex: 1;
+    }
+    &-title {
+      width: 25%;
+    }
 
     &.active {
       color: $accent-color;
