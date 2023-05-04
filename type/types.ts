@@ -5,6 +5,12 @@ import {
   TitleField,
 } from "@prismicio/types";
 
+export type LinkPrismicType = {
+  name: TitleField;
+  link: LinkField;
+  image: ImageField | {};
+};
+
 export type ProjectPrismicType = {
   date: string;
   description: RichTextField;
@@ -15,11 +21,11 @@ export type ProjectPrismicType = {
 
 export type HeaderPrismicType = {
   catchphrase: TitleField;
-  links: { name: TitleField; link: LinkField; image: ImageField | {} }[];
+  links: LinkPrismicType[];
   logo: ImageField;
 };
 
 export type FooterPrismicType = {
   text: RichTextField;
-  links: { name: TitleField; link: LinkField; image: ImageField | {} }[];
+  links: LinkPrismicType[];
 };
