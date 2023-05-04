@@ -64,6 +64,7 @@ const projectsRef = ref<HTMLElement[]>([]);
 
     div {
       display: flex;
+      gap: 10px;
       flex: 1;
     }
     &-title {
