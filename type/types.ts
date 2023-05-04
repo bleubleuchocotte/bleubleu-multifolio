@@ -5,22 +5,10 @@ import {
   TitleField,
 } from "@prismicio/types";
 
-export type HeaderLinkType = {
-  url: string;
-  text: string;
-  target: "_blank" | "_self" | "_parent" | "_top";
-};
-
-export type ProjectType = {
-  name: string;
-  year: number;
-  about: {
-    skills: string[];
-    content: string;
-  };
-  images: {
-    url: string;
-  }[];
+export type LinkPrismicType = {
+  name: TitleField;
+  link: LinkField;
+  image: ImageField | {};
 };
 
 export type ProjectPrismicType = {
@@ -33,6 +21,11 @@ export type ProjectPrismicType = {
 
 export type HeaderPrismicType = {
   catchphrase: TitleField;
-  links: { name: TitleField; link: LinkField; image: ImageField | {} }[];
+  links: LinkPrismicType[];
   logo: ImageField;
+};
+
+export type FooterPrismicType = {
+  text: RichTextField;
+  links: LinkPrismicType[];
 };

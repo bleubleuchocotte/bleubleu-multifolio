@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import InfiniteSlidingText from "./UI/InfiniteSlidingText.vue";
+import LinkComponent from "./UI/LinkComponent.vue";
 import type { HeaderPrismicType } from "type/types";
 
 defineProps({
@@ -20,19 +21,12 @@ defineProps({
     </div>
 
     <div class="container__links">
-      <PrismicLink
+      <LinkComponent
         v-for="(link, index) in header.links"
         :key="index"
-        :field="link.link"
-      >
-        <PrismicImage
-          v-if="Object.keys(link.image).length > 0"
-          :field="link.image"
-        />
-        <template v-else>
-          {{ link.name[0]?.text }}
-        </template>
-      </PrismicLink>
+        :link="link"
+        :image-over-text="true"
+      />
     </div>
   </header>
 </template>
@@ -54,16 +48,6 @@ header {
   }
 }
 
-a {
-  padding: 10px 32px;
-  border: 1px solid $border-color;
-  border-radius: 12px;
-  background-color: $cta-background-color;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .container {
   display: flex;
   justify-content: space-between;

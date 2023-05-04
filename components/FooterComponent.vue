@@ -1,12 +1,26 @@
+<script setup lang="ts">
+import LinkComponent from "./UI/LinkComponent.vue";
+import { FooterPrismicType } from "~/type/types";
+
+defineProps({
+  footer: {
+    type: Object as PropType<FooterPrismicType>,
+    required: true,
+  },
+});
+</script>
+
 <template>
   <footer>
-    <p>Thomas Auffroy, developper</p>
-    <p>BeluBelu Studio</p>
-    <p>Github</p>
-    <p>Linkedin</p>
-    <p>Malt</p>
+    <PrismicRichText :field="footer.text" />
+    <LinkComponent
+      v-for="(link, index) in footer.links"
+      :key="index"
+      :link="link"
+    />
+
     <p>Mentions légales</p>
-    <p>2023</p>
+    <p>{{ new Date().getFullYear() }}</p>
   </footer>
 </template>
 
@@ -15,5 +29,6 @@ footer {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 </style>
