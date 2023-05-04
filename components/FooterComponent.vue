@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LinkComponent from "./UI/LinkComponent.vue";
 import { FooterPrismicType } from "~/type/types";
 
 defineProps({
@@ -12,29 +13,18 @@ defineProps({
 <template>
   <footer>
     <PrismicRichText :field="footer.text" />
-    <PrismicLink
+    <LinkComponent
       v-for="(link, index) in footer.links"
       :key="index"
-      :field="link.link"
-    >
-      {{ link.name[0]?.text }}
-    </PrismicLink>
+      :link="link"
+    />
+
     <p>Mentions légales</p>
     <p>{{ new Date().getFullYear() }}</p>
   </footer>
 </template>
 
 <style scoped lang="scss">
-a {
-  padding: 10px 32px;
-  border: 1px solid $border-color;
-  border-radius: 12px;
-  background-color: $cta-background-color;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 footer {
   margin-top: 20px;
   display: flex;
