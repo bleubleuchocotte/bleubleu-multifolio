@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ProjectPrismicType, HeaderPrismicType } from "type/types";
+import {
+  ProjectPrismicType,
+  HeaderPrismicType,
+  FooterPrismicType,
+} from "type/types";
 const { client } = usePrismic();
 
 // On récupère le document global
@@ -8,17 +12,18 @@ const { data: website } = await useAsyncData(() =>
 );
 const projects = ref<ProjectPrismicType[]>([]);
 const header = ref<HeaderPrismicType>();
+const footer = ref<FooterPrismicType>();
 
 if (website.value) {
   const datas = website.value[0].data;
 
-  const ids: Array<string> = [];
+  const idsProject: Array<string> = [];
 
-  // On récupère les ids de tous les projets
+  // On récupère les ids de tous les projets présents pour le site
   datas.projets.forEach((el: any) => {
-    ids.push(el.projet.id);
+    idsProject.push(el.projet.id);
   });
-  const { data: el } = await useAsyncData(() => client.getByIDs(ids));
+  const { data: el } = await useAsyncData(() => client.getByIDs(idsProject));
 
   projects.value =
     el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
@@ -28,19 +33,42 @@ if (website.value) {
     client.getByID(datas.header.id)
   );
 
-  const idss: Array<string> = [];
+  const idsHeader: Array<string> = [];
 
-  // On récupère les ids de tous les liens
+  // On récupère les ids de tous les liens du header
   headerPrismic.value?.data.links.forEach((el: any) => {
-    idss.push(el.link.id);
+    idsHeader.push(el.link.id);
   });
 
-  const { data: links } = await useAsyncData(() => client.getByIDs(idss));
+  const { data: headerLinks } = await useAsyncData(() =>
+    client.getByIDs(idsHeader)
+  );
 
   header.value = {
     catchphrase: headerPrismic.value?.data.catchphrase,
-    links: links.value?.results.map((el) => el.data as any) ?? [],
+    links: headerLinks.value?.results.map((el) => el.data as any) ?? [],
     logo: headerPrismic.value?.data.logo,
+  };
+
+  // On récupère les informations du footer
+  const { data: footerPrismic } = await useAsyncData(() =>
+    client.getByID(datas.footer.id)
+  );
+
+  const idsFooter: Array<string> = [];
+
+  // On récupère les ids de tous les liens du header
+  headerPrismic.value?.data.links.forEach((el: any) => {
+    idsFooter.push(el.link.id);
+  });
+
+  const { data: footerLinks } = await useAsyncData(() =>
+    client.getByIDs(idsFooter)
+  );
+
+  footer.value = {
+    text: footerPrismic.value?.data.text,
+    links: footerLinks.value?.results.map((el) => el.data as any) ?? [],
   };
 }
 </script>
@@ -49,7 +77,7 @@ if (website.value) {
   <div class="body">
     <HeaderComponent v-if="header" :header="header" />
     <MainComponent v-if="projects.length > 0" :projects="projects" />
-    <FooterComponent />
+    <FooterComponent v-if="footer" :footer="footer" />
   </div>
 </template>
 
