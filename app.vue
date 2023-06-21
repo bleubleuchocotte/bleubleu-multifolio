@@ -1,50 +1,50 @@
 <script setup lang="ts">
-// import { Settings, Header, Main, Footer } from "./type/types";
+import { Settings, Header, Main, Footer } from "./type/types";
 
-// const { client } = usePrismic();
+const { client } = usePrismic();
 
-// // On GET le document global
-// const { data: website } = await useAsyncData(() => client.getSingle("website"));
-// if (!website.value) throw new Error("Prismic document could not be accessed");
+// On GET le document global
+const { data: website } = await useAsyncData(() => client.getSingle("website"));
+if (!website.value) throw new Error("Prismic document could not be accessed");
 
-// const settings = ref<Settings>({
-//   isDarkMode: website.value.data["dark-mode"] ?? false,
-//   accentColor: website.value.data["accent-color"] ?? "#000000",
-//   firstName: website.value.data["first-name"] ?? "John",
-//   lastName: website.value.data["last-name"] ?? "Doe",
-// });
+const settings = ref<Settings>({
+  isDarkMode: website.value.data["dark-mode"] ?? false,
+  accentColor: website.value.data["accent-color"] ?? "#000000",
+  firstName: website.value.data["first-name"] ?? "John",
+  lastName: website.value.data["last-name"] ?? "Doe",
+});
 
-// provide("settings", settings);
+provide("settings", settings);
 
-// // On GET la section About
-// const { data: about } = await useAsyncData(() => client.getSingle("about"));
-// if (!about.value) throw new Error("Prismic document could not be accessed");
+// On GET la section About
+const { data: about } = await useAsyncData(() => client.getSingle("about"));
+if (!about.value) throw new Error("Prismic document could not be accessed");
 
-// // On GET la section Projets
-// const { data: projects } = await useAsyncData(() =>
-//   client.getAllByType("projet")
-// );
-// if (!projects.value) throw new Error("Prismic document could not be accessed");
+// On GET la section Projets
+const { data: projects } = await useAsyncData(() =>
+  client.getAllByType("projet")
+);
+if (!projects.value) throw new Error("Prismic document could not be accessed");
 
-// const header = ref<Header>({
-//   text: website.value.data["text-header"],
-// });
+const header = ref<Header>({
+  text: website.value.data["text-header"],
+});
 
-// const main = ref<Main>({
-//   about: about.value,
-//   projects: projects.value,
-// });
+const main = ref<Main>({
+  about: about.value,
+  projects: projects.value,
+});
 
-// const footer = ref<Footer>({
-//   links: website.value.data.links,
-// });
+const footer = ref<Footer>({
+  links: website.value.data.links,
+});
 </script>
 
 <template>
   <div class="body">
-    <!-- <TheHeader :params="header" />
+    <TheHeader :params="header" />
     <TheMain :params="main" />
-    <TheFooter :params="footer" /> -->
+    <TheFooter :params="footer" />
     im online
     <NuxtPage />
   </div>
