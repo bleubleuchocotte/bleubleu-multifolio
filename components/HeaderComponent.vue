@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Header } from "./type/types";
+import { Header } from "@/type/types";
 defineProps({
   params: {
     type: Object as PropType<Header>,
