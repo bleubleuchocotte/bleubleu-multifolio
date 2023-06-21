@@ -1,31 +1,21 @@
-import {
-  RichTextField,
-  ImageField,
-  LinkField,
-  TitleField,
-} from "@prismicio/types";
+import { LinkField, PrismicDocument } from "@prismicio/types";
 
-export type LinkPrismicType = {
-  name: TitleField;
-  link: LinkField;
-  image: ImageField | {};
+export type Settings = {
+  accentColor: string; // Couleur formatée en HEX
+  isDarkMode: boolean;
+  firstName: string;
+  lastName: string;
 };
 
-export type ProjectPrismicType = {
-  date: string;
-  description: RichTextField;
-  images: { image: ImageField }[];
-  skills: any[];
-  title: any[];
+export type Header = {
+  text: string;
 };
 
-export type HeaderPrismicType = {
-  catchphrase: TitleField;
-  links: LinkPrismicType[];
-  logo: ImageField;
+export type Main = {
+  about: PrismicDocument;
+  projects: PrismicDocument[];
 };
 
-export type FooterPrismicType = {
-  text: RichTextField;
-  links: LinkPrismicType[];
+export type Footer = {
+  links: { name: string; linl: LinkField };
 };

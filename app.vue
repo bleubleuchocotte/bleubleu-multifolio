@@ -1,83 +1,53 @@
 <script setup lang="ts">
-import {
-  ProjectPrismicType,
-  HeaderPrismicType,
-  FooterPrismicType,
-} from "type/types";
+import { Settings, Header, Main, Footer } from "./type/types";
+import HeaderComponent from "./components/V1/HeaderComponent.vue";
+import MainComponent from "./components/V1/MainComponent.vue";
+import FooterComponent from "./components/V1/FooterComponent.vue";
+
 const { client } = usePrismic();
 
-// On récupère le document global
-const { data: website } = await useAsyncData(() =>
-  client.getAllByType("website")
+// On GET le document global
+const { data: website } = await useAsyncData(() => client.getSingle("website"));
+if (!website.value) throw new Error("Prismic document could not be accessed");
+
+const settings = ref<Settings>({
+  isDarkMode: website.value.data["dark-mode"] ?? false,
+  accentColor: website.value.data["accent-color"] ?? "#000000",
+  firstName: website.value.data["first-name"] ?? "John",
+  lastName: website.value.data["last-name"] ?? "Doe",
+});
+
+provide("settings", settings);
+
+// On GET la section About
+const { data: about } = await useAsyncData(() => client.getSingle("about"));
+if (!about.value) throw new Error("Prismic document could not be accessed");
+
+// On GET la section Projets
+const { data: projects } = await useAsyncData(() =>
+  client.getAllByType("projet")
 );
-const projects = ref<ProjectPrismicType[]>([]);
-const header = ref<HeaderPrismicType>();
-const footer = ref<FooterPrismicType>();
+if (!projects.value) throw new Error("Prismic document could not be accessed");
 
-if (website.value) {
-  const datas = website.value[0].data;
+const header = ref<Header>({
+  text: website.value.data["text-header"],
+});
 
-  const idsProject: Array<string> = [];
+const main = ref<Main>({
+  about: about.value,
+  projects: projects.value,
+});
 
-  // On récupère les ids de tous les projets présents pour le site
-  datas.projets.forEach((el: any) => {
-    idsProject.push(el.projet.id);
-  });
-  const { data: el } = await useAsyncData(() => client.getByIDs(idsProject));
-
-  projects.value =
-    el.value?.results.map((arg) => arg.data as ProjectPrismicType) ?? [];
-
-  // On récupère les informations du header
-  const { data: headerPrismic } = await useAsyncData(() =>
-    client.getByID(datas.header.id)
-  );
-
-  const idsHeader: Array<string> = [];
-
-  // On récupère les ids de tous les liens du header
-  headerPrismic.value?.data.links.forEach((el: any) => {
-    idsHeader.push(el.link.id);
-  });
-
-  const { data: headerLinks } = await useAsyncData(() =>
-    client.getByIDs(idsHeader)
-  );
-
-  header.value = {
-    catchphrase: headerPrismic.value?.data.catchphrase,
-    links: headerLinks.value?.results.map((el) => el.data as any) ?? [],
-    logo: headerPrismic.value?.data.logo,
-  };
-
-  // On récupère les informations du footer
-  const { data: footerPrismic } = await useAsyncData(() =>
-    client.getByID(datas.footer.id)
-  );
-
-  const idsFooter: Array<string> = [];
-
-  // On récupère les ids de tous les liens du header
-  headerPrismic.value?.data.links.forEach((el: any) => {
-    idsFooter.push(el.link.id);
-  });
-
-  const { data: footerLinks } = await useAsyncData(() =>
-    client.getByIDs(idsFooter)
-  );
-
-  footer.value = {
-    text: footerPrismic.value?.data.text,
-    links: footerLinks.value?.results.map((el) => el.data as any) ?? [],
-  };
-}
+const footer = ref<Footer>({
+  links: website.value.data.links,
+});
 </script>
 
 <template>
   <div class="body">
-    <HeaderComponent v-if="header" :header="header" />
-    <MainComponent v-if="projects.length > 0" :projects="projects" />
-    <FooterComponent v-if="footer" :footer="footer" />
+    <HeaderComponent :params="header" />
+    <MainComponent :params="main" />
+    <FooterComponent :params="footer" />
   </div>
 </template>
 
