@@ -46,6 +46,7 @@
     <TheMain :params="main" />
     <TheFooter :params="footer" /> -->
     im online
+    <NuxtPage />
   </div>
 </template>
 
