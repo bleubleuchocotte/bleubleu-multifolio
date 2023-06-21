@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Settings, Header, Main, Footer } from "./type/types";
 
+console.log("debut");
+
 const { client } = usePrismic();
 
 // On GET le document global
@@ -38,13 +40,15 @@ const main = ref<Main>({
 const footer = ref<Footer>({
   links: website.value.data.links,
 });
+
+console.log("fin");
 </script>
 
 <template>
   <div class="body">
-    <HeaderComponent :params="header" />
-    <MainComponent :params="main" />
-    <FooterComponent :params="footer" />
+    <TheHeader :params="header" />
+    <TheMain :params="main" />
+    <TheFooter :params="footer" />
   </div>
 </template>
 
