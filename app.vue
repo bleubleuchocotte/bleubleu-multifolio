@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { Settings, Header, Main, Footer } from "./type/types";
-import HeaderComponent from "./components/V1/HeaderComponent.vue";
-import MainComponent from "./components/V1/MainComponent.vue";
-import FooterComponent from "./components/V1/FooterComponent.vue";
 
 const { client } = usePrismic();
 
