@@ -16,9 +16,10 @@ const settings = ref<Settings>({
 
 const cssVariables = [
   "--accent-color: " + settings.value.accentColor,
+  "--text-accent-color: #131313",
   "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
   "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
-  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#123456"),
+  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#131313"),
 ];
 
 useHead({
