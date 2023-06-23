@@ -16,13 +16,16 @@ const settings = ref<Settings>({
 
 const cssVariables = [
   "--accent-color: " + settings.value.accentColor,
-  "--text-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
-  "--background-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
+  "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
+  "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
   "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#123456"),
 ];
 
 useHead({
-  style: [`:root{${cssVariables.join(";")}}`],
+  style: [
+    `:root{${cssVariables.join(";")}}`,
+    "body{color: var(--text-color); background-color: var(--background-color)}",
+  ],
 });
 
 provide("settings", settings);
