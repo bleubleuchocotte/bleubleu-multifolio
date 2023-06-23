@@ -12,6 +12,7 @@ const settings = ref<Settings>({
   accentColor: website.value.data["accent-color"] ?? "#000000",
   firstName: website.value.data["first-name"] ?? "John",
   lastName: website.value.data["last-name"] ?? "Doe",
+  email: website.value.data.email ?? "john.doe@foo.com",
 });
 
 const cssVariables = [
@@ -29,8 +30,6 @@ useHead({
   ],
 });
 
-provide("settings", settings);
-
 // On GET la section About
 const { data: about } = await useAsyncData(() => client.getSingle("about"));
 if (!about.value) throw new Error("Prismic document could not be accessed");
@@ -43,6 +42,7 @@ if (!projects.value) throw new Error("Prismic document could not be accessed");
 
 const header = ref<Header>({
   text: website.value.data["text-header"],
+  email: settings.value.email,
 });
 
 const main = ref<Main>({
