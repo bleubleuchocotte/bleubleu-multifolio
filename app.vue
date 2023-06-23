@@ -12,9 +12,23 @@ const settings = ref<Settings>({
   accentColor: website.value.data["accent-color"] ?? "#000000",
   firstName: website.value.data["first-name"] ?? "John",
   lastName: website.value.data["last-name"] ?? "Doe",
+  email: website.value.data.email ?? "john.doe@foo.com",
 });
 
-provide("settings", settings);
+const cssVariables = [
+  "--accent-color: " + settings.value.accentColor,
+  "--text-accent-color: #131313",
+  "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
+  "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
+  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#131313"),
+];
+
+useHead({
+  style: [
+    `:root{${cssVariables.join(";")}}`,
+    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope'}",
+  ],
+});
 
 // On GET la section About
 const { data: about } = await useAsyncData(() => client.getSingle("about"));
@@ -28,6 +42,7 @@ if (!projects.value) throw new Error("Prismic document could not be accessed");
 
 const header = ref<Header>({
   text: website.value.data["text-header"],
+  email: settings.value.email,
 });
 
 const main = ref<Main>({
@@ -41,16 +56,7 @@ const footer = ref<Footer>({
 </script>
 
 <template>
-  <div class="body">
-    <TheHeader :params="header" />
-    <TheMain :params="main" />
-    <TheFooter :params="footer" />
-  </div>
+  <TheHeader :params="header" />
+  <TheMain :params="main" />
+  <TheFooter :params="footer" />
 </template>
-
-<style scoped lang="scss">
-.body {
-  background-color: $background-color;
-  color: $text-color;
-}
-</style>

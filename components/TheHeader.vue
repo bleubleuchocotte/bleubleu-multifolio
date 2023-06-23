@@ -9,5 +9,28 @@ defineProps({
 </script>
 
 <template>
-  <header>{{ params }}</header>
+  <header class="header">
+    <UIInfiniteSlidingText :text="params.text" class="header__slider" />
+    <UIBaseButton :email="params.email" class="header__button"
+      >contact</UIBaseButton
+    >
+  </header>
 </template>
+
+<style scoped lang="scss">
+.header {
+  display: flex;
+  margin: $gutter;
+  gap: $gutter;
+
+  height: 40px;
+
+  &__slider {
+    flex: 0.85;
+  }
+
+  &__button {
+    flex: 0.15;
+  }
+}
+</style>

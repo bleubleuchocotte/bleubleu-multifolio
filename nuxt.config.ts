@@ -4,12 +4,12 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/main.scss";',
+          additionalData: '@import "@/assets/styles/main.scss";',
         },
       },
     },
   },
-  css: ["@/assets/reset.css", "@/assets/lenis.css"],
+  css: ["@/assets/styles/reset.css", "@/assets/styles/lenis.css"],
   modules: ["@vueuse/nuxt", "@nuxtjs/prismic"],
   prismic: { endpoint: "https://test-duofolio.cdn.prismic.io/api/v2" },
 });

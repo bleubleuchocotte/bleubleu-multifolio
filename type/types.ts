@@ -5,10 +5,12 @@ export type Settings = {
   isDarkMode: boolean;
   firstName: string;
   lastName: string;
+  email: string;
 };
 
 export type Header = {
   text: string;
+  email: string;
 };
 
 export type Main = {
