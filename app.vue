@@ -14,6 +14,17 @@ const settings = ref<Settings>({
   lastName: website.value.data["last-name"] ?? "Doe",
 });
 
+const cssVariables = [
+  "--accent-color: " + settings.value.accentColor,
+  "--text-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
+  "--background-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
+  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#123456"),
+];
+
+useHead({
+  style: [`:root{${cssVariables.join(";")}}`],
+});
+
 provide("settings", settings);
 
 // On GET la section About
@@ -41,16 +52,7 @@ const footer = ref<Footer>({
 </script>
 
 <template>
-  <div class="body">
-    <TheHeader :params="header" />
-    <TheMain :params="main" />
-    <TheFooter :params="footer" />
-  </div>
+  <TheHeader :params="header" />
+  <TheMain :params="main" />
+  <TheFooter :params="footer" />
 </template>
-
-<style scoped lang="scss">
-.body {
-  background-color: $background-color;
-  color: $text-color;
-}
-</style>
