@@ -25,10 +25,12 @@ defineProps({
     width: 100%;
     height: 100%;
     border: 1px solid var(--border-color);
-    border-radius: 50px;
+    border-radius: $border-radius;
     background-color: var(--background-color);
 
     overflow: hidden;
+
+    font-size: $font-size-medium;
   }
 
   &__animation {
