@@ -14,7 +14,10 @@ export type Header = {
 };
 
 export type Main = {
-  about: PrismicDocument;
+  about: {
+    fullName: String;
+    prismic: PrismicDocument;
+  };
   projects: PrismicDocument[];
 };
 

@@ -46,7 +46,10 @@ const header = ref<Header>({
 });
 
 const main = ref<Main>({
-  about: about.value,
+  about: {
+    fullName: settings.value.firstName + " " + settings.value.lastName,
+    prismic: about.value,
+  },
   projects: projects.value,
 });
 

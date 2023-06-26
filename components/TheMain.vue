@@ -10,8 +10,8 @@ defineProps({
 
 <template>
   <main class="main">
+    <TheAboutMe :about="params.about" />
     <div class="main__left">
-      <div>About</div>
       <div>Liste des projets</div>
     </div>
     <UIBaseSeparator :width="1" />
@@ -23,9 +23,11 @@ defineProps({
 .main {
   flex: 1;
   display: flex;
+  position: relative;
 
   &__left {
     @include left;
+    margin-inline: $bookmark-width calc($bookmark-width * -1);
   }
 
   &__right {
