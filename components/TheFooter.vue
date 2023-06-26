@@ -32,6 +32,7 @@ defineProps({
 <style scoped lang="scss">
 .footer {
   display: flex;
+  padding-block: $gutter;
 
   &__left {
     padding-inline: $gutter;
