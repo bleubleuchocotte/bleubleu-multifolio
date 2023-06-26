@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PrismicDocument } from "@prismicio/types";
-const props = defineProps({
+defineProps({
   about: {
     type: Object as PropType<{
       fullName: String;
@@ -10,11 +10,11 @@ const props = defineProps({
   },
 });
 
-console.log(props.about.prismic);
+const isOpen = ref(false);
 </script>
 
 <template>
-  <section class="section">
+  <section class="section" :class="{ open: isOpen }" @click="isOpen = !isOpen">
     <div class="section__text">
       <PrismicRichText :field="about.prismic.data.text" />
     </div>
@@ -46,10 +46,18 @@ console.log(props.about.prismic);
 
 <style scoped lang="scss">
 .section {
+  transition: transform 0.4s ease-in-out;
+  transform: translate(calc($bookmark-width - 50vw));
+  &.open {
+    transform: translate(0);
+  }
   display: flex;
 
+  position: absolute;
+  left: 0;
+
   height: 100%;
-  width: 100%;
+  width: 50vw;
 
   background-color: var(--accent-color);
   color: var(--text-accent-color);
@@ -68,7 +76,7 @@ console.log(props.about.prismic);
 
     padding: 10px;
 
-    width: 70px;
+    width: $bookmark-width;
 
     border-left: 1px solid var(--text-accent-color);
 
