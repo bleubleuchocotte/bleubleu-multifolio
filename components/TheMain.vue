@@ -11,7 +11,7 @@ defineProps({
 <template>
   <main class="main">
     <div class="main__left">
-      <div>About</div>
+      <TheAboutMe :about="params.about" />
       <div>Liste des projets</div>
     </div>
     <UIBaseSeparator :width="1" />
