@@ -19,5 +19,5 @@ export type Main = {
 };
 
 export type Footer = {
-  links: { name: string; linl: LinkField };
+  links: { name: string; link: LinkField }[];
 };
