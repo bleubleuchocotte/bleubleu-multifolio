@@ -13,6 +13,9 @@ dependencies:
   sass-loader:
     specifier: ^13.2.2
     version: 13.2.2(sass@1.62.0)(webpack@5.80.0)
+  vue3-marquee:
+    specifier: ^3.2.1
+    version: 3.2.1(vue@3.2.47)
 
 devDependencies:
   '@nuxtjs/eslint-config-typescript':
@@ -6365,6 +6368,15 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.0
       vue: 3.2.47
+
+  /vue3-marquee@3.2.1(vue@3.2.47):
+    resolution: {integrity: sha512-pNvmdtF06cm6AD0fKiPCuH6W80z+WB4Lpfx5Zd+jHrZovyFRRJOgXBNqXQtiBA1jQWcsHR2QQ/8Eu4OFLFgX2Q==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      vue: ^3.2
+    dependencies:
+      vue: 3.2.47
+    dev: false
 
   /vue@3.2.47:
     resolution: {integrity: sha512-60188y/9Dc9WVrAZeUVSDxRQOZ+z+y5nO2ts9jWXSTkMvayiWxCWOWtBQoYjLeccfXkiiPZWAHcV+WTPhkqJHQ==}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import "vue3-marquee/dist/style.css";
 import { Header } from "@/type/types";
 defineProps({
   params: {
@@ -10,7 +11,10 @@ defineProps({
 
 <template>
   <header class="header">
-    <UIInfiniteSlidingText :text="params.text" class="header__slider" />
+    <Vue3Marquee class="header__slider" :direction="'reverse'" :duration="10">
+      <span style="margin-left: 5rem">{{ params.text }}</span>
+    </Vue3Marquee>
+
     <UIBaseButton :email="params.email" class="header__button"
       >contact</UIBaseButton
     >
@@ -27,6 +31,12 @@ defineProps({
 
   &__slider {
     flex: 0.85;
+
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    background-color: var(--background-color);
+
+    font-size: $font-size-medium;
   }
 
   &__button {
