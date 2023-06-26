@@ -9,5 +9,39 @@ defineProps({
 </script>
 
 <template>
-  <footer>{{ params }}</footer>
+  <footer class="footer">
+    <div class="footer__left">
+      <NuxtLink to="https://bleubleu.studio" target="_blank">
+        Made with love with bleubleu
+      </NuxtLink>
+    </div>
+    <div class="footer__right">
+      <PrismicLink
+        v-for="(link, i) in params.links"
+        :key="i"
+        :field="link.link"
+      >
+        {{ link.name }}
+      </PrismicLink>
+      <NuxtLink to="/termofservices"> Mentions légales </NuxtLink>
+      <span>2023</span>
+    </div>
+  </footer>
 </template>
+
+<style scoped lang="scss">
+.footer {
+  display: flex;
+
+  &__left {
+    padding-inline: $gutter;
+    flex: 0.3;
+  }
+  &__right {
+    flex: 0.7;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: $gutter;
+  }
+}
+</style>
