@@ -35,14 +35,13 @@ defineProps({
   padding-block: $gutter;
 
   &__left {
-    padding-inline: $gutter;
-    flex: 0.3;
+    @include left;
   }
   &__right {
-    flex: 0.7;
+    @include right;
+
     display: flex;
     justify-content: space-between;
-    padding-inline: $gutter;
   }
 }
 </style>
