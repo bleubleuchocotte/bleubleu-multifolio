@@ -23,7 +23,7 @@ defineProps({
       >
         {{ link.name }}
       </PrismicLink>
-      <NuxtLink to="/termofservices"> Mentions légales </NuxtLink>
+      <NuxtLink to="/termofservices"> Terms of services </NuxtLink>
       <span>2023</span>
     </div>
   </footer>
