@@ -12,10 +12,10 @@ defineProps({
   <main class="main">
     <TheAboutMe :about="params.about" />
     <div class="main__left">
-      <div>Liste des projets</div>
+      <p>Liste des projets</p>
     </div>
     <UIBaseSeparator :width="1" />
-    <div class="main__right">Liste des projets scrollable</div>
+    <div class="main__right"><p>Liste des projets scrollable</p></div>
   </main>
 </template>
 
