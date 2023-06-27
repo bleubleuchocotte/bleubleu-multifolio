@@ -15,9 +15,12 @@ const isOpen = ref(false);
 
 <template>
   <section class="section" :class="{ open: isOpen }" @click="isOpen = !isOpen">
-    <div class="section__text">
+    <UIBaseLenis class="section__text">
+      <div class="section__text-image">
+        <PrismicImage :field="about.prismic.data.me" />
+      </div>
       <PrismicRichText :field="about.prismic.data.text" />
-    </div>
+    </UIBaseLenis>
     <div class="section__bookmark">
       <h1>{{ about.fullName }}</h1>
       <div class="section__bookmark-flex">
@@ -41,7 +44,7 @@ const isOpen = ref(false);
     transform: translate(0);
 
     .section__bookmark-arrow {
-      transform: rotate(180deg);
+      transform: rotate(0);
     }
   }
   display: flex;
@@ -60,10 +63,22 @@ const isOpen = ref(false);
   &__text {
     width: 100%;
     padding: $gutter;
+
+    font-size: $font-size-big;
+
+    &-image {
+      width: fit-content;
+      margin-bottom: $gutter;
+
+      border: 1px solid var(--text-accent-color);
+      border-radius: $border-radius;
+    }
   }
 
   &__bookmark {
-    writing-mode: sideways-lr;
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+
     display: flex;
     justify-content: space-between;
 
@@ -95,11 +110,9 @@ const isOpen = ref(false);
       height: 40px;
       border-radius: 50%;
       background-color: var(--background-color);
+
+      transform: rotate(180deg);
     }
   }
-}
-
-#arrow {
-  fill: var(--accent-color);
 }
 </style>
