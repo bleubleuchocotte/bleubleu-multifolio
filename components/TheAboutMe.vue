@@ -86,7 +86,7 @@ const isOpen = ref(false);
 
     width: $bookmark-width;
 
-    border-left: 1px solid var(--text-accent-color);
+    border-right: 1px solid var(--text-accent-color);
 
     h1 {
       text-transform: uppercase;
