@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import ProjectImagesSummary from "./ProjectImagesSummary.vue";
 import { Project } from "~/type/types";
-
-const props = defineProps({
+defineProps({
   project: {
     type: Object as PropType<Project>,
     required: true,
@@ -12,8 +11,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-console.log(props.project);
 </script>
 
 <template>
@@ -31,7 +28,9 @@ console.log(props.project);
       </div>
 
       <div class="project-details__utils">
-        <span class="project-details__utils-index">{{ index }}</span>
+        <span class="project-details__utils-index">
+          <UIBaseIndex :index="index + 1" />
+        </span>
         <div class="project-details__utils-button">
           <div>
             <IconBaseArrow />
@@ -53,7 +52,7 @@ console.log(props.project);
 .project-details {
   display: flex;
 
-  width: 100vw;
+  min-width: 100vw;
   height: 100%;
 
   &__left {
@@ -83,7 +82,8 @@ console.log(props.project);
 
   &__utils {
     &-index {
-      font-size: $font-size-big;
+      font-size: $font-size-enormous;
+      font-weight: 200;
       color: var(--accent-color);
     }
   }
