@@ -15,6 +15,7 @@ onMounted(() => {
   const lenis = new Lenis({
     wrapper: container.value, // element which has overflow
     content: container.value, // usually wrapper's direct child
+    orientation: props.orientation,
   });
 
   function raf(time: number) {
