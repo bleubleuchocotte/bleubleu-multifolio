@@ -29,7 +29,8 @@ onMounted(() => {
 const container = ref(null);
 
 const styles = reactive({
-  overflow: props.orientation === "vertical" ? "auto scroll" : "scroll auto",
+  overflow:
+    props.orientation === "vertical" ? "hidden scroll" : "scroll hidden",
 });
 </script>
 
