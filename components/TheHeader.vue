@@ -11,9 +11,11 @@ defineProps({
 
 <template>
   <header class="header">
-    <Vue3Marquee class="header__slider" :direction="'reverse'" :duration="10">
-      <span style="margin-left: 5rem">{{ params.text }}</span>
-    </Vue3Marquee>
+    <div class="header__slider">
+      <Vue3Marquee :direction="'reverse'" :duration="10">
+        <span style="margin-left: 5rem">{{ params.text }}</span>
+      </Vue3Marquee>
+    </div>
 
     <UIBaseButton :email="params.email" class="header__button"
       >contact</UIBaseButton
