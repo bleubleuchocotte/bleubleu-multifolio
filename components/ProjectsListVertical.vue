@@ -34,12 +34,13 @@ defineProps({
   &__element {
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--text-color);
 
     padding-block: calc($gutter / 2);
 
     &-left {
       text-transform: uppercase;
+      align-self: flex-end;
 
       span {
         display: inline-block;
