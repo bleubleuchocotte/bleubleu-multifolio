@@ -29,12 +29,15 @@ defineProps({
 
 <style scoped lang="scss">
 .projects-list-vertical {
+  height: 100%;
+  overflow: scroll;
   padding-left: 5px;
   padding-top: $gutter;
+
   &__element {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--border-color);
 
     padding-block: calc($gutter / 2);
 

@@ -18,13 +18,15 @@ const projects = props.params.projects.map(
   <main class="main">
     <TheAboutMe :about="params.about" />
     <div class="main__left">
-      <div class="main__left-container">
-        <p>Liste des projets</p>
+      <section class="main__left-container">
+        <p>My projects</p>
         <ProjectsListVertical :projects="projects" />
-      </div>
+      </section>
     </div>
     <UIBaseSeparator :width="1" />
-    <div class="main__right"><p>Liste des projets scrollable</p></div>
+    <div class="main__right">
+      <p>More info</p>
+    </div>
   </main>
 </template>
 
@@ -33,11 +35,14 @@ const projects = props.params.projects.map(
   flex: 1;
   display: flex;
   position: relative;
+  overflow: hidden;
 
   &__left {
     @include left;
     &-container {
+      height: 100%;
       padding-left: $bookmark-width;
+      padding-bottom: $gutter;
     }
   }
 
