@@ -24,9 +24,9 @@ const projects = props.params.projects.map(
       </section>
     </div>
     <UIBaseSeparator :width="1" />
-    <div class="main__right">
+    <UIBaseLenis :orientation="'horizontal'" class="main__right">
       <ProjectsListHorizontal :projects="projects" />
-    </div>
+    </UIBaseLenis>
   </main>
 </template>
 
@@ -47,6 +47,7 @@ const projects = props.params.projects.map(
   }
 
   &__right {
+    display: flex;
     @include right;
   }
 }
