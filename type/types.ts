@@ -16,10 +16,8 @@ export type Settings = {
 export type Project = {
   date: string;
   images: { image: ImageField }[];
-  description: {
-    short: RichTextField;
-    long: RichTextField;
-  };
+  "short-description": RichTextField;
+  "long-description": RichTextField;
   skills: { skill: string }[];
   title: string;
 };
