@@ -22,7 +22,7 @@ const isOpen = ref(false);
       <PrismicRichText :field="about.prismic.data.text" />
     </UIBaseLenis>
     <div class="section__bookmark">
-      <h1>{{ about.fullName }}</h1>
+      <p class="section__bookmark-heading">{{ about.fullName }}</p>
       <div class="section__bookmark-flex">
         <div>
           <p>contact & more</p>
@@ -88,7 +88,8 @@ const isOpen = ref(false);
 
     border-right: 1px solid var(--text-accent-color);
 
-    h1 {
+    &-heading {
+      font-size: $font-size-big;
       text-transform: uppercase;
     }
 
