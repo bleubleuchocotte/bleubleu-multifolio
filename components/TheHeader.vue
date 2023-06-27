@@ -13,7 +13,7 @@ defineProps({
   <header class="header">
     <div class="header__slider">
       <Vue3Marquee :direction="'reverse'" :duration="10">
-        <span style="margin-left: 5rem">{{ params.text }}</span>
+        <h1 style="margin-left: 5rem">{{ params.text }}</h1>
       </Vue3Marquee>
     </div>
 
