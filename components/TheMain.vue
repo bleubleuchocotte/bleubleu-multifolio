@@ -25,7 +25,7 @@ const projects = props.params.projects.map(
     </div>
     <UIBaseSeparator :width="1" />
     <div class="main__right">
-      <p>More info</p>
+      <ProjectsListHorizontal :projects="projects" />
     </div>
   </main>
 </template>

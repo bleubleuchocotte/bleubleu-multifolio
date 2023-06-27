@@ -1,7 +1,91 @@
 <script setup lang="ts">
-// Un item de la liste des projets horizontaux
+import ProjectImagesSummary from "./ProjectImagesSummary.vue";
+import { Project } from "~/type/types";
+
+const props = defineProps({
+  project: {
+    type: Object as PropType<Project>,
+    required: true,
+  },
+  index: {
+    type: Number,
+    required: true,
+  },
+});
+
+console.log(props.project);
 </script>
 
 <template>
-  <div>oui</div>
+  <article class="project-details">
+    <div class="project-details__left">
+      <div class="project-details__content">
+        <p>More info</p>
+        <h2 class="project-details__content-heading">{{ project.title }}</h2>
+        <div class="project-details__content-tags">
+          <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
+            {{ skill.skill }}
+          </UIBaseTag>
+        </div>
+        <PrismicRichText :field="project['short-description']" />
+      </div>
+
+      <div class="project-details__utils">
+        <span class="project-details__utils-index">{{ index }}</span>
+        <div class="project-details__utils-button">
+          <div>
+            <IconBaseArrow />
+          </div>
+          <div>
+            <IconBaseArrow />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-details__right">
+      <ProjectImagesSummary :images="project.images.map((el) => el.image)" />
+    </div>
+  </article>
 </template>
+
+<style scoped lang="scss">
+.project-details {
+  display: flex;
+
+  width: 100vw;
+  height: 100%;
+
+  &__left {
+    @include left;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__right {
+    @include right;
+  }
+
+  &__content {
+    padding-bottom: $gutter;
+    border-bottom: 1px solid var(--border-color);
+    &-heading {
+      margin-block: $gutter;
+    }
+
+    &-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+  }
+
+  &__utils {
+    &-index {
+      font-size: $font-size-big;
+      color: var(--accent-color);
+    }
+  }
+}
+</style>

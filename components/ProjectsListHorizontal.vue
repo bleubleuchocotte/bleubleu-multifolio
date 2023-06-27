@@ -1,7 +1,19 @@
 <script setup lang="ts">
-// La liste de tous les projets
+import { Project } from "~/type/types";
+
+defineProps({
+  projects: {
+    type: Array<Project>,
+    required: true,
+  },
+});
 </script>
 
 <template>
-  <div>oui</div>
+  <ProjectDetails
+    v-for="(project, i) in projects"
+    :key="i"
+    :project="project"
+    :index="i"
+  />
 </template>
