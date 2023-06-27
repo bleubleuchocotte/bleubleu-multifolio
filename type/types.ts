@@ -1,4 +1,9 @@
-import { LinkField, PrismicDocument } from "@prismicio/types";
+import {
+  LinkField,
+  PrismicDocument,
+  ImageField,
+  RichTextField,
+} from "@prismicio/types";
 
 export type Settings = {
   accentColor: string; // Couleur formatée en HEX
@@ -6,6 +11,17 @@ export type Settings = {
   firstName: string;
   lastName: string;
   email: string;
+};
+
+export type Project = {
+  date: string;
+  images: { image: ImageField }[];
+  description: {
+    short: RichTextField;
+    long: RichTextField;
+  };
+  skills: { skill: string }[];
+  title: string;
 };
 
 export type Header = {
