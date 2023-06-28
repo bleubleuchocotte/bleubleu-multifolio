@@ -13,15 +13,17 @@ export type Settings = {
   email: string;
 };
 
+export type Images = {
+  field: {
+    [index: string]: ImageField;
+  };
+  type: "image-full" | "image-duo";
+};
+
 export type Project = {
   id: string;
   date: string;
-  images: {
-    field: {
-      [index: string]: ImageField;
-    };
-    type: "image-full" | "image-duo";
-  }[];
+  images: Images[];
   "short-description": RichTextField;
   "long-description": RichTextField;
   skills: { skill: string }[];
