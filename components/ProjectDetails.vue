@@ -48,7 +48,7 @@ const images = computed(() =>
     </div>
 
     <div class="project-details__right">
-      <ProjectImagesSummary :images="images" />
+      <ProjectImagesSummary :images="images.splice(0, 3)" />
     </div>
   </article>
 </template>
@@ -75,13 +75,15 @@ const images = computed(() =>
     padding-bottom: $gutter;
     border-bottom: 1px solid var(--border-color);
     &-heading {
-      margin-block: $gutter;
+      margin-top: $gutter;
     }
 
     &-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
+
+      margin-block: $gutter/2;
     }
   }
 
