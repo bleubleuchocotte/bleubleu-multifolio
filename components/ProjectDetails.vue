@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProjectImagesSummary from "./ProjectImagesSummary.vue";
 import { Project } from "~/type/types";
-defineProps({
+const props = defineProps({
   project: {
     type: Object as PropType<Project>,
     required: true,
@@ -11,6 +11,11 @@ defineProps({
     required: true,
   },
 });
+
+// Get toutes les images d'un projet dans un seul tableau
+const images = computed(() =>
+  props.project.images.flatMap((el) => Object.values(el))
+);
 </script>
 
 <template>
@@ -43,7 +48,7 @@ defineProps({
     </div>
 
     <div class="project-details__right">
-      <ProjectImagesSummary :images="project.images.map((el) => el.image)" />
+      <ProjectImagesSummary :images="images" />
     </div>
   </article>
 </template>
