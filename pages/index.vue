@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Settings, Header, Main, Footer } from "@/type/types";
+import { Settings, Header, Main, Footer, Project } from "@/type/types";
 
 const { client } = usePrismic();
 
@@ -35,10 +35,34 @@ const { data: about } = await useAsyncData(() => client.getSingle("about"));
 if (!about.value) throw new Error("Prismic document could not be accessed");
 
 // On GET la section Projets
-const { data: projects } = await useAsyncData(() =>
+const { data: prismicProjects } = await useAsyncData(() =>
   client.getAllByType("projet")
 );
-if (!projects.value) throw new Error("Prismic document could not be accessed");
+if (!prismicProjects.value)
+  throw new Error("Prismic document could not be accessed");
+
+const projects: Project[] = await Promise.all(
+  prismicProjects.value.map(async (project) => {
+    // On récupère l'id de toutes les images
+    const ids: string[] = project.data.images.map((a: any) => a.image.id);
+
+    const { data: images } = await useAsyncData(project.id, () =>
+      client.getAllByIDs(ids)
+    );
+
+    if (!images.value)
+      throw new Error("Prismic document could not be accessed");
+
+    return {
+      date: project.data.date,
+      "short-description": project.data["short-description"],
+      "long-description": project.data["long-description"],
+      skills: project.data.skills,
+      title: project.data.title,
+      images: images.value.map((image) => image.data),
+    };
+  })
+);
 
 const header = ref<Header>({
   text: website.value.data["text-header"],
@@ -50,7 +74,7 @@ const main = ref<Main>({
     fullName: settings.value.firstName + " " + settings.value.lastName,
     prismic: about.value,
   },
-  projects: projects.value,
+  projects,
 });
 
 const footer = ref<Footer>({
