@@ -15,7 +15,9 @@ export type Settings = {
 
 export type Project = {
   date: string;
-  images: { image: ImageField }[];
+  images: {
+    [index: string]: ImageField;
+  }[];
   "short-description": RichTextField;
   "long-description": RichTextField;
   skills: { skill: string }[];
@@ -32,7 +34,7 @@ export type Main = {
     fullName: String;
     prismic: PrismicDocument;
   };
-  projects: PrismicDocument[];
+  projects: Project[];
 };
 
 export type Footer = {
