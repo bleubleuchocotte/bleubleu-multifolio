@@ -13,7 +13,7 @@ defineProps({
   <ul class="projects-list-vertical">
     <li
       v-for="(project, i) in projects"
-      :key="i"
+      :key="project.id"
       class="projects-list-vertical__element"
     >
       <h2 class="projects-list-vertical__element-left">

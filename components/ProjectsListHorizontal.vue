@@ -12,7 +12,7 @@ defineProps({
 <template>
   <ProjectDetails
     v-for="(project, i) in projects"
-    :key="i"
+    :key="project.id"
     :project="project"
     :index="i"
   />
