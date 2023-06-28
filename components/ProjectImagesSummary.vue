@@ -11,16 +11,33 @@ defineProps({
 
 <template>
   <div class="project-images-summary__grid">
-    <PrismicImage v-for="(image, i) in images" :key="i" :field="image" />
+    <PrismicImage
+      v-for="(image, i) in images"
+      :key="i"
+      :field="image"
+      :data-index="i"
+    />
   </div>
 </template>
 
 <style scoped lang="scss">
 .project-images-summary__grid {
+  height: 100%;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
+
+  [data-index="0"] {
+    grid-area: 1 / 1 / 4 / 5;
+  }
+  [data-index="1"] {
+    grid-area: 4 / 1 / 6 / 3;
+  }
+  [data-index="2"] {
+    grid-area: 4 / 3 / 6 / 5;
+  }
 }
 </style>
