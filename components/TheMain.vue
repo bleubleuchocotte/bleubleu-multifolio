@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ProjectsListVertical from "./ProjectsListVertical.vue";
 import { Main } from "@/type/types";
 defineProps({
   params: {
