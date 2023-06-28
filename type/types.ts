@@ -14,9 +14,13 @@ export type Settings = {
 };
 
 export type Project = {
+  id: string;
   date: string;
   images: {
-    [index: string]: ImageField;
+    field: {
+      [index: string]: ImageField;
+    };
+    type: "image-full" | "image-duo";
   }[];
   "short-description": RichTextField;
   "long-description": RichTextField;
