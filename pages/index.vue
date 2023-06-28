@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Settings, Header, Main, Footer, Project } from "@/type/types";
-
 const { client } = usePrismic();
 
 // On GET le document global
@@ -53,14 +52,24 @@ const projects: Project[] = await Promise.all(
     if (!images.value)
       throw new Error("Prismic document could not be accessed");
 
-    return {
+    const bufferProject: Project = {
+      id: project.id,
       date: project.data.date,
       "short-description": project.data["short-description"],
       "long-description": project.data["long-description"],
       skills: project.data.skills,
       title: project.data.title,
-      images: images.value.map((image) => image.data),
+      images: images.value.map((image) => {
+        if (image.type !== "image-duo" && image.type !== "image-full")
+          throw new Error("Type error");
+        return {
+          type: image.type,
+          field: image.data,
+        };
+      }),
     };
+
+    return bufferProject;
   })
 );
 
