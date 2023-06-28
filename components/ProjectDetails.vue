@@ -14,7 +14,7 @@ const props = defineProps({
 
 // Get toutes les images d'un projet dans un seul tableau
 const images = computed(() =>
-  props.project.images.flatMap((el) => Object.values(el))
+  props.project.images.flatMap((el) => Object.values(el.field))
 );
 </script>
 
@@ -83,7 +83,7 @@ const images = computed(() =>
       flex-wrap: wrap;
       gap: 5px;
 
-      margin-block: $gutter/2;
+      margin-block: calc($gutter/2);
     }
   }
 
