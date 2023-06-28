@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ImageField } from "@prismicio/types";
+import { Images } from "@/type/types";
 defineProps({
   images: {
-    type: Array<ImageField>,
+    type: Array<Images>,
     required: false,
     default: [],
   },
@@ -11,12 +11,14 @@ defineProps({
 
 <template>
   <div class="project-images-summary__grid">
-    <PrismicImage
-      v-for="(image, i) in images"
-      :key="i"
-      :field="image"
-      :data-index="i"
-    />
+    <template v-for="(image, i) in images" :key="i">
+      <PrismicImage
+        v-for="(field, j) in Object.values(image.field)"
+        :key="j"
+        :field="field"
+        :data-index="i + j"
+      />
+    </template>
   </div>
 </template>
 
@@ -38,6 +40,10 @@ defineProps({
   }
   [data-index="2"] {
     grid-area: 4 / 3 / 6 / 5;
+  }
+
+  & > img {
+    border-radius: $border-radius-big;
   }
 }
 </style>
