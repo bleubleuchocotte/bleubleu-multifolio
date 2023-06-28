@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import ProjectsListVertical from "./ProjectsListVertical.vue";
-import { Main, Project } from "@/type/types";
-const props = defineProps({
+import { Main } from "@/type/types";
+defineProps({
   params: {
     type: Object as PropType<Main>,
     required: true,
   },
 });
-
-// Permet de typer les projets venant de prismic
-const projects = props.params.projects.map(
-  (prismicEl) => prismicEl.data as Project
-);
 </script>
 
 <template>
@@ -20,12 +15,12 @@ const projects = props.params.projects.map(
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
-        <ProjectsListVertical :projects="projects" />
+        <ProjectsListVertical :projects="params.projects" />
       </section>
     </div>
     <UIBaseSeparator :width="1" />
     <UIBaseLenis :orientation="'horizontal'" class="main__right">
-      <ProjectsListHorizontal :projects="projects" />
+      <ProjectsListHorizontal :projects="params.projects" />
     </UIBaseLenis>
   </main>
 </template>
