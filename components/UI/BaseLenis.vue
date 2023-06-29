@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Lenis from "@studio-freight/lenis";
-import { PropType } from "nuxt/dist/app/compat/capi";
+import type { LenisTarget } from "@/type/types";
 
 const props = defineProps({
   orientation: {
@@ -8,11 +8,16 @@ const props = defineProps({
     required: false,
     default: "vertical",
   },
+  target: {
+    type: [String, Number, Object] as PropType<LenisTarget>,
+    required: false,
+    default: undefined,
+  },
 });
 
 onMounted(() => {
   if (container.value === null) return;
-  const lenis = new Lenis({
+  lenis = new Lenis({
     wrapper: container.value, // element which has overflow
     content: container.value, // usually wrapper's direct child
     orientation: props.orientation,
@@ -27,11 +32,19 @@ onMounted(() => {
 });
 
 const container = ref(null);
+let lenis: Lenis;
 
 const styles = reactive({
   overflow:
     props.orientation === "vertical" ? "hidden scroll" : "scroll hidden",
 });
+
+watch(
+  () => props.target,
+  () => {
+    lenis.scrollTo(props.target);
+  }
+);
 </script>
 
 <template>
