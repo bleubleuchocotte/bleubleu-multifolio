@@ -11,7 +11,7 @@ const emit = defineEmits<{
   (e: "target", payload: string): void;
 }>();
 
-const callback = (e: MouseEvent, id: string) => {
+const callback = (e: MouseEvent | KeyboardEvent, id: string) => {
   // Si un projet est déjà actif, on remove le style
   if (projectActive.value) {
     projectActive.value.classList.remove("active");
@@ -38,6 +38,7 @@ const projectActive = ref<HTMLElement>();
       class="projects-list-vertical__element"
       tabindex="0"
       @click="(e) => callback(e, project.id)"
+      @keypress.enter="(e) => callback(e, project.id)"
     >
       <h2 class="projects-list-vertical__element-left">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
