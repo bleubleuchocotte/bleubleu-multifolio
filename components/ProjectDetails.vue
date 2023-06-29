@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <article class="project-details">
+  <article class="project-details" :data-project-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>
