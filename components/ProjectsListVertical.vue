@@ -72,8 +72,9 @@ const projectActive = ref<HTMLElement>();
       border-bottom: 1px solid var(--accent-color);
     }
 
-    &.active {
-      padding-left: calc($gutter / 2);
+    &.active &-left:before {
+      width: 10px;
+      margin-right: 5px;
     }
 
     &-left,
@@ -82,8 +83,20 @@ const projectActive = ref<HTMLElement>();
     }
 
     &-left {
+      display: flex;
       text-transform: uppercase;
       align-self: flex-end;
+
+      &::before {
+        transition: all ease-out 0.3s;
+        content: "";
+        height: 1px;
+        width: 0;
+        margin-right: 0;
+        background-color: var(--accent-color);
+
+        align-self: center;
+      }
 
       span {
         display: inline-block;
