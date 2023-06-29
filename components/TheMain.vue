@@ -14,7 +14,9 @@ defineProps({
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
-        <ProjectsListVertical :projects="params.projects" />
+        <UIBaseLenis :orientation="'vertical'">
+          <ProjectsListVertical :projects="params.projects" />
+        </UIBaseLenis>
       </section>
     </div>
     <UIBaseSeparator :width="1" />
