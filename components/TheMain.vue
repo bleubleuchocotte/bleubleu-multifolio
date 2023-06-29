@@ -6,6 +6,8 @@ defineProps({
     required: true,
   },
 });
+
+const scrollToProjectId = ref<string>();
 </script>
 
 <template>
@@ -15,12 +17,19 @@ defineProps({
       <section class="main__left-container">
         <p>My projects</p>
         <UIBaseLenis :orientation="'vertical'">
-          <ProjectsListVertical :projects="params.projects" />
+          <ProjectsListVertical
+            :projects="params.projects"
+            @target="(id) => (scrollToProjectId = `[data-project-id='${id}']`)"
+          />
         </UIBaseLenis>
       </section>
     </div>
     <UIBaseSeparator :width="1" />
-    <UIBaseLenis :orientation="'horizontal'" class="main__right">
+    <UIBaseLenis
+      :orientation="'horizontal'"
+      class="main__right"
+      :target="scrollToProjectId"
+    >
       <ProjectsListHorizontal :projects="params.projects" />
     </UIBaseLenis>
   </main>
