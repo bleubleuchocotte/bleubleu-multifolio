@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <article class="project-details">
+  <article class="project-details" :data-project-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>
@@ -51,12 +51,16 @@ defineProps({
 <style scoped lang="scss">
 .project-details {
   display: flex;
+  gap: $gutter;
+
+  padding-left: $gutter;
 
   min-width: 100vw;
   height: 100%;
 
   &__left {
     @include left;
+    padding-inline: 0;
 
     display: flex;
     flex-direction: column;
@@ -64,6 +68,7 @@ defineProps({
   }
   &__right {
     @include right;
+    padding-inline: 0;
   }
 
   &__content {

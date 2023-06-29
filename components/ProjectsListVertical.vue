@@ -7,6 +7,9 @@ defineProps({
     required: true,
   },
 });
+defineEmits<{
+  (e: "target", payload: string): void;
+}>();
 </script>
 
 <template>
@@ -15,6 +18,8 @@ defineProps({
       v-for="(project, i) in projects"
       :key="project.id"
       class="projects-list-vertical__element"
+      tabindex="0"
+      @click="$emit('target', project.id)"
     >
       <h2 class="projects-list-vertical__element-left">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
@@ -30,16 +35,24 @@ defineProps({
 <style scoped lang="scss">
 .projects-list-vertical {
   height: 100%;
-  overflow: scroll;
   padding-left: 5px;
   padding-top: $gutter;
 
   &__element {
+    transition: all ease-out 0.3s;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--border-color);
 
     padding-block: calc($gutter / 2);
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--accent-color);
+      border-bottom: 1px solid var(--accent-color);
+    }
 
     &-left {
       text-transform: uppercase;
