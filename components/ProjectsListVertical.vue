@@ -15,6 +15,7 @@ defineProps({
       v-for="(project, i) in projects"
       :key="project.id"
       class="projects-list-vertical__element"
+      tabindex="0"
     >
       <h2 class="projects-list-vertical__element-left">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
@@ -40,6 +41,13 @@ defineProps({
     border-bottom: 1px solid var(--border-color);
 
     padding-block: calc($gutter / 2);
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--accent-color);
+    }
 
     &-left {
       text-transform: uppercase;
