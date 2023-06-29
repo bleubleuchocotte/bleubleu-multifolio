@@ -31,7 +31,6 @@ defineProps({
 <style scoped lang="scss">
 .projects-list-vertical {
   height: 100%;
-  overflow: scroll;
   padding-left: 5px;
   padding-top: $gutter;
 
