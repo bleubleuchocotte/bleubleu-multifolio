@@ -42,6 +42,12 @@ defineProps({
 
     display: flex;
     justify-content: space-between;
+
+    padding-left: 0;
+
+    :nth-child(1) {
+      padding-left: $gutter;
+    }
   }
 }
 </style>

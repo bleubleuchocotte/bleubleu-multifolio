@@ -52,8 +52,10 @@ const scrollToProjectId = ref<string>();
   }
 
   &__right {
-    display: flex;
     @include right;
+    display: flex;
+
+    padding-left: 0;
   }
 }
 </style>
