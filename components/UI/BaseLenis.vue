@@ -35,7 +35,13 @@ const styles = reactive({
 </script>
 
 <template>
-  <div ref="container" :style="styles">
+  <div ref="container" data-lenis :style="styles">
     <slot></slot>
   </div>
 </template>
+
+<style scoped lang="scss">
+div[data-lenis] {
+  height: 100%;
+}
+</style>
