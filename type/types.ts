@@ -46,3 +46,11 @@ export type Main = {
 export type Footer = {
   links: { name: string; link: LinkField }[];
 };
+
+/**
+ * D'après la doc de lenis :
+ * number: value to scroll in pixels
+ * string: CSS selector or keyword (top, left, start, bottom, right, end)
+ * HTMLElement: DOM element
+ */
+export type LenisTarget = number | string | HTMLElement;
