@@ -7,6 +7,9 @@ defineProps({
     required: true,
   },
 });
+defineEmits<{
+  (e: "target", payload: string): void;
+}>();
 </script>
 
 <template>
@@ -16,6 +19,7 @@ defineProps({
       :key="project.id"
       class="projects-list-vertical__element"
       tabindex="0"
+      @click="$emit('target', project.id)"
     >
       <h2 class="projects-list-vertical__element-left">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
