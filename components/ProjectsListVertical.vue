@@ -57,7 +57,7 @@ const projectActive = ref<HTMLElement>();
   padding-top: $gutter;
 
   &__element {
-    transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.3s;
+    transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.2s;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--border-color);
@@ -89,7 +89,7 @@ const projectActive = ref<HTMLElement>();
       align-self: flex-end;
 
       &::before {
-        transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.3s;
+        transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.2s;
         content: "";
         height: 1px;
         width: 0;
