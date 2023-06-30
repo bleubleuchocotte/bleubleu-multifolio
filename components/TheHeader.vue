@@ -17,9 +17,9 @@ defineProps({
       </Vue3Marquee>
     </div>
 
-    <UIBaseButton :email="params.email" class="header__button"
-      >contact</UIBaseButton
-    >
+    <UIBaseButtonContact :email="params.email" class="header__button">
+      contact
+    </UIBaseButtonContact>
   </header>
 </template>
 
