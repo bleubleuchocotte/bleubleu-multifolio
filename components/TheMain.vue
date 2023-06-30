@@ -7,9 +7,10 @@ defineProps({
   },
 });
 
-const callback = (id: string) => {
+const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;
-  scrollToProjectId.value = undefined;
+  if (hasToScroll) scrollToProjectId.value = `[data-project-h-id='${id}']`;
+  else scrollToProjectId.value = undefined;
 };
 
 const scrollToProjectId = ref<string>();
@@ -39,7 +40,11 @@ const idToProject = ref<string>();
       class="main__right"
       :target="scrollToProjectId"
     >
-      <ProjectsListHorizontal :projects="params.projects" @target="callback" />
+      <ProjectsListHorizontal
+        :projects="params.projects"
+        @target="(id) => callback(id, false)"
+        @target-then-scroll="(id) => callback(id, true)"
+      />
     </UIBaseLenis>
   </main>
 </template>

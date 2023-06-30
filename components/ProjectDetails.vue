@@ -14,6 +14,8 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: "target", payload: string): void;
+  (e: "next"): void;
+  (e: "previous"): void;
 }>();
 
 const target = ref<HTMLElement>();
@@ -50,12 +52,22 @@ useIntersectionObserver(
           <UIBaseIndex :index="index + 1" />
         </span>
         <div class="project-details__utils-button">
-          <div>
-            <IconBaseArrow />
-          </div>
-          <div>
-            <IconBaseArrow />
-          </div>
+          <UIBaseButtonNavigation
+            :colors="{
+              background: 'transparent',
+              arrow: 'var(--text-color)',
+              border: 'var(--text-color)',
+            }"
+            :orientation="'left'"
+            @click="$emit('previous')"
+          />
+          <UIBaseButtonNavigation
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--text-accent-color)',
+            }"
+            @click="$emit('next')"
+          />
         </div>
       </div>
     </div>
@@ -106,10 +118,18 @@ useIntersectionObserver(
   }
 
   &__utils {
+    display: flex;
+    flex-direction: column;
+    gap: calc($gutter/2);
     &-index {
       font-size: $font-size-enormous;
       font-weight: 200;
       color: var(--accent-color);
+      line-height: 1;
+    }
+    &-button {
+      display: flex;
+      gap: calc($gutter / 2);
     }
   }
 }
