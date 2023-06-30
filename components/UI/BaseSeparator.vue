@@ -38,7 +38,6 @@ div {
     );
     z-index: 1;
     pointer-events: none;
-    backdrop-filter: opacity(100%);
   }
 }
 </style>

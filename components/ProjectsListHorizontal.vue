@@ -11,6 +11,7 @@ defineProps({
 defineEmits<{
   (e: "target", payload: string): void;
   (e: "targetThenScroll", payload: string): void;
+  (e: "gallery", payload: Project): void;
 }>();
 </script>
 
@@ -27,5 +28,6 @@ defineEmits<{
         ? $emit('targetThenScroll', projects[i + 1].id)
         : null
     "
+    @gallery="(project) => $emit('gallery', project)"
   />
 </template>

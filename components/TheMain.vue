@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Main } from "@/type/types";
+import { Main, Project } from "@/type/types";
 defineProps({
   params: {
     type: Object as PropType<Main>,
@@ -15,6 +15,8 @@ const callback = (id: string, hasToScroll: boolean) => {
 
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
+
+const projectInGallery = ref<Project | null>(null);
 </script>
 
 <template>
@@ -44,8 +46,17 @@ const idToProject = ref<string>();
         :projects="params.projects"
         @target="(id) => callback(id, false)"
         @target-then-scroll="(id) => callback(id, true)"
+        @gallery="(project) => (projectInGallery = project)"
       />
     </UIBaseLenis>
+
+    <Transition>
+      <TheGallery
+        v-if="projectInGallery != null"
+        :project="projectInGallery"
+        @close="projectInGallery = null"
+      />
+    </Transition>
   </main>
 </template>
 

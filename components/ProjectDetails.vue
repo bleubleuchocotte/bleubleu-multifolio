@@ -16,6 +16,7 @@ const emit = defineEmits<{
   (e: "target", payload: string): void;
   (e: "next"): void;
   (e: "previous"): void;
+  (e: "gallery", payload: Project): void;
 }>();
 
 const target = ref<HTMLElement>();
@@ -73,7 +74,10 @@ useIntersectionObserver(
     </div>
 
     <div class="project-details__right">
-      <ProjectImagesSummary :images="project.images.slice(0, 2)" />
+      <ProjectImagesSummary
+        :images="project.images.slice(0, 2)"
+        @click="$emit('gallery', project)"
+      />
     </div>
   </article>
 </template>
@@ -98,7 +102,6 @@ useIntersectionObserver(
   }
   &__right {
     @include right;
-    padding-inline: 0;
   }
 
   &__content {
