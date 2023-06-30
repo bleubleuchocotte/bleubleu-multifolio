@@ -29,7 +29,7 @@ const isOpen = ref(false);
           <p>Learn to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
-          <IconBaseArrow />
+          <IconBaseArrowShort :fill="'var(--accent-color)'" />
         </div>
       </div>
     </div>
