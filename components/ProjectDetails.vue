@@ -50,12 +50,20 @@ useIntersectionObserver(
           <UIBaseIndex :index="index + 1" />
         </span>
         <div class="project-details__utils-button">
-          <div>
-            <IconBaseArrow />
-          </div>
-          <div>
-            <IconBaseArrow />
-          </div>
+          <UIBaseButtonNavigation
+            :colors="{
+              background: 'transparent',
+              arrow: 'var(--text-color)',
+              border: 'var(--text-color)',
+            }"
+            :orientation="'left'"
+          />
+          <UIBaseButtonNavigation
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--text-accent-color)',
+            }"
+          />
         </div>
       </div>
     </div>
