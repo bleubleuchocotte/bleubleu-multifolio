@@ -114,10 +114,18 @@ useIntersectionObserver(
   }
 
   &__utils {
+    display: flex;
+    flex-direction: column;
+    gap: $gutter;
     &-index {
       font-size: $font-size-enormous;
       font-weight: 200;
       color: var(--accent-color);
+      line-height: 1;
+    }
+    &-button {
+      display: flex;
+      gap: calc($gutter / 2);
     }
   }
 }
