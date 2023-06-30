@@ -31,6 +31,7 @@ defineProps({
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
+  cursor: pointer;
 
   [data-index="0"] {
     grid-area: 1 / 1 / 4 / 5;
