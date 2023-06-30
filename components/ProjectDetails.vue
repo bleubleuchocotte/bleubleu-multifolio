@@ -14,6 +14,8 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: "target", payload: string): void;
+  (e: "next"): void;
+  (e: "previous"): void;
 }>();
 
 const target = ref<HTMLElement>();
@@ -57,12 +59,14 @@ useIntersectionObserver(
               border: 'var(--text-color)',
             }"
             :orientation="'left'"
+            @click="$emit('previous')"
           />
           <UIBaseButtonNavigation
             :colors="{
               background: 'var(--accent-color)',
               arrow: 'var(--text-accent-color)',
             }"
+            @click="$emit('next')"
           />
         </div>
       </div>
