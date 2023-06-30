@@ -98,7 +98,6 @@ useIntersectionObserver(
   }
   &__right {
     @include right;
-    padding-inline: 0;
   }
 
   &__content {
