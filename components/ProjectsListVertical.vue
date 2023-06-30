@@ -11,6 +11,11 @@ const emit = defineEmits<{
   (e: "target", payload: string): void;
 }>();
 
+onMounted(() => {
+  projectActive.value = containers.value[0];
+  projectActive.value.classList.add("active");
+});
+
 const callback = (e: MouseEvent | KeyboardEvent, id: string) => {
   // Si un projet est déjà actif, on remove le style
   if (projectActive.value) {
