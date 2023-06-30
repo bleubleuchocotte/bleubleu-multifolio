@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { Project } from "~/type/types";
 
-defineProps({
+const props = defineProps({
   projects: {
     type: Array<Project>,
     required: true,
+  },
+
+  idToActive: {
+    type: String,
+    required: false,
+    default: undefined,
   },
 });
 const emit = defineEmits<{
@@ -27,11 +33,29 @@ const callback = (e: MouseEvent | KeyboardEvent, id: string) => {
   if (!projectActive.value) return;
   projectActive.value.classList.add("active");
 
+  (e.target as HTMLElement).blur();
   emit("target", id);
 };
 
 const containers = ref<Array<HTMLElement>>([]);
 const projectActive = ref<HTMLElement>();
+
+watch(
+  () => props.idToActive,
+  () => {
+    // Logique pour activer un projet depuis le scroll des projets horizontaux
+    if (projectActive.value) {
+      projectActive.value.classList.remove("active");
+    }
+    projectActive.value = containers.value.find(
+      (el) =>
+        el.attributes.getNamedItem("data-project-v-id")?.nodeValue ===
+        props.idToActive
+    );
+    if (!projectActive.value) return;
+    projectActive.value.classList.add("active");
+  }
+);
 </script>
 
 <template>
@@ -40,6 +64,7 @@ const projectActive = ref<HTMLElement>();
       v-for="(project, i) in projects"
       ref="containers"
       :key="project.id"
+      :data-project-v-id="project.id"
       class="projects-list-vertical__element"
       tabindex="0"
       @click="(e) => callback(e, project.id)"
@@ -72,7 +97,7 @@ const projectActive = ref<HTMLElement>();
     cursor: pointer;
 
     &:hover,
-    &:focus,
+    &:focus-within,
     &.active {
       color: var(--accent-color);
       border-bottom: 1px solid var(--accent-color);

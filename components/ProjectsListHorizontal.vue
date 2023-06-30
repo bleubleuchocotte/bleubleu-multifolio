@@ -7,6 +7,10 @@ defineProps({
     required: true,
   },
 });
+
+defineEmits<{
+  (e: "target", payload: string): void;
+}>();
 </script>
 
 <template>
@@ -15,5 +19,6 @@ defineProps({
     :key="project.id"
     :project="project"
     :index="i"
+    @target="(id) => $emit('target', id)"
   />
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProjectImagesSummary from "./ProjectImagesSummary.vue";
 import { Project } from "~/type/types";
-defineProps({
+const props = defineProps({
   project: {
     type: Object as PropType<Project>,
     required: true,
@@ -11,10 +11,28 @@ defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits<{
+  (e: "target", payload: string): void;
+}>();
+
+const target = ref<HTMLElement>();
+
+useIntersectionObserver(
+  target,
+  ([{ isIntersecting, intersectionRatio }]) => {
+    if (isIntersecting && intersectionRatio > 0.5) {
+      emit("target", props.project.id);
+    }
+  },
+  {
+    threshold: [...Array(4).keys()].map((el) => el / 4),
+  }
+);
 </script>
 
 <template>
-  <article class="project-details" :data-project-id="project.id">
+  <article ref="target" class="project-details" :data-project-h-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>

@@ -8,6 +8,7 @@ defineProps({
 });
 
 const scrollToProjectId = ref<string>();
+const idToProject = ref<string>();
 </script>
 
 <template>
@@ -19,7 +20,10 @@ const scrollToProjectId = ref<string>();
         <UIBaseLenis :orientation="'vertical'">
           <ProjectsListVertical
             :projects="params.projects"
-            @target="(id) => (scrollToProjectId = `[data-project-id='${id}']`)"
+            :id-to-active="idToProject"
+            @target="
+              (id) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+            "
           />
         </UIBaseLenis>
       </section>
@@ -30,7 +34,10 @@ const scrollToProjectId = ref<string>();
       class="main__right"
       :target="scrollToProjectId"
     >
-      <ProjectsListHorizontal :projects="params.projects" />
+      <ProjectsListHorizontal
+        :projects="params.projects"
+        @target="(id) => (idToProject = id)"
+      />
     </UIBaseLenis>
   </main>
 </template>
