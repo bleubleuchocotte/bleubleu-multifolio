@@ -7,6 +7,11 @@ defineProps({
   },
 });
 
+const callback = (id: string) => {
+  idToProject.value = id;
+  scrollToProjectId.value = undefined;
+};
+
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 </script>
@@ -34,10 +39,7 @@ const idToProject = ref<string>();
       class="main__right"
       :target="scrollToProjectId"
     >
-      <ProjectsListHorizontal
-        :projects="params.projects"
-        @target="(id) => (idToProject = id)"
-      />
+      <ProjectsListHorizontal :projects="params.projects" @target="callback" />
     </UIBaseLenis>
   </main>
 </template>

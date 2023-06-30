@@ -42,7 +42,7 @@ const styles = reactive({
 watch(
   () => props.target,
   () => {
-    lenis.scrollTo(props.target);
+    if (props.target) lenis.scrollTo(props.target);
   }
 );
 </script>
