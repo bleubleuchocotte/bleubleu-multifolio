@@ -120,7 +120,7 @@ useIntersectionObserver(
   &__utils {
     display: flex;
     flex-direction: column;
-    gap: $gutter;
+    gap: calc($gutter/2);
     &-index {
       font-size: $font-size-enormous;
       font-weight: 200;
