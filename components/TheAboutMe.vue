@@ -50,6 +50,7 @@ const isOpen = ref(false);
   display: flex;
 
   position: absolute;
+  z-index: 10;
   left: 0;
 
   height: 100%;
