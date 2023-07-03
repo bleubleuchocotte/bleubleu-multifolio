@@ -92,7 +92,8 @@ const footer = ref<Footer>({
 </script>
 
 <template>
-  <div>
+  <div class="body">
+    <UIBaseCursor />
     <TheHeader :params="header" />
     <TheMain :params="main" />
     <TheFooter :params="footer" />
@@ -100,7 +101,7 @@ const footer = ref<Footer>({
 </template>
 
 <style scoped lang="css">
-div {
+.body {
   display: flex;
   flex-direction: column;
 
