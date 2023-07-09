@@ -36,7 +36,7 @@ let lenis: Lenis;
 
 const styles = reactive({
   overflow:
-    props.orientation === "vertical" ? "hidden scroll" : "scroll hidden",
+    props.orientation === "vertical" ? "hidden" : "hidden",
 });
 
 watch(
