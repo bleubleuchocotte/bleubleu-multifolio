@@ -21,7 +21,7 @@ const isOpen = ref(false);
       </div>
       <PrismicRichText :field="about.prismic.data.text" />
     </UIBaseLenis>
-    <div class="section__bookmark">
+    <button class="section__bookmark">
       <p class="section__bookmark-heading">{{ about.fullName }}</p>
       <div class="section__bookmark-flex">
         <div>
@@ -32,14 +32,14 @@ const isOpen = ref(false);
           <IconBaseArrowShort :fill="'var(--accent-color)'" />
         </div>
       </div>
-    </div>
+    </button>
   </section>
 </template>
 
 <style scoped lang="scss">
 .section {
   transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 50vw));
+  transform: translate(calc($bookmark-width - 1px - 50vw));
   &.open {
     transform: translate(0);
 
@@ -67,6 +67,8 @@ const isOpen = ref(false);
 
     font-size: $font-size-big;
 
+    border-right: 1px solid var(--text-accent-color);
+
     &-image {
       width: fit-content;
       margin-bottom: $gutter;
@@ -87,7 +89,9 @@ const isOpen = ref(false);
 
     width: $bookmark-width;
 
-    border-right: 1px solid var(--text-accent-color);
+    & > * {
+      pointer-events: none;
+    }
 
     &-heading {
       font-size: $font-size-big;
