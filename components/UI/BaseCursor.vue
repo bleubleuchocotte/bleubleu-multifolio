@@ -32,7 +32,6 @@ const callback = (e: MouseEvent) => {
   }
 };
 
-const styles = ref();
 const x = ref(0);
 const y = ref(0);
 const isExpand = ref(false);
@@ -58,7 +57,7 @@ watch([x, y], () =>
 
 <template>
   <div class="cursor__container">
-    <div ref="container" :style="styles">
+    <div ref="container">
       <div
         class="cursor__shape"
         :class="{ expand: isExpand }"
