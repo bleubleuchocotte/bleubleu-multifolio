@@ -27,7 +27,6 @@ defineProps({
 
 <style scoped lang="scss">
 button {
-  cursor: pointer;
   width: 75px;
   height: 75px;
 

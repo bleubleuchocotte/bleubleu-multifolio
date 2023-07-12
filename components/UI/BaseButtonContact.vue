@@ -32,7 +32,5 @@ const { copy } = useClipboard();
   background-color: var(--accent-color);
 
   font-size: $font-size-normal;
-
-  cursor: pointer;
 }
 </style>
