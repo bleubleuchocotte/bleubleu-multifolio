@@ -16,6 +16,7 @@ const settings = ref<Settings>({
 
 const cssVariables = [
   "--accent-color: " + settings.value.accentColor,
+  "--accent-color-80: " + settings.value.accentColor + "80",
   "--text-accent-color: #131313",
   "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
   "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),

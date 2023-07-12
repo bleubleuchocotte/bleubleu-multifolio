@@ -84,7 +84,7 @@ watch([x, y], () =>
   }
 
   &__shape {
-    transition: transform 0.4s ease-out;
+    transition: all 0.2s ease-out;
     height: var(--size);
     width: var(--size);
     background-color: var(--background-color);
@@ -95,7 +95,9 @@ watch([x, y], () =>
     &.expand {
       border: 1px solid var(--background-color);
       background-color: var(--accent-color);
-      transform: scale(2);
+      transform: scale(1.75);
+
+      box-shadow: 0px 0px 30px 0px var(--accent-color-80);
     }
   }
 }
