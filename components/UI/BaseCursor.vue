@@ -35,57 +35,68 @@ const x = ref(0);
 const y = ref(0);
 const isExpand = ref(false);
 
-watch(x, () => {
-  styles.value = {
-    "--size": props.size + "px",
-    "--x": x.value + "px",
-    "--y": y.value + "px",
-    "--scale": isExpand.value ? "2" : "1",
-  };
-});
+const container = ref();
+
+watch([x, y], () =>
+  useAnimate(
+    container,
+    {
+      transform: `translate3d(${x.value - props.size / 2}px, ${
+        y.value - props.size / 2
+      }px, 0)`,
+    },
+    {
+      duration: 800,
+      fill: "forwards",
+      easing: "ease-out",
+    }
+  )
+);
 </script>
 
 <template>
-  <div class="cursor__container" :style="styles" :class="{ expand: isExpand }">
-    <div class="cursor__blur"></div>
+  <div class="cursor__container">
+    <div ref="container" :style="styles">
+      <div
+        class="cursor__shape"
+        :class="{ expand: isExpand }"
+        :style="{ '--size': `${props.size}px` }"
+      ></div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .cursor {
   &__container {
-    --xCenter: calc(var(--x) - var(--size) / 2);
-    --yCenter: calc(var(--y) - var(--size) / 2);
-    transition: all 0.2s ease-out;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 100;
 
-    pointer-events: none;
+    height: 100vh;
+    width: 100vw;
 
+    pointer-events: none;
+    mix-blend-mode: exclusion;
+
+    overflow: hidden;
+  }
+
+  &__shape {
+    transition: transform 0.4s ease-out;
     height: var(--size);
     width: var(--size);
-
-    transform: translate(var(--xCenter), var(--yCenter)) scale(var(--scale));
-
     background-color: var(--background-color);
 
     border: 1px solid var(--accent-color);
     border-radius: 50%;
-    mix-blend-mode: exclusion;
-
-    overflow: hidden;
 
     &.expand {
       border: 1px solid var(--background-color);
       background-color: var(--accent-color);
+      transform: scale(2);
     }
   }
-
-  // &__blur {
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: var(--accent-color);
-  //   mix-blend-mode: exclusion;
-  // }
 }
 </style>
