@@ -22,7 +22,9 @@ const callback = (e: MouseEvent) => {
   if (
     e.target instanceof HTMLButtonElement ||
     e.target instanceof HTMLLIElement ||
-    e.target instanceof HTMLAnchorElement
+    e.target instanceof HTMLAnchorElement ||
+    (e.target instanceof HTMLImageElement &&
+      e.target.attributes.getNamedItem("data-index") !== null)
   ) {
     isExpand.value = true;
   } else {
