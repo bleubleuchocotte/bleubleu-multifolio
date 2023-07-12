@@ -25,7 +25,7 @@ const cssVariables = [
 useHead({
   style: [
     `:root{${cssVariables.join(";")}}`,
-    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope'}",
+    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope'};overflow: hidden;",
   ],
 });
 
