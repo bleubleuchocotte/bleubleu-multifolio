@@ -35,6 +35,7 @@ const callback = (e: MouseEvent) => {
 const x = ref(0);
 const y = ref(0);
 const isExpand = ref(false);
+const isVisible = ref(false);
 
 const container = ref();
 
@@ -53,10 +54,13 @@ watch([x, y], () =>
     }
   )
 );
+watchOnce([x, y], () => {
+  isVisible.value = true;
+});
 </script>
 
 <template>
-  <div class="cursor__container">
+  <div class="cursor__container" :class="{ 'is-visible': isVisible }">
     <div ref="container">
       <div
         class="cursor__shape"
@@ -70,6 +74,11 @@ watch([x, y], () =>
 <style scoped lang="scss">
 .cursor {
   &__container {
+    opacity: 0;
+    &.is-visible {
+      opacity: 1;
+    }
+
     position: fixed;
     top: 0;
     left: 0;
