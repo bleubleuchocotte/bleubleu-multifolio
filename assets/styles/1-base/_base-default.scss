@@ -8,6 +8,13 @@ a:focus-visible {
   outline: 1px solid red;
 }
 
+button {
+  cursor: pointer;
+  & > * {
+    pointer-events: none;
+  }
+}
+
 h1 {
   font-size: $font-size-large;
 }

@@ -16,6 +16,7 @@ const settings = ref<Settings>({
 
 const cssVariables = [
   "--accent-color: " + settings.value.accentColor,
+  "--accent-color-80: " + settings.value.accentColor + "80",
   "--text-accent-color: #131313",
   "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
   "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
@@ -25,7 +26,7 @@ const cssVariables = [
 useHead({
   style: [
     `:root{${cssVariables.join(";")}}`,
-    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope'}",
+    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope';overflow: hidden;}",
   ],
 });
 
@@ -92,7 +93,8 @@ const footer = ref<Footer>({
 </script>
 
 <template>
-  <div>
+  <div class="body">
+    <UIBaseCursor />
     <TheHeader :params="header" />
     <TheMain :params="main" />
     <TheFooter :params="footer" />
@@ -100,7 +102,7 @@ const footer = ref<Footer>({
 </template>
 
 <style scoped lang="css">
-div {
+.body {
   display: flex;
   flex-direction: column;
 
