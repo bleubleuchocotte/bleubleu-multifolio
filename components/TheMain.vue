@@ -78,9 +78,25 @@ const projectInGallery = ref<Project | null>(null);
 
   &__right {
     @include right;
+    position: relative;
     display: flex;
 
     padding-left: 0;
+
+    &::before {
+      content: "";
+      position: fixed;
+      right: 0;
+      width: calc($gutter + $gutter / 2);
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        hsla(0, 0%, 100%, 0),
+        var(--background-color)
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
   }
 }
 </style>
