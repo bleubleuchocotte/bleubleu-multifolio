@@ -89,11 +89,12 @@ const callback = (e: KeyboardEvent) => {
 
       img {
         border-radius: $border-radius-big;
+        aspect-ratio: 1;
       }
       [data-type="duo"] {
         display: flex;
         gap: $gutter;
-        height: 100%;
+        height: 500px;
         width: 100%;
       }
       [data-type="full"] {
