@@ -21,13 +21,13 @@ defineEmits<{
     :key="project.id"
     :project="project"
     :index="i"
-    @target="(id) => $emit('target', id)"
+    @target="(id: string) => $emit('target', id)"
     @previous="i > 0 ? $emit('targetThenScroll', projects[i - 1].id) : null"
     @next="
       i < projects.length - 1
         ? $emit('targetThenScroll', projects[i + 1].id)
         : null
     "
-    @gallery="(project) => $emit('gallery', project)"
+    @gallery="(project: Project) => $emit('gallery', project)"
   />
 </template>

@@ -30,7 +30,7 @@ const projectInGallery = ref<Project | null>(null);
             :projects="params.projects"
             :id-to-active="idToProject"
             @target="
-              (id) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+              (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
             "
           />
         </UIBaseLenis>
@@ -44,9 +44,9 @@ const projectInGallery = ref<Project | null>(null);
     >
       <ProjectsListHorizontal
         :projects="params.projects"
-        @target="(id) => callback(id, false)"
-        @target-then-scroll="(id) => callback(id, true)"
-        @gallery="(project) => (projectInGallery = project)"
+        @target="(id: string) => callback(id, false)"
+        @target-then-scroll="(id: string) => callback(id, true)"
+        @gallery="(project: Project) => (projectInGallery = project)"
       />
     </UIBaseLenis>
 
@@ -78,9 +78,25 @@ const projectInGallery = ref<Project | null>(null);
 
   &__right {
     @include right;
+    position: relative;
     display: flex;
 
     padding-left: 0;
+
+    &::before {
+      content: "";
+      position: fixed;
+      right: 0;
+      width: calc($gutter + $gutter / 2);
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        hsla(0, 0%, 100%, 0),
+        var(--background-color)
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
   }
 }
 </style>

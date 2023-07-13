@@ -50,7 +50,10 @@ const callback = (e: KeyboardEvent) => {
             :field="field"
           />
         </div>
-        <PrismicRichText :field="project['long-description']" />
+        <div class="gallery__project-description">
+          <h3>Description</h3>
+          <PrismicRichText :field="project['long-description']" />
+        </div>
       </div>
     </UIBaseLenis>
   </section>
@@ -59,12 +62,11 @@ const callback = (e: KeyboardEvent) => {
 <style scoped lang="scss">
 .gallery {
   &__container {
-    cursor: pointer;
-
     position: fixed;
     inset: 0;
 
-    padding: 5vw 15vh;
+    padding-inline: 5vw;
+    padding-block: 2.5vh 5vh;
 
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2px);
@@ -89,16 +91,24 @@ const callback = (e: KeyboardEvent) => {
 
       img {
         border-radius: $border-radius-big;
+        aspect-ratio: 1;
       }
       [data-type="duo"] {
         display: flex;
         gap: $gutter;
-        height: 100%;
+        height: 500px;
         width: 100%;
       }
       [data-type="full"] {
         height: 100%;
       }
+    }
+
+    &-description {
+      display: flex;
+      flex-direction: column;
+      gap: $gutter;
+      padding-bottom: 5vh;
     }
   }
 }

@@ -10,18 +10,35 @@ defineProps({
   },
 });
 
+onMounted(() => {
+  document.addEventListener("keydown", callback);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", callback);
+});
+
+const callback = (e: KeyboardEvent) => {
+  if (isOpen.value === true && e.key === "Escape") isOpen.value = false;
+};
+
 const isOpen = ref(false);
+const target = ref();
+
+onClickOutside(target, () => {
+  if (isOpen.value === true) isOpen.value = false;
+});
 </script>
 
 <template>
-  <section class="section" :class="{ open: isOpen }" @click="isOpen = !isOpen">
+  <section ref="target" class="section" :class="{ open: isOpen }">
     <UIBaseLenis class="section__text">
       <div class="section__text-image">
         <PrismicImage :field="about.prismic.data.me" />
       </div>
       <PrismicRichText :field="about.prismic.data.text" />
     </UIBaseLenis>
-    <button class="section__bookmark">
+    <button class="section__bookmark" @click="isOpen = !isOpen">
       <p class="section__bookmark-heading">{{ about.fullName }}</p>
       <div class="section__bookmark-flex">
         <div>
