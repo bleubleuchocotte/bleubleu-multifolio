@@ -28,6 +28,6 @@ defineEmits<{
         ? $emit('targetThenScroll', projects[i + 1].id)
         : null
     "
-    @gallery="(project: string) => $emit('gallery', project)"
+    @gallery="(project: Project) => $emit('gallery', project)"
   />
 </template>
