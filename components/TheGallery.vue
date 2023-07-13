@@ -50,10 +50,10 @@ const callback = (e: KeyboardEvent) => {
             :field="field"
           />
         </div>
-        <PrismicRichText
-          :field="project['long-description']"
-          style="padding-bottom: 5vh"
-        />
+        <div class="gallery__project-description">
+          <h3>Description</h3>
+          <PrismicRichText :field="project['long-description']" />
+        </div>
       </div>
     </UIBaseLenis>
   </section>
@@ -102,6 +102,13 @@ const callback = (e: KeyboardEvent) => {
       [data-type="full"] {
         height: 100%;
       }
+    }
+
+    &-description {
+      display: flex;
+      flex-direction: column;
+      gap: $gutter;
+      padding-bottom: 5vh;
     }
   }
 }
