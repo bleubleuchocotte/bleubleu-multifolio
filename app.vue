@@ -44,7 +44,7 @@ const footer = ref<Footer>({
   </div>
 </template>
 
-<style lang="scss">
+<style>
 body {
   color: var(--text-color);
   background-color: var(--background-color);
