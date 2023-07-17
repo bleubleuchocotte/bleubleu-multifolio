@@ -33,7 +33,11 @@ export default defineNuxtConfig({
   },
   css: ["@/assets/styles/reset.css", "@/assets/styles/lenis.css"],
   modules: ["@vueuse/nuxt", "@nuxtjs/prismic"],
-  prismic: { endpoint: "https://test-duofolio.cdn.prismic.io/api/v2" },
+  prismic: {
+    endpoint: "https://test-duofolio.cdn.prismic.io/api/v2",
+    toolbar: false,
+    preview: false,
+  },
   plugins: [
     {
       src: "@/plugins/Vue3Marquee.client.ts",
