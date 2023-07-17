@@ -1,38 +1,5 @@
 <script setup lang="ts">
-import { Settings } from "~/type/types";
-
 const { client } = usePrismic();
-
-// On GET le document global pour avoir accès aux settings
-const { data: websiteSettings } = await useAsyncData(() =>
-  client.getSingle("website")
-);
-if (!websiteSettings.value)
-  throw new Error("Prismic document could not be accessed");
-
-const settings = ref<Settings>({
-  isDarkMode: websiteSettings.value.data["dark-mode"] ?? false,
-  accentColor: websiteSettings.value.data["accent-color"] ?? "#000000",
-  firstName: websiteSettings.value.data["first-name"] ?? "John",
-  lastName: websiteSettings.value.data["last-name"] ?? "Doe",
-  email: websiteSettings.value.data.email ?? "john.doe@foo.com",
-});
-
-const cssVariables = [
-  "--accent-color: " + settings.value.accentColor,
-  "--accent-color-80: " + settings.value.accentColor + "80",
-  "--text-accent-color: #131313",
-  "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
-  "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
-  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#131313"),
-];
-
-useHead({
-  style: [
-    `:root{${cssVariables.join(";")}}`,
-    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope';overflow: hidden;}",
-  ],
-});
 
 // On GET les informations de la page
 const { data: website } = await useAsyncData(() =>

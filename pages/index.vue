@@ -1,34 +1,6 @@
 <script setup lang="ts">
-import { Settings, Header, Main, Footer, Project } from "@/type/types";
+import { Main, Project } from "@/type/types";
 const { client } = usePrismic();
-
-// On GET le document global
-const { data: website } = await useAsyncData(() => client.getSingle("website"));
-if (!website.value) throw new Error("Prismic document could not be accessed");
-
-const settings = ref<Settings>({
-  isDarkMode: website.value.data["dark-mode"] ?? false,
-  accentColor: website.value.data["accent-color"] ?? "#000000",
-  firstName: website.value.data["first-name"] ?? "John",
-  lastName: website.value.data["last-name"] ?? "Doe",
-  email: website.value.data.email ?? "john.doe@foo.com",
-});
-
-const cssVariables = [
-  "--accent-color: " + settings.value.accentColor,
-  "--accent-color-80: " + settings.value.accentColor + "80",
-  "--text-accent-color: #131313",
-  "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
-  "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
-  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#131313"),
-];
-
-useHead({
-  style: [
-    `:root{${cssVariables.join(";")}}`,
-    "body{color: var(--text-color); background-color: var(--background-color);font-family: 'Manrope';overflow: hidden;}",
-  ],
-});
 
 // On GET la section About
 const { data: about } = await useAsyncData(() => client.getSingle("about"));
@@ -74,40 +46,16 @@ const projects: Project[] = await Promise.all(
   })
 );
 
-const header = ref<Header>({
-  text: website.value.data["text-header"],
-  email: settings.value.email,
-});
-
 const main = ref<Main>({
   about: {
-    fullName: settings.value.firstName + " " + settings.value.lastName,
+    fullName:
+      about.value.data["first-name"] + " " + about.value.data["last-name"],
     prismic: about.value,
   },
   projects,
 });
-
-const footer = ref<Footer>({
-  links: website.value.data.links,
-});
 </script>
 
 <template>
-  <div class="body">
-    <UIBaseCursor />
-    <TheHeader :params="header" />
-    <TheMain :params="main" />
-    <TheFooter :params="footer" />
-  </div>
+  <TheMain :params="main" />
 </template>
-
-<style scoped lang="css">
-.body {
-  display: flex;
-  flex-direction: column;
-
-  height: 100vh;
-
-  justify-content: space-between;
-}
-</style>
