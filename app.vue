@@ -41,9 +41,9 @@ useServerSeoMeta({
   title: website.value.data["seo-title"],
   description: website.value.data["seo-description"],
 
-  ogUrl: website.value.data["seo-url"],
   ogTitle: website.value.data["seo-title"],
   ogDescription: website.value.data["seo-description"],
+  ogUrl: website.value.data["og-url"],
   ogImage: {
     url: website.value.data["og-image"].url,
     secureUrl: website.value.data["og-image"].url,
