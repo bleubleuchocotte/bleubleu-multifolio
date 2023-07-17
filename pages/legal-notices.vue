@@ -6,6 +6,10 @@ const { data: website } = await useAsyncData(() =>
   client.getSingle("legal_notices")
 );
 if (!website.value) throw new Error("Prismic document could not be accessed");
+
+useSeoMeta({
+  robots: "no-index",
+});
 </script>
 
 <template>

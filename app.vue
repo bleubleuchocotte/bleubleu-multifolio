@@ -25,6 +25,33 @@ useHead({
   style: [`:root{${cssVariables.join(";")}}`],
 });
 
+useSeoMeta({
+  robots: "follow",
+});
+
+// Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
+useServerSeoMeta({
+  ogType: "website",
+  ogLocale: "en_US",
+  twitterCard: "summary",
+
+  colorScheme: website.value.data["accent-color"],
+  themeColor: website.value.data["accent-color"],
+
+  title: website.value.data["seo-title"],
+  description: website.value.data["seo-description"],
+
+  ogUrl: website.value.data["seo-url"],
+  ogTitle: website.value.data["seo-title"],
+  ogDescription: website.value.data["seo-description"],
+  ogImage: {
+    url: website.value.data["og-image"].url,
+    secureUrl: website.value.data["og-image"].url,
+    width: website.value.data["og-image"].dimensions.width,
+    height: website.value.data["og-image"].dimensions.height,
+  },
+});
+
 const header = ref<Header>({
   text: website.value.data["text-header"],
   email: settings.value.email,
