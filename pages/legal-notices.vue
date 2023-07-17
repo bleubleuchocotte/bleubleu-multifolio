@@ -39,8 +39,6 @@ const { data: website } = await useAsyncData(() =>
   client.getSingle("legal_notices")
 );
 if (!website.value) throw new Error("Prismic document could not be accessed");
-
-console.log(website);
 </script>
 
 <template>
