@@ -12,7 +12,12 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 </script>
 
 <template>
-  <button :data-email="email" class="button" @click="copy(email)">
+  <button
+    :data-email="email"
+    class="button"
+    :class="{ open: copied }"
+    @click="copy(email)"
+  >
     <div class="button__text">
       <div class="button__text-bg-top">
         <span><slot /></span>
@@ -22,7 +27,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       </div>
     </div>
 
-    <div class="button__reveal">{{ copied ? "Email copied ! <3" : email }}</div>
+    <div class="button__reveal">{{ copied ? "Email copied ! ❤" : email }}</div>
   </button>
 </template>
 
@@ -40,7 +45,8 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 
   font-size: $font-size-normal;
 
-  &:hover .button__text-bg {
+  &:hover .button__text-bg,
+  &.open .button__text-bg {
     &-top {
       transform: translate3d(0, -100%, 0);
     }
