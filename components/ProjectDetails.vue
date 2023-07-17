@@ -45,7 +45,10 @@ useIntersectionObserver(
             {{ skill.skill }}
           </UIBaseTag>
         </div>
-        <PrismicRichText :field="project['short-description']" />
+        <PrismicRichText
+          :field="project['short-description']"
+          class="project-details__content-description"
+        />
       </div>
 
       <div class="project-details__utils">
@@ -117,6 +120,10 @@ useIntersectionObserver(
       gap: 5px;
 
       margin-block: calc($gutter/2);
+    }
+
+    &-description {
+      font-size: $font-size-normal;
     }
   }
 
