@@ -1,6 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
+    head: {
+      meta: [
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+        {
+          charset: "utf-8",
+        },
+        {
+          name: "author",
+          content: "Thomas Auffroy",
+        },
+        {
+          name: "creator",
+          content: "Thomas Auffroy",
+        },
+      ],
+    },
     pageTransition: { name: "page", mode: "out-in" },
   },
   vite: {

@@ -54,6 +54,10 @@ const main = ref<Main>({
   },
   projects,
 });
+
+useServerSeoMeta({
+  publisher: main.value.about.fullName.toString(),
+});
 </script>
 
 <template>
