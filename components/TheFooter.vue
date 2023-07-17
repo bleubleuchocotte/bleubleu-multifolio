@@ -24,7 +24,7 @@ defineProps({
         {{ link.name }}
       </PrismicLink>
       <NuxtLink to="/legal-notices"> Legal notices </NuxtLink>
-      <span>2023</span>
+      <span>© {{ new Date().getFullYear() }} Bleubleu Chocotte</span>
     </div>
   </footer>
 </template>

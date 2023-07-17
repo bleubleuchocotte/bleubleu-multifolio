@@ -8,8 +8,6 @@ import {
 export type Settings = {
   accentColor: string; // Couleur formatée en HEX
   isDarkMode: boolean;
-  firstName: string;
-  lastName: string;
   email: string;
 };
 

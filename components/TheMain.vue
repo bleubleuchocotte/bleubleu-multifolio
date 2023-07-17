@@ -62,7 +62,6 @@ const projectInGallery = ref<Project | null>(null);
 
 <style scoped lang="scss">
 .main {
-  flex: 1;
   display: flex;
   position: relative;
   overflow: hidden;
