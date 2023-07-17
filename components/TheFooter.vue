@@ -34,6 +34,8 @@ defineProps({
   display: flex;
   padding-block: $gutter;
 
+  font-size: $font-size-normal;
+
   &__left {
     @include left;
   }
