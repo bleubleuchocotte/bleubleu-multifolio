@@ -8,6 +8,8 @@
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: $border-radius;
+
+    font-size: $font-size-normal;
   }
 }
 </style>
