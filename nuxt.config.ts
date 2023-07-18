@@ -19,6 +19,9 @@ export default defineNuxtConfig({
           content: "Thomas Auffroy",
         },
       ],
+      htmlAttrs: {
+        lang: "en",
+      },
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
