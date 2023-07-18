@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/styles/reset.css", "@/assets/styles/lenis.css"],
-  modules: ["@vueuse/nuxt", "@nuxtjs/prismic"],
+  modules: ["@vueuse/nuxt", "@nuxtjs/prismic", "nuxt-simple-robots"],
   prismic: {
     endpoint: "https://test-duofolio.cdn.prismic.io/api/v2",
     toolbar: false,
