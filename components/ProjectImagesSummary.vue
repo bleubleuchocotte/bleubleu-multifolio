@@ -17,6 +17,7 @@ defineProps({
         :key="j"
         :field="field"
         :data-index="i + j"
+        widths="defaults"
       />
     </template>
   </div>

@@ -20,7 +20,12 @@ defineProps({
 </script>
 
 <template>
-  <button :class="{ rotate: orientation === 'left' }">
+  <button
+    :class="{ rotate: orientation === 'left' }"
+    :aria-label="
+      orientation === 'left' ? 'Go to previous project' : 'Go to next project'
+    "
+  >
     <UIWrapperArrow :colors="colors" :length-arrow="'long'" />
   </button>
 </template>
