@@ -35,20 +35,20 @@ useServerSeoMeta({
   ogLocale: "en_US",
   twitterCard: "summary",
 
-  colorScheme: website.value.data["accent-color"],
-  themeColor: website.value.data["accent-color"],
+  colorScheme: website.value.data["accent-color"] ?? undefined,
+  themeColor: website.value.data["accent-color"] ?? undefined,
 
-  title: website.value.data["seo-title"],
-  description: website.value.data["seo-description"],
+  title: website.value.data["seo-title"] ?? undefined,
+  description: website.value.data["seo-description"] ?? undefined,
 
-  ogTitle: website.value.data["seo-title"],
-  ogDescription: website.value.data["seo-description"],
-  ogUrl: website.value.data["og-url"],
+  ogTitle: website.value.data["seo-title"] ?? undefined,
+  ogDescription: website.value.data["seo-description"] ?? undefined,
+  ogUrl: website.value.data["og-url"] ?? undefined,
   ogImage: {
-    url: website.value.data["og-image"].url,
-    secureUrl: website.value.data["og-image"].url,
-    width: website.value.data["og-image"].dimensions.width,
-    height: website.value.data["og-image"].dimensions.height,
+    url: website.value.data["og-image"].url ?? undefined,
+    secureUrl: website.value.data["og-image"].url ?? undefined,
+    width: website.value.data["og-image"]?.dimensions?.width ?? undefined,
+    height: website.value.data["og-image"]?.dimensions?.height ?? undefined,
   },
 });
 
