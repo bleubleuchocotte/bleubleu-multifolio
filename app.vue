@@ -60,10 +60,13 @@ const header = ref<Header>({
 const footer = ref<Footer>({
   links: website.value.data.links,
 });
+
+// Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
+const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 </script>
 
 <template>
-  <UIBaseCursor />
+  <UIBaseCursor v-if="isPointerAccurate" />
   <div class="body">
     <TheHeader :params="header" />
     <NuxtPage />
