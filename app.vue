@@ -25,6 +25,26 @@ useHead({
   style: [`:root{${cssVariables.join(";")}}`],
 });
 
+useServerHeadSafe({
+  link: [
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      href:
+        website.value.data["seo-favicon"]?.small.url ??
+        "/default-favicon-16x16.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href:
+        website.value.data["seo-favicon"]?.url ?? "/default-favicon-32x32.png",
+    },
+  ],
+});
+
 useSeoMeta({
   robots: "follow",
 });
