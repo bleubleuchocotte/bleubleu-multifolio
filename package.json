@@ -14,23 +14,25 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@types/node": "^18",
-    "@typescript-eslint/parser": "^5.59.1",
-    "@vueuse/core": "^10.1.0",
-    "@vueuse/nuxt": "^10.1.0",
-    "consola": "^3.1.0",
-    "eslint": "^8.39.0",
+    "@types/node": "^18.16.19",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vueuse/core": "^10.2.1",
+    "@vueuse/nuxt": "^10.2.1",
+    "consola": "^3.2.3",
+    "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.4.2",
+    "nuxt": "^3.6.3",
+    "nuxt-simple-robots": "^3.0.2",
+    "nuxt-simple-sitemap": "^3.0.11",
     "prettier": "^2.8.8",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "@nuxtjs/prismic": "3.0.0-rc.4",
-    "@studio-freight/lenis": "^1.0.11",
-    "sass": "^1.62.0",
-    "sass-loader": "^13.2.2",
+    "@studio-freight/lenis": "^1.0.16",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
     "vue3-marquee": "^3.2.1"
   }
 }
