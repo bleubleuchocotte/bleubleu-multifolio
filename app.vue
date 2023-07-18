@@ -66,7 +66,9 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 </script>
 
 <template>
-  <UIBaseCursor v-if="isPointerAccurate" />
+  <ClientOnly>
+    <UIBaseCursor v-if="isPointerAccurate" />
+  </ClientOnly>
   <div class="body">
     <TheHeader :params="header" />
     <NuxtPage />
