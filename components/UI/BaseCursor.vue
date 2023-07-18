@@ -16,6 +16,9 @@ onUnmounted(() => {
 });
 
 const callback = (e: MouseEvent) => {
+  console.log(e);
+  foo.value = e.type;
+
   x.value = e.clientX;
   y.value = e.clientY;
 
@@ -36,6 +39,8 @@ const x = ref(0);
 const y = ref(0);
 const isExpand = ref(false);
 const isVisible = ref(false);
+
+const foo = ref("");
 
 const container = ref();
 
@@ -66,7 +71,9 @@ watchOnce([x, y], () => {
         class="cursor__shape"
         :class="{ expand: isExpand }"
         :style="{ '--size': `${props.size}px` }"
-      ></div>
+      >
+        {{ foo }}
+      </div>
     </div>
   </div>
 </template>
