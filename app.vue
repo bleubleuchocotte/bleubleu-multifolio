@@ -25,6 +25,26 @@ useHead({
   style: [`:root{${cssVariables.join(";")}}`],
 });
 
+useServerHeadSafe({
+  link: [
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      href:
+        website.value.data["seo-favicon"]?.small.url ??
+        "/default-favicon-16x16.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href:
+        website.value.data["seo-favicon"]?.url ?? "/default-favicon-32x32.png",
+    },
+  ],
+});
+
 useSeoMeta({
   robots: "follow",
 });
@@ -66,7 +86,9 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 </script>
 
 <template>
-  <UIBaseCursor v-if="isPointerAccurate" />
+  <ClientOnly>
+    <UIBaseCursor v-if="isPointerAccurate" />
+  </ClientOnly>
   <div class="body">
     <TheHeader :params="header" />
     <NuxtPage />
