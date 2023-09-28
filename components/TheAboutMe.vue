@@ -38,7 +38,15 @@ onClickOutside(target, () => {
       </div>
       <PrismicRichText :field="about.prismic.data.text" />
     </UIBaseLenis>
-    <button class="section__bookmark" @click="isOpen = !isOpen">
+    <div
+      class="section__bookmark"
+      tabindex="0"
+      aria-disabled="false"
+      role="button"
+      @click="isOpen = !isOpen"
+      @keydown.enter="isOpen = !isOpen"
+      @keydown.space.prevent="isOpen = !isOpen"
+    >
       <p class="section__bookmark-heading">{{ about.fullName }}</p>
       <div class="section__bookmark-flex">
         <div>
@@ -49,7 +57,7 @@ onClickOutside(target, () => {
           <IconBaseArrowShort :fill="'var(--accent-color)'" />
         </div>
       </div>
-    </button>
+    </div>
   </section>
 </template>
 
