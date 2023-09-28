@@ -77,7 +77,6 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 
       span {
         width: 100%;
-        height: 100%;
         position: absolute;
 
         left: 0;
@@ -90,7 +89,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       span {
         bottom: 0;
 
-        transform: translate3d(0, 9px, 0);
+        transform: translate3d(0, 50%, 0);
       }
     }
 
@@ -98,7 +97,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       span {
         top: 0;
 
-        transform: translate3d(0, -11px, 0);
+        transform: translate3d(0, -50%, 0);
       }
     }
   }
