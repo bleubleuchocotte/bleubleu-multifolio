@@ -6,19 +6,13 @@
 
 $landscape: "screen and (orientation: landscape)";
 $portrait: "screen and (orientation: portrait)";
-
-$xs-up: "screen and (min-width: 401px)";
-$sm-up: "screen and (min-width: 1000px)";
-$md-up: "screen and (min-width: 1269px)";
-
-$xs-down: "screen and (max-width: 400px)";
-$sm-down: "screen and (max-width: 1000px)";
-$md-down: "screen and (max-width: 1300px)";
-$hg-down: "screen and (max-width: 1600px)";
-$hg-high-down: "screen and (max-width: 1900px)";
-
-$md-down-up: "screen and (max-width: 1440px)";
-
-$sm-down-height: "screen and (max-height: 750px)";
-
 $low-accuracy: "(pointer: coarse)";
+
+$mobile-xs: "screen and (max-width: 480px)";
+$mobile: "screen and (min-width: 481px) and (max-width: 768px)";
+$mobile-down: "screen and (max-width: 768px)";
+
+$tablet: "screen and (min-width: 769px) and (max-width: 1024px)";
+$desktop: "screen and (min-width: 1025px)";
+
+$desktop-down: "screen and (max-width: 1025px)";
