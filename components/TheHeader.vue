@@ -12,8 +12,12 @@ defineProps({
 <template>
   <header class="header">
     <div class="header__slider">
-      <Vue3Marquee :direction="'reverse'" :duration="10">
-        <h1 style="margin-left: 5rem">{{ params.text }}</h1>
+      <Vue3Marquee
+        :direction="'reverse'"
+        :duration="10"
+        class="header__slider-container"
+      >
+        <h1 style="margin-left: 5em">{{ params.text }}</h1>
       </Vue3Marquee>
     </div>
 
@@ -26,23 +30,32 @@ defineProps({
 <style scoped lang="scss">
 .header {
   display: flex;
-  margin: $gutter;
-  gap: $gutter;
+  @include gap();
+  @include margin();
 
-  height: 40px;
+  height: 45px;
+
+  @media #{$mobile-down} {
+    height: 35px;
+  }
 
   &__slider {
-    flex: 0.85;
+    @include transition();
+    @include border(0.5, var(--border-color));
 
-    border: 1px solid var(--border-color);
-    border-radius: $border-radius;
-    background-color: var(--background-color);
-
-    font-size: $font-size-medium;
+    &-container {
+      align-items: center;
+      height: 100%;
+    }
   }
 
   &__button {
-    flex: 0.15;
+    min-width: 200px;
+    flex: 1;
+
+    @media #{$mobile-down} {
+      display: none;
+    }
   }
 }
 </style>
