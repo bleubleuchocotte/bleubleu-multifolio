@@ -32,7 +32,7 @@ FONT
       font-size: $base-fs;
     }
   } @else if ($font == "h1") {
-    $base-fs: 26px;
+    $base-fs: 28px;
 
     @media #{$mobile-xs} {
       font-size: $base-fs * 0.4;

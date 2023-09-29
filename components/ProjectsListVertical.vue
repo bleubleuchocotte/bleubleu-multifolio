@@ -70,10 +70,10 @@ watch(
       @click="(e) => callback(e, project.id)"
       @keypress.enter="(e) => callback(e, project.id)"
     >
-      <h2 class="projects-list-vertical__element-left">
+      <h3 class="projects-list-vertical__element-name">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
-      </h2>
-      <div class="projects-list-vertical__element-right">
+      </h3>
+      <div class="projects-list-vertical__element-data">
         <p>{{ project.date.slice(0, 4) }}</p>
         <p>{{ project.skills[0].skill }}</p>
       </div>
@@ -84,15 +84,16 @@ watch(
 <style scoped lang="scss">
 .projects-list-vertical {
   height: 100%;
-  padding-top: $gutter;
+  @include prop("padding-top");
 
   &__element {
-    transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.2s;
+    @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
     display: flex;
     justify-content: space-between;
+    @include gap(0.5);
     border-bottom: 1px solid var(--border-color);
 
-    padding-block: calc($gutter / 2);
+    @include prop("padding-block", 0.5);
 
     cursor: pointer;
 
@@ -100,26 +101,28 @@ watch(
     &:focus-within,
     &.active {
       color: var(--accent-color);
-      border-bottom: 1px solid var(--accent-color);
+      border-bottom: 1px solid;
     }
 
-    &.active &-left:before {
+    &.active &-name:before {
       width: 10px;
       margin-right: 5px;
     }
 
-    &-left,
-    &-right {
+    &-name,
+    &-data {
       pointer-events: none;
     }
 
-    &-left {
+    &-name {
       display: flex;
       text-transform: uppercase;
       align-self: flex-end;
 
+      white-space: nowrap;
+
       &::before {
-        transition: all cubic-bezier(0.63, 0, 0.78, 0.99) 0.2s;
+        @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
         content: "";
         height: 1px;
         width: 0;
@@ -128,15 +131,13 @@ watch(
 
         align-self: center;
       }
-
-      span {
-        display: inline-block;
-        width: calc($gutter * 2);
-      }
     }
 
-    &-right {
+    &-data {
       text-align: right;
+      & > p {
+        @include font("small");
+      }
     }
   }
 }
