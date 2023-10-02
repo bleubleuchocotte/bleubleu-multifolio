@@ -30,4 +30,5 @@ defineEmits<{
     "
     @gallery="(project: Project) => $emit('gallery', project)"
   />
+  
 </template>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { Main, Project } from "@/type/types";
+import { emailKey, endingCardImageKey } from "@/type/keys";
+import { ImageField } from "@prismicio/types";
+
+
 defineProps({
-  params: {
+  params: { 
     type: Object as PropType<Main>,
     required: true,
   },
@@ -17,6 +21,12 @@ const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
+
+const email = inject<string>(emailKey, 'email not provided');
+const endingCardImage = inject<ImageField>(endingCardImageKey, {});
+
+console.log(endingCardImage);
+
 </script>
 
 <template>
@@ -48,6 +58,11 @@ const projectInGallery = ref<Project | null>(null);
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
       />
+      
+      <EndingCard :email="email" :endingCardImage="endingCardImage"
+      @target="
+           () => (scrollToProjectId = `[data-project-h-id='${params.projects[0].id}']`)"/>
+
     </UIBaseLenis>
 
     <Transition name="slide-fade">

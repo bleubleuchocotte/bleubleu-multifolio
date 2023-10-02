@@ -16,6 +16,12 @@ defineProps({
     required: false,
     default: "right",
   },
+
+  lengthArrow: {
+    type: String as PropType<"short" | "long">,
+    required: false,
+    default: "long",
+  },
 });
 </script>
 
@@ -26,7 +32,7 @@ defineProps({
       orientation === 'left' ? 'Go to previous project' : 'Go to next project'
     "
   >
-    <UIWrapperArrow :colors="colors" :length-arrow="'long'" />
+    <UIWrapperArrow :colors="colors" :length-arrow="lengthArrow" />
   </button>
 </template>
 
