@@ -9,7 +9,8 @@ a:focus-visible {
   outline: 1px solid red;
 }
 
-button {
+button,
+div[role="button"] {
   cursor: pointer;
   & > * {
     pointer-events: none;
@@ -17,13 +18,19 @@ button {
 }
 
 h1 {
-  font-size: $font-size-large;
+  @include font("h1");
 }
 h2 {
-  font-size: $font-size-medium;
+  @include font("h2");
+}
+h3 {
+  @include font("h3");
+}
+h4 {
+  @include font("h4");
 }
 p {
-  font-size: $font-size-normal;
+  @include font("p");
 }
 
 img {

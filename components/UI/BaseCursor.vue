@@ -24,7 +24,9 @@ const callback = (e: MouseEvent) => {
     e.target instanceof HTMLLIElement ||
     e.target instanceof HTMLAnchorElement ||
     (e.target instanceof HTMLImageElement &&
-      e.target.attributes.getNamedItem("data-index") !== null)
+      e.target.attributes.getNamedItem("data-index") !== null) ||
+    (e.target instanceof HTMLDivElement &&
+      e.target.attributes.getNamedItem("role")?.value === "button")
   ) {
     isExpand.value = true;
   } else {
@@ -87,7 +89,6 @@ watchOnce([x, y], () => {
     width: 100vw;
 
     pointer-events: none;
-    mix-blend-mode: exclusion;
 
     overflow: hidden;
   }
@@ -96,15 +97,14 @@ watchOnce([x, y], () => {
     transition: all 0.2s ease-out;
     height: var(--size);
     width: var(--size);
-    background-color: var(--background-color);
 
     border: 1px solid var(--accent-color);
     border-radius: 50%;
 
     &.expand {
       border: 1px solid var(--background-color);
-      background-color: var(--accent-color);
       transform: scale(1.75);
+      backdrop-filter: invert(1) grayscale(1);
 
       box-shadow: 0px 0px 30px 0px var(--accent-color-80);
     }

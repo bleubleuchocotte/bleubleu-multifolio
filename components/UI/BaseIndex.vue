@@ -10,5 +10,12 @@ const i = ref(props.index < 10 ? `0${props.index}` : props.index.toString());
 </script>
 
 <template>
-  <span>{{ i }}</span>
+  <span class="project-index">{{ i }}</span>
 </template>
+
+<style scoped lang="scss">
+.project-index {
+  display: inline-block;
+  @include prop("width", 1.5);
+}
+</style>

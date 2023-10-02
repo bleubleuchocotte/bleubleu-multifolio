@@ -16,6 +16,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
     :data-email="email"
     class="button"
     :class="{ open: copied }"
+    aria-label="Copy email address to clipboard"
     @click="copy(email)"
   >
     <div class="button__text">
@@ -27,23 +28,25 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       </div>
     </div>
 
-    <div class="button__reveal">{{ copied ? "Email copied ! ❤" : email }}</div>
+    <div class="button__reveal">
+      <span>{{ copied ? "Email copied ! ❤" : email }} </span>
+    </div>
   </button>
 </template>
 
 <style scoped lang="scss">
 .button {
+  @include font("cta");
+
   position: relative;
   overflow: hidden;
 
   height: 100%;
-  width: 100%;
+  width: fit-content;
 
-  border-radius: $border-radius;
+  @include border-radius(0.5);
 
   color: var(--text-accent-color);
-
-  font-size: $font-size-normal;
 
   &:hover .button__text-bg,
   &.open .button__text-bg {
@@ -116,8 +119,8 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 
     background-color: var(--background-color);
     color: var(--accent-color);
-    border-radius: $border-radius;
-    border: 1px solid var(--accent-color);
+
+    @include border(0.5, var(--accent-color));
   }
 }
 </style>
