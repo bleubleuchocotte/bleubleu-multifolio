@@ -36,7 +36,7 @@ const projectInGallery = ref<Project | null>(null);
         </UIBaseLenis>
       </section>
     </div>
-    <UIBaseSeparator :width="1" />
+    <UIBaseSeparator :width="1" class="desktop-only" />
     <UIBaseLenis
       :orientation="'horizontal'"
       class="main__right"

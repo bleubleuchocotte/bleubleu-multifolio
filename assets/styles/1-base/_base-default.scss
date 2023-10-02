@@ -38,3 +38,9 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+.desktop-only {
+  @media #{$desktop-down} {
+    display: none;
+  }
+}
