@@ -82,6 +82,7 @@ function clicked() {
 
         &-contact-button {
             height: 18%;
+            width: 100%;
             z-index: 0;
             border: 1px solid var(--background-color);
             font-size: $font-size-large;
