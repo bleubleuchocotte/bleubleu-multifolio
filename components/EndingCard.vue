@@ -12,22 +12,17 @@ defineProps({
   }
 });
 
-const emit = defineEmits<{
-    (e: "target"): void;
-}>();
+defineEmits<{ (e: "goToStart"): void; }>();
 
-function clicked() {
-    emit("target");
-}
 </script>
 
 <template>
-    <article ref="target" class="ending-card">
+    <article class="ending-card">
         <div class="ending-card__content">
             <p class="ending-card__content-caption">You reached the end of the shortlist,<br> feel free to contact me!</p>
             <PrismicImage class="ending-card__content-image" :field="endingCardImage"/>
             <div class="ending-card__content-start-button">
-                <a @click="clicked">Bring me to start</a>
+                <a @click="$emit('goToStart')">Bring me to start</a>
                 <UIBaseButtonNavigation class="ending-card__content-arrow"
                     :colors="{
                         background: 'var(--background-color)',
@@ -36,7 +31,7 @@ function clicked() {
                     :orientation="'left'"
                     :length-arrow="'short'"
 
-                    @click="clicked"
+                    @click="$emit('goToStart')"
 
                     />
                     
@@ -63,7 +58,6 @@ function clicked() {
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        line-height: middle;
         height: 100%;
         padding: $gutter;
         gap: $gutter;
@@ -89,11 +83,6 @@ function clicked() {
 
         }
 
-        &-start-button > a {
-            font-size: $font-size-medium;
-            text-decoration: underline;
-        }
-
         &-arrow {
             height: 38px;
             width: 38px;
@@ -107,14 +96,15 @@ function clicked() {
             margin: auto;
         }
 
-        & > div {
+        &-start-button {
             display: flex;
             justify-content: center;
             gap: calc($gutter / 2);
             cursor: pointer;
 
-            & > p {
-                vertical-align: text-bottom;
+            & > a {
+                font-size: $font-size-medium;
+                text-decoration: underline;
             }
         }
     }
