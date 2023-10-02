@@ -25,8 +25,6 @@ const projectInGallery = ref<Project | null>(null);
 const email = inject<string>(emailKey, 'email not provided');
 const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
-console.log(endingCardImage);
-
 </script>
 
 <template>
@@ -60,7 +58,7 @@ console.log(endingCardImage);
       />
       
       <EndingCard :email="email" :endingCardImage="endingCardImage"
-      @target="
+      @goToStart="
            () => (scrollToProjectId = `[data-project-h-id='${params.projects[0].id}']`)"/>
 
     </UIBaseLenis>
