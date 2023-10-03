@@ -14,14 +14,28 @@ defineProps({
       <NuxtLink to="https://bleubleu.studio" target="_blank">
         Made with love with bleubleu
       </NuxtLink>
+      <IconBaseArrowLink 
+        :colors="{
+          background: 'var(--background-color)',
+          arrow: 'var(--text-color)',
+        }"
+        class="footer__right-link-arrow"
+        />
     </div>
     <div class="footer__right">
-      <PrismicLink
+      <PrismicLink class="footer__right-link"
         v-for="(link, i) in params.links"
         :key="i"
         :field="link.link"
       >
         {{ link.name }}
+        <IconBaseArrowLink 
+        :colors="{
+          background: 'var(--background-color)',
+          arrow: 'var(--text-color)',
+        }"
+        class="footer__right-link-arrow"
+        />
       </PrismicLink>
       <NuxtLink to="/legal-notices"> Legal notices </NuxtLink>
       <span>© {{ new Date().getFullYear() }} Bleubleu Chocotte</span>
@@ -38,6 +52,7 @@ defineProps({
 
   &__left {
     @include left;
+    display: flex;  
   }
   &__right {
     @include right;
@@ -47,9 +62,10 @@ defineProps({
 
     padding-left: 0;
 
-    :nth-child(1) {
-      padding-left: $gutter;
+    &-link {
+      display: flex;
     }
+    
   }
 }
 </style>

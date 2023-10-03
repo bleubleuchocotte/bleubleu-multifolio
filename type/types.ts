@@ -53,3 +53,9 @@ export type Footer = {
  * HTMLElement: DOM element
  */
 export type LenisTarget = number | string | HTMLElement;
+
+export type ColorArrow = {
+  background: string;
+  arrow: string;
+  border?: string;
+};

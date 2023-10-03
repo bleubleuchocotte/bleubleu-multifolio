@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { LinkField } from "@prismicio/types";
-type Color = {
-  background: string;
-  arrow: string;
-  border?: string;
-};
+import { ColorArrow } from "@/type/types";
 
 defineProps({
   colors: {
-    type: Object as PropType<Color>,
+    type: Object as PropType<ColorArrow>,
     required: true,
   },
   link: {
@@ -23,7 +19,12 @@ defineProps({
   <PrismicLink
   class="link"
   :field="link">
-    <IconBaseArrowLink class="link__icon" :arrow="colors.arrow" :circle="colors.background"/>
+    <IconBaseArrowLink 
+      class="link__icon" 
+      :colors="{
+        background: 'var(--accent-color)',
+        arrow: 'var(--background-color)',
+      }"/>
   </PrismicLink>
 </template>
 
