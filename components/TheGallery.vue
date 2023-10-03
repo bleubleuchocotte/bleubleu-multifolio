@@ -34,9 +34,18 @@ const callback = (e: KeyboardEvent) => {
 
 <template>
   <section class="gallery__container">
-    <div ref="ignore" class="gallery__project-title">
-      <h2>{{ project.title }}</h2>
-    </div>
+    <PrismicLink v-if="project.url" class="gallery__project-heading" :field="project.url">
+          <h2 class="gallery__project-heading-title">{{ project.title }}</h2>
+          <IconBaseArrowLink 
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--background-color)',
+            }"
+          />
+        </PrismicLink>
+        <div v-else  class="gallery__project-heading">
+          <h2 class="gallery__project-heading-title">{{ project.title }}</h2> 
+        </div>
     <UIBaseLenis ref="container" class="gallery__project-lenis">
       <div class="gallery__project-images">
         <div
@@ -75,8 +84,16 @@ const callback = (e: KeyboardEvent) => {
   }
 
   &__project {
-    &-title {
+    &-heading {
       padding-bottom: $gutter;
+      display: flex;
+      gap: calc($gutter/3);
+      align-items: center;
+
+      &-title {
+        pointer-events: none;
+      }
+
     }
 
     &-lenis {
