@@ -11,16 +11,17 @@ defineProps({
 <template>
   <footer class="footer">
     <div class="footer__left">
-      <NuxtLink to="https://bleubleu.studio" target="_blank">
+      <NuxtLink to="https://bleubleu.studio" target="_blank" class="footer__left-link">
         Made with love with bleubleu
-      </NuxtLink>
-      <IconBaseArrowLink 
+        <IconBaseArrowLink 
+        class="footer-arrows"
         :colors="{
           background: 'var(--background-color)',
           arrow: 'var(--text-color)',
         }"
-        class="footer__right-link-arrow"
         />
+      </NuxtLink>
+      
     </div>
     <div class="footer__right">
       <PrismicLink class="footer__right-link"
@@ -29,12 +30,12 @@ defineProps({
         :field="link.link"
       >
         {{ link.name }}
-        <IconBaseArrowLink 
-        :colors="{
-          background: 'var(--background-color)',
-          arrow: 'var(--text-color)',
-        }"
-        class="footer__right-link-arrow"
+        <IconBaseArrowLink
+        class="footer-arrows"
+          :colors="{
+            background: 'var(--background-color)',
+            arrow: 'var(--text-color)',
+          }"
         />
       </PrismicLink>
       <NuxtLink to="/legal-notices"> Legal notices </NuxtLink>
@@ -50,9 +51,17 @@ defineProps({
 
   font-size: $font-size-normal;
 
+  &-arrows {
+    pointer-events: none;
+  }
+
   &__left {
     @include left;
-    display: flex;  
+
+    &-link {
+      display: flex;
+      width: fit-content;
+    }
   }
   &__right {
     @include right;
