@@ -32,6 +32,7 @@ useIntersectionObserver(
     threshold: [...Array(4).keys()].map((el) => el / 4),
   }
 );
+
 </script>
 
 <template>
@@ -39,7 +40,17 @@ useIntersectionObserver(
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>
-        <h2 class="project-details__content-heading">{{ project.title }}</h2>
+        <div class="project-details__content-heading">
+          <h2 class="project-details__content-heading-title">{{ project.title }}</h2>
+          <UIBaseButtonLink
+            v-if="project.url"
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--background-color)',
+            }"
+            :link="project.url"
+          />
+        </div>
         <div class="project-details__content-tags">
           <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
             {{ skill.skill }}
@@ -111,9 +122,12 @@ useIntersectionObserver(
     padding-bottom: $gutter;
     border-bottom: 1px solid var(--border-color);
     &-heading {
+      display: flex;
       margin-top: $gutter;
-    }
+      gap: calc($gutter/3);
 
+    }
+   
     &-tags {
       display: flex;
       flex-wrap: wrap;

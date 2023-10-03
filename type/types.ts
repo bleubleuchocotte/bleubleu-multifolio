@@ -26,6 +26,7 @@ export type Project = {
   "long-description": RichTextField;
   skills: { skill: string }[];
   title: string;
+  url: LinkField | null;
 };
 
 export type Header = {
