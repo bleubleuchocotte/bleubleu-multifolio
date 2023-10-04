@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { PropType } from "nuxt/dist/app/compat/capi";
-
-type Color = {
-  background: string;
-  arrow: string;
-  border?: string;
-};
+import { ColorArrow } from "@/type/types";
 
 const props = defineProps({
   colors: {
-    type: Object as PropType<Color>,
+    type: Object as PropType<ColorArrow>,
     required: true,
   },
   lengthArrow: {

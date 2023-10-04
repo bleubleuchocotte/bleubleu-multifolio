@@ -1,13 +1,9 @@
 <script setup lang="ts">
-type Color = {
-  background: string;
-  arrow: string;
-  border?: string;
-};
+import { ColorArrow } from "@/type/types";
 
 defineProps({
   colors: {
-    type: Object as PropType<Color>,
+    type: Object as PropType<ColorArrow>,
     required: true,
   },
 

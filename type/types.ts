@@ -26,6 +26,7 @@ export type Project = {
   "long-description": RichTextField;
   skills: { skill: string }[];
   title: string;
+  url: LinkField | null;
 };
 
 export type Header = {
@@ -52,3 +53,9 @@ export type Footer = {
  * HTMLElement: DOM element
  */
 export type LenisTarget = number | string | HTMLElement;
+
+export type ColorArrow = {
+  background: string;
+  arrow: string;
+  border?: string;
+};
