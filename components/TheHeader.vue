@@ -22,7 +22,7 @@ defineProps({
     </div>
 
     <UIBaseButtonContact :email="params.email" class="header__button">
-      contact
+      Contact
     </UIBaseButtonContact>
   </header>
 </template>
