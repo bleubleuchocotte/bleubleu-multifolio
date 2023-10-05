@@ -68,7 +68,6 @@ const { isMobile } = storeToRefs(store);
 </script>
 
 <template>
-  <!-- <TheMain :params="main" /> -->
   <TheMainMobile v-if="isMobile" :params="main" />
-  <TheMainDesktop v-else />
+  <TheMain v-else :params="main" />
 </template>
