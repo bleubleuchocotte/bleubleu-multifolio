@@ -36,6 +36,7 @@ const projects: Project[] = await Promise.all(
       "long-description": project.data["long-description"],
       skills: project.data.skills,
       title: project.data.title,
+      url: project.data.url.url ? project.data.url : null,
       images: images.value.map((image) => {
         if (image.type !== "image-duo" && image.type !== "image-full")
           throw new Error("Type error");
