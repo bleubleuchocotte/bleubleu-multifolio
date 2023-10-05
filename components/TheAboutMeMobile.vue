@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { PrismicDocument } from "@prismicio/types";
+import { PrismicDocument, LinkField } from "@prismicio/types";
+import { FooterLinksKey } from "@/type/keys";
 defineProps({
   about: {
     type: Object as PropType<{
@@ -13,6 +14,8 @@ defineProps({
     required: true,
   },
 });
+
+const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 </script>
 
 <template>
@@ -36,17 +39,42 @@ defineProps({
         :field="about.prismic.data.me"
         class="about-me-mobile__content-image"
       />
-      <NuxtLink :to="email" class="about-me-mobile__content-contact"
+      <NuxtLink :to="`mailto:${email}`" class="about-me-mobile__content-contact"
         >Contact</NuxtLink
       >
     </div>
 
     <ul class="about-me-mobile__links">
-      <li class="about-me-mobile__links-item">Bleubleu.studio</li>
-      <li class="about-me-mobile__links-item">Github</li>
-      <li class="about-me-mobile__links-item">Linekdin</li>
-      <li class="about-me-mobile__links-item">Malt</li>
-      <li class="about-me-mobile__links-item">Mentions légales</li>
+      <li class="about-me-mobile__links-item">
+        <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
+          Bleubleu.studio
+          <IconBaseArrowLink
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--background-color)',
+            }"
+          />
+        </NuxtLink>
+      </li>
+      <li
+        v-for="(link, i) in links"
+        :key="Math.floor(Math.random() * (100 + i))"
+        class="about-me-mobile__links-item"
+      >
+        <PrismicLink :field="link.link">
+          {{ link.name }}
+          <IconBaseArrowLink
+            :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--background-color)',
+            }"
+          />
+        </PrismicLink>
+      </li>
+
+      <li class="about-me-mobile__links-item">
+        <NuxtLink to="/legal-notices">Legal policy</NuxtLink>
+      </li>
     </ul>
   </section>
 </template>
@@ -104,6 +132,13 @@ defineProps({
         border-bottom: 1px solid var(--background-color);
       }
       @include prop("padding-block", 0.25);
+
+      & > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include gap(0.5);
+      }
     }
   }
 }
