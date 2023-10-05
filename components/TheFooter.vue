@@ -51,10 +51,6 @@ defineProps({
 
   font-size: $font-size-normal;
 
-  &-arrows {
-    pointer-events: none;
-  }
-
   &__left {
     @include left;
 
