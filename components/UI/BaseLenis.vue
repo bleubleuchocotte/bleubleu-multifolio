@@ -34,11 +34,6 @@ onMounted(() => {
 const container = ref(null);
 let lenis: Lenis;
 
-const styles = reactive({
-  overflow:
-    props.orientation === "vertical" ? "hidden" : "hidden",
-});
-
 watch(
   () => props.target,
   () => {
@@ -48,7 +43,7 @@ watch(
 </script>
 
 <template>
-  <div ref="container" data-lenis :style="styles">
+  <div ref="container" data-lenis>
     <slot></slot>
   </div>
 </template>
@@ -56,5 +51,9 @@ watch(
 <style scoped lang="scss">
 div[data-lenis] {
   height: 100%;
+  overflow: hidden;
+  @media #{$desktop-down} {
+    overflow: auto;
+  }
 }
 </style>
