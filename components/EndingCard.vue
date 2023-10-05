@@ -43,7 +43,7 @@ defineEmits<{ (e: "goToStart"): void }>();
       <UIBaseButtonContact
         :email="email"
         class="ending-card__content-contact-button"
-        >contact
+        >Contact
       </UIBaseButtonContact>
     </div>
   </article>

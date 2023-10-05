@@ -7,7 +7,9 @@ import {
 
 export type Settings = {
   accentColor: string; // Couleur formatée en HEX
-  isDarkMode: boolean;
+  backgroundColor: string;
+  textColor: string;
+  textAccentColor: string;
   email: string;
 };
 
