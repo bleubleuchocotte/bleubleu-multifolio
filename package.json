@@ -30,7 +30,9 @@
   },
   "dependencies": {
     "@nuxtjs/prismic": "3.0.0-rc.4",
+    "@pinia/nuxt": "^0.4.11",
     "@studio-freight/lenis": "^1.0.16",
+    "pinia": "^2.1.6",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "vue3-marquee": "^3.2.1"
