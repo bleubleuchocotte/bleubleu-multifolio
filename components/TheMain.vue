@@ -22,6 +22,9 @@ const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
 
+// Permet de détecter la taille de l'écran
+const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
+
 const email = inject<string>(emailKey, 'email not provided');
 const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
@@ -29,7 +32,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" />
+    <TheAboutMe :about="params.about" class="desktop-only" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
@@ -44,9 +47,9 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         </UIBaseLenis>
       </section>
     </div>
-    <UIBaseSeparator :width="1" />
+    <UIBaseSeparator :width="1" class="desktop-only" />
     <UIBaseLenis
-      :orientation="'horizontal'"
+      :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
       class="main__right"
       :target="scrollToProjectId"
     >
@@ -79,12 +82,23 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
   position: relative;
   overflow: hidden;
 
+  @media #{$desktop-down} {
+    flex-direction: column;
+    @include gap();
+  }
+
   &__left {
     @include left;
+    @media #{$desktop-down} {
+      height: 20vh;
+    }
+
     &-container {
       height: 100%;
-      padding-left: $bookmark-width;
-      padding-bottom: $gutter;
+      @media #{$desktop} {
+        padding-left: $bookmark-width;
+      }
+      @include prop("padding-bottom");
     }
   }
 
@@ -93,13 +107,14 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
     position: relative;
     display: flex;
 
-    padding-left: 0;
+    @media #{$desktop-down} {
+      flex-direction: column;
+      @include gap();
+    }
 
     &::before {
       content: "";
       position: fixed;
-      right: 0;
-      width: calc($gutter + $gutter / 2);
       height: 100%;
       background: linear-gradient(
         90deg,
@@ -108,6 +123,12 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       );
       z-index: 1;
       pointer-events: none;
+      right: 0;
+      width: calc($gutter + $gutter / 2);
+
+      @media #{$desktop-down} {
+        content: none;
+      }
     }
   }
 }
