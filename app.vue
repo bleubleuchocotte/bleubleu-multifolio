@@ -8,18 +8,20 @@ const { data: website } = await useAsyncData(() => client.getSingle("website"));
 if (!website.value) throw new Error("Prismic document could not be accessed");
 
 const settings = ref<Settings>({
-  isDarkMode: website.value.data["dark-mode"] ?? false,
+  backgroundColor: website.value.data["background-color"] ?? "#ffffff",
   accentColor: website.value.data["accent-color"] ?? "#000000",
+  textColor: website.value.data["text-color"] ?? "#000000",
+  textAccentColor: website.value.data["text-accent-color"] ?? "#ffffff",
   email: website.value.data.email ?? "john.doe@foo.com",
 });
 
 const cssVariables = [
   "--accent-color: " + settings.value.accentColor,
   "--accent-color-80: " + settings.value.accentColor + "80",
-  "--text-accent-color: #131313",
-  "--text-color: " + (settings.value.isDarkMode ? "#ffffff" : "#131313"),
-  "--background-color: " + (settings.value.isDarkMode ? "#131313" : "#ffffff"),
-  "--border-color:" + (settings.value.isDarkMode ? "#9d9d9d" : "#131313"),
+  "--text-accent-color: " + settings.value.textAccentColor,
+  "--text-color: " + settings.value.textColor,
+  "--background-color: " + settings.value.backgroundColor,
+  "--border-color:" + settings.value.textColor + "50",
 ];
 
 useHead({
