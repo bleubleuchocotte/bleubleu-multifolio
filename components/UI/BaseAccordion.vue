@@ -11,7 +11,10 @@ defineProps({
     required: true,
   },
 });
+
 const isOpen = ref(false);
+defineExpose({ isOpen });
+
 const accordionId = `accordion-${Math.random().toString(36).substring(2, 9)}`;
 
 const toggleAccordion = () => {
@@ -38,6 +41,7 @@ onUpdated(() => {
 <template>
   <div class="accordion" :style="`--accordion-height: ${height}px`">
     <button
+      type="button"
       :aria-expanded="isOpen ? 'true' : 'false'"
       :aria-controls="accordionId"
       class="accordion__button"
