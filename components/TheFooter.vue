@@ -18,7 +18,6 @@ defineProps({
       >
         Made with love with bleubleu
         <IconBaseArrowLink
-          class="footer-arrows"
           :colors="{
             background: 'var(--background-color)',
             arrow: 'var(--text-color)',
@@ -35,7 +34,6 @@ defineProps({
       >
         {{ link.name }}
         <IconBaseArrowLink
-          class="footer-arrows"
           :colors="{
             background: 'var(--background-color)',
             arrow: 'var(--text-color)',

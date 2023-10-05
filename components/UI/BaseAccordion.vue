@@ -11,7 +11,10 @@ defineProps({
     required: true,
   },
 });
+
 const isOpen = ref(false);
+defineExpose({ isOpen });
+
 const accordionId = `accordion-${Math.random().toString(36).substring(2, 9)}`;
 
 const toggleAccordion = () => {
@@ -22,6 +25,13 @@ const target = ref<HTMLDivElement>();
 const height = ref(0);
 
 onMounted(() => {
+  // Pas forcément néssaire vu qu'à chaque clic, onUpdated est call à cause de la varibale isOpen
+  if (target.value) {
+    height.value = target.value.scrollHeight;
+  }
+});
+
+onUpdated(() => {
   if (target.value) {
     height.value = target.value.scrollHeight;
   }
@@ -31,6 +41,7 @@ onMounted(() => {
 <template>
   <div class="accordion" :style="`--accordion-height: ${height}px`">
     <button
+      type="button"
       :aria-expanded="isOpen ? 'true' : 'false'"
       :aria-controls="accordionId"
       class="accordion__button"
