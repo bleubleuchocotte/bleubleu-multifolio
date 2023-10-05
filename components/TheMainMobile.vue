@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { Main } from "@/type/types";
+import { emailKey } from "@/type/keys";
 defineProps({
   params: {
     type: Object as PropType<Main>,
     required: true,
   },
 });
+
+const email = inject<string>(emailKey, "email not provided");
 </script>
 
 <template>
@@ -23,7 +26,7 @@ defineProps({
     </main>
 
     <footer>
-      <TheAboutMeMobile :about="params.about" email="te" />
+      <TheAboutMeMobile :about="params.about" :email="email" />
     </footer>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Settings, Header, Footer } from "@/type/types";
-import { emailKey, endingCardImageKey } from "@/type/keys";
+import { emailKey, endingCardImageKey, FooterLinksKey } from "@/type/keys";
 const { client } = usePrismic();
 
 // On GET le document global
@@ -87,6 +87,8 @@ const footer = ref<Footer>({
 provide(emailKey, settings.value.email);
 
 provide(endingCardImageKey, website.value.data["ending-card-image"]);
+
+provide(FooterLinksKey, footer.value.links);
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
