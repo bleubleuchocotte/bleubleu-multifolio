@@ -249,7 +249,7 @@ $base-border-radius: 20px;
   }
 }
 
-@mixin border($coef: 1, $color: $white) {
+@mixin border($coef: 1, $color: red) {
   border: 1px solid $color;
   @include border-radius($coef);
 }
