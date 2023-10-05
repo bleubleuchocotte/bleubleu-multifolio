@@ -38,8 +38,10 @@ useIntersectionObserver(
   <article ref="target" class="project-details" :data-project-h-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
-        <p>More info</p>
-        <h2 class="project-details__content-heading">{{ project.title }}</h2>
+        <p class="desktop-only">More info</p>
+        <h2 class="project-details__content-heading desktop-only">
+          {{ project.title }}
+        </h2>
         <div class="project-details__content-tags">
           <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
             {{ skill.skill }}
@@ -51,7 +53,7 @@ useIntersectionObserver(
         />
       </div>
 
-      <div class="project-details__utils">
+      <div class="project-details__utils desktop-only">
         <span class="project-details__utils-index">
           <UIBaseIndex :index="index + 1" />
         </span>
@@ -88,58 +90,84 @@ useIntersectionObserver(
 <style scoped lang="scss">
 .project-details {
   display: flex;
-  gap: $gutter;
-
-  padding-left: $gutter;
-
+  @include gap();
   min-width: 100vw;
+
+  @media #{$desktop-down} {
+    min-width: initial;
+    flex-direction: column;
+    @include prop("padding-bottom");
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
   height: 100%;
 
   &__left {
     @include left;
-    padding-inline: 0;
+    @include prop("padding-inline", 0);
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media #{$desktop-down} {
+      flex-direction: column-reverse;
+    }
   }
   &__right {
     @include right;
+    @media #{$desktop-down} {
+      padding-inline: 0;
+    }
   }
 
   &__content {
-    padding-bottom: $gutter;
+    @include prop("padding-bottom");
     border-bottom: 1px solid var(--border-color);
     &-heading {
-      margin-top: $gutter;
+      @include prop("margin-top");
     }
 
     &-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
-
-      margin-block: calc($gutter/2);
+      @include gap(calc(1 / 6));
+      @include prop("margin-block", 0.5);
     }
 
     &-description {
-      font-size: $font-size-normal;
+      @include font("p");
     }
   }
 
   &__utils {
     display: flex;
-    flex-direction: column;
-    gap: calc($gutter/2);
+    @media #{$desktop} {
+      flex-direction: column;
+    }
+    @media #{$desktop-down} {
+      justify-content: space-between;
+    }
+    @include gap(0.5);
+
     &-index {
-      font-size: $font-size-enormous;
-      font-weight: 200;
+      @include font("enormous");
       color: var(--accent-color);
       line-height: 1;
     }
+
     &-button {
       display: flex;
-      gap: calc($gutter / 2);
+      @include gap(0.5);
+      @media #{$desktop-down} {
+        align-items: center;
+        gap: $base-length;
+
+        & > button {
+          rotate: 90deg;
+        }
+      }
     }
   }
 }

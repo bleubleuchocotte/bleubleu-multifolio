@@ -96,12 +96,14 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
   </div>
 </template>
 
-<style>
+<style lang="scss">
 body {
   color: var(--text-color);
   background-color: var(--background-color);
   font-family: "Manrope";
-  overflow: hidden;
+  @media #{$desktop} {
+    overflow: hidden;
+  }
 }
 
 .page-enter-active,
@@ -121,6 +123,11 @@ body {
   flex-direction: column;
 
   height: 100vh;
+
+  @media #{$desktop-down} {
+    height: auto;
+    @include gap();
+  }
 
   justify-content: space-between;
 }

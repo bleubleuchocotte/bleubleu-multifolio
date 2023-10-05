@@ -43,9 +43,12 @@ defineProps({
     @include transition();
     @include border(0.5, var(--border-color));
 
+    width: 100%;
+
     &-container {
       align-items: center;
       height: 100%;
+      overflow: hidden;
     }
   }
 

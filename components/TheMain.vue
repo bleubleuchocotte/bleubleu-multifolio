@@ -17,11 +17,14 @@ const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
+
+// Permet de détecter la taille de l'écran
+const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 </script>
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" />
+    <TheAboutMe :about="params.about" class="desktop-only" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
@@ -38,7 +41,7 @@ const projectInGallery = ref<Project | null>(null);
     </div>
     <UIBaseSeparator :width="1" class="desktop-only" />
     <UIBaseLenis
-      :orientation="'horizontal'"
+      :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
       class="main__right"
       :target="scrollToProjectId"
     >
@@ -66,12 +69,23 @@ const projectInGallery = ref<Project | null>(null);
   position: relative;
   overflow: hidden;
 
+  @media #{$desktop-down} {
+    flex-direction: column;
+    @include gap();
+  }
+
   &__left {
     @include left;
+    @media #{$desktop-down} {
+      height: 20vh;
+    }
+
     &-container {
       height: 100%;
-      padding-left: $bookmark-width;
-      padding-bottom: $gutter;
+      @media #{$desktop} {
+        padding-left: $bookmark-width;
+      }
+      @include prop("padding-bottom");
     }
   }
 
@@ -80,13 +94,14 @@ const projectInGallery = ref<Project | null>(null);
     position: relative;
     display: flex;
 
-    padding-left: 0;
+    @media #{$desktop-down} {
+      flex-direction: column;
+      @include gap();
+    }
 
     &::before {
       content: "";
       position: fixed;
-      right: 0;
-      width: calc($gutter + $gutter / 2);
       height: 100%;
       background: linear-gradient(
         90deg,
@@ -95,6 +110,12 @@ const projectInGallery = ref<Project | null>(null);
       );
       z-index: 1;
       pointer-events: none;
+      right: 0;
+      width: calc($gutter + $gutter / 2);
+
+      @media #{$desktop-down} {
+        content: none;
+      }
     }
   }
 }
