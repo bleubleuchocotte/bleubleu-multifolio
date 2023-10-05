@@ -18,9 +18,9 @@ defineProps({
 
 <template>
   <div class="project-list-vertical-item">
-    <h3 class="project-list-vertical-item__title">
+    <h3 class="project-list-vertical-item__title" :class="{ active: active }">
       <UIBaseIndex :index="index + 1" />
-      <span :class="{ active: active }"> {{ project.title }}</span>
+      {{ project.title }}
     </h3>
     <div class="project-list-vertical-item__data">
       <p>{{ project.date.slice(0, 4) }}</p>
@@ -50,7 +50,7 @@ defineProps({
     white-space: nowrap;
 
     transition: color 0.2s ease-out;
-    & > span.active {
+    &.active {
       color: var(--accent-color);
     }
   }
