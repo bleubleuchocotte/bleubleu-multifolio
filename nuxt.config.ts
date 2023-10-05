@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     "nuxt-simple-sitemap",
   ],
   prismic: {
-    endpoint: "https://test-duofolio.cdn.prismic.io/api/v2",
+    endpoint: import.meta.env.PRISMIC_ENDPOINT,
     toolbar: false,
     preview: false,
   },
