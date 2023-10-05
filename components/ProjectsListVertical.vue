@@ -86,6 +86,10 @@ watch(
   height: 100%;
   @include prop("padding-top");
 
+  @media #{$desktop-down} {
+    @include prop("padding-top", 0, !important);
+  }
+
   &__element {
     @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
     display: flex;

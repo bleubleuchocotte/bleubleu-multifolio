@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Project } from "~/type/types";
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 defineProps({
   project: {
@@ -30,12 +31,34 @@ onClickOutside(container, () => emit("close"), {
 const callback = (e: KeyboardEvent) => {
   if (e.key === "Escape") emit("close");
 };
+
+const target = ref()
+useFocusTrap(target, { immediate: true })
+
 </script>
 
 <template>
-  <section class="gallery__container">
-    <div ref="ignore" class="gallery__project-title">
-      <h2>{{ project.title }}</h2>
+  <section ref="target" class="gallery__container">
+    <div ref="ignore" class="gallery__header">
+      <PrismicLink v-if="project.url" class="gallery__project-heading" :field="project.url">
+            <h2 class="gallery__project-heading-title">{{ project.title }}</h2>
+            <IconBaseArrowLink 
+              :colors="{
+                background: 'var(--accent-color)',
+                arrow: 'var(--background-color)',
+              }"
+            />
+      </PrismicLink>
+      <div v-else  class="gallery__project-heading">
+        <h2 class="gallery__project-heading-title">{{ project.title }}</h2> 
+      </div>
+      <button type="button" @click="$emit('close')" aria-label="Close the gallery modal">
+        <IconBaseCross
+        :colors="{
+          background: 'var(--text-color)',
+          arrow: 'var(--text-color)',
+        }"/>
+      </button>
     </div>
     <UIBaseLenis ref="container" class="gallery__project-lenis">
       <div class="gallery__project-images">
@@ -51,7 +74,6 @@ const callback = (e: KeyboardEvent) => {
           />
         </div>
         <div class="gallery__project-description">
-          <h3>Description</h3>
           <PrismicRichText :field="project['long-description']" />
         </div>
       </div>
@@ -61,11 +83,18 @@ const callback = (e: KeyboardEvent) => {
 
 <style scoped lang="scss">
 .gallery {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 30px;
+    margin-bottom: calc($gutter/2);
+  }
   &__container {
     position: fixed;
     inset: 0;
 
-    padding-inline: 5vw;
+    padding-inline: 15vw;
     padding-block: 2.5vh 5vh;
 
     background-color: rgba(0, 0, 0, 0.7);
@@ -75,8 +104,15 @@ const callback = (e: KeyboardEvent) => {
   }
 
   &__project {
-    &-title {
-      padding-bottom: $gutter;
+    &-heading {
+      display: flex;
+      gap: calc($gutter/3);
+      align-items: center;
+
+      &-title {
+        pointer-events: none;
+      }
+
     }
 
     &-lenis {
@@ -96,11 +132,11 @@ const callback = (e: KeyboardEvent) => {
       [data-type="duo"] {
         display: flex;
         gap: $gutter;
-        height: 500px;
+        height: 400px;
         width: 100%;
       }
       [data-type="full"] {
-        height: 100%;
+        height: 70%;
       }
     }
 
@@ -109,6 +145,7 @@ const callback = (e: KeyboardEvent) => {
       flex-direction: column;
       gap: $gutter;
       padding-bottom: 5vh;
+      max-width: 50%;
     }
   }
 }

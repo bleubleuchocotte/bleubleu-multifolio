@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Settings, Header, Footer } from "@/type/types";
-const { client } = usePrismic();
 import { emailKey, endingCardImageKey } from "@/type/keys";
+const { client } = usePrismic();
 
 // On GET le document global
 const { data: website } = await useAsyncData(() => client.getSingle("website"));
@@ -88,8 +88,6 @@ provide(endingCardImageKey, website.value.data["ending-card-image"]);
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
-
-
 </script>
 
 <template>
@@ -99,16 +97,18 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
   <div class="body">
     <TheHeader :params="header" />
     <NuxtPage />
-    <TheFooter :params="footer" />
+    <TheFooter :params="footer" class="desktop-only" />
   </div>
 </template>
 
-<style>
+<style lang="scss">
 body {
   color: var(--text-color);
   background-color: var(--background-color);
   font-family: "Manrope";
-  overflow: hidden;
+  @media #{$desktop} {
+    overflow: hidden;
+  }
 }
 
 .page-enter-active,
@@ -128,6 +128,11 @@ body {
   flex-direction: column;
 
   height: 100vh;
+
+  @media #{$desktop-down} {
+    height: auto;
+    @include gap();
+  }
 
   justify-content: space-between;
 }

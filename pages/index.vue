@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { Main, Project } from "@/type/types";
+import { useWebsiteStore } from "@/stores/myStore";
 const { client } = usePrismic();
 
 // On GET la section About
@@ -15,8 +17,10 @@ if (!prismicProjects.value)
 
 const projects: Project[] = await Promise.all(
   prismicProjects.value.map(async (project) => {
-    // On récupère l'id de toutes les images
-    const ids: string[] = project.data.images.map((a: any) => a.image.id);
+    // On récupère l'id non null de toutes les images
+    const ids: string[] = project.data.images
+      .map((a: any) => a.image.id ?? "")
+      .filter((el: string) => el !== "");
 
     const { data: images } = await useAsyncData(project.id, () =>
       client.getAllByIDs(ids)
@@ -32,6 +36,7 @@ const projects: Project[] = await Promise.all(
       "long-description": project.data["long-description"],
       skills: project.data.skills,
       title: project.data.title,
+      url: project.data.url.url ? project.data.url : null,
       images: images.value.map((image) => {
         if (image.type !== "image-duo" && image.type !== "image-full")
           throw new Error("Type error");
@@ -40,6 +45,9 @@ const projects: Project[] = await Promise.all(
           field: image.data,
         };
       }),
+      "image-mobile": project.data["image-mobile"].url
+        ? project.data["image-mobile"]
+        : null,
     };
 
     return bufferProject;
@@ -58,8 +66,12 @@ const main = ref<Main>({
 useServerSeoMeta({
   publisher: main.value.about.fullName.toString(),
 });
+
+const store = useWebsiteStore();
+const { isMobile } = storeToRefs(store);
 </script>
 
 <template>
-  <TheMain :params="main" />
+  <TheMainMobile v-if="isMobile" :params="main" />
+  <TheMain v-else :params="main" />
 </template>

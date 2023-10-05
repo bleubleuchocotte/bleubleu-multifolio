@@ -5,11 +5,11 @@
 <style scoped lang="scss">
 .tag {
   &__text {
-    padding: 10px;
+    @include padding(0.5);
     border: 1px solid var(--border-color);
-    border-radius: $border-radius;
+    @include border-radius();
 
-    font-size: $font-size-normal;
+    @include font("p");
   }
 }
 </style>
