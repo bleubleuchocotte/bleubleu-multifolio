@@ -21,7 +21,7 @@ const cssVariables = [
   "--text-accent-color: " + settings.value.textAccentColor,
   "--text-color: " + settings.value.textColor,
   "--background-color: " + settings.value.backgroundColor,
-  "--border-color:" + settings.value.textColor + "50",
+  "--border-color:" + settings.value.textColor + "80",
 ];
 
 useHead({
