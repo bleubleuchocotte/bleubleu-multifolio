@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { ImageField } from "@prismicio/types";
 import { Main, Project } from "@/type/types";
 import { emailKey, endingCardImageKey } from "@/type/keys";
-import { ImageField } from "@prismicio/types";
-
 
 defineProps({
-  params: { 
+  params: {
     type: Object as PropType<Main>,
     required: true,
   },
@@ -25,9 +24,8 @@ const projectInGallery = ref<Project | null>(null);
 // Permet de détecter la taille de l'écran
 const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 
-const email = inject<string>(emailKey, 'email not provided');
+const email = inject<string>(emailKey, "email not provided");
 const endingCardImage = inject<ImageField>(endingCardImageKey, {});
-
 </script>
 
 <template>
@@ -59,11 +57,15 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
       />
-      
-      <EndingCard :email="email" :endingCardImage="endingCardImage"
-      @goToStart="
-           () => (scrollToProjectId = `[data-project-h-id='${params.projects[0].id}']`)"/>
 
+      <EndingCard
+        :email="email"
+        :ending-card-image="endingCardImage"
+        @go-to-start="
+          () =>
+            (scrollToProjectId = `[data-project-h-id='${params.projects[0].id}']`)
+        "
+      />
     </UIBaseLenis>
 
     <Transition name="slide-fade">
