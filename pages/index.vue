@@ -44,6 +44,9 @@ const projects: Project[] = await Promise.all(
           field: image.data,
         };
       }),
+      "image-mobile": project.data["image-mobile"].url
+        ? project.data["image-mobile"]
+        : null,
     };
 
     return bufferProject;
