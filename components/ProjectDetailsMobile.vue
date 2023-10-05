@@ -22,19 +22,11 @@ defineProps({
       </UIBaseTag>
     </div>
 
-    <div class="project-details-mobile__images">
-      <div
-        v-for="(image, i) in project.images"
-        :key="i"
-        :data-type="image.type === 'image-duo' ? 'duo' : 'full'"
-      >
-        <PrismicImage
-          v-for="(field, j) in image.field"
-          :key="j"
-          :field="field"
-        />
-      </div>
-    </div>
+    <PrismicImage
+      v-if="project['image-mobile']"
+      :field="project['image-mobile']"
+      class="project-details-mobile__image"
+    />
 
     <PrismicRichText
       :field="project['long-description']"
@@ -51,9 +43,20 @@ defineProps({
 
   min-width: initial;
   flex-direction: column;
-  @include prop("padding-bottom");
+  @include prop("padding-block");
 
-  border-bottom: 1px solid var(--border-color);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background-color: var(--border-color);
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+  }
 
   height: 100%;
 
@@ -77,28 +80,14 @@ defineProps({
 
     &-description {
       @include font("p");
+      @include prop("margin-bottom");
     }
   }
 
-  &__images {
-    display: flex;
-    flex-direction: column;
-    gap: $gutter;
-    height: 100%;
-
-    img {
-      border-radius: $border-radius-big;
-      aspect-ratio: 1;
-    }
-    [data-type="duo"] {
-      display: flex;
-      gap: $gutter;
-      height: 500px;
-      width: 100%;
-    }
-    [data-type="full"] {
-      height: 100%;
-    }
+  &__image {
+    @include border-radius();
+    width: 100%;
+    aspect-ratio: 9/16;
   }
 }
 </style>

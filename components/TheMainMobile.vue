@@ -9,27 +9,31 @@ defineProps({
 </script>
 
 <template>
-  <main class="main-mobile">
-    <p>My projects</p>
-    <UIBaseAccordion
-      v-for="(project, i) in params.projects"
-      :key="project.id"
-      :project="project"
-      :index="i"
-      class="main-mobile__accordion"
-    >
-      <ProjectDetailsMobile :project="project" :index="i" />
-    </UIBaseAccordion>
-  </main>
+  <div class="main-mobile">
+    <main>
+      <p>My projects</p>
+      <UIBaseAccordion
+        v-for="(project, i) in params.projects"
+        :key="project.id"
+        :project="project"
+        :index="i"
+      >
+        <ProjectDetailsMobile :project="project" :index="i" />
+      </UIBaseAccordion>
+    </main>
+
+    <footer>
+      <TheAboutMeMobile :about="params.about" email="te" />
+    </footer>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .main-mobile {
-  @include padding();
-
-  &__accordion {
-    // border-bottom: 1px solid var(--border-color);
-    // @include prop("padding-block");
-  }
+  display: flex;
+  flex-direction: column;
+  @include gap(2);
+  @include prop("padding-inline");
+  @include prop("padding-bottom");
 }
 </style>
