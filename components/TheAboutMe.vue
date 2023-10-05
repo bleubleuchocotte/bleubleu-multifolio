@@ -47,7 +47,7 @@ onClickOutside(target, () => {
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
     >
-      <p class="section__bookmark-heading">{{ about.fullName }}</p>
+      <h1 class="section__bookmark-heading">{{ about.fullName }}</h1>
       <div class="section__bookmark-flex">
         <div>
           <p>contact & more</p>
@@ -88,18 +88,20 @@ onClickOutside(target, () => {
 
   &__text {
     width: 100%;
-    padding: $gutter;
-
-    font-size: $font-size-big;
+    @include padding();
 
     border-right: 1px solid var(--text-accent-color);
 
+    & > p {
+      @include font("h2");
+    }
+
     &-image {
       width: fit-content;
-      margin-bottom: $gutter;
+      @include prop("margin-bottom");
 
       border: 1px solid var(--text-accent-color);
-      border-radius: $border-radius;
+      @include border-radius();
     }
   }
 
@@ -109,8 +111,7 @@ onClickOutside(target, () => {
 
     display: flex;
     justify-content: space-between;
-
-    padding: 10px;
+    @include padding(calc(1 / 3));
 
     width: $bookmark-width;
 
@@ -119,7 +120,6 @@ onClickOutside(target, () => {
     }
 
     &-heading {
-      font-size: $font-size-big;
       text-transform: uppercase;
     }
 
@@ -127,7 +127,8 @@ onClickOutside(target, () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+
+      @include gap(calc(1 / 3));
 
       text-align: right;
     }
