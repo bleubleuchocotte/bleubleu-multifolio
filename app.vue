@@ -92,7 +92,7 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
   <div class="body">
     <TheHeader :params="header" />
     <NuxtPage />
-    <TheFooter :params="footer" />
+    <TheFooter :params="footer" class="desktop-only" />
   </div>
 </template>
 
