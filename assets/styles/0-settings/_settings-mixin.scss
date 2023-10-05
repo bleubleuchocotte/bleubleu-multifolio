@@ -1,11 +1,11 @@
 @mixin left {
   flex: 0.3;
-  padding-inline: $gutter;
+  @include prop("padding-inline");
 }
 
 @mixin right {
   flex: 0.7;
-  padding-inline: $gutter;
+  @include prop("padding-inline");
 }
 
 /**
@@ -13,130 +13,150 @@
 FONT
 -----------------------------------------------------
 */
+@function pxToVw($size: 1, $breakpoint: 1440) {
+  @return calc($size/$breakpoint) * 100vw;
+}
+
 @mixin font($font: "p", $i: null) {
   @include transition(font-size);
 
   @if ($font == "p") {
-    $base-fs: 14px;
+    $base-fs: 14;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.7;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.9;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "h1") {
-    $base-fs: 28px;
+    $base-fs: 28;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.4;
+      font-size: pxToVw(22, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.6;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "h2") {
-    $base-fs: 22px;
+    $base-fs: 22;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.5;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.6;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "h3") {
-    $base-fs: 20px;
+    $base-fs: 20;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.6;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.6;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "h4") {
-    $base-fs: 20px;
+    $base-fs: 20;
     font-weight: 500;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.7;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.9;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "cta") {
-    $base-fs: 12px;
+    $base-fs: 12;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.7;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.9;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "small") {
-    $base-fs: 12px;
+    $base-fs: 12;
     font-weight: 482;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.7;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.9;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
     }
   } @else if ($font == "big") {
-    $base-fs: 40px;
+    $base-fs: 40;
 
     @media #{$mobile-xs} {
-      font-size: $base-fs * 0.7;
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
-      font-size: $base-fs * 0.8;
+      font-size: pxToVw($base-fs, 768);
     }
     @media #{$tablet} {
-      font-size: $base-fs * 0.9;
+      font-size: pxToVw($base-fs, 1024);
     }
     @media #{$desktop} {
-      font-size: $base-fs;
+      font-size: pxToVw($base-fs, 1440);
+    }
+  } @else if ($font == "enormous") {
+    $base-fs: 200;
+    font-weight: 200;
+
+    @media #{$mobile-xs} {
+      font-size: pxToVw(100, 390);
+    }
+    @media #{$mobile} {
+      font-size: pxToVw($base-fs, 768);
+    }
+    @media #{$tablet} {
+      font-size: pxToVw($base-fs, 1024);
+    }
+    @media #{$desktop} {
+      font-size: pxToVw($base-fs, 1440);
     }
   }
 }
@@ -149,13 +169,13 @@ CUSTOM PROPERTY
 $base-length: 30px;
 @mixin prop($property, $coef: 1, $important: null) {
   @media #{$mobile-xs} {
-    #{$property}: $base-length * 0.25 * $coef $important;
+    #{$property}: $base-length * 0.75 * $coef $important;
   }
   @media #{$mobile} {
-    #{$property}: $base-length * 0.5 * $coef $important;
+    #{$property}: $base-length * 0.8 * $coef $important;
   }
   @media #{$tablet} {
-    #{$property}: $base-length * 0.75 * $coef $important;
+    #{$property}: $base-length * 0.9 * $coef $important;
   }
   @media #{$desktop} {
     #{$property}: $base-length * $coef $important;
