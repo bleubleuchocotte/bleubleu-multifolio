@@ -30,8 +30,9 @@ defineProps({
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+
+  @include prop("grid-column-gap");
+  @include prop("grid-row-gap");
   cursor: pointer;
 
   [data-index="0"] {
@@ -45,7 +46,7 @@ defineProps({
   }
 
   & > img {
-    border-radius: $border-radius-big;
+    @include border-radius();
   }
 }
 </style>
