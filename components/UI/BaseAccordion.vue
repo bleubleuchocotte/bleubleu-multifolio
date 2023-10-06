@@ -17,9 +17,9 @@ defineExpose({ isOpen });
 
 const accordionId = `accordion-${Math.random().toString(36).substring(2, 9)}`;
 
-const toggleAccordion = () => {
+const toggleAccordion = useThrottleFn(() => {
   isOpen.value = !isOpen.value;
-};
+}, 100);
 
 const target = ref<HTMLDivElement>();
 const height = ref(0);
