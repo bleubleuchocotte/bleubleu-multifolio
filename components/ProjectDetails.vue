@@ -157,6 +157,7 @@ useIntersectionObserver(
       display: flex;
       @include gap(calc(1 / 3));
       align-items: center;
+      width: fit-content;
 
       &-title {
         pointer-events: none;
