@@ -35,7 +35,12 @@ useIntersectionObserver(
 </script>
 
 <template>
-  <article ref="target" class="project-details" :data-project-h-id="project.id">
+  <article
+    ref="target"
+    class="project-details"
+    :class="{ 'pl-0': index === 0 }"
+    :data-project-h-id="project.id"
+  >
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>
@@ -120,10 +125,13 @@ useIntersectionObserver(
 
   height: 100%;
 
+  &:not(.pl-0) {
+    @include prop("padding-left");
+  }
+
   &__left {
     @include left;
     @include prop("padding-inline", 0);
-    @include prop("padding-left");
 
     display: flex;
     flex-direction: column;
