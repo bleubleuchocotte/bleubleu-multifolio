@@ -22,6 +22,7 @@ const cssVariables = [
   "--text-color: " + settings.value.textColor,
   "--background-color: " + settings.value.backgroundColor,
   "--border-color:" + settings.value.textColor + "80",
+  "--background-color-70: " + settings.value.backgroundColor + "B3",
 ];
 
 useHead({
