@@ -30,7 +30,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" class="desktop-only" />
+    <TheAboutMe :about="params.about" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
@@ -45,7 +45,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         </UIBaseLenis>
       </section>
     </div>
-    <UIBaseSeparator :width="1" class="desktop-only" />
+    <UIBaseSeparator :width="1" />
     <UIBaseLenis
       :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
       class="main__right"
