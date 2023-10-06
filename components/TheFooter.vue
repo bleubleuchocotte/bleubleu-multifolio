@@ -57,6 +57,7 @@ defineProps({
     &-link {
       display: flex;
       width: fit-content;
+      align-items: flex-end;
     }
   }
   &__right {
