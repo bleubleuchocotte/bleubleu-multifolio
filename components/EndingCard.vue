@@ -51,8 +51,8 @@ defineEmits<{ (e: "goToStart"): void }>();
 
 <style scoped lang="scss">
 .ending-card {
-  gap: $gutter;
-  padding-left: $gutter;
+  @include gap();
+  @include prop("padding-left");
 
   min-width: 40vw;
   height: 100%;
@@ -63,18 +63,17 @@ defineEmits<{ (e: "goToStart"): void }>();
     justify-content: center;
     text-align: center;
     height: 100%;
-    padding: $gutter;
-    gap: $gutter;
+    @include padding(0.5);
+    @include gap();
 
     color: var(--background-color);
 
     background-color: var(--accent-color);
     border: 0 solid var(--accent-color);
-    border-radius: $border-radius-big;
+    @include border-radius();
 
     &-caption {
       text-align: left;
-      font-size: $font-size-normal;
     }
 
     &-contact-button {
@@ -82,7 +81,8 @@ defineEmits<{ (e: "goToStart"): void }>();
       width: 100%;
       z-index: 0;
       border: 1px solid var(--background-color);
-      font-size: $font-size-large;
+
+      @include font("h2");
     }
 
     &-arrow {
@@ -101,11 +101,11 @@ defineEmits<{ (e: "goToStart"): void }>();
     &-start-button {
       display: flex;
       justify-content: center;
-      gap: calc($gutter / 2);
+      @include gap(0.5);
       cursor: pointer;
 
       & > a {
-        font-size: $font-size-medium;
+        @include font("h3");
         text-decoration: underline;
       }
     }
