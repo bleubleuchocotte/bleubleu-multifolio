@@ -61,6 +61,10 @@ defineProps({
       }
       &.h-50 {
         height: 50%;
+
+        & > img {
+          min-width: 0;
+        }
       }
       &.h-65 {
         height: 65%;
