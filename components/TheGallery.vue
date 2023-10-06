@@ -106,8 +106,8 @@ useFocusTrap(target);
     padding-inline: 15vw;
     padding-block: 2.5vh 5vh;
 
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
+    background-color: var(--background-color-70);
+    backdrop-filter: blur(20px);
 
     z-index: 10;
   }
