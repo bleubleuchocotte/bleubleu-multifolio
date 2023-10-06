@@ -85,6 +85,11 @@ defineEmits<{ (e: "goToStart"): void }>();
       border: 1px solid var(--background-color);
 
       @include font("h2");
+
+      &:deep(.button__reveal) {
+        border-radius: 0;
+        border: unset;
+      }
     }
 
     &-arrow {
