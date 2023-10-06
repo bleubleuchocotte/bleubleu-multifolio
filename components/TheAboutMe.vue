@@ -97,7 +97,11 @@ onClickOutside(target, () => {
     }
 
     &-image {
+      overflow: hidden;
       width: fit-content;
+      aspect-ratio: calc(
+        320 / 245
+      ); // Permet d'avoir le même ration que l'image prismic
       @include prop("margin-bottom");
 
       border: 1px solid var(--text-accent-color);
