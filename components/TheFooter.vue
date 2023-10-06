@@ -19,7 +19,7 @@ defineProps({
         Made with love with bleubleu
         <IconBaseArrowLink
           :colors="{
-            background: 'var(--background-color)',
+            background: 'transparent',
             arrow: 'var(--text-color)',
           }"
         />
