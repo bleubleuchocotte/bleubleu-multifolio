@@ -12,6 +12,7 @@ defineEmits<{
   (e: "target", payload: string): void;
   (e: "targetThenScroll", payload: string): void;
   (e: "gallery", payload: Project): void;
+  (e: "goToEnd"): void;
 }>();
 </script>
 
@@ -26,9 +27,8 @@ defineEmits<{
     @next="
       i < projects.length - 1
         ? $emit('targetThenScroll', projects[i + 1].id)
-        : null
+        : $emit('goToEnd')
     "
     @gallery="(project: Project) => $emit('gallery', project)"
   />
-  
 </template>

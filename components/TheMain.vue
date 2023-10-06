@@ -56,6 +56,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         @target="(id: string) => callback(id, false)"
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
+        @go-to-end="() => (scrollToProjectId = `end`)"
       />
 
       <EndingCard
@@ -106,6 +107,9 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
   &__right {
     @include right;
+    @include prop("padding-inline", 0);
+    @include prop("margin-right");
+    @include prop("padding-right");
     position: relative;
     display: flex;
 
