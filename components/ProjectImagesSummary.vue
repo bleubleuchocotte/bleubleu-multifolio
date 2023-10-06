@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Images } from "@/type/types";
+
 defineProps({
   images: {
     type: Array<Images>,
@@ -47,6 +48,15 @@ defineProps({
     @include gap();
 
     &-item {
+      transition: transform 0.1s ease-out;
+      &:first-of-type {
+        transform: translate3d(calc(var(--v) * 0.5px), 0, 0);
+      }
+
+      &:last-of-type {
+        transform: translate3d(calc(var(--v) * -0.5px), 0, 0);
+      }
+
       display: flex;
       @include gap();
 
