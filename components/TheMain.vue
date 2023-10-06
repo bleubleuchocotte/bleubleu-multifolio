@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ImageField } from "@prismicio/types";
+import { storeToRefs } from "pinia";
 import { Main, Project } from "@/type/types";
 import { emailKey, endingCardImageKey } from "@/type/keys";
+import { useWebsiteStore } from "@/stores/myStore";
 
 defineProps({
   params: {
@@ -26,6 +28,19 @@ const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 
 const email = inject<string>(emailKey, "email not provided");
 const endingCardImage = inject<ImageField>(endingCardImageKey, {});
+
+const store = useWebsiteStore();
+const { lenisInstance } = storeToRefs(store);
+
+const velocity = ref(0);
+
+watchOnce(lenisInstance, () => {
+  if (lenisInstance.value) {
+    lenisInstance.value.on("scroll", () => {
+      velocity.value = lenisInstance.value?.velocity ?? 0;
+    });
+  }
+});
 </script>
 
 <template>
@@ -50,6 +65,8 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
       class="main__right"
       :target="scrollToProjectId"
+      :request-lenis="true"
+      :style="`--v: ${velocity}`"
     >
       <ProjectsListHorizontal
         :projects="params.projects"
@@ -107,9 +124,6 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
   &__right {
     @include right;
-    @include prop("padding-inline", 0);
-    @include prop("margin-right");
-    @include prop("padding-right");
     position: relative;
     display: flex;
 
@@ -130,7 +144,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       z-index: 1;
       pointer-events: none;
       right: 0;
-      width: calc($gutter + $gutter / 2);
+      @include prop("width");
 
       @media #{$desktop-down} {
         content: none;

@@ -2,6 +2,8 @@
 import Lenis from "@studio-freight/lenis";
 import type { LenisTarget } from "@/type/types";
 
+import { useWebsiteStore } from "@/stores/myStore";
+
 const props = defineProps({
   orientation: {
     type: String as PropType<"vertical" | "horizontal">,
@@ -12,6 +14,11 @@ const props = defineProps({
     type: [String, Number, Object] as PropType<LenisTarget>,
     required: false,
     default: undefined,
+  },
+  requestLenis: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 
@@ -26,6 +33,11 @@ onMounted(() => {
   function raf(time: number) {
     lenis.raf(time);
     requestAnimationFrame(raf);
+  }
+
+  if (props.requestLenis) {
+    const store = useWebsiteStore();
+    store.lenisInstance = lenis;
   }
 
   requestAnimationFrame(raf);

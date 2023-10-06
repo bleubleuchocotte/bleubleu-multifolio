@@ -29,7 +29,7 @@ div {
     content: "";
     position: absolute;
     left: 1px;
-    width: calc($gutter + $gutter / 2);
+    @include prop("width");
     height: 100%;
     background: linear-gradient(
       270deg,

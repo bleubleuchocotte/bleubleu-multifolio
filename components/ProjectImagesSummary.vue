@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Images } from "@/type/types";
+
 defineProps({
   images: {
     type: Array<Images>,
@@ -12,41 +13,73 @@ defineProps({
 <template>
   <div class="project-images-summary__grid">
     <template v-for="(image, i) in images" :key="i">
-      <PrismicImage
-        v-for="(field, j) in Object.values(image.field)"
-        :key="j"
-        :field="field"
-        :data-index="i + j"
-        widths="defaults"
-      />
+      <div
+        class="project-images-summary__grid-item"
+        :data-type="image.type"
+        :class="{
+          'h-65': image.type === 'image-full',
+          'h-35':
+            image.type === 'image-duo' &&
+            images.some((el) => el.type === 'image-full'),
+          'h-50':
+            image.type === 'image-duo' &&
+            !images.some((el) => el.type === 'image-full'),
+        }"
+      >
+        <PrismicImage
+          v-for="(field, j) in Object.values(image.field)"
+          :key="j"
+          :field="field"
+          widths="defaults"
+        />
+      </div>
     </template>
   </div>
 </template>
 
 <style scoped lang="scss">
-.project-images-summary__grid {
-  height: 100%;
+.project-images-summary {
+  &__grid {
+    height: 100%;
+    cursor: pointer;
 
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+    display: flex;
+    flex-direction: column;
+    @include gap();
 
-  @include prop("grid-column-gap");
-  @include prop("grid-row-gap");
-  cursor: pointer;
+    &-item {
+      transition: transform 0.1s ease-out;
+      &:first-of-type {
+        transform: translate3d(calc(var(--v) * 0.5px), 0, 0);
+      }
 
-  [data-index="0"] {
-    grid-area: 1 / 1 / 4 / 5;
-  }
-  [data-index="1"] {
-    grid-area: 4 / 1 / 6 / 3;
-  }
-  [data-index="2"] {
-    grid-area: 4 / 3 / 6 / 5;
-  }
+      &:last-of-type {
+        transform: translate3d(calc(var(--v) * -0.5px), 0, 0);
+      }
 
-  & > img {
-    @include border-radius();
+      display: flex;
+      @include gap();
+
+      overflow: hidden;
+
+      & > img {
+        @include border-radius();
+      }
+
+      &.h-35 {
+        height: 35%;
+      }
+      &.h-50 {
+        height: 50%;
+
+        & > img {
+          min-width: 0;
+        }
+      }
+      &.h-65 {
+        height: 65%;
+      }
+    }
   }
 }
 </style>
