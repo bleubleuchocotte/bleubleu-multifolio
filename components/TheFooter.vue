@@ -35,7 +35,7 @@ defineProps({
         {{ link.name }}
         <IconBaseArrowLink
           :colors="{
-            background: 'var(--background-color)',
+            background: 'transparent',
             arrow: 'var(--text-color)',
           }"
         />
