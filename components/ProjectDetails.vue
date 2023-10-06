@@ -123,6 +123,7 @@ useIntersectionObserver(
   &__left {
     @include left;
     @include prop("padding-inline", 0);
+    @include prop("padding-left");
 
     display: flex;
     flex-direction: column;
