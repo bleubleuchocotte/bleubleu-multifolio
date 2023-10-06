@@ -11,15 +11,22 @@ defineProps({
 const email = inject<string>(emailKey, "email not provided");
 
 const accordions = ref();
-const indexAccordionOpen = ref<number | null>(null);
+const indexsAccordionOpen = reactive<{
+  last: number | null;
+  current: number | null;
+}>({ last: null, current: null });
 
 const onClick = (index: number) => {
-  if (indexAccordionOpen.value !== null) {
-    // Un accordéons a déjà été ouvert
-    accordions.value[indexAccordionOpen.value].isOpen = false;
-  }
+  indexsAccordionOpen.current = index;
 
-  indexAccordionOpen.value = index;
+  if (
+    indexsAccordionOpen.last !== null &&
+    indexsAccordionOpen.last !== indexsAccordionOpen.current
+  ) {
+    // Un accordéon est ouvert et ce n'est pas celui qui vient d'être cliqué
+    accordions.value[indexsAccordionOpen.last].isOpen = false;
+  }
+  indexsAccordionOpen.last = index;
 };
 </script>
 
