@@ -73,6 +73,8 @@ defineEmits<{ (e: "goToStart"): void }>();
     @include border-radius();
 
     &-caption {
+      @include prop("padding-left", 0.5);
+      @include prop("padding-top", 0.25);
       text-align: left;
     }
 
