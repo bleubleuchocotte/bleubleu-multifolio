@@ -27,7 +27,9 @@ defineEmits<{ (e: "goToStart"): void }>();
         :field="endingCardImage"
       />
       <div class="ending-card__content-start-button">
-        <a @click="$emit('goToStart')">Bring me to start</a>
+        <button type="button" @click="$emit('goToStart')">
+          Bring me to start
+        </button>
         <UIBaseButtonNavigation
           class="ending-card__content-arrow"
           :colors="{
@@ -111,7 +113,7 @@ defineEmits<{ (e: "goToStart"): void }>();
       @include gap(0.5);
       cursor: pointer;
 
-      & > a {
+      & > button {
         @include font("h3");
         text-decoration: underline;
       }
