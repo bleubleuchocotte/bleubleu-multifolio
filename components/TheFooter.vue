@@ -19,7 +19,7 @@ defineProps({
         Made with love with bleubleu
         <IconBaseArrowLink
           :colors="{
-            background: 'var(--background-color)',
+            background: 'transparent',
             arrow: 'var(--text-color)',
           }"
         />
@@ -35,7 +35,7 @@ defineProps({
         {{ link.name }}
         <IconBaseArrowLink
           :colors="{
-            background: 'var(--background-color)',
+            background: 'transparent',
             arrow: 'var(--text-color)',
           }"
         />
@@ -57,6 +57,7 @@ defineProps({
     &-link {
       display: flex;
       width: fit-content;
+      align-items: flex-end;
     }
   }
   &__right {
@@ -69,6 +70,7 @@ defineProps({
 
     &-link {
       display: flex;
+      align-items: flex-end;
     }
   }
 }
