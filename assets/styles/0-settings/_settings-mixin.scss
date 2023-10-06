@@ -246,6 +246,23 @@ $base-border-radius: 20px;
       border-radius: 0 0 ($base-border-radius * $coef)
         ($base-border-radius * $coef);
     }
+  } @else if $side == "right" {
+    @media #{$mobile-xs} {
+      border-radius: 0 ($base-border-radius * $coef * 0.5)
+        ($base-border-radius * $coef * 0.5) 0;
+    }
+    @media #{$mobile} {
+      border-radius: 0 ($base-border-radius * $coef * 0.5)
+        ($base-border-radius * $coef * 0.5) 0;
+    }
+    @media #{$tablet} {
+      border-radius: 0 ($base-border-radius * $coef * 0.75)
+        ($base-border-radius * $coef * 0.75) 0;
+    }
+    @media #{$desktop} {
+      border-radius: 0 ($base-border-radius * $coef)
+        ($base-border-radius * $coef) 0;
+    }
   }
 }
 
