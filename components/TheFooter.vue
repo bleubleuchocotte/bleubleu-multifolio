@@ -49,9 +49,7 @@ defineProps({
 <style scoped lang="scss">
 .footer {
   display: flex;
-  padding-block: $gutter;
-
-  font-size: $font-size-normal;
+  @include prop("padding-block");
 
   &__left {
     @include left;

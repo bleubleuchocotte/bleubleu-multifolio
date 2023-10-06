@@ -83,8 +83,7 @@ onClickOutside(target, () => {
 
   background-color: var(--accent-color);
   color: var(--text-accent-color);
-
-  border-radius: 0 $border-radius-big $border-radius-big 0;
+  @include border-radius(1, "right");
 
   &__text {
     width: 100%;

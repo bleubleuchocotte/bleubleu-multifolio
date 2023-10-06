@@ -130,7 +130,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       z-index: 1;
       pointer-events: none;
       right: 0;
-      width: calc($gutter + $gutter / 2);
+      @include prop("width");
 
       @media #{$desktop-down} {
         content: none;

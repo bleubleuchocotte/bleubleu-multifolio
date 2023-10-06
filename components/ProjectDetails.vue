@@ -147,7 +147,7 @@ useIntersectionObserver(
     &-heading {
       @include prop("margin-top");
       display: flex;
-      gap: calc($gutter/3);
+      @include gap(calc(1 / 3));
       align-items: center;
 
       &-title {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 import { Project } from "~/type/types";
-import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 defineProps({
   project: {
@@ -32,32 +32,40 @@ const callback = (e: KeyboardEvent) => {
   if (e.key === "Escape") emit("close");
 };
 
-const target = ref()
-useFocusTrap(target, { immediate: true })
-
+const target = ref();
+useFocusTrap(target, { immediate: true });
 </script>
 
 <template>
   <section ref="target" class="gallery__container">
     <div ref="ignore" class="gallery__header">
-      <PrismicLink v-if="project.url" class="gallery__project-heading" :field="project.url">
-            <h2 class="gallery__project-heading-title">{{ project.title }}</h2>
-            <IconBaseArrowLink 
-              :colors="{
-                background: 'var(--accent-color)',
-                arrow: 'var(--background-color)',
-              }"
-            />
+      <PrismicLink
+        v-if="project.url"
+        class="gallery__project-heading"
+        :field="project.url"
+      >
+        <h2 class="gallery__project-heading-title">{{ project.title }}</h2>
+        <IconBaseArrowLink
+          :colors="{
+            background: 'var(--accent-color)',
+            arrow: 'var(--background-color)',
+          }"
+        />
       </PrismicLink>
-      <div v-else  class="gallery__project-heading">
-        <h2 class="gallery__project-heading-title">{{ project.title }}</h2> 
+      <div v-else class="gallery__project-heading">
+        <h2 class="gallery__project-heading-title">{{ project.title }}</h2>
       </div>
-      <button type="button" @click="$emit('close')" aria-label="Close the gallery modal">
+      <button
+        type="button"
+        aria-label="Close the gallery modal"
+        @click="$emit('close')"
+      >
         <IconBaseCross
-        :colors="{
-          background: 'var(--text-color)',
-          arrow: 'var(--text-color)',
-        }"/>
+          :colors="{
+            background: 'var(--text-color)',
+            arrow: 'var(--text-color)',
+          }"
+        />
       </button>
     </div>
     <UIBaseLenis ref="container" class="gallery__project-lenis">
@@ -88,7 +96,8 @@ useFocusTrap(target, { immediate: true })
     flex-direction: row;
     justify-content: space-between;
     height: 30px;
-    margin-bottom: calc($gutter/2);
+
+    @include prop("margin-bottom", 0.5);
   }
   &__container {
     position: fixed;
@@ -98,7 +107,7 @@ useFocusTrap(target, { immediate: true })
     padding-block: 2.5vh 5vh;
 
     background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
 
     z-index: 10;
   }
@@ -106,32 +115,31 @@ useFocusTrap(target, { immediate: true })
   &__project {
     &-heading {
       display: flex;
-      gap: calc($gutter/3);
+      @include gap(calc(1 / 3));
       align-items: center;
 
       &-title {
         pointer-events: none;
       }
-
     }
 
     &-lenis {
-      border-radius: $border-radius-big $border-radius-big 0 0;
+      @include border-radius(1, "top");
     }
 
     &-images {
       display: flex;
       flex-direction: column;
-      gap: $gutter;
+      @include gap();
       height: 100%;
 
       img {
-        border-radius: $border-radius-big;
+        @include border-radius();
         aspect-ratio: 1;
       }
       [data-type="duo"] {
         display: flex;
-        gap: $gutter;
+        @include gap();
         height: 400px;
         width: 100%;
       }
@@ -143,7 +151,7 @@ useFocusTrap(target, { immediate: true })
     &-description {
       display: flex;
       flex-direction: column;
-      gap: $gutter;
+      @include gap();
       padding-bottom: 5vh;
       max-width: 50%;
     }
