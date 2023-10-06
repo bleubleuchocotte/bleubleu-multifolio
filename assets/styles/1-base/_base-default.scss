@@ -44,3 +44,8 @@ img {
     display: none;
   }
 }
+
+*::selection {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}

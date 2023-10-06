@@ -30,7 +30,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" class="desktop-only" />
+    <TheAboutMe :about="params.about" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
@@ -45,7 +45,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         </UIBaseLenis>
       </section>
     </div>
-    <UIBaseSeparator :width="1" class="desktop-only" />
+    <UIBaseSeparator :width="1" />
     <UIBaseLenis
       :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
       class="main__right"
@@ -56,6 +56,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         @target="(id: string) => callback(id, false)"
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
+        @go-to-end="() => (scrollToProjectId = `end`)"
       />
 
       <EndingCard
@@ -106,6 +107,9 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
   &__right {
     @include right;
+    @include prop("padding-inline", 0);
+    @include prop("margin-right");
+    @include prop("padding-right");
     position: relative;
     display: flex;
 

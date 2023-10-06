@@ -70,7 +70,7 @@ useIntersectionObserver(
         />
       </div>
 
-      <div class="project-details__utils desktop-only">
+      <div class="project-details__utils">
         <span class="project-details__utils-index">
           <UIBaseIndex :index="index + 1" />
         </span>
@@ -123,6 +123,7 @@ useIntersectionObserver(
   &__left {
     @include left;
     @include prop("padding-inline", 0);
+    @include prop("padding-left");
 
     display: flex;
     flex-direction: column;
