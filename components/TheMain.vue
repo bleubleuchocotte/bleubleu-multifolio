@@ -56,6 +56,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
         @target="(id: string) => callback(id, false)"
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
+        @go-to-end="() => (scrollToProjectId = `[data-v-ce1e4c24]`)"
       />
 
       <EndingCard
