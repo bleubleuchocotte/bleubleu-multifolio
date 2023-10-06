@@ -69,6 +69,7 @@ defineProps({
 
     &-link {
       display: flex;
+      align-items: flex-end;
     }
   }
 }
