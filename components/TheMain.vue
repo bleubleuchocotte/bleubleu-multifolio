@@ -108,6 +108,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
   &__right {
     @include right;
     @include prop("padding-inline", 0);
+    @include prop("margin-right");
     @include prop("padding-right");
     position: relative;
     display: flex;
