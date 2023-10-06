@@ -13,7 +13,7 @@ defineProps({
   <header class="header">
     <div class="header__slider">
       <Vue3Marquee
-        :direction="'reverse'"
+        :direction="'normal'"
         :duration="10"
         class="header__slider-container"
       >
