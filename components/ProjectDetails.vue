@@ -103,7 +103,11 @@ useIntersectionObserver(
     <div class="project-details__right">
       <ProjectImagesSummary
         :images="project.images.slice(0, 2)"
+        role="button"
+        aria-label="View project images"
+        tabindex="0"
         @click="$emit('gallery', project)"
+        @keydown.enter.space="$emit('gallery', project)"
       />
     </div>
   </article>
