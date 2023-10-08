@@ -2,8 +2,6 @@
 import Lenis from "@studio-freight/lenis";
 import type { LenisTarget } from "@/type/types";
 
-import { useWebsiteStore } from "@/stores/myStore";
-
 const props = defineProps({
   orientation: {
     type: String as PropType<"vertical" | "horizontal">,
@@ -36,8 +34,9 @@ onMounted(() => {
   }
 
   if (props.requestLenis) {
-    const store = useWebsiteStore();
-    store.lenisInstance = lenis;
+    lenis.on("scroll", () => {
+      velocity.value = lenis.velocity;
+    });
   }
 
   requestAnimationFrame(raf);
@@ -52,10 +51,12 @@ watch(
     if (props.target) lenis.scrollTo(props.target);
   }
 );
+
+const velocity = ref(0);
 </script>
 
 <template>
-  <div ref="container" data-lenis>
+  <div ref="container" data-lenis :style="`--v: ${velocity}`">
     <slot></slot>
   </div>
 </template>
