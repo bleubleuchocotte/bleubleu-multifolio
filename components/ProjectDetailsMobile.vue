@@ -15,7 +15,30 @@ defineProps({
 <template>
   <article class="project-details-mobile">
     <UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
-    <h2>{{ project.title }}</h2>
+    <template v-if="project.url">
+      <PrismicLink
+        class="project-details-mobile__content-heading"
+        :field="project.url"
+      >
+        <h2>
+          {{ project.title }}
+        </h2>
+        <IconBaseArrowLink
+          :colors="{
+            background: 'var(--accent-color)',
+            arrow: 'var(--background-color)',
+          }"
+        />
+      </PrismicLink>
+    </template>
+    <template v-else>
+      <div class="project-details-mobile__content-heading">
+        <h2>
+          {{ project.title }}
+        </h2>
+      </div>
+    </template>
+
     <div class="project-details-mobile__content-tags">
       <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
         {{ skill.skill }}
@@ -67,8 +90,11 @@ defineProps({
   }
 
   &__content {
-    @include prop("padding-bottom");
+    // @include prop("padding-bottom");
     &-heading {
+      display: flex;
+      align-items: center;
+      @include gap(calc(1 / 3));
       @include prop("margin-top");
     }
 
