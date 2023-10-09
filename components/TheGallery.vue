@@ -33,7 +33,7 @@ const callback = (e: KeyboardEvent) => {
 };
 
 const target = ref();
-useFocusTrap(target);
+useFocusTrap(target, { immediate: true });
 </script>
 
 <template>
