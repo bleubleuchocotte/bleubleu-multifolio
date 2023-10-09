@@ -180,7 +180,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           align-items: center;
           @include gap(0.5);
 
-          transition: transform 0.1s ease-out;
+          transition: transform 0.2s ease-out;
 
           &:hover {
             transform: translate(5px);

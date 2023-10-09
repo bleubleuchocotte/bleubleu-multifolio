@@ -95,24 +95,35 @@ provide(FooterLinksKey, footer.value.links);
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 
 const isLoading = ref(true);
+const showContent = ref(false);
 </script>
 
 <template>
   <ClientOnly>
     <UIBaseCursor v-if="isPointerAccurate" />
   </ClientOnly>
-  <Transition mode="out-in" name="loader">
+  <Transition
+    name="translate-out"
+    mode="out-in"
+    @after-leave="showContent = true"
+  >
     <TheLoader
-      v-show="isLoading"
+      v-if="isLoading"
       :text="'Thomas Auffroy'"
+      :colors="{
+        start: settings.textColor,
+        end: settings.accentColor,
+      }"
       @unmount="isLoading = false"
     />
   </Transition>
-  <div v-show="isLoading === false" class="body">
-    <TheHeader :params="header" />
-    <NuxtPage />
-    <TheFooter :params="footer" class="desktop-only" />
-  </div>
+  <Transition mode="out-in" name="translate-in">
+    <div v-show="showContent" class="body">
+      <TheHeader :params="header" />
+      <NuxtPage />
+      <TheFooter :params="footer" class="desktop-only" />
+    </div>
+  </Transition>
 </template>
 
 <style lang="scss">
@@ -135,15 +146,26 @@ body {
   filter: blur(1rem);
 }
 
-.loader-enter-active,
-.loader-leave-active {
-  transition: all 0.4s;
+.translate-out-enter-active,
+.translate-out-leave-active {
+  transition: all 0.4s ease-out;
 }
 
-.loader-enter-from,
-.loader-leave-to {
+.translate-out-enter-from,
+.translate-out-leave-to {
   opacity: 0;
-  filter: blur(1rem);
+  transform: translateY(-20vh);
+}
+
+.translate-in-enter-active,
+.translate-in-leave-active {
+  transition: all 0.4s ease-out;
+}
+
+.translate-in-enter-from,
+.translate-in-leave-to {
+  opacity: 0;
+  transform: translateY(80vh);
 }
 </style>
 

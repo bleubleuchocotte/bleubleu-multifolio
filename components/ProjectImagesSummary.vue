@@ -50,13 +50,13 @@ defineProps({
     &-item {
       transition: transform 0.1s ease-out;
       &:first-of-type {
-        transform: translate3d(calc(var(--v) * 1.2px), 0, 0)
-          skewX(calc(var(--v) * -0.0125deg));
+        transform: translate3d(calc(var(--v) * 1.5px), 0, 0)
+          skewX(calc(var(--v) * -0.02deg));
       }
 
       &:last-of-type {
-        transform: translate3d(calc(var(--v) * 0.6px), 0, 0)
-          skewX(calc(var(--v) * -0.0125deg));
+        transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
+          skewX(calc(var(--v) * -0.02deg));
       }
 
       display: flex;
