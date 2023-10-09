@@ -93,13 +93,22 @@ provide(FooterLinksKey, footer.value.links);
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
+
+const isLoading = ref(true);
 </script>
 
 <template>
   <ClientOnly>
     <UIBaseCursor v-if="isPointerAccurate" />
   </ClientOnly>
-  <div class="body">
+  <Transition mode="out-in" name="loader">
+    <TheLoader
+      v-show="isLoading"
+      :text="'Thomas Auffroy'"
+      @unmount="isLoading = false"
+    />
+  </Transition>
+  <div v-show="isLoading === false" class="body">
     <TheHeader :params="header" />
     <NuxtPage />
     <TheFooter :params="footer" class="desktop-only" />
@@ -122,6 +131,17 @@ body {
 }
 .page-enter-from,
 .page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.loader-enter-active,
+.loader-leave-active {
+  transition: all 0.4s;
+}
+
+.loader-enter-from,
+.loader-leave-to {
   opacity: 0;
   filter: blur(1rem);
 }
