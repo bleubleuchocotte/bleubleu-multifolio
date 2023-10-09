@@ -30,7 +30,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" />
+    <TheAboutMe :about="params.about" :email="email" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>

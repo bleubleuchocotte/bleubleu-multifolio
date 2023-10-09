@@ -5,9 +5,9 @@
 <style scoped lang="scss">
 .tag {
   &__text {
-    @include padding(0.5);
+    @include padding(calc(1 / 3));
     border: 1px solid var(--border-color);
-    @include border-radius();
+    @include border-radius(0.5);
 
     @include font("p");
   }
