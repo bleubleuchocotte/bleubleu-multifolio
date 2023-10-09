@@ -10,10 +10,6 @@ defineProps({
     }>,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-  },
 });
 
 onMounted(() => {
@@ -125,9 +121,6 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
   @include border-radius(1, "right");
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     @include padding();
 
@@ -168,24 +161,9 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           transition: transform 0.1s ease-out;
 
           &:hover {
-            transition: transform 0.1s ease-out;
             transform: translate(5px);
           }
         }
-      }
-    }
-    &-contact {
-      height: 8%;
-      width: 100%;
-      z-index: 0;
-      border: 1px solid var(--background-color);
-      display: none;
-
-      @include font("h2");
-
-      &:deep(.button__reveal) {
-        border-radius: 0;
-        border: unset;
       }
     }
   }
