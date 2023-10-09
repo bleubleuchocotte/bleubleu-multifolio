@@ -26,18 +26,7 @@ div {
   background-color: var(--border-color);
 
   &::before {
-    content: "";
-    position: absolute;
-    left: 1px;
-    @include prop("width");
-    height: 100%;
-    background: linear-gradient(
-      270deg,
-      hsla(0, 0%, 100%, 0),
-      var(--background-color)
-    );
-    z-index: 1;
-    pointer-events: none;
+    @include gradientScroll(left);
   }
 }
 </style>

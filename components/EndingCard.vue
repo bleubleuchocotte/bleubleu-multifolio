@@ -53,9 +53,7 @@ defineEmits<{ (e: "goToStart"): void }>();
 
 <style scoped lang="scss">
 .ending-card {
-  @include gap();
-  @include prop("padding-left");
-
+  @include prop("margin-right", -1);
   min-width: 40vw;
   height: 100%;
 

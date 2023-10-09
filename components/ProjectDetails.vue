@@ -35,12 +35,7 @@ useIntersectionObserver(
 </script>
 
 <template>
-  <article
-    ref="target"
-    class="project-details"
-    :class="{ 'pl-0': index === 0 }"
-    :data-project-h-id="project.id"
-  >
+  <article ref="target" class="project-details" :data-project-h-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
         <p>More info</p>
@@ -103,7 +98,11 @@ useIntersectionObserver(
     <div class="project-details__right">
       <ProjectImagesSummary
         :images="project.images.slice(0, 2)"
+        role="button"
+        aria-label="View project images"
+        tabindex="0"
         @click="$emit('gallery', project)"
+        @keydown.enter.space="$emit('gallery', project)"
       />
     </div>
   </article>
@@ -125,9 +124,7 @@ useIntersectionObserver(
 
   height: 100%;
 
-  &:not(.pl-0) {
-    @include prop("padding-left");
-  }
+  @include prop("padding-left");
 
   &__left {
     @include left;

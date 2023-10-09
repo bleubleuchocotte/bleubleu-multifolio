@@ -5,7 +5,8 @@
 }
 
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+div[role="button"]:focus-visible {
   outline: 1px solid red;
 }
 

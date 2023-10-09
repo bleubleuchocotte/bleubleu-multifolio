@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ImageField } from "@prismicio/types";
-import { storeToRefs } from "pinia";
 import { Main, Project } from "@/type/types";
 import { emailKey, endingCardImageKey } from "@/type/keys";
-import { useWebsiteStore } from "@/stores/myStore";
 
 defineProps({
   params: {
@@ -28,19 +26,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 
 const email = inject<string>(emailKey, "email not provided");
 const endingCardImage = inject<ImageField>(endingCardImageKey, {});
-
-const store = useWebsiteStore();
-const { lenisInstance } = storeToRefs(store);
-
-const velocity = ref(0);
-
-watchOnce(lenisInstance, () => {
-  if (lenisInstance.value) {
-    lenisInstance.value.on("scroll", () => {
-      velocity.value = lenisInstance.value?.velocity ?? 0;
-    });
-  }
-});
 </script>
 
 <template>
@@ -66,7 +51,6 @@ watchOnce(lenisInstance, () => {
       class="main__right"
       :target="scrollToProjectId"
       :request-lenis="true"
-      :style="`--v: ${velocity}`"
     >
       <ProjectsListHorizontal
         :projects="params.projects"
@@ -124,6 +108,8 @@ watchOnce(lenisInstance, () => {
 
   &__right {
     @include right;
+    @include prop("padding-inline", 0);
+    @include prop("padding-right", 2);
     position: relative;
     display: flex;
 
@@ -131,25 +117,9 @@ watchOnce(lenisInstance, () => {
       flex-direction: column;
       @include gap();
     }
-
-    &::before {
-      content: "";
-      position: fixed;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        hsla(0, 0%, 100%, 0),
-        var(--background-color)
-      );
-      z-index: 1;
-      pointer-events: none;
-      right: 0;
-      @include prop("width");
-
-      @media #{$desktop-down} {
-        content: none;
-      }
-    }
+  }
+  &::after {
+    @include gradientScroll(right);
   }
 }
 </style>
