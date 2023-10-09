@@ -10,6 +10,10 @@ defineProps({
     }>,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
 onMounted(() => {
@@ -44,6 +48,9 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
         :field="about.prismic.data.text"
         class="section__content-text"
       />
+      <UIBaseButtonContact :email="email" class="section__content-contact"
+        >Contact
+      </UIBaseButtonContact>
       <ul class="section__content-links">
         <li class="section__content-links-item">
           <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
@@ -132,6 +139,21 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 
     &-text {
       @include prop("margin-bottom");
+    }
+
+    &-contact {
+      height: 10%;
+      width: 100%;
+      z-index: 0;
+      border: 1px solid var(--background-color);
+
+      @include prop("margin-bottom");
+      @include font("h2");
+
+      &:deep(.button__reveal) {
+        border-radius: 0;
+        border: unset;
+      }
     }
 
     &-image {
