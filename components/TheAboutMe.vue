@@ -1,11 +1,17 @@
 <script lang="ts" setup>
-import { PrismicDocument } from "@prismicio/types";
+import { PrismicDocument, LinkField } from "@prismicio/types";
+import { FooterLinksKey } from "@/type/keys";
+
 defineProps({
   about: {
     type: Object as PropType<{
       fullName: String;
       prismic: PrismicDocument;
     }>,
+    required: true,
+  },
+  email: {
+    type: String,
     required: true,
   },
 });
@@ -28,15 +34,51 @@ const target = ref();
 onClickOutside(target, () => {
   if (isOpen.value === true) isOpen.value = false;
 });
+
+const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 </script>
 
 <template>
   <section ref="target" class="section" :class="{ open: isOpen }">
-    <UIBaseLenis class="section__text">
-      <div class="section__text-image">
+    <UIBaseLenis class="section__content">
+      <div class="section__content-image">
         <PrismicImage :field="about.prismic.data.me" />
       </div>
-      <PrismicRichText :field="about.prismic.data.text" />
+      <PrismicRichText
+        :field="about.prismic.data.text"
+        class="section__content-text"
+      />
+      <UIBaseButtonContact :email="email" class="section__content-contact"
+        >Contact
+      </UIBaseButtonContact>
+      <ul class="section__content-links">
+        <li class="section__content-links-item">
+          <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
+            Bleubleu.studio
+            <IconBaseArrowLink
+              :colors="{
+                background: 'var(--accent-color)',
+                arrow: 'var(--background-color)',
+              }"
+            />
+          </NuxtLink>
+        </li>
+        <li
+          v-for="(link, i) in links"
+          :key="Math.floor(Math.random() * (100 + i))"
+          class="section__content-links-item"
+        >
+          <PrismicLink :field="link.link">
+            {{ link.name }}
+            <IconBaseArrowLink
+              :colors="{
+                background: 'var(--accent-color)',
+                arrow: 'var(--background-color)',
+              }"
+            />
+          </PrismicLink>
+        </li>
+      </ul>
     </UIBaseLenis>
     <div
       class="section__bookmark"
@@ -64,7 +106,7 @@ onClickOutside(target, () => {
 <style scoped lang="scss">
 .section {
   transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 1px - 50vw));
+  transform: translate(calc($bookmark-width - 1px - 30vw));
   &.open {
     transform: translate(0);
 
@@ -79,13 +121,13 @@ onClickOutside(target, () => {
   left: 0;
 
   height: 100%;
-  width: 50vw;
+  width: 30vw;
 
   background-color: var(--accent-color);
   color: var(--text-accent-color);
   @include border-radius(1, "right");
 
-  &__text {
+  &__content {
     width: 100%;
     @include padding();
 
@@ -95,16 +137,56 @@ onClickOutside(target, () => {
       @include font("h2");
     }
 
+    &-text {
+      @include prop("margin-bottom");
+    }
+
+    &-contact {
+      height: 10%;
+      width: 100%;
+      z-index: 0;
+      border: 1px solid var(--background-color);
+
+      @include prop("margin-bottom");
+      @include font("h2");
+
+      &:deep(.button__reveal) {
+        border-radius: 0;
+        border: unset;
+      }
+    }
+
     &-image {
       overflow: hidden;
-      width: fit-content;
       aspect-ratio: calc(
-        320 / 245
+        16 / 9
       ); // Permet d'avoir le même ration que l'image prismic
       @include prop("margin-bottom");
 
       border: 1px solid var(--text-accent-color);
       @include border-radius();
+    }
+
+    &-links {
+      &-item {
+        &:not(:last-of-type) {
+          border-bottom: 1px solid var(--background-color);
+        }
+        @include prop("padding-block", 0.25);
+
+        & > a {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          @include gap(0.5);
+
+          transition: transform 0.2s ease-out;
+
+          &:hover {
+            transform: translate(5px);
+          }
+        }
+      }
     }
   }
 
