@@ -8,6 +8,32 @@
   @include prop("padding-inline");
 }
 
+@mixin gradientScroll($dir: left) {
+  content: "";
+  position: absolute;
+  @if ($dir == left) {
+    left: 1px;
+    background: linear-gradient(
+      270deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+  } @else {
+    right: 0;
+    background: linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+  }
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: darken;
+
+  height: 100%;
+  @include prop("width");
+}
+
 /**
 -----------------------------------------------------
 FONT

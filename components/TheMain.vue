@@ -117,25 +117,9 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       flex-direction: column;
       @include gap();
     }
-
-    &::before {
-      content: "";
-      position: fixed;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        hsla(0, 0%, 100%, 0),
-        var(--background-color)
-      );
-      z-index: 1;
-      pointer-events: none;
-      right: 0;
-      @include prop("width");
-
-      @media #{$desktop-down} {
-        content: none;
-      }
-    }
+  }
+  &::after {
+    @include gradientScroll(right);
   }
 }
 </style>
