@@ -54,7 +54,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
       <ul class="section__content-links">
         <li class="section__content-links-item">
           <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
-            Bleubleu.studio
+            <span> Bleubleu.studio </span>
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
@@ -69,7 +69,9 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">
-            {{ link.name }}
+            <span>
+              {{ link.name }}
+            </span>
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
@@ -180,10 +182,12 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           align-items: center;
           @include gap(0.5);
 
-          transition: transform 0.2s ease-out;
+          span {
+            transition: transform 0.2s ease-out;
+          }
 
-          &:hover {
-            transform: translate(5px);
+          &:hover span {
+            transform: translate3d(5px, 0, 0);
           }
         }
       }
