@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  colors: {
+    type: Object as PropType<{ start: string; end: string }>,
+    required: true,
+  },
 });
 
 const emit = defineEmits<{ (e: "unmount"): void }>();
@@ -42,6 +46,25 @@ function randomString(length: number) {
   return result;
 }
 
+function interpolate(color1: string, color2: string, percent: number) {
+  // Convert the hex colors to RGB values
+  const r1 = parseInt(color1.substring(1, 3), 16);
+  const g1 = parseInt(color1.substring(3, 5), 16);
+  const b1 = parseInt(color1.substring(5, 7), 16);
+
+  const r2 = parseInt(color2.substring(1, 3), 16);
+  const g2 = parseInt(color2.substring(3, 5), 16);
+  const b2 = parseInt(color2.substring(5, 7), 16);
+
+  // Interpolate the RGB values
+  const r = Math.round(r1 + (r2 - r1) * percent);
+  const g = Math.round(g1 + (g2 - g1) * percent);
+  const b = Math.round(b1 + (b2 - b1) * percent);
+
+  // Convert the interpolated RGB values back to a hex color
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 const displayString = ref("Loading...");
 
 let index = 0;
@@ -52,6 +75,12 @@ const { pause } = useIntervalFn(() => {
   index += 1;
   ratio.value = Math.floor((100 * (index + 1)) / (props.text.length + 1));
 
+  styles.color = interpolate(
+    props.colors.start,
+    props.colors.end,
+    ratio.value / 100
+  );
+
   if (result) {
     pause();
     useTimeoutFn(() => {
@@ -59,10 +88,14 @@ const { pause } = useIntervalFn(() => {
     }, 400);
   }
 }, 75);
+
+const styles = reactive({
+  color: `${interpolate(props.colors.start, props.colors.end, 0)}`,
+});
 </script>
 
 <template>
-  <div class="loader">
+  <div class="loader" :style="styles">
     <span>{{ displayString }}_{{ ratio }}%</span>
   </div>
 </template>
@@ -79,9 +112,5 @@ const { pause } = useIntervalFn(() => {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-
-  span {
-    color: var(--text-color);
-  }
 }
 </style>

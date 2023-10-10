@@ -1,33 +1,13 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { Main, Project } from "@/type/types";
-import { useWebsiteStore } from "@/stores/myStore";
-const { client } = usePrismic();
+import { Project } from "@/type/types";
 
-// On GET la section About
-const { data: about } = await useAsyncData(() => client.getSingle("about"));
-if (!about.value) throw new Error("Prismic document could not be accessed");
-
-// On GET la section Projets
-const { data: prismicProjects } = await useAsyncData(() =>
-  client.getAllByType("projet")
-);
-if (!prismicProjects.value)
-  throw new Error("Prismic document could not be accessed");
+const { $api } = useNuxtApp();
+const website = await $api.website.getWebsite();
+const prismicProjects = await $api.projects.getAllProjects();
 
 const projects: Project[] = await Promise.all(
-  prismicProjects.value.map(async (project) => {
-    // On récupère l'id non null de toutes les images
-    const ids: string[] = project.data.images
-      .map((a: any) => a.image.id ?? "")
-      .filter((el: string) => el !== "");
-
-    const { data: images } = await useAsyncData(project.id, () =>
-      client.getAllByIDs(ids)
-    );
-
-    if (!images.value)
-      throw new Error("Prismic document could not be accessed");
+  prismicProjects.map(async (project) => {
+    const images = await $api.projects.getImagesFromProject(project);
 
     const bufferProject: Project = {
       id: project.id,
@@ -37,7 +17,7 @@ const projects: Project[] = await Promise.all(
       skills: project.data.skills,
       title: project.data.title,
       url: project.data.url.url ? project.data.url : null,
-      images: images.value.map((image) => {
+      images: images.map((image) => {
         if (image.type !== "image-duo" && image.type !== "image-full")
           throw new Error("Type error");
         return {
@@ -49,29 +29,18 @@ const projects: Project[] = await Promise.all(
         ? project.data["image-mobile"]
         : null,
     };
-
     return bufferProject;
   })
 );
 
-const main = ref<Main>({
-  about: {
-    fullName:
-      about.value.data["first-name"] + " " + about.value.data["last-name"],
-    prismic: about.value,
-  },
-  projects,
-});
-
 useServerSeoMeta({
-  publisher: main.value.about.fullName.toString(),
+  publisher: `${website.me["first-name"]} ${website.me["last-name"]}`,
 });
 
-const store = useWebsiteStore();
-const { isMobile } = storeToRefs(store);
+const isMobile = useMediaQuery("(max-width: 1025px)");
 </script>
 
 <template>
-  <TheMainMobile v-if="isMobile" :params="main" />
-  <TheMain v-else :params="main" />
+  <TheMainMobile v-if="isMobile" :projects="projects" />
+  <TheMain v-else :projects="projects" />
 </template>

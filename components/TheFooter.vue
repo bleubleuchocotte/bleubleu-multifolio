@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Footer } from "@/type/types";
+import { LinkField } from "@prismicio/types";
 defineProps({
-  params: {
-    type: Object as PropType<Footer>,
+  links: {
+    type: Array<{ name: string; link: LinkField }>,
     required: true,
   },
 });
@@ -27,7 +27,7 @@ defineProps({
     </div>
     <div class="footer__right">
       <PrismicLink
-        v-for="(link, i) in params.links"
+        v-for="(link, i) in links"
         :key="i"
         class="footer__right-link"
         :field="link.link"

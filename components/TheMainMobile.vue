@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { Main } from "@/type/types";
-import { emailKey } from "@/type/keys";
+import { Project } from "@/type/types";
+
 defineProps({
-  params: {
-    type: Object as PropType<Main>,
+  projects: {
+    type: Array<Project>,
     required: true,
   },
 });
 
-const email = inject<string>(emailKey, "email not provided");
+const { $api } = useNuxtApp();
+const website = await $api.website.getWebsite();
 
 const accordions = ref();
 const indexsAccordionOpen = reactive<{
@@ -35,7 +36,7 @@ const onClick = (index: number) => {
     <main>
       <p>My projects</p>
       <UIBaseAccordion
-        v-for="(project, i) in params.projects"
+        v-for="(project, i) in projects"
         :key="project.id"
         ref="accordions"
         :project="project"
@@ -47,7 +48,9 @@ const onClick = (index: number) => {
     </main>
 
     <footer>
-      <TheAboutMeMobile :about="params.about" :email="email" />
+      <TheAboutMeMobile
+        :params="{ me: website.me, links: website.footer.links }"
+      />
     </footer>
   </div>
 </template>
