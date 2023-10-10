@@ -38,7 +38,6 @@ export default defineNuxtConfig({
   modules: [
     "@vueuse/nuxt",
     "@nuxtjs/prismic",
-    "@pinia/nuxt",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],

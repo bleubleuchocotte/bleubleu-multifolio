@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import "vue3-marquee/dist/style.css";
-import { Header } from "@/type/types";
+
 defineProps({
-  params: {
-    type: Object as PropType<Header>,
+  email: {
+    type: String,
+    required: true,
+  },
+  marqueeText: {
+    type: String,
     required: true,
   },
 });
@@ -17,11 +21,11 @@ defineProps({
         :duration="10"
         class="header__slider-container"
       >
-        <h1 style="margin-left: 5em">{{ params.text }}</h1>
+        <h1 style="margin-left: 5em">{{ marqueeText }}</h1>
       </Vue3Marquee>
     </div>
 
-    <UIBaseButtonContact :email="params.email" class="header__button">
+    <UIBaseButtonContact :email="email" class="header__button">
       Contact
     </UIBaseButtonContact>
   </header>

@@ -1,17 +1,4 @@
-import {
-  LinkField,
-  PrismicDocument,
-  ImageField,
-  RichTextField,
-} from "@prismicio/types";
-
-export type Settings = {
-  accentColor: string; // Couleur formatée en HEX
-  backgroundColor: string;
-  textColor: string;
-  textAccentColor: string;
-  email: string;
-};
+import { LinkField, ImageField, RichTextField } from "@prismicio/types";
 
 export type Images = {
   field: {
@@ -30,23 +17,6 @@ export type Project = {
   title: string;
   "image-mobile": ImageField | null;
   url: LinkField | null;
-};
-
-export type Header = {
-  text: string;
-  email: string;
-};
-
-export type Main = {
-  about: {
-    fullName: String;
-    prismic: PrismicDocument;
-  };
-  projects: Project[];
-};
-
-export type Footer = {
-  links: { name: string; link: LinkField }[];
 };
 
 /**
