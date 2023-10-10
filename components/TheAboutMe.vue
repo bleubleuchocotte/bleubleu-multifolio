@@ -1,17 +1,21 @@
 <script lang="ts" setup>
-import { PrismicDocument, LinkField } from "@prismicio/types";
-import { FooterLinksKey } from "@/type/keys";
+import { LinkField, ImageField, RichTextField } from "@prismicio/types";
+import { PropType } from "nuxt/dist/app/compat/capi";
+
+type TheAboutMeType = {
+  me: {
+    "first-name": string;
+    "last-name": string;
+    description: RichTextField;
+    image: ImageField;
+    email: string;
+  };
+  links: { name: string; link: LinkField }[];
+};
 
 defineProps({
-  about: {
-    type: Object as PropType<{
-      fullName: String;
-      prismic: PrismicDocument;
-    }>,
-    required: true,
-  },
-  email: {
-    type: String,
+  params: {
+    type: Object as PropType<TheAboutMeType>,
     required: true,
   },
 });
@@ -34,21 +38,21 @@ const target = ref();
 onClickOutside(target, () => {
   if (isOpen.value === true) isOpen.value = false;
 });
-
-const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 </script>
 
 <template>
   <section ref="target" class="section" :class="{ open: isOpen }">
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
-        <PrismicImage :field="about.prismic.data.me" />
+        <PrismicImage :field="params.me.image" />
       </div>
       <PrismicRichText
-        :field="about.prismic.data.text"
+        :field="params.me.description"
         class="section__content-text"
       />
-      <UIBaseButtonContact :email="email" class="section__content-contact"
+      <UIBaseButtonContact
+        :email="params.me.email"
+        class="section__content-contact"
         >Contact
       </UIBaseButtonContact>
       <ul class="section__content-links">
@@ -64,7 +68,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           </NuxtLink>
         </li>
         <li
-          v-for="(link, i) in links"
+          v-for="(link, i) in params.links"
           :key="Math.floor(Math.random() * (100 + i))"
           class="section__content-links-item"
         >
@@ -91,7 +95,9 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
     >
-      <h1 class="section__bookmark-heading">{{ about.fullName }}</h1>
+      <h1 class="section__bookmark-heading">
+        {{ params.me["first-name"] }} {{ params.me["last-name"] }}
+      </h1>
       <div class="section__bookmark-flex">
         <div>
           <p>contact & more</p>
