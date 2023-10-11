@@ -13,7 +13,7 @@
 .button {
   height: 7vw;
   width: 20vw;
-  z-index: 0;
+  z-index: 5;
   border: 1px solid var(--background-color);
   position: absolute;
   top: calc(24vw - 7vw);
@@ -48,7 +48,7 @@
   top: 0;
   left: 5px;
   position: absolute;
-  text-shadow: -10px 0 var(--accent-color);
+  text-shadow: -10px 0 var(--border-color);
   color: var(--text-color);
   background: var(--background-color);
   overflow: hidden;
