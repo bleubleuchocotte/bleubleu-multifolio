@@ -9,7 +9,7 @@ defineProps({
 });
 
 const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
+const website = $api.website;
 
 const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;

@@ -9,7 +9,7 @@ defineProps({
 });
 
 const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
+const website = $api.website;
 
 const accordions = ref();
 const indexsAccordionOpen = reactive<{
