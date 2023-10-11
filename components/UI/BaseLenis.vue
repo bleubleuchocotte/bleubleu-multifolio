@@ -65,8 +65,8 @@ const velocity = ref(0);
 div[data-lenis] {
   height: 100%;
   overflow: hidden;
-  @media #{$desktop-down} {
-    overflow: auto;
+  @media #{$low-accuracy} {
+    overflow: overlay;
   }
 }
 </style>
