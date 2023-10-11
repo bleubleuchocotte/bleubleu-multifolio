@@ -193,6 +193,7 @@ onClickOutside(target, () => {
           @include gap(0.5);
 
           span {
+            pointer-events: none;
             transition: transform 0.2s ease-out;
           }
 
