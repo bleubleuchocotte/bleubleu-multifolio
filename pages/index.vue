@@ -2,7 +2,7 @@
 import { Project } from "@/type/types";
 
 const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
+const website = $api.website;
 const prismicProjects = await $api.projects.getAllProjects();
 
 const projects: Project[] = await Promise.all(

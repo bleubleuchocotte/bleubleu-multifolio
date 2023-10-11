@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
+const website = $api.website;
 
 const cssVariables = [
   "--accent-color: " + website.colors["accent-color"],
