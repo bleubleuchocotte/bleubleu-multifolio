@@ -98,16 +98,7 @@ const showContent = ref(false);
   </Transition>
 </template>
 
-<style lang="scss">
-body {
-  color: var(--text-color);
-  background-color: var(--background-color);
-  font-family: "Manrope";
-  @media #{$desktop} {
-    overflow: hidden;
-  }
-}
-
+<style>
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
