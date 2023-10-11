@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <NuxtLink to="/" class="button">
     <div class="button__text">
@@ -19,8 +17,6 @@
 
 <style scoped lang="scss">
 .button {
-  @include font("cta");
-
   position: relative;
   overflow: hidden;
 
@@ -30,6 +26,10 @@
   @include border-radius(0.5);
 
   color: var(--text-accent-color);
+
+  & > * {
+    pointer-events: none;
+  }
 
   &:hover .button__text-bg,
   &.open .button__text-bg {
@@ -102,8 +102,6 @@
 
     background-color: var(--background-color);
     color: var(--accent-color);
-
-    @include border(0.5, var(--accent-color));
   }
 }
 </style>
