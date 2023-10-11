@@ -41,7 +41,11 @@ onClickOutside(target, () => {
 </script>
 
 <template>
-  <section ref="target" class="section" :class="{ open: isOpen }">
+  <section
+    ref="target"
+    class="section invert-selection"
+    :class="{ open: isOpen }"
+  >
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
         <PrismicImage :field="params.me.image" />
