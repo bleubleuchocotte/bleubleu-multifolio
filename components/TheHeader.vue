@@ -25,7 +25,7 @@ defineProps({
       </Vue3Marquee>
     </div>
 
-    <UIBaseButtonContact :email="email" class="header__button">
+    <UIBaseButtonContact :email="email" class="header__button desktop-only">
       Contact
     </UIBaseButtonContact>
   </header>
@@ -59,10 +59,6 @@ defineProps({
   &__button {
     min-width: 200px;
     flex: 1;
-
-    @media #{$mobile-down} {
-      display: none;
-    }
   }
 }
 </style>
