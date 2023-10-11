@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ImageField } from "@prismicio/types";
-import { Main, Project } from "@/type/types";
-import { emailKey, endingCardImageKey } from "@/type/keys";
+import { Project } from "@/type/types";
 
 defineProps({
-  params: {
-    type: Object as PropType<Main>,
+  projects: {
+    type: Array<Project>,
     required: true,
   },
 });
+
+const { $api } = useNuxtApp();
+const website = $api.website;
 
 const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;
@@ -23,20 +24,17 @@ const projectInGallery = ref<Project | null>(null);
 
 // Permet de détecter la taille de l'écran
 const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
-
-const email = inject<string>(emailKey, "email not provided");
-const endingCardImage = inject<ImageField>(endingCardImageKey, {});
 </script>
 
 <template>
   <main class="main">
-    <TheAboutMe :about="params.about" :email="email" />
+    <TheAboutMe :params="{ me: website.me, links: website.footer.links }" />
     <div class="main__left">
       <section class="main__left-container">
         <p>My projects</p>
         <UIBaseLenis :orientation="'vertical'">
           <ProjectsListVertical
-            :projects="params.projects"
+            :projects="projects"
             :id-to-active="idToProject"
             @target="
               (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
@@ -53,7 +51,7 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       :request-lenis="true"
     >
       <ProjectsListHorizontal
-        :projects="params.projects"
+        :projects="projects"
         @target="(id: string) => callback(id, false)"
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
@@ -61,11 +59,10 @@ const endingCardImage = inject<ImageField>(endingCardImageKey, {});
       />
 
       <EndingCard
-        :email="email"
-        :ending-card-image="endingCardImage"
+        :email="website.me.email"
+        :ending-card-image="website['ending-card-image']"
         @go-to-start="
-          () =>
-            (scrollToProjectId = `[data-project-h-id='${params.projects[0].id}']`)
+          () => (scrollToProjectId = `[data-project-h-id='${projects[0].id}']`)
         "
       />
     </UIBaseLenis>

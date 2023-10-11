@@ -34,11 +34,14 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/styles/reset.css", "@/assets/styles/lenis.css"],
+  css: [
+    "@/assets/styles/reset.css",
+    "@/assets/styles/lenis.css",
+    "@/assets/styles/1-base/_base-default.scss",
+  ],
   modules: [
     "@vueuse/nuxt",
     "@nuxtjs/prismic",
-    "@pinia/nuxt",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],

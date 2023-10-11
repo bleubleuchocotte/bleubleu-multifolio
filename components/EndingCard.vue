@@ -16,7 +16,7 @@ defineEmits<{ (e: "goToStart"): void }>();
 </script>
 
 <template>
-  <article class="ending-card">
+  <article class="ending-card invert-selection">
     <div class="ending-card__content">
       <p class="ending-card__content-caption">
         You reached the end of the shortlist,<br />

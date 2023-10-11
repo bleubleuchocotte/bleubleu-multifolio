@@ -1,17 +1,21 @@
 <script lang="ts" setup>
-import { PrismicDocument, LinkField } from "@prismicio/types";
-import { FooterLinksKey } from "@/type/keys";
+import { LinkField, ImageField, RichTextField } from "@prismicio/types";
+import { PropType } from "nuxt/dist/app/compat/capi";
+
+type TheAboutMeType = {
+  me: {
+    "first-name": string;
+    "last-name": string;
+    description: RichTextField;
+    image: ImageField;
+    email: string;
+  };
+  links: { name: string; link: LinkField }[];
+};
 
 defineProps({
-  about: {
-    type: Object as PropType<{
-      fullName: String;
-      prismic: PrismicDocument;
-    }>,
-    required: true,
-  },
-  email: {
-    type: String,
+  params: {
+    type: Object as PropType<TheAboutMeType>,
     required: true,
   },
 });
@@ -34,27 +38,31 @@ const target = ref();
 onClickOutside(target, () => {
   if (isOpen.value === true) isOpen.value = false;
 });
-
-const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 </script>
 
 <template>
-  <section ref="target" class="section" :class="{ open: isOpen }">
+  <section
+    ref="target"
+    class="section invert-selection"
+    :class="{ open: isOpen }"
+  >
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
-        <PrismicImage :field="about.prismic.data.me" />
+        <PrismicImage :field="params.me.image" />
       </div>
       <PrismicRichText
-        :field="about.prismic.data.text"
+        :field="params.me.description"
         class="section__content-text"
       />
-      <UIBaseButtonContact :email="email" class="section__content-contact"
+      <UIBaseButtonContact
+        :email="params.me.email"
+        class="section__content-contact"
         >Contact
       </UIBaseButtonContact>
       <ul class="section__content-links">
         <li class="section__content-links-item">
           <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
-            Bleubleu.studio
+            <span> Bleubleu.studio </span>
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
@@ -64,12 +72,14 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           </NuxtLink>
         </li>
         <li
-          v-for="(link, i) in links"
+          v-for="(link, i) in params.links"
           :key="Math.floor(Math.random() * (100 + i))"
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">
-            {{ link.name }}
+            <span>
+              {{ link.name }}
+            </span>
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
@@ -89,7 +99,9 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
     >
-      <h1 class="section__bookmark-heading">{{ about.fullName }}</h1>
+      <h1 class="section__bookmark-heading">
+        {{ params.me["first-name"] }} {{ params.me["last-name"] }}
+      </h1>
       <div class="section__bookmark-flex">
         <div>
           <p>contact & more</p>
@@ -106,7 +118,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 <style scoped lang="scss">
 .section {
   transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 1px - 30vw));
+  transform: translate(calc($bookmark-width - 30vw));
   &.open {
     transform: translate(0);
 
@@ -180,10 +192,13 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
           align-items: center;
           @include gap(0.5);
 
-          transition: transform 0.2s ease-out;
+          span {
+            pointer-events: none;
+            transition: transform 0.2s ease-out;
+          }
 
-          &:hover {
-            transform: translate(5px);
+          &:hover span {
+            transform: translate3d(5px, 0, 0);
           }
         }
       }
@@ -198,7 +213,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
     justify-content: space-between;
     @include padding(calc(1 / 3));
 
-    width: $bookmark-width;
+    min-width: $bookmark-width;
 
     & > * {
       pointer-events: none;
@@ -206,6 +221,7 @@ const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 
     &-heading {
       text-transform: uppercase;
+      align-self: center;
     }
 
     &-flex {

@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { PrismicDocument, LinkField } from "@prismicio/types";
-import { FooterLinksKey } from "@/type/keys";
+import { LinkField, RichTextField, ImageField } from "@prismicio/types";
+
+type TheAboutMeType = {
+  me: {
+    "first-name": string;
+    "last-name": string;
+    description: RichTextField;
+    image: ImageField;
+    email: string;
+  };
+  links: { name: string; link: LinkField }[];
+};
+
 defineProps({
-  about: {
-    type: Object as PropType<{
-      fullName: String;
-      prismic: PrismicDocument;
-    }>,
-    required: true,
-  },
-  email: {
-    type: String,
+  params: {
+    type: Object as PropType<TheAboutMeType>,
     required: true,
   },
 });
-
-const links = inject<Array<{ name: string; link: LinkField }>>(FooterLinksKey);
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,7 +27,7 @@ const scrollToTop = () => {
 <template>
   <section class="about-me-mobile">
     <div class="about-me-mobile__heading">
-      <h1>{{ about.fullName }}</h1>
+      <h1>{{ params.me["first-name"] }} {{ params.me["last-name"] }}</h1>
 
       <button aria-label="Back to Top" @click="scrollToTop">
         <svg
@@ -51,12 +53,14 @@ const scrollToTop = () => {
     </div>
 
     <div class="about-me-mobile__content">
-      <PrismicRichText :field="about.prismic.data.text" />
+      <PrismicRichText :field="params.me.description" />
       <PrismicImage
-        :field="about.prismic.data.me"
+        :field="params.me.image"
         class="about-me-mobile__content-image"
       />
-      <NuxtLink :to="`mailto:${email}`" class="about-me-mobile__content-contact"
+      <NuxtLink
+        :to="`mailto:${params.me.email}`"
+        class="about-me-mobile__content-contact"
         >Contact</NuxtLink
       >
     </div>
@@ -74,7 +78,7 @@ const scrollToTop = () => {
         </NuxtLink>
       </li>
       <li
-        v-for="(link, i) in links"
+        v-for="(link, i) in params.links"
         :key="Math.floor(Math.random() * (100 + i))"
         class="about-me-mobile__links-item"
       >
