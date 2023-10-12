@@ -65,7 +65,7 @@ FONT
     $base-fs: 28;
 
     @media #{$mobile-xs} {
-      font-size: pxToVw(22, 390);
+      font-size: pxToVw($base-fs, 390);
     }
     @media #{$mobile} {
       font-size: pxToVw($base-fs, 768);
