@@ -20,9 +20,9 @@ defineProps({
         class="project-details-mobile__content-heading"
         :field="project.url"
       >
-        <h2>
+        <h3>
           {{ project.title }}
-        </h2>
+        </h3>
         <IconBaseArrowLink
           :colors="{
             background: 'var(--accent-color)',
@@ -33,9 +33,9 @@ defineProps({
     </template>
     <template v-else>
       <div class="project-details-mobile__content-heading">
-        <h2>
+        <h3>
           {{ project.title }}
-        </h2>
+        </h3>
       </div>
     </template>
 
@@ -90,12 +90,15 @@ defineProps({
   }
 
   &__content {
-    // @include prop("padding-bottom");
     &-heading {
       display: flex;
       align-items: center;
       @include gap(calc(1 / 3));
       @include prop("margin-top");
+
+      & > h3 {
+        @include font("h2");
+      }
     }
 
     &-tags {
