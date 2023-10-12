@@ -9,6 +9,10 @@ defineProps({
     type: Number,
     required: true,
   },
+  hidden: {
+    type: Boolean,
+    required: true,
+  },
 });
 </script>
 
@@ -19,6 +23,7 @@ defineProps({
       <PrismicLink
         class="project-details-mobile__content-heading"
         :field="project.url"
+        :tabindex="hidden ? -1 : 0"
       >
         <h3>
           {{ project.title }}
