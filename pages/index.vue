@@ -41,6 +41,15 @@ const isMobile = useMediaQuery("(max-width: 1025px)");
 </script>
 
 <template>
-  <TheMainMobile v-if="isMobile" :projects="projects" />
-  <TheMain v-else :projects="projects" />
+  <div class="index-page">
+    <TheMainMobile v-if="isMobile" :projects="projects" :website="website" />
+    <TheMain v-else :projects="projects" :website="website" />
+  </div>
 </template>
+
+<style scoped lang="scss">
+.index-page {
+  flex: 1;
+  min-height: 400px;
+}
+</style>

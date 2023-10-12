@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { Project } from "@/type/types";
+import { WebsiteType } from "repository/modules/website";
 
 defineProps({
   projects: {
     type: Array<Project>,
     required: true,
   },
+  website: {
+    type: Object as PropType<WebsiteType>,
+    required: true,
+  },
 });
-
-const { $api } = useNuxtApp();
-const website = $api.website;
 
 const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;
@@ -79,6 +81,7 @@ const projectInGallery = ref<Project | null>(null);
   display: flex;
   position: relative;
   overflow: hidden;
+  height: 100%;
 
   @media #{$desktop-down} {
     flex-direction: column;
