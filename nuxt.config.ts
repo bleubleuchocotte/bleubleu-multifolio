@@ -44,6 +44,7 @@ export default defineNuxtConfig({
     "@nuxtjs/prismic",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
+    "@nuxtjs/device",
   ],
   prismic: {
     endpoint: import.meta.env.PRISMIC_ENDPOINT,

@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { Project } from "@/type/types";
+import { WebsiteType } from "repository/modules/website";
 
 defineProps({
   projects: {
     type: Array<Project>,
     required: true,
   },
+  website: {
+    type: Object as PropType<WebsiteType>,
+    required: true,
+  },
 });
-
-const { $api } = useNuxtApp();
-const website = $api.website;
 
 const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;
@@ -34,8 +36,8 @@ const projectInGallery = ref<Project | null>(null);
             :projects="projects"
             :id-to-active="idToProject"
             @target="
-              (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
-            "
+                  (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+                "
           />
         </UIBaseLenis>
       </section>
