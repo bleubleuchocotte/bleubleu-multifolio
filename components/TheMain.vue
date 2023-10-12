@@ -36,8 +36,8 @@ const projectInGallery = ref<Project | null>(null);
             :projects="projects"
             :id-to-active="idToProject"
             @target="
-              (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
-            "
+                  (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+                "
           />
         </UIBaseLenis>
       </section>
@@ -81,7 +81,6 @@ const projectInGallery = ref<Project | null>(null);
   display: flex;
   position: relative;
   overflow: hidden;
-  height: 100%;
 
   @media #{$desktop-down} {
     flex-direction: column;
