@@ -21,9 +21,6 @@ const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
-
-// Permet de détecter la taille de l'écran
-const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 </script>
 
 <template>
@@ -45,7 +42,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
     </div>
     <UIBaseSeparator :width="1" />
     <UIBaseLenis
-      :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
+      :orientation="'horizontal'"
       class="main__right"
       :target="scrollToProjectId"
       :request-lenis="true"
