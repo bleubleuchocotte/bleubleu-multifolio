@@ -34,7 +34,8 @@ body {
   }
 }
 
-h1 {
+h1,
+.h1 {
   @include font("h1");
 }
 h2 {

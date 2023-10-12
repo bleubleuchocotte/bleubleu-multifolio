@@ -14,6 +14,10 @@ defineProps({
 });
 
 const accordions = ref();
+
+const accordions = ref<any[]>([]);
+const arrAriaHidden = computed(() => accordions.value.map((el) => !el.isOpen));
+
 const indexsAccordionOpen = reactive<{
   last: number | null;
   current: number | null;
@@ -45,7 +49,11 @@ const onClick = (index: number) => {
         :index="i"
         @click="onClick(i)"
       >
-        <ProjectDetailsMobile :project="project" :index="i" />
+        <ProjectDetailsMobile
+          :project="project"
+          :index="i"
+          :hidden="arrAriaHidden[i] ?? true"
+        />
       </UIBaseAccordion>
     </main>
 

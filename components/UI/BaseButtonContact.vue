@@ -14,6 +14,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 <template>
   <button
     :data-email="email"
+    type="button"
     class="button"
     :class="{ open: copied }"
     aria-label="Copy email address to clipboard"
@@ -23,7 +24,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       <div class="button__text-bg-top">
         <span><slot /></span>
       </div>
-      <div class="button__text-bg-bottom">
+      <div class="button__text-bg-bottom" aria-hidden="true">
         <span><slot /></span>
       </div>
     </div>

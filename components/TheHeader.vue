@@ -21,7 +21,7 @@ defineProps({
         :duration="10"
         class="header__slider-container"
       >
-        <h1 style="margin-left: 5em">{{ marqueeText }}</h1>
+        <p style="margin-left: 5em" class="h1">{{ marqueeText }}</p>
       </Vue3Marquee>
     </div>
 
