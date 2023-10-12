@@ -7,7 +7,14 @@
 button:focus-visible,
 a:focus-visible,
 div[role="button"]:focus-visible {
-  outline: 1px solid red;
+  outline: 2px solid var(--accent-color);
+  @include padding(0.25);
+}
+
+.invert-selection button:focus-visible,
+.invert-selection a:focus-visible,
+.invert-selection div[role="button"]:focus-visible {
+  outline: 2px solid var(--background-color);
 }
 
 button,
