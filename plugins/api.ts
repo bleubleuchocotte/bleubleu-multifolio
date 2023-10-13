@@ -7,6 +7,9 @@ export default defineNuxtPlugin(async () => {
   // An object containing all repositories we need to expose
   const modules = {
     website: await new WebsiteModule(client).getWebsite(),
+    pages: {
+      "legal-notices": await new WebsiteModule(client).getPage("legal_notices"),
+    },
     projects: new ProjectsModule(client),
   };
 

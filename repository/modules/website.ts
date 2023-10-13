@@ -83,6 +83,50 @@ class WebsiteModule {
     };
     return result;
   }
+
+  async getPage(name: string) {
+    const { data: page } = await useAsyncData(() =>
+      this.client.getSingle(name)
+    );
+
+    if (!page.value) {
+      throw new Error("Prismic document could not be accessed");
+    }
+
+    type PageType = {
+      me: {
+        "first-name": string;
+        "last-name": string;
+        adress: string;
+        email: string;
+        phone: string;
+        tva: string;
+      };
+      host: {
+        name: string;
+        address: string;
+        phone: string;
+      };
+    };
+
+    const pageInformation: PageType = {
+      me: {
+        "first-name": page.value.data["me-first-name"] ?? "Undefined value",
+        "last-name": page.value.data["me-last-name"] ?? "Undefined value",
+        adress: page.value.data["me-address"] ?? "Undefined value",
+        email: page.value.data["me-email"] ?? "Undefined value",
+        phone: page.value.data["me-phone-number"] ?? "Undefined value",
+        tva: page.value.data["me-tva-number"] ?? "Undefined value",
+      },
+      host: {
+        name: page.value.data["host-name"] ?? "Undefined value",
+        address: page.value.data["host-address"] ?? "Undefined value",
+        phone: page.value.data["host-phone-number"] ?? "Undefined value",
+      },
+    };
+
+    return pageInformation;
+  }
 }
 
 export default WebsiteModule;
