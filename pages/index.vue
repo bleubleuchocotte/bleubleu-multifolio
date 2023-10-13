@@ -12,8 +12,7 @@ const projects: Project[] = await Promise.all(
     const bufferProject: Project = {
       id: project.id,
       date: project.data.date,
-      "short-description": project.data["short-description"],
-      "long-description": project.data["long-description"],
+      description: project.data.description,
       skills: project.data.skills,
       title: project.data.title,
       url: project.data.url.url ? project.data.url : null,
@@ -32,6 +31,8 @@ const projects: Project[] = await Promise.all(
     return bufferProject;
   })
 );
+
+console.log(projects);
 
 useServerSeoMeta({
   publisher: `${website.me["first-name"]} ${website.me["last-name"]}`,

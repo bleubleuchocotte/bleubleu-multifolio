@@ -65,7 +65,7 @@ useIntersectionObserver(
           </UIBaseTag>
         </div>
         <PrismicRichText
-          :field="project['short-description']"
+          :field="project['description']"
           class="project-details__content-description"
         />
       </div>

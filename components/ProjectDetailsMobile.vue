@@ -57,7 +57,7 @@ defineProps({
     />
 
     <PrismicRichText
-      :field="project['long-description']"
+      :field="project['description']"
       class="project-details-mobile__content-description"
     />
   </article>

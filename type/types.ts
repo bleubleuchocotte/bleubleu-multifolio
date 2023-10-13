@@ -11,8 +11,7 @@ export type Project = {
   id: string;
   date: string;
   images: Images[];
-  "short-description": RichTextField;
-  "long-description": RichTextField;
+  description: RichTextField;
   skills: { skill: string }[];
   title: string;
   "image-mobile": ImageField | null;
