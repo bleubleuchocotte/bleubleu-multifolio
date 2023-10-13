@@ -32,8 +32,6 @@ const projects: Project[] = await Promise.all(
   })
 );
 
-console.log(projects);
-
 useServerSeoMeta({
   publisher: `${website.me["first-name"]} ${website.me["last-name"]}`,
 });
