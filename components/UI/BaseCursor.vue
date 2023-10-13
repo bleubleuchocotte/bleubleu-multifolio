@@ -19,6 +19,12 @@ const callback = (e: MouseEvent) => {
   x.value = e.clientX;
   y.value = e.clientY;
 
+  isInvert.value = hasParentWithClass(
+    e.target as HTMLElement,
+    "invert-selection",
+    5
+  );
+
   if (
     e.target instanceof HTMLButtonElement ||
     e.target instanceof HTMLLIElement ||
@@ -32,8 +38,37 @@ const callback = (e: MouseEvent) => {
   }
 };
 
+function hasParentWithClass(
+  element: HTMLElement,
+  className: string,
+  depth: number
+) {
+  if (element.classList.contains(className)) {
+    return true;
+  }
+
+  let parent = element.parentElement;
+  let counter = 0;
+
+  if (parent === null) {
+    return false;
+  }
+
+  while (parent && counter < depth) {
+    counter += 1;
+
+    if (parent.classList.contains(className)) {
+      return true;
+    }
+    parent = parent.parentElement;
+  }
+
+  return false;
+}
+
 const x = ref(0);
 const y = ref(0);
+const isInvert = ref(false);
 const isExpand = ref(false);
 const isVisible = ref(false);
 const container = ref();
@@ -63,7 +98,7 @@ watchOnce([x, y], () => {
     <div ref="container">
       <div
         class="cursor__shape"
-        :class="{ expand: isExpand }"
+        :class="{ expand: isExpand, invert: isInvert }"
         :style="{ '--size': `${props.size}px` }"
       ></div>
     </div>
@@ -97,6 +132,9 @@ watchOnce([x, y], () => {
     width: var(--size);
 
     border: 1px solid var(--accent-color);
+    &.invert {
+      border: 1px solid var(--background-color);
+    }
     border-radius: 50%;
 
     &.expand {
