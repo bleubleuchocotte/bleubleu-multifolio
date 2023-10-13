@@ -13,8 +13,6 @@ defineProps({
   },
 });
 
-const accordions = ref();
-
 const accordions = ref<any[]>([]);
 const arrAriaHidden = computed(() => accordions.value.map((el) => !el.isOpen));
 
