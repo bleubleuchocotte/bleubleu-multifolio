@@ -128,6 +128,10 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 
     &-notices {
       @include padding(0.5);
+
+      h2 {
+        @include prop("margin-block", 0.5);
+      }
     }
   }
 }
