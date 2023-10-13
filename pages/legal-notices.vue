@@ -11,29 +11,25 @@ useSeoMeta({
   robots: "no-index",
 });
 
-const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
+const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 </script>
 
 <template>
-  <UIBaseLenis
-    :orientation="'horizontal'"
-    :infinite="true"
-    :request-lenis="true"
-    class="legal-container"
-  >
+  <div class="legal-container">
     <UIBaseButtonHome class="legal-container__button"
       >Let's go home</UIBaseButtonHome
     >
     <div
-      v-for="i in 2"
-      :key="i"
+      v-for="i in isDeviceMobile ? 1 : 2"
+      :key="Math.floor(Math.random() * (100 + i))"
       class="legal-container__bands"
       :class="'legal-container__band-' + i"
     >
       <div
-        v-for="j in isDeviceMobile ? 1 : 10"
-        :key="j"
+        v-for="j in isDeviceMobile ? 1 : 5"
+        :key="Math.floor(Math.random() * (100 + j))"
         class="legal-container__bands-notices"
+        :aria-hidden="!(j === 1 && i === 1)"
       >
         <h1>Legal Notices</h1>
 
@@ -63,7 +59,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
         <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
       </div>
     </div>
-  </UIBaseLenis>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -73,6 +69,10 @@ const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
   border-bottom: 1px solid var(--border-color);
   @media #{$mobile-down} {
     z-index: -1;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border-bottom: none;
   }
 
   &__button {
@@ -81,17 +81,16 @@ const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
     z-index: 5;
     border: 1px solid var(--background-color);
     position: absolute;
-    top: calc(50vh - 7vw);
-    left: calc(50vw - 10vw);
+    top: calc(50% - 3.5vw);
+    left: calc(50% - 10vw);
     @include font("h2");
-    position: fixed;
 
     @media #{$mobile-down} {
-      height: 15vw;
-      width: 50vw;
-      top: calc(80vh);
-      left: calc(50vw - 25vw);
+      height: 10vw;
+      width: 30vw;
+      position: relative;
       @include font("cta");
+      @include prop("margin-top");
     }
   }
 
@@ -101,6 +100,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
     flex-direction: row;
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
+    border-left: none;
 
     @media #{$mobile-down} {
       flex-direction: column;
