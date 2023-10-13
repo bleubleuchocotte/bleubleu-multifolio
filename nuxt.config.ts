@@ -34,12 +34,17 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/styles/reset.css", "@/assets/styles/lenis.css"],
+  css: [
+    "@/assets/styles/reset.css",
+    "@/assets/styles/lenis.css",
+    "@/assets/styles/1-base/_base-default.scss",
+  ],
   modules: [
     "@vueuse/nuxt",
     "@nuxtjs/prismic",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
+    "@nuxtjs/device",
   ],
   prismic: {
     endpoint: import.meta.env.PRISMIC_ENDPOINT,

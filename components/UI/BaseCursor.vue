@@ -23,8 +23,6 @@ const callback = (e: MouseEvent) => {
     e.target instanceof HTMLButtonElement ||
     e.target instanceof HTMLLIElement ||
     e.target instanceof HTMLAnchorElement ||
-    (e.target instanceof HTMLImageElement &&
-      e.target.attributes.getNamedItem("data-index") !== null) ||
     (e.target instanceof HTMLDivElement &&
       e.target.attributes.getNamedItem("role")?.value === "button")
   ) {

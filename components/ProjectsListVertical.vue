@@ -70,9 +70,9 @@ watch(
       @click="(e) => callback(e, project.id)"
       @keypress.enter="(e) => callback(e, project.id)"
     >
-      <h3 class="projects-list-vertical__element-name">
+      <h2 class="projects-list-vertical__element-name">
         <UIBaseIndex :index="i + 1" />{{ project.title }}
-      </h3>
+      </h2>
       <div class="projects-list-vertical__element-data">
         <p>{{ project.date.slice(0, 4) }}</p>
         <p>{{ project.skills[0].skill }}</p>
@@ -124,6 +124,8 @@ watch(
       align-self: flex-end;
 
       white-space: nowrap;
+
+      @include font("h3");
 
       &::before {
         @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));

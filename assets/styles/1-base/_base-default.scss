@@ -7,7 +7,14 @@
 button:focus-visible,
 a:focus-visible,
 div[role="button"]:focus-visible {
-  outline: 1px solid red;
+  outline: 2px solid var(--accent-color);
+  @include padding(0.25);
+}
+
+.invert-selection button:focus-visible,
+.invert-selection a:focus-visible,
+.invert-selection div[role="button"]:focus-visible {
+  outline: 2px solid var(--background-color);
 }
 
 button,
@@ -18,7 +25,17 @@ div[role="button"] {
   }
 }
 
-h1 {
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-family: "Manrope";
+  @media #{$desktop} {
+    overflow: hidden;
+  }
+}
+
+h1,
+.h1 {
   @include font("h1");
 }
 h2 {
@@ -46,7 +63,12 @@ img {
   }
 }
 
-*::selection {
+::selection {
   background-color: var(--accent-color);
   color: var(--background-color);
+}
+
+.invert-selection *::selection {
+  background-color: var(--background-color);
+  color: var(--accent-color);
 }

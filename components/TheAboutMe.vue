@@ -41,7 +41,11 @@ onClickOutside(target, () => {
 </script>
 
 <template>
-  <section ref="target" class="section" :class="{ open: isOpen }">
+  <section
+    ref="target"
+    class="section invert-selection"
+    :class="{ open: isOpen }"
+  >
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
         <PrismicImage :field="params.me.image" />
@@ -114,7 +118,7 @@ onClickOutside(target, () => {
 <style scoped lang="scss">
 .section {
   transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 1px - 30vw));
+  transform: translate(calc($bookmark-width - 30vw));
   &.open {
     transform: translate(0);
 
@@ -189,6 +193,7 @@ onClickOutside(target, () => {
           @include gap(0.5);
 
           span {
+            pointer-events: none;
             transition: transform 0.2s ease-out;
           }
 
@@ -208,7 +213,7 @@ onClickOutside(target, () => {
     justify-content: space-between;
     @include padding(calc(1 / 3));
 
-    width: $bookmark-width;
+    min-width: $bookmark-width;
 
     & > * {
       pointer-events: none;
@@ -216,6 +221,7 @@ onClickOutside(target, () => {
 
     &-heading {
       text-transform: uppercase;
+      align-self: center;
     }
 
     &-flex {

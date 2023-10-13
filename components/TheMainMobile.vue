@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { Project } from "@/type/types";
+import { WebsiteType } from "@/repository/modules/website";
 
 defineProps({
   projects: {
     type: Array<Project>,
     required: true,
   },
+  website: {
+    type: Object as PropType<WebsiteType>,
+    required: true,
+  },
 });
 
-const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
-
 const accordions = ref();
+
+const accordions = ref<any[]>([]);
+const arrAriaHidden = computed(() => accordions.value.map((el) => !el.isOpen));
+
 const indexsAccordionOpen = reactive<{
   last: number | null;
   current: number | null;
@@ -43,7 +49,11 @@ const onClick = (index: number) => {
         :index="i"
         @click="onClick(i)"
       >
-        <ProjectDetailsMobile :project="project" :index="i" />
+        <ProjectDetailsMobile
+          :project="project"
+          :index="i"
+          :hidden="arrAriaHidden[i] ?? true"
+        />
       </UIBaseAccordion>
     </main>
 

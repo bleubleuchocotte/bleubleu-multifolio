@@ -2,7 +2,7 @@
 import { Project } from "@/type/types";
 
 const { $api } = useNuxtApp();
-const website = await $api.website.getWebsite();
+const website = $api.website;
 const prismicProjects = await $api.projects.getAllProjects();
 
 const projects: Project[] = await Promise.all(
@@ -37,10 +37,40 @@ useServerSeoMeta({
   publisher: `${website.me["first-name"]} ${website.me["last-name"]}`,
 });
 
-const isMobile = useMediaQuery("(max-width: 1025px)");
+const isMobile = useMediaQuery("(max-width: 1025px)"); // Client side
+const { isDesktop } = useDevice(); // Server side
 </script>
 
 <template>
-  <TheMainMobile v-if="isMobile" :projects="projects" />
-  <TheMain v-else :projects="projects" />
+  <div class="index-page">
+    <ClientOnly>
+      <TheMainMobile v-if="isMobile" :projects="projects" :website="website" />
+      <TheMain
+        v-else
+        class="index-page__desktop"
+        :projects="projects"
+        :website="website"
+      />
+
+      <template #fallback>
+        <TheMain
+          v-if="isDesktop"
+          :projects="projects"
+          :website="website"
+          class="index-page__desktop"
+        />
+        <TheMainMobile v-else :projects="projects" :website="website" />
+      </template>
+    </ClientOnly>
+  </div>
 </template>
+
+<style scoped lang="scss">
+.index-page {
+  min-height: 0;
+
+  &__desktop {
+    height: 100%;
+  }
+}
+</style>
