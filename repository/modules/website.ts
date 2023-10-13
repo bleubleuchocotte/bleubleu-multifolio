@@ -100,7 +100,7 @@ class WebsiteModule {
         address: string;
         email: string;
         phone: string;
-        tva: string;
+        tva: string | null;
       };
       host: {
         name: string;
@@ -116,7 +116,7 @@ class WebsiteModule {
         address: page.value.data["me-address"] ?? "Undefined value",
         email: page.value.data["me-email"] ?? "Undefined value",
         phone: page.value.data["me-phone-number"] ?? "Undefined value",
-        tva: page.value.data["me-tva-number"] ?? "Undefined value",
+        tva: page.value.data["me-tva-number"],
       },
       host: {
         name: page.value.data["host-name"] ?? "Undefined value",
