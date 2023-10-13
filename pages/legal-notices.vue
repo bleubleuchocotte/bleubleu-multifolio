@@ -1,15 +1,6 @@
 <script setup lang="ts">
-const { client } = usePrismic();
-
-// On GET les informations de la page
-const { data: website } = await useAsyncData(() =>
-  client.getSingle("legal_notices")
-);
-if (!website.value) throw new Error("Prismic document could not be accessed");
-
-useSeoMeta({
-  robots: "no-index",
-});
+const { $api } = useNuxtApp();
+const page = $api.pages["legal-notices"];
 
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 </script>
@@ -19,46 +10,79 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
     <UIBaseButtonHome class="legal-container__button"
       >Let's go home</UIBaseButtonHome
     >
-    <div
-      v-for="i in isDeviceMobile ? 1 : 2"
-      :key="Math.floor(Math.random() * (100 + i))"
-      class="legal-container__bands"
-      :class="'legal-container__band-' + i"
-    >
+
+    <template v-if="!isDeviceMobile">
       <div
-        v-for="j in isDeviceMobile ? 1 : 5"
-        :key="Math.floor(Math.random() * (100 + j))"
-        class="legal-container__bands-notices"
-        :aria-hidden="!(j === 1 && i === 1)"
+        v-for="i in 2"
+        :key="Math.floor(Math.random() * (100 + i))"
+        class="legal-container__bands"
       >
+        <div
+          v-for="j in 5"
+          :key="Math.floor(Math.random() * (100 + j))"
+          class="legal-container__bands-notices"
+          :aria-hidden="!(j === 1 && i === 1)"
+        >
+          <h1>Legal Notices</h1>
+
+          <h2>Company Information</h2>
+          <p>Last name: {{ page.me["last-name"] }}</p>
+          <p>First name: {{ page.me["first-name"] }}</p>
+          <p>Adress: {{ page.me["address"] }}</p>
+          <p>Status: Entrepreneur individuel (EI)</p>
+          <p>Email: {{ page.me["email"] }}</p>
+          <p>Phone: {{ page.me["phone"] }}</p>
+
+          <template v-if="page.me['tva'] != null">
+            <h2>VAT Identification Number:</h2>
+            <p>{{ page.me["tva"] }}</p>
+          </template>
+
+          <h2>Website Host:</h2>
+          <p>Host name: {{ page.host["name"] }}</p>
+          <p>Host address: {{ page.host["address"] }}</p>
+          <p></p>
+          <p>Host phone: {{ page.host["phone"] }}</p>
+
+          <h2>BleuBleu Chocotte:</h2>
+          <p>Host name: {{ page.host["name"] }}</p>
+          <p>Host address: {{ page.host["address"] }}</p>
+          <p></p>
+          <p>Host phone: {{ page.host["phone"] }}</p>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="legal-container__bands-notices">
         <h1>Legal Notices</h1>
 
         <h2>Company Information</h2>
-        <p>Last name: {{ website?.data["me-last-name"] ?? "Unknown" }}</p>
-        <p>First name: {{ website?.data["me-first-name"] ?? "Unknown" }}</p>
-        <p>Adress: {{ website?.data["me-address"] ?? "Unknown" }}</p>
+        <p>Last name: {{ page.me["last-name"] }}</p>
+        <p>First name: {{ page.me["first-name"] }}</p>
+        <p>Adress: {{ page.me["address"] }}</p>
         <p>Status: Entrepreneur individuel (EI)</p>
-        <p>Email: {{ website?.data["me-email"] ?? "Unknown" }}</p>
-        <p>Phone: {{ website?.data["me-phone-number"] ?? "Unknown" }}</p>
+        <p>Email: {{ page.me["email"] }}</p>
+        <p>Phone: {{ page.me["phone"] }}</p>
 
-        <template v-if="website?.data['me-tva-number'] != null">
+        <template v-if="page.me['tva'] != null">
           <h2>VAT Identification Number:</h2>
-          <p>{{ website.data["me-tva-number"] }}</p>
+          <p>{{ page.me["tva"] }}</p>
         </template>
 
         <h2>Website Host:</h2>
-        <p>Host name: {{ website?.data["host-name"] ?? "Unknown" }}</p>
-        <p>Host address: {{ website?.data["host-address"] ?? "Unknown" }}</p>
+        <p>Host name: {{ page.host["name"] }}</p>
+        <p>Host address: {{ page.host["address"] }}</p>
         <p></p>
-        <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
+        <p>Host phone: {{ page.host["phone"] }}</p>
 
         <h2>BleuBleu Chocotte:</h2>
-        <p>Host name: {{ website?.data["host-name"] ?? "Unknown" }}</p>
-        <p>Host address: {{ website?.data["host-address"] ?? "Unknown" }}</p>
+        <p>Host name: {{ page.host["name"] }}</p>
+        <p>Host address: {{ page.host["address"] }}</p>
         <p></p>
-        <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
+        <p>Host phone: {{ page.host["phone"] }}</p>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -67,11 +91,10 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border-color);
+
   @media #{$mobile-down} {
-    z-index: -1;
     display: flex;
     flex-direction: column-reverse;
-    align-items: center;
     border-bottom: none;
   }
 
@@ -89,6 +112,8 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
       height: 10vw;
       width: 30vw;
       position: relative;
+      top: initial;
+      left: initial;
       @include font("cta");
       @include prop("margin-top");
     }
@@ -97,36 +122,12 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
   &__bands {
     width: max-content;
     display: flex;
-    flex-direction: row;
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
     border-left: none;
 
-    @media #{$mobile-down} {
-      flex-direction: column;
-      width: 100%;
-      border: none;
-    }
-
     &-notices {
       @include padding(0.5);
-    }
-  }
-
-  &__band-1 {
-    @media #{$desktop} {
-      transform: translate3d(calc(var(--v) * 2px), 0, 0)
-        skewX(calc(var(--v) * -0.05deg));
-    }
-  }
-
-  &__band-2 {
-    @media #{$desktop} {
-      transform: translate3d(calc(var(--v) * 1px), 0, 0)
-        skewX(calc(var(--v) * -0.05deg));
-    }
-    @media #{$mobile-down} {
-      display: none;
     }
   }
 }
