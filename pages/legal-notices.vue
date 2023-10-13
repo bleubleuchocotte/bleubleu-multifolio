@@ -10,31 +10,124 @@ if (!website.value) throw new Error("Prismic document could not be accessed");
 useSeoMeta({
   robots: "no-index",
 });
+
+const isDeviceMobile = useMediaQuery("(max-width: 1023px)");
 </script>
 
 <template>
-  <div>
-    <h1>Legal Notices</h1>
+  <UIBaseLenis
+    :orientation="'horizontal'"
+    :infinite="true"
+    :request-lenis="true"
+    class="legal-container"
+  >
+    <UIBaseButtonHome class="legal-container__button"
+      >Let's go home</UIBaseButtonHome
+    >
+    <div
+      v-for="i in 2"
+      :key="i"
+      class="legal-container__bands"
+      :class="'legal-container__band-' + i"
+    >
+      <div
+        v-for="j in isDeviceMobile ? 1 : 10"
+        :key="j"
+        class="legal-container__bands-notices"
+      >
+        <h1>Legal Notices</h1>
 
-    <h2>Company Information</h2>
-    <p>Last name: {{ website?.data["me-last-name"] ?? "Unknown" }}</p>
-    <p>First name: {{ website?.data["me-first-name"] ?? "Unknown" }}</p>
-    <p>Adress: {{ website?.data["me-address"] ?? "Unknown" }}</p>
-    <p>Status: Entrepreneur individuel (EI)</p>
-    <p>Email: {{ website?.data["me-email"] ?? "Unknown" }}</p>
-    <p>Phone: {{ website?.data["me-phone-number"] ?? "Unknown" }}</p>
+        <h2>Company Information</h2>
+        <p>Last name: {{ website?.data["me-last-name"] ?? "Unknown" }}</p>
+        <p>First name: {{ website?.data["me-first-name"] ?? "Unknown" }}</p>
+        <p>Adress: {{ website?.data["me-address"] ?? "Unknown" }}</p>
+        <p>Status: Entrepreneur individuel (EI)</p>
+        <p>Email: {{ website?.data["me-email"] ?? "Unknown" }}</p>
+        <p>Phone: {{ website?.data["me-phone-number"] ?? "Unknown" }}</p>
 
-    <template v-if="website?.data['me-tva-number'] != null">
-      <h2>VAT Identification Number:</h2>
-      <p>{{ website.data["me-tva-number"] }}</p>
-    </template>
+        <template v-if="website?.data['me-tva-number'] != null">
+          <h2>VAT Identification Number:</h2>
+          <p>{{ website.data["me-tva-number"] }}</p>
+        </template>
 
-    <h2>Website Host:</h2>
-    <p>Host name: {{ website?.data["host-name"] ?? "Unknown" }}</p>
-    <p>Host address: {{ website?.data["host-address"] ?? "Unknown" }}</p>
-    <p></p>
-    <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
+        <h2>Website Host:</h2>
+        <p>Host name: {{ website?.data["host-name"] ?? "Unknown" }}</p>
+        <p>Host address: {{ website?.data["host-address"] ?? "Unknown" }}</p>
+        <p></p>
+        <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
 
-    <NuxtLink to="/">Home</NuxtLink>
-  </div>
+        <h2>BleuBleu Chocotte:</h2>
+        <p>Host name: {{ website?.data["host-name"] ?? "Unknown" }}</p>
+        <p>Host address: {{ website?.data["host-address"] ?? "Unknown" }}</p>
+        <p></p>
+        <p>Host phone: {{ website?.data["host-phone-number"] ?? "Unknown" }}</p>
+      </div>
+    </div>
+  </UIBaseLenis>
 </template>
+
+<style scoped lang="scss">
+.legal-container {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  @media #{$mobile-down} {
+    z-index: -1;
+  }
+
+  &__button {
+    height: 7vw;
+    width: 20vw;
+    z-index: 5;
+    border: 1px solid var(--background-color);
+    position: absolute;
+    top: calc(50vh - 7vw);
+    left: calc(50vw - 10vw);
+    @include font("h2");
+    position: fixed;
+
+    @media #{$mobile-down} {
+      height: 15vw;
+      width: 50vw;
+      top: calc(80vh);
+      left: calc(50vw - 25vw);
+      @include font("cta");
+    }
+  }
+
+  &__bands {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+
+    @media #{$mobile-down} {
+      flex-direction: column;
+      width: 100%;
+      border: none;
+    }
+
+    &-notices {
+      @include padding(0.5);
+    }
+  }
+
+  &__band-1 {
+    @media #{$desktop} {
+      transform: translate3d(calc(var(--v) * 2px), 0, 0)
+        skewX(calc(var(--v) * -0.05deg));
+    }
+  }
+
+  &__band-2 {
+    @media #{$desktop} {
+      transform: translate3d(calc(var(--v) * 1px), 0, 0)
+        skewX(calc(var(--v) * -0.05deg));
+    }
+    @media #{$mobile-down} {
+      display: none;
+    }
+  }
+}
+</style>

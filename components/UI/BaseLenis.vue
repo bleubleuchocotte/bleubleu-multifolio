@@ -18,6 +18,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  infinite: {
+    type: Boolean,
+    required: false,
+    defautl: false,
+  },
 });
 
 onMounted(() => {
@@ -26,6 +31,7 @@ onMounted(() => {
     wrapper: container.value, // element which has overflow
     content: container.value, // usually wrapper's direct child
     orientation: props.orientation,
+    infinite: props.infinite,
   });
 
   function raf(time: number) {
