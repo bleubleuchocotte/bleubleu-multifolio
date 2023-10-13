@@ -124,6 +124,10 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
     display: flex;
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
+
+    &:first-of-type {
+      border-bottom: unset;
+    }
     border-left: none;
 
     &-notices {
