@@ -97,7 +97,7 @@ class WebsiteModule {
       me: {
         "first-name": string;
         "last-name": string;
-        adress: string;
+        address: string;
         email: string;
         phone: string;
         tva: string;
@@ -113,7 +113,7 @@ class WebsiteModule {
       me: {
         "first-name": page.value.data["me-first-name"] ?? "Undefined value",
         "last-name": page.value.data["me-last-name"] ?? "Undefined value",
-        adress: page.value.data["me-address"] ?? "Undefined value",
+        address: page.value.data["me-address"] ?? "Undefined value",
         email: page.value.data["me-email"] ?? "Undefined value",
         phone: page.value.data["me-phone-number"] ?? "Undefined value",
         tva: page.value.data["me-tva-number"] ?? "Undefined value",
