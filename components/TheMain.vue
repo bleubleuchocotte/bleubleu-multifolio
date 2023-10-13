@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { Project } from "@/type/types";
+import { WebsiteType } from "repository/modules/website";
 
 defineProps({
   projects: {
     type: Array<Project>,
     required: true,
   },
+  website: {
+    type: Object as PropType<WebsiteType>,
+    required: true,
+  },
 });
-
-const { $api } = useNuxtApp();
-const website = $api.website;
 
 const callback = (id: string, hasToScroll: boolean) => {
   idToProject.value = id;
@@ -21,9 +23,6 @@ const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
-
-// Permet de détecter la taille de l'écran
-const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
 </script>
 
 <template>
@@ -37,15 +36,15 @@ const isDeviceMobile = useMediaQuery("(max-width: 1025px)");
             :projects="projects"
             :id-to-active="idToProject"
             @target="
-              (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
-            "
+                  (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+                "
           />
         </UIBaseLenis>
       </section>
     </div>
     <UIBaseSeparator :width="1" />
     <UIBaseLenis
-      :orientation="isDeviceMobile ? 'vertical' : 'horizontal'"
+      :orientation="'horizontal'"
       class="main__right"
       :target="scrollToProjectId"
       :request-lenis="true"
