@@ -81,9 +81,6 @@ useFocusTrap(target, { immediate: true });
             :field="field"
           />
         </div>
-        <div class="gallery__project-description">
-          <PrismicRichText :field="project['long-description']" />
-        </div>
       </div>
     </UIBaseLenis>
   </section>
@@ -146,14 +143,6 @@ useFocusTrap(target, { immediate: true });
       [data-type="full"] {
         height: 70%;
       }
-    }
-
-    &-description {
-      display: flex;
-      flex-direction: column;
-      @include gap();
-      padding-bottom: 5vh;
-      max-width: 50%;
     }
   }
 }
