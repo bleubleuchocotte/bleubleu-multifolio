@@ -45,7 +45,7 @@ defineProps({
 
     display: flex;
     flex-direction: column;
-    @include gap();
+    @include prop("gap", 0.9);
 
     &-item {
       transition: transform 0.1s ease-out;
