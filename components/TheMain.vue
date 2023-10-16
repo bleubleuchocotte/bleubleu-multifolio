@@ -55,6 +55,7 @@ const projectInGallery = ref<Project | null>(null);
         @target-then-scroll="(id: string) => callback(id, true)"
         @gallery="(project: Project) => (projectInGallery = project)"
         @go-to-end="() => (scrollToProjectId = `end`)"
+        @go-to-start="() => (scrollToProjectId = 'start')"
       />
 
       <EndingCard
