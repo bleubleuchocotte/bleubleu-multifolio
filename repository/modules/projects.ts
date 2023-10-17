@@ -77,7 +77,7 @@ class ProjectsModule {
         }
       );
 
-    return projects.filter((el) => el as Project); // Permet de filtrer les champs null
+    return projects.filter((el): el is Project => el !== null); // Permet de filtrer les champs null
   }
 }
 export default ProjectsModule;
