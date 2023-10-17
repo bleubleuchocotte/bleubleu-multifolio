@@ -104,8 +104,8 @@ onClickOutside(target, () => {
       </h1>
       <div class="section__bookmark-flex">
         <div>
-          <p>contact & more</p>
-          <p>Learn to know me here</p>
+          <p>Explore further</p>
+          <p>Get to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
           <IconBaseArrowShort :fill="'var(--accent-color)'" />
