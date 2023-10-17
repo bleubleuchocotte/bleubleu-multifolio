@@ -17,7 +17,7 @@ defineProps({
           target="_blank"
           class="footer__left-link"
         >
-          Made with love with bleubleu
+          Lovingly made with bleubleu
           <IconBaseArrowLink
             :colors="{
               background: 'transparent',
