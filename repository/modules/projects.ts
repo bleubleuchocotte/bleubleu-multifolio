@@ -2,6 +2,7 @@ import { Client } from "@prismicio/client";
 import { PrismicDocument } from "@prismicio/types";
 
 import { useAsyncData } from "#imports";
+import { Project } from "type/types";
 
 class ProjectsModule {
   private client: Client;
@@ -10,30 +11,67 @@ class ProjectsModule {
     this.client = client;
   }
 
-  async getAllProjects() {
-    const { data: prismicProjects } = await useAsyncData("getAllProjects", () =>
-      this.client.getAllByType("projet")
+  async getProjects() {
+    const { data: prismicProjects } = await useAsyncData("GetAllProjects", () =>
+      this.client.getSingle("website", {
+        graphQuery: `{
+        website {
+          projects {
+            project {
+              title
+              url
+              date
+              description
+              skills {
+                skill
+              }
+              images {
+                image {
+                  ...on image-full {
+                    ...image-fullFields
+                  }
+                  ...on image-duo {
+                    ...image-duoFields
+                  }
+                }
+              }
+              image-mobile
+            }
+          }
+        }
+      }`,
+      })
     );
+
     if (!prismicProjects.value) {
-      throw new Error("Prismic document could not be accessed");
+      throw new Error("Project could not be loaded");
     }
 
-    return prismicProjects.value;
-  }
+    const projects: Project[] = prismicProjects.value.data.projects.map(
+      (el: { project: PrismicDocument }) => {
+        const result: Project = {
+          id: el.project.id,
+          date: el.project.data.date,
+          images: el.project.data.images.map(
+            (img: { image: PrismicDocument }) => {
+              return {
+                field: img.image.data,
+                type: img.image.type,
+              };
+            }
+          ),
+          description: el.project.data.description,
+          title: el.project.data.title,
+          skills: el.project.data.skills,
+          "image-mobile": el.project.data["image-mobile"],
+          url: el.project.data.url.url ? el.project.data.url : null,
+        };
 
-  async getImagesFromProject(project: PrismicDocument) {
-    // On récupère l'id non null de toutes les images
-    const ids: string[] = project.data.images
-      .map((a: any) => a.image.id ?? "")
-      .filter((el: string) => el !== "");
-    const { data: images } = await useAsyncData(project.id, () =>
-      this.client.getAllByIDs(ids)
+        return result;
+      }
     );
-    if (images.value === null) {
-      throw new Error("Prismic document could not be accessed");
-    }
 
-    return images.value;
+    return projects;
   }
 }
 export default ProjectsModule;
