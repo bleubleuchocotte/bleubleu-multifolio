@@ -133,6 +133,7 @@ useFocusTrap(target, { immediate: true });
 
       img {
         @include border-radius();
+        min-width: 0;
       }
       [data-type="duo"] {
         display: flex;
