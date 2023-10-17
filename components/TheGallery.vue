@@ -37,7 +37,7 @@ useFocusTrap(target, { immediate: true });
 </script>
 
 <template>
-  <section ref="target" class="gallery__container">
+  <section ref="target" class="gallery">
     <div ref="ignore" class="gallery__header">
       <PrismicLink
         v-if="project.url"
@@ -88,25 +88,26 @@ useFocusTrap(target, { immediate: true });
 
 <style scoped lang="scss">
 .gallery {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  @include gap(0.5);
+
+  padding-inline: 15vw;
+  @include prop("padding-top");
+
+  background-color: var(--background-color-70);
+  backdrop-filter: blur(20px);
+
+  z-index: 10;
+
   &__header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    height: 30px;
 
-    @include prop("margin-bottom", 0.5);
-  }
-  &__container {
-    position: fixed;
-    inset: 0;
-
-    padding-inline: 15vw;
-    padding-block: 2.5vh 5vh;
-
-    background-color: var(--background-color-70);
-    backdrop-filter: blur(20px);
-
-    z-index: 10;
+    @include prop("height");
   }
 
   &__project {
@@ -132,16 +133,25 @@ useFocusTrap(target, { immediate: true });
 
       img {
         @include border-radius();
-        aspect-ratio: 1;
+        min-width: 0;
       }
       [data-type="duo"] {
         display: flex;
         @include gap();
-        height: 400px;
         width: 100%;
+
+        img {
+          aspect-ratio: 1;
+        }
       }
       [data-type="full"] {
-        height: 70%;
+        img {
+          aspect-ratio: 16/9;
+        }
+      }
+
+      [data-type]:last-of-type {
+        @include prop("padding-bottom", 2.5);
       }
     }
   }
