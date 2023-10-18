@@ -1,16 +1,5 @@
 <script setup lang="ts">
-import { LinkField, RichTextField, ImageField } from "@prismicio/types";
-
-type TheAboutMeType = {
-  me: {
-    "first-name": string;
-    "last-name": string;
-    description: RichTextField;
-    image: ImageField;
-    email: string;
-  };
-  links: { name: string; link: LinkField }[];
-};
+import { TheAboutMeType } from "@/type/types";
 
 defineProps({
   params: {
@@ -78,8 +67,8 @@ const scrollToTop = () => {
         </NuxtLink>
       </li>
       <li
-        v-for="(link, i) in params.links"
-        :key="Math.floor(Math.random() * (100 + i))"
+        v-for="link in params.links"
+        :key="link.id"
         class="about-me-mobile__links-item"
       >
         <PrismicLink :field="link.link">

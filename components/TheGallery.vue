@@ -71,13 +71,13 @@ useFocusTrap(target, { immediate: true });
     <UIBaseLenis ref="container" class="gallery__project-lenis">
       <div class="gallery__project-images">
         <div
-          v-for="(image, i) in project.images"
-          :key="i"
+          v-for="image in project.images"
+          :key="image.id"
           :data-type="image.type === 'image-duo' ? 'duo' : 'full'"
         >
           <PrismicImage
-            v-for="(field, j) in image.field"
-            :key="j"
+            v-for="field in image.field"
+            :key="image.id + field.url"
             :field="field"
           />
         </div>
