@@ -2,7 +2,7 @@ import { Client } from "@prismicio/client";
 import { PrismicDocument } from "@prismicio/types";
 
 import { useAsyncData } from "#imports";
-import { Project } from "type/types";
+import { ImageType, Project, SkillType } from "type/types";
 
 class ProjectsModule {
   private client: Client;
@@ -55,20 +55,43 @@ class ProjectsModule {
             return null;
           }
 
+          const images = (
+            el.project.data.images as { image: PrismicDocument }[]
+          ).map((img) => {
+            if (
+              img.image.type !== "image-duo" &&
+              img.image.type !== "image-full"
+            ) {
+              throw new Error("Error type image");
+            }
+
+            const result: ImageType = {
+              field: img.image.data,
+              type: img.image.type,
+              id: img.image.id,
+            };
+
+            return result;
+          });
+
+          const skills = (el.project.data.skills as { skill: string }[]).map(
+            (obj) => {
+              const result: SkillType = {
+                name: obj.skill,
+                id: useUID(),
+              };
+
+              return result;
+            }
+          );
+
           const result: Project = {
             id: el.project.id,
             date: el.project.data.date,
-            images: el.project.data.images.map(
-              (img: { image: PrismicDocument }) => {
-                return {
-                  field: img.image.data,
-                  type: img.image.type,
-                };
-              }
-            ),
+            images,
             description: el.project.data.description,
             title: el.project.data.title,
-            skills: el.project.data.skills,
+            skills,
             "image-mobile": el.project.data["image-mobile"],
             url: el.project.data.url ? el.project.data.url : null,
           };

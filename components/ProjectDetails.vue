@@ -60,8 +60,8 @@ useIntersectionObserver(
           </h2>
         </div>
         <div class="project-details__content-tags">
-          <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
-            {{ skill.skill }}
+          <UIBaseTag v-for="skill in project.skills" :key="skill.id">
+            {{ skill.name }}
           </UIBaseTag>
         </div>
         <PrismicRichText
