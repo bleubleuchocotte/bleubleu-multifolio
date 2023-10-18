@@ -10,7 +10,7 @@ export default defineNuxtPlugin(async () => {
     pages: {
       "legal-notices": await new WebsiteModule(client).getPage("legal_notices"),
     },
-    projects: new ProjectsModule(client),
+    projects: await new ProjectsModule(client).getProjects(),
   };
 
   return {

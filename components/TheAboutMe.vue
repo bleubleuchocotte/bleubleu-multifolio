@@ -1,17 +1,5 @@
 <script lang="ts" setup>
-import { LinkField, ImageField, RichTextField } from "@prismicio/types";
-import { PropType } from "nuxt/dist/app/compat/capi";
-
-type TheAboutMeType = {
-  me: {
-    "first-name": string;
-    "last-name": string;
-    description: RichTextField;
-    image: ImageField;
-    email: string;
-  };
-  links: { name: string; link: LinkField }[];
-};
+import { TheAboutMeType } from "@/type/types";
 
 defineProps({
   params: {
@@ -72,8 +60,8 @@ onClickOutside(target, () => {
           </NuxtLink>
         </li>
         <li
-          v-for="(link, i) in params.links"
-          :key="Math.floor(Math.random() * (100 + i))"
+          v-for="link in params.links"
+          :key="link.id"
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">

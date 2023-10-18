@@ -1,38 +1,6 @@
-import { LinkField, ImageField, RichTextField } from "@prismicio/types";
+import { LinkField } from "@prismicio/types";
 import { Client } from "@prismicio/client";
-
-export type WebsiteType = {
-  colors: {
-    "accent-color": string;
-    "background-color": string;
-    "text-color": string;
-    "text-accent-color": string;
-  };
-  header: {
-    text: string;
-  };
-  footer: {
-    links: { name: string; link: LinkField }[];
-  };
-  me: {
-    "first-name": string;
-    "last-name": string;
-    description: RichTextField;
-    image: ImageField;
-    email: string;
-  };
-  seo: {
-    title: string;
-    description: string;
-    favicon: ImageField;
-    og: {
-      url: string;
-      image: ImageField;
-    };
-  };
-
-  "ending-card-image": ImageField;
-};
+import { LinkType, WebsiteType } from "@/type/types";
 
 class WebsiteModule {
   private client: Client;
@@ -49,6 +17,17 @@ class WebsiteModule {
       throw new Error("Prismic document could not be accessed");
     }
 
+    const links = (
+      website.value.data.links as { name: string; link: LinkField }[]
+    ).map((el) => {
+      const result: LinkType = {
+        name: el.name,
+        link: el.link,
+        id: useUID(),
+      };
+      return result;
+    });
+
     const result: WebsiteType = {
       colors: {
         "accent-color": website.value.data["accent-color"] ?? "#000000",
@@ -61,7 +40,7 @@ class WebsiteModule {
         text: website.value.data["text-header"] ?? "Undefined value",
       },
       footer: {
-        links: website.value.data.links,
+        links,
       },
       me: {
         "first-name": website.value.data["first-name"] ?? "Undefined value",
