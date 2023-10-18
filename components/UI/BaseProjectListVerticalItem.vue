@@ -24,7 +24,7 @@ defineProps({
     </h3>
     <div class="project-list-vertical-item__data">
       <p>{{ project.date.slice(0, 4) }}</p>
-      <p>{{ project.skills[0].skill }}</p>
+      <p>{{ project.skills[0].name }}</p>
     </div>
   </div>
 </template>
