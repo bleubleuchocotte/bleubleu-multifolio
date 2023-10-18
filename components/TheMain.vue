@@ -68,7 +68,7 @@ const projectInGallery = ref<Project | null>(null);
     </UIBaseLenis>
 
     <Transition name="slide-fade">
-      <TheGallery
+      <LazyTheGallery
         v-if="projectInGallery != null"
         :project="projectInGallery"
         @close="projectInGallery = null"
