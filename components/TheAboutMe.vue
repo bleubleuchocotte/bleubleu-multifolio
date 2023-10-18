@@ -48,7 +48,7 @@ onClickOutside(target, () => {
   >
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
-        <PrismicImage :field="params.me.image" />
+        <UIBaseImage :field="params.me.image" />
       </div>
       <PrismicRichText
         :field="params.me.description"

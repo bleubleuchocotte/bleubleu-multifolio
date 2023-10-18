@@ -54,7 +54,8 @@ const scrollToTop = () => {
 
     <div class="about-me-mobile__content">
       <PrismicRichText :field="params.me.description" />
-      <PrismicImage
+
+      <UIBaseImage
         :field="params.me.image"
         class="about-me-mobile__content-image"
       />
