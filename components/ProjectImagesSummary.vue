@@ -26,11 +26,10 @@ defineProps({
             !images.some((el) => el.type === 'image-full'),
         }"
       >
-        <PrismicImage
+        <UIBaseImage
           v-for="(field, j) in Object.values(image.field)"
           :key="j"
           :field="field"
-          widths="defaults"
         />
       </div>
     </template>
