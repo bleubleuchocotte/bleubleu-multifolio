@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Images } from "@/type/types";
+import { ImageType } from "@/type/types";
 
 defineProps({
   images: {
-    type: Array<Images>,
+    type: Array<ImageType>,
     required: false,
     default: [],
   },
@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <div class="project-images-summary__grid">
-    <template v-for="(image, i) in images" :key="i">
+    <template v-for="image in images" :key="image.id">
       <div
         class="project-images-summary__grid-item"
         :data-type="image.type"
@@ -27,8 +27,8 @@ defineProps({
         }"
       >
         <PrismicImage
-          v-for="(field, j) in Object.values(image.field)"
-          :key="j"
+          v-for="field in Object.values(image.field)"
+          :key="image.id + field.url"
           :field="field"
           widths="defaults"
         />
@@ -45,7 +45,7 @@ defineProps({
 
     display: flex;
     flex-direction: column;
-    @include gap();
+    @include prop("gap", 0.8);
 
     &-item {
       transition: transform 0.1s ease-out;
@@ -60,7 +60,7 @@ defineProps({
       }
 
       display: flex;
-      @include gap();
+      @include prop("gap", 0.8);
 
       overflow: hidden;
 

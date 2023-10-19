@@ -1,17 +1,5 @@
 <script lang="ts" setup>
-import { LinkField, ImageField, RichTextField } from "@prismicio/types";
-import { PropType } from "nuxt/dist/app/compat/capi";
-
-type TheAboutMeType = {
-  me: {
-    "first-name": string;
-    "last-name": string;
-    description: RichTextField;
-    image: ImageField;
-    email: string;
-  };
-  links: { name: string; link: LinkField }[];
-};
+import { TheAboutMeType } from "@/type/types";
 
 defineProps({
   params: {
@@ -66,14 +54,14 @@ onClickOutside(target, () => {
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
-                arrow: 'var(--background-color)',
+                arrow: 'var(--text-accent-color)',
               }"
             />
           </NuxtLink>
         </li>
         <li
-          v-for="(link, i) in params.links"
-          :key="Math.floor(Math.random() * (100 + i))"
+          v-for="link in params.links"
+          :key="link.id"
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">
@@ -83,7 +71,7 @@ onClickOutside(target, () => {
             <IconBaseArrowLink
               :colors="{
                 background: 'var(--accent-color)',
-                arrow: 'var(--background-color)',
+                arrow: 'var(--text-accent-color)',
               }"
             />
           </PrismicLink>
@@ -104,8 +92,8 @@ onClickOutside(target, () => {
       </h1>
       <div class="section__bookmark-flex">
         <div>
-          <p>contact & more</p>
-          <p>Learn to know me here</p>
+          <p>Explore further</p>
+          <p>Get to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
           <IconBaseArrowShort :fill="'var(--accent-color)'" />
@@ -157,7 +145,7 @@ onClickOutside(target, () => {
       height: 10%;
       width: 100%;
       z-index: 0;
-      border: 1px solid var(--background-color);
+      border: 1px solid var(--text-accent-color);
 
       @include prop("margin-bottom");
       @include font("h2");
@@ -182,7 +170,7 @@ onClickOutside(target, () => {
     &-links {
       &-item {
         &:not(:last-of-type) {
-          border-bottom: 1px solid var(--background-color);
+          border-bottom: 1px solid var(--text-accent-color);
         }
         @include prop("padding-block", 0.25);
 
@@ -242,7 +230,7 @@ onClickOutside(target, () => {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: var(--background-color);
+      background-color: var(--text-accent-color);
 
       transform: rotate(180deg);
     }
