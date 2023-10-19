@@ -19,11 +19,10 @@ const isLoading = ref(true);
 <template>
   <div class="image">
     <UIBaseImageSkeleton v-if="isLoading" />
-    <img
+    <NuxtImg
       v-show="!isLoading"
       :src="src ?? ''"
       :alt="alt"
-      :srcset="srcset ?? ''"
       @load="isLoading = false"
     />
   </div>
