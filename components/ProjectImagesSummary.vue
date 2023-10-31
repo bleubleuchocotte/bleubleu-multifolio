@@ -16,15 +16,6 @@ defineProps({
       <div
         class="project-images-summary__grid-item"
         :data-type="image.type"
-        :class="{
-          'h-65': image.type === 'image-full',
-          'h-35':
-            image.type === 'image-duo' &&
-            images.some((el) => el.type === 'image-full'),
-          'h-50':
-            image.type === 'image-duo' &&
-            !images.some((el) => el.type === 'image-full'),
-        }"
       >
         <PrismicImage
           v-for="field in Object.values(image.field)"
@@ -58,6 +49,18 @@ defineProps({
         transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
           skewX(calc(var(--v) * -0.02deg));
       }
+      
+      &[data-type="image-full"] {
+        & > img {
+          aspect-ratio: 16/9;
+
+        }
+      }
+      &[data-type="image-duo"] {
+        & > img {
+          aspect-ratio: 1;
+        }
+      }
 
       display: flex;
       @include prop("gap", 0.8);
@@ -66,20 +69,8 @@ defineProps({
 
       & > img {
         @include border-radius();
-      }
-
-      &.h-35 {
-        height: 35%;
-      }
-      &.h-50 {
-        height: 50%;
-
-        & > img {
-          min-width: 0;
-        }
-      }
-      &.h-65 {
-        height: 65%;
+        width: 100%;
+        height: auto;
       }
     }
   }
