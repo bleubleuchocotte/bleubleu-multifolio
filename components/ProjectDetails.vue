@@ -126,7 +126,7 @@ useIntersectionObserver(
   }
 
   &__right {
-    min-width: 800px;
+    min-width: 88vh;
     @include prop('padding-inline')
   }
 
