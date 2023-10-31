@@ -69,7 +69,7 @@ defineProps({
 
       & > img {
         @include border-radius();
-        width: 100%;
+        min-width: 0;
         height: auto;
       }
     }
