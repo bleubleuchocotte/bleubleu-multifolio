@@ -19,8 +19,8 @@ defineEmits<{ (e: "goToStart"): void }>();
   <article class="ending-card invert-selection">
     <div class="ending-card__content">
       <p class="ending-card__content-caption">
-        You reached the end of the shortlist,<br />
-        feel free to contact me!
+        Finished viewing?<br />
+        Reach out for collaborations or inquiries!
       </p>
       <PrismicImage
         class="ending-card__content-image"
@@ -33,7 +33,7 @@ defineEmits<{ (e: "goToStart"): void }>();
         <UIBaseButtonNavigation
           class="ending-card__content-arrow"
           :colors="{
-            background: 'var(--background-color)',
+            background: 'var(--text-accent-color)',
             arrow: 'var(--accent-color)',
           }"
           :orientation="'left'"
@@ -66,7 +66,7 @@ defineEmits<{ (e: "goToStart"): void }>();
     @include padding(0.5);
     @include gap();
 
-    color: var(--background-color);
+    color: var(--text-accent-color);
 
     background-color: var(--accent-color);
     border: 0 solid var(--accent-color);
@@ -82,7 +82,7 @@ defineEmits<{ (e: "goToStart"): void }>();
       height: 18%;
       width: 100%;
       z-index: 0;
-      border: 1px solid var(--background-color);
+      border: 1px solid var(--text-accent-color);
 
       @include font("h2");
 

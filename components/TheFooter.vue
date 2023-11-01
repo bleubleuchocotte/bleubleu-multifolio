@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { LinkField } from "@prismicio/types";
+import { LinkType } from "@/type/types";
+
 defineProps({
   links: {
-    type: Array<{ name: string; link: LinkField }>,
+    type: Array<LinkType>,
     required: true,
   },
 });
@@ -17,7 +18,7 @@ defineProps({
           target="_blank"
           class="footer__left-link"
         >
-          Made with love with bleubleu
+          Lovingly made with bleubleu
           <IconBaseArrowLink
             :colors="{
               background: 'transparent',
@@ -28,8 +29,8 @@ defineProps({
       </div>
       <div class="footer__right">
         <PrismicLink
-          v-for="(link, i) in links"
-          :key="i"
+          v-for="link in links"
+          :key="link.id"
           class="footer__right-link"
           :field="link.link"
         >

@@ -1,19 +1,57 @@
 <script setup lang="ts">
 import { Project } from "~/type/types";
 
-defineProps({
+const props = defineProps({
   projects: {
     type: Array<Project>,
     required: true,
   },
 });
 
-defineEmits<{
+const emits = defineEmits<{
   (e: "target", payload: string): void;
   (e: "targetThenScroll", payload: string): void;
   (e: "gallery", payload: Project): void;
   (e: "goToEnd"): void;
+  (e: "goToStart"): void;
 }>();
+
+onMounted(() => {
+  useEventListener(document, "keydown", (e) => {
+    if (
+      (e.code === "ArrowLeft" || e.key === "q") &&
+      currentProjectIndex.value > 0
+    ) {
+      emits(
+        "targetThenScroll",
+        props.projects[currentProjectIndex.value - 1].id
+      );
+    } else if (
+      (e.code === "ArrowRight" || e.key === "d") &&
+      currentProjectIndex.value < props.projects.length - 1
+    ) {
+      emits(
+        "targetThenScroll",
+        props.projects[currentProjectIndex.value + 1].id
+      );
+    } else if (
+      (e.code === "ArrowRight" || e.key === "d") &&
+      currentProjectIndex.value === props.projects.length - 1
+    ) {
+      emits("goToEnd");
+      currentProjectIndex.value += 1;
+    } else if (e.key === "r") {
+      emits("goToStart");
+    }
+  });
+});
+
+const currentProjectIndex = ref(0);
+
+const onTarget = (id: string, index: number) => {
+  emits("target", id);
+  currentProjectIndex.value = index;
+};
 </script>
 
 <template>
@@ -22,7 +60,7 @@ defineEmits<{
     :key="project.id"
     :project="project"
     :index="i"
-    @target="(id: string) => $emit('target', id)"
+    @target="(id: string) => onTarget(id, i)"
     @previous="i > 0 ? $emit('targetThenScroll', projects[i - 1].id) : null"
     @next="
       i < projects.length - 1

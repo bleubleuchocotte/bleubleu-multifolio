@@ -100,7 +100,7 @@
     left: 0;
     top: 0;
 
-    background-color: var(--background-color);
+    background-color: var(--text-accent-color);
     color: var(--accent-color);
     @include border(0.5, var(--accent-color));
   }
