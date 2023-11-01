@@ -18,7 +18,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
         class="legal-container__bands"
       >
         <div
-          v-for="j in 5"
+          v-for="j in 6"
           :key="Math.floor(Math.random() * (100 + j))"
           class="legal-container__bands-notices"
           :aria-hidden="!(j === 1 && i === 1)"
@@ -39,12 +39,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
           </template>
 
           <h2>Website Host:</h2>
-          <p>Host name: {{ page.host["name"] }}</p>
-          <p>Host address: {{ page.host["address"] }}</p>
-          <p></p>
-          <p>Host phone: {{ page.host["phone"] }}</p>
-
-          <h2>BleuBleu Chocotte:</h2>
           <p>Host name: {{ page.host["name"] }}</p>
           <p>Host address: {{ page.host["address"] }}</p>
           <p></p>
@@ -71,12 +65,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
         </template>
 
         <h2>Website Host:</h2>
-        <p>Host name: {{ page.host["name"] }}</p>
-        <p>Host address: {{ page.host["address"] }}</p>
-        <p></p>
-        <p>Host phone: {{ page.host["phone"] }}</p>
-
-        <h2>BleuBleu Chocotte:</h2>
         <p>Host name: {{ page.host["name"] }}</p>
         <p>Host address: {{ page.host["address"] }}</p>
         <p></p>

@@ -45,8 +45,8 @@ defineProps({
     </template>
 
     <div class="project-details-mobile__content-tags">
-      <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
-        {{ skill.skill }}
+      <UIBaseTag v-for="skill in project.skills" :key="skill.id">
+        {{ skill.name }}
       </UIBaseTag>
     </div>
 
@@ -57,7 +57,7 @@ defineProps({
     />
 
     <PrismicRichText
-      :field="project['long-description']"
+      :field="project['description']"
       class="project-details-mobile__content-description"
     />
   </article>

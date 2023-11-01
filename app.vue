@@ -78,7 +78,7 @@ const showContent = ref(false);
   >
     <TheLoader
       v-if="isLoading"
-      :text="'Thomas Auffroy'"
+      :text="`${website.me['first-name']} ${website.me['last-name']}`"
       :colors="{
         start: website.colors['text-color'],
         end: website.colors['accent-color'],
