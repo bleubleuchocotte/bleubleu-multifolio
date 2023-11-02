@@ -7,14 +7,6 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  document.addEventListener("mousemove", callback);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("mousemove", callback);
-});
-
 const callback = (e: MouseEvent) => {
   x.value = e.clientX;
   y.value = e.clientY;
@@ -65,6 +57,8 @@ function hasParentWithClass(
 
   return false;
 }
+
+useEventListener(document, "mousemove", callback);
 
 const x = ref(0);
 const y = ref(0);
