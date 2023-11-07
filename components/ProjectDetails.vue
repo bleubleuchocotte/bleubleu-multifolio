@@ -69,7 +69,7 @@ useIntersectionObserver(
           class="project-details__content-description"
         />
       </div>
-
+      <MediaPlayer class="project-details__player" />
       <div class="project-details__utils">
         <span class="project-details__utils-index">
           <UIBaseIndex :index="index + 1" />
