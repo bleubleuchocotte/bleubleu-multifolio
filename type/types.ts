@@ -94,4 +94,5 @@ export type CursorIconType =
   | "IconFullscreen"
   | "IconArrowRightUp"
   | "IconBaseToward"
+  | "IconBaseTowardReverse"
   | null;

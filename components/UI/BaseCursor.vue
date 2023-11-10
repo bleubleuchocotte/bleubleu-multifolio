@@ -48,6 +48,10 @@ function typeDataIconAttribute(str: string | null): CursorIconType {
       return "IconFullscreen";
     case "IconArrowRightUp":
       return "IconArrowRightUp";
+    case "IconBaseToward":
+      return "IconBaseToward";
+    case "IconBaseTowardReverse":
+      return "IconBaseTowardReverse";
 
     default:
       return null;
@@ -120,8 +124,6 @@ const icon = ref<CursorIconType>(null);
 const size = computed(() => isExpand.value ? props.size * 2 : props.size)
 
 watch([x, y], () => {
-  console.log(size.value);
-
   useAnimate(
     container,
     {

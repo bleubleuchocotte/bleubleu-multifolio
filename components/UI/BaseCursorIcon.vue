@@ -4,6 +4,7 @@ import IconArrowLeft from "@/components/Icon/BaseArrowLeft.vue";
 import IconFullscreen from "@/components/Icon/BaseFullscreen.vue";
 import IconBaseArrowRightUp from "@/components/Icon/BaseArrowRightUp.vue";
 import IconBaseToward from "@/components/Icon/BaseToward.vue";
+import IconBaseTowardReverse from "@/components/Icon/BaseTowardReverse.vue";
 import { CursorIconType } from "type/types";
 
 const props = defineProps({
@@ -26,6 +27,8 @@ const icon = computed(() => {
       return IconBaseArrowRightUp;
     case "IconBaseToward":
       return IconBaseToward;
+    case "IconBaseTowardReverse":
+      return IconBaseTowardReverse;
 
     default:
       return null;
