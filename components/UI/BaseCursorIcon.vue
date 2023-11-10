@@ -3,6 +3,7 @@ import IconArrowRight from "@/components/Icon/BaseArrowRight.vue";
 import IconArrowLeft from "@/components/Icon/BaseArrowLeft.vue";
 import IconFullscreen from "@/components/Icon/BaseFullscreen.vue";
 import IconBaseArrowRightUp from "@/components/Icon/BaseArrowRightUp.vue";
+import IconBaseToward from "@/components/Icon/BaseToward.vue";
 import { CursorIconType } from "type/types";
 
 const props = defineProps({
@@ -14,8 +15,6 @@ const props = defineProps({
 });
 
 const icon = computed(() => {
-  console.log(props.icon);
-
   switch (props.icon) {
     case "IconArrowLeft":
       return IconArrowLeft;
@@ -25,6 +24,8 @@ const icon = computed(() => {
       return IconFullscreen;
     case "IconArrowRightUp":
       return IconBaseArrowRightUp;
+    case "IconBaseToward":
+      return IconBaseToward;
 
     default:
       return null;
@@ -39,6 +40,5 @@ const icon = computed(() => {
 <style scoped lang="scss">
 .cursor-icon {
   color: var(--background-color);
-  width: 50%;
 }
 </style>
