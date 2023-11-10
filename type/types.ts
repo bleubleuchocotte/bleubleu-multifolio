@@ -87,3 +87,12 @@ export type ColorArrow = {
   arrow: string;
   border?: string;
 };
+
+export type CursorIconType =
+  | "IconArrowRight"
+  | "IconArrowLeft"
+  | "IconFullscreen"
+  | "IconArrowRightUp"
+  | "IconBaseToward"
+  | "IconBaseTowardReverse"
+  | null;

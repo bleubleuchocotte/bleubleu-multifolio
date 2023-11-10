@@ -29,64 +29,40 @@ onClickOutside(target, () => {
 </script>
 
 <template>
-  <section
-    ref="target"
-    class="section invert-selection"
-    :class="{ open: isOpen }"
-  >
+  <section ref="target" class="section invert-selection" :class="{ open: isOpen }">
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
         <PrismicImage :field="params.me.image" />
       </div>
-      <PrismicRichText
-        :field="params.me.description"
-        class="section__content-text"
-      />
-      <UIBaseButtonContact
-        :email="params.me.email"
-        class="section__content-contact"
-        >Contact
+      <PrismicRichText :field="params.me.description" class="section__content-text" />
+      <UIBaseButtonContact :email="params.me.email" class="section__content-contact">Contact
       </UIBaseButtonContact>
       <ul class="section__content-links">
         <li class="section__content-links-item">
           <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
             <span> Bleubleu.studio </span>
-            <IconBaseArrowLink
-              :colors="{
-                background: 'var(--accent-color)',
-                arrow: 'var(--text-accent-color)',
-              }"
-            />
+            <IconBaseArrowLink :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--text-accent-color)',
+            }" />
           </NuxtLink>
         </li>
-        <li
-          v-for="link in params.links"
-          :key="link.id"
-          class="section__content-links-item"
-        >
+        <li v-for="link in params.links" :key="link.id" class="section__content-links-item">
           <PrismicLink :field="link.link">
             <span>
               {{ link.name }}
             </span>
-            <IconBaseArrowLink
-              :colors="{
-                background: 'var(--accent-color)',
-                arrow: 'var(--text-accent-color)',
-              }"
-            />
+            <IconBaseArrowLink :colors="{
+              background: 'var(--accent-color)',
+              arrow: 'var(--text-accent-color)',
+            }" />
           </PrismicLink>
         </li>
       </ul>
     </UIBaseLenis>
-    <div
-      class="section__bookmark"
-      tabindex="0"
-      aria-disabled="false"
-      role="button"
-      @click="isOpen = !isOpen"
-      @keydown.enter="isOpen = !isOpen"
-      @keydown.space.prevent="isOpen = !isOpen"
-    >
+    <div class="section__bookmark" tabindex="0" aria-disabled="false" role="button"
+      :data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'" @click="isOpen = !isOpen"
+      @keydown.enter="isOpen = !isOpen" @keydown.space.prevent="isOpen = !isOpen">
       <h1 class="section__bookmark-heading">
         {{ params.me["first-name"] }} {{ params.me["last-name"] }}
       </h1>
@@ -96,7 +72,7 @@ onClickOutside(target, () => {
           <p>Get to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
-          <IconBaseArrowShort :fill="'var(--accent-color)'" />
+          <IconBaseToward />
         </div>
       </div>
     </div>
@@ -107,6 +83,7 @@ onClickOutside(target, () => {
 .section {
   transition: transform 0.3s ease-out;
   transform: translate(calc($bookmark-width - 30vw));
+
   &.open {
     transform: translate(0);
 
@@ -114,6 +91,7 @@ onClickOutside(target, () => {
       transform: rotate(0);
     }
   }
+
   display: flex;
 
   position: absolute;
@@ -133,7 +111,7 @@ onClickOutside(target, () => {
 
     border-right: 1px solid var(--text-accent-color);
 
-    & > p {
+    &>p {
       @include font("h2");
     }
 
@@ -158,9 +136,7 @@ onClickOutside(target, () => {
 
     &-image {
       overflow: hidden;
-      aspect-ratio: calc(
-        16 / 9
-      ); // Permet d'avoir le même ration que l'image prismic
+      aspect-ratio: calc(16 / 9); // Permet d'avoir le même ration que l'image prismic
       @include prop("margin-bottom");
 
       border: 1px solid var(--text-accent-color);
@@ -172,9 +148,10 @@ onClickOutside(target, () => {
         &:not(:last-of-type) {
           border-bottom: 1px solid var(--text-accent-color);
         }
+
         @include prop("padding-block", 0.25);
 
-        & > a {
+        &>a {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -203,7 +180,7 @@ onClickOutside(target, () => {
 
     min-width: $bookmark-width;
 
-    & > * {
+    &>* {
       pointer-events: none;
     }
 
@@ -232,6 +209,7 @@ onClickOutside(target, () => {
       border-radius: 50%;
       background-color: var(--text-accent-color);
 
+      color: var(--accent-color);
       transform: rotate(180deg);
     }
   }

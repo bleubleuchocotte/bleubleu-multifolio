@@ -3,7 +3,7 @@ defineProps({
   fill: {
     type: String,
     required: false,
-    default: undefined,
+    default: "currentColor",
   },
 });
 </script>
