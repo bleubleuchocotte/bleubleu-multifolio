@@ -121,7 +121,7 @@ const isVisible = ref(false);
 const container = ref();
 const icon = ref<CursorIconType>(null);
 
-const size = computed(() => isExpand.value ? props.size * 2 : props.size)
+const size = computed(() => isExpand.value && icon.value ? props.size * 2 : props.size)
 
 watch([x, y], () => {
   useAnimate(
