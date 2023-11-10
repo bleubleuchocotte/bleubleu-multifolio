@@ -43,6 +43,7 @@ useIntersectionObserver(
           v-if="project.url"
           class="project-details__content-heading"
           :field="project.url"
+          data-icon="IconArrowRightUp"
         >
           <h2 class="project-details__content-heading-title">
             {{ project.title }}
@@ -100,6 +101,7 @@ useIntersectionObserver(
         :images="project.images.slice(0, 2)"
         role="button"
         aria-label="View project images"
+        data-icon="IconFullscreen"
         tabindex="0"
         @click="$emit('gallery', project)"
         @keydown.enter.space="$emit('gallery', project)"
@@ -127,7 +129,7 @@ useIntersectionObserver(
 
   &__right {
     min-width: 88vh;
-    @include prop('padding-inline')
+    @include prop("padding-inline");
   }
 
   &__content {

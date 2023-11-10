@@ -27,6 +27,7 @@ defineProps({
     :aria-label="
       orientation === 'left' ? 'Go to previous project' : 'Go to next project'
     "
+    :data-icon="orientation === 'left' ? 'IconArrowLeft' : 'IconArrowRight'"
   >
     <UIWrapperArrow :colors="colors" :length-arrow="lengthArrow" />
   </button>
