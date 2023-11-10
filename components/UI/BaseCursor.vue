@@ -29,7 +29,6 @@ const callback = (e: MouseEvent) => {
     isExpand.value = true;
 
     icon.value = typeDataIconAttribute(getParentDataIcon(e.target, 5));
-    console.log(icon.value);
   } else {
     isExpand.value = false;
   }
@@ -118,13 +117,16 @@ const isVisible = ref(false);
 const container = ref();
 const icon = ref<CursorIconType>(null);
 
+const size = computed(() => isExpand.value ? props.size * 2 : props.size)
+
 watch([x, y], () => {
+  console.log(size.value);
+
   useAnimate(
     container,
     {
-      transform: `translate3d(${x.value - props.size / 2}px, ${
-        y.value - props.size / 2
-      }px, 0)`,
+      transform: `translate3d(${x.value - size.value / 2}px, ${y.value - size.value / 2
+        }px, 0)`,
     },
     {
       duration: 800,
@@ -140,13 +142,9 @@ watchOnce([x, y], () => {
 </script>
 
 <template>
-  <div class="cursor__container" :class="{ 'is-visible': isVisible }">
+  <div class="cursor" :class="{ 'is-visible': isVisible }">
     <div ref="container">
-      <div
-        class="cursor__shape"
-        :class="{ expand: isExpand, invert: isInvert }"
-        :style="{ '--size': `${props.size}px` }"
-      >
+      <div class="cursor__shape" :class="{ expand: isExpand, invert: isInvert }" :style="{ '--size': `${size}px` }">
         <UIBaseCursorIcon v-show="isExpand" :icon="icon" />
       </div>
     </div>
@@ -155,24 +153,23 @@ watchOnce([x, y], () => {
 
 <style scoped lang="scss">
 .cursor {
-  &__container {
-    opacity: 0;
-    &.is-visible {
-      opacity: 1;
-    }
+  opacity: 0;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-
-    height: 100vh;
-    width: 100vw;
-
-    pointer-events: none;
-
-    overflow: hidden;
+  &.is-visible {
+    opacity: 1;
   }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  height: 100vh;
+  width: 100vw;
+
+  pointer-events: none;
+
+  overflow: hidden;
 
   &__shape {
     display: flex;
@@ -181,17 +178,18 @@ watchOnce([x, y], () => {
 
     transition: all 0.2s ease-out;
     height: var(--size);
-    width: var(--size);
+    aspect-ratio: 1;
 
     border: 1px solid var(--accent-color);
+
     &.invert {
       border: 1px solid var(--background-color);
     }
+
     border-radius: 50%;
 
     &.expand {
       border: 1px solid var(--background-color);
-      transform: scale(2);
       background-color: var(--accent-color);
     }
   }
