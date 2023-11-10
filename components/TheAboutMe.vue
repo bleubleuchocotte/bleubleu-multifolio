@@ -83,6 +83,7 @@ onClickOutside(target, () => {
       tabindex="0"
       aria-disabled="false"
       role="button"
+      data-icon="IconArrowRight"
       @click="isOpen = !isOpen"
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"

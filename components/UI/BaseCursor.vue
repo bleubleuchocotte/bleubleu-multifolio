@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import { CursorIconType } from "type/types";
+
 const props = defineProps({
   size: {
     type: Number,
     required: false,
-    default: 50,
+    default: 30,
   },
 });
 
@@ -25,11 +27,59 @@ const callback = (e: MouseEvent) => {
       e.target.attributes.getNamedItem("role")?.value === "button")
   ) {
     isExpand.value = true;
+
+    icon.value = typeDataIconAttribute(getParentDataIcon(e.target, 5));
+    console.log(icon.value);
   } else {
     isExpand.value = false;
   }
 };
 
+function typeDataIconAttribute(str: string | null): CursorIconType {
+  if (!str) {
+    return null;
+  }
+
+  switch (str) {
+    case "IconArrowRight":
+      return "IconArrowRight";
+    case "IconArrowLeft":
+      return "IconArrowLeft";
+    case "IconFullscreen":
+      return "IconFullscreen";
+    case "IconArrowRightUp":
+      return "IconArrowRightUp";
+
+    default:
+      return null;
+  }
+}
+
+function getParentDataIcon(element: HTMLElement, depth: number) {
+  const attr = element.attributes.getNamedItem("data-icon");
+  if (attr?.value) {
+    return attr.value;
+  }
+
+  let parent = element.parentElement;
+  let counter = 0;
+
+  if (parent === null) {
+    return null;
+  }
+
+  while (parent && counter < depth) {
+    counter += 1;
+
+    const attr = element.attributes.getNamedItem("data-icon");
+    if (attr?.value) {
+      return attr.value;
+    }
+    parent = parent.parentElement;
+  }
+
+  return null;
+}
 function hasParentWithClass(
   element: HTMLElement,
   className: string,
@@ -66,8 +116,9 @@ const isInvert = ref(false);
 const isExpand = ref(false);
 const isVisible = ref(false);
 const container = ref();
+const icon = ref<CursorIconType>(null);
 
-watch([x, y], () =>
+watch([x, y], () => {
   useAnimate(
     container,
     {
@@ -80,8 +131,9 @@ watch([x, y], () =>
       fill: "forwards",
       easing: "ease-out",
     }
-  )
-);
+  );
+});
+
 watchOnce([x, y], () => {
   isVisible.value = true;
 });
@@ -94,7 +146,9 @@ watchOnce([x, y], () => {
         class="cursor__shape"
         :class="{ expand: isExpand, invert: isInvert }"
         :style="{ '--size': `${props.size}px` }"
-      ></div>
+      >
+        <UIBaseCursorIcon v-show="isExpand" :icon="icon" />
+      </div>
     </div>
   </div>
 </template>
@@ -121,6 +175,10 @@ watchOnce([x, y], () => {
   }
 
   &__shape {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     transition: all 0.2s ease-out;
     height: var(--size);
     width: var(--size);
@@ -133,10 +191,8 @@ watchOnce([x, y], () => {
 
     &.expand {
       border: 1px solid var(--background-color);
-      transform: scale(1.75);
-      backdrop-filter: invert(1) grayscale(1);
-
-      box-shadow: 0px 0px 30px 0px var(--accent-color-80);
+      transform: scale(2);
+      background-color: var(--accent-color);
     }
   }
 }
