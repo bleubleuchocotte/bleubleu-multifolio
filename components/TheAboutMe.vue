@@ -32,7 +32,7 @@ onClickOutside(target, () => {
   <section ref="target" class="section invert-selection" :class="{ open: isOpen }">
     <UIBaseLenis class="section__content">
       <div class="section__content-image">
-        <UIBaseImage :field="params.me.image" />
+        <PrismicImage :field="params.me.image" />
       </div>
       <PrismicRichText :field="params.me.description" class="section__content-text" />
       <UIBaseButtonContact :email="params.me.email" class="section__content-contact">Contact

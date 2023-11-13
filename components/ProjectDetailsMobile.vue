@@ -50,7 +50,7 @@ defineProps({
       </UIBaseTag>
     </div>
 
-    <UIBaseImage
+    <PrismicImage
       v-if="project['image-mobile']"
       :field="project['image-mobile']"
       class="project-details-mobile__image"

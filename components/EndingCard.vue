@@ -22,10 +22,9 @@ defineEmits<{ (e: "goToStart"): void }>();
         Finished viewing?<br />
         Reach out for collaborations or inquiries!
       </p>
-
-      <UIBaseImage
-        :field="endingCardImage"
+      <PrismicImage
         class="ending-card__content-image"
+        :field="endingCardImage"
       />
       <div class="ending-card__content-start-button">
         <button type="button" @click="$emit('goToStart')">

@@ -17,10 +17,11 @@ defineProps({
         class="project-images-summary__grid-item"
         :data-type="image.type"
       >
-        <UIBaseImage
-          v-for="(field) in Object.values(image.field)"
+        <PrismicImage
+          v-for="field in Object.values(image.field)"
           :key="image.id + field.url"
           :field="field"
+          widths="defaults"
         />
       </div>
     </template>
