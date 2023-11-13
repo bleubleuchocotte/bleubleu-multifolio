@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
+import BaseImage from "./UI/BaseImage.vue";
 import { Project } from "~/type/types";
 
 defineProps({
@@ -75,8 +76,8 @@ useFocusTrap(target, { immediate: true });
           :key="image.id"
           :data-type="image.type === 'image-duo' ? 'duo' : 'full'"
         >
-          <PrismicImage
-            v-for="field in image.field"
+          <BaseImage
+            v-for="(field, j) in image.field"
             :key="image.id + field.url"
             :field="field"
           />
