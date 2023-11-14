@@ -16,7 +16,6 @@ const callback = (e: MouseEvent) => {
   delta.x = e.movementX;
   delta.y = e.movementY;
 
-
   isInvert.value = hasParentWithClass(
     e.target as HTMLElement,
     "invert-selection",
@@ -121,8 +120,8 @@ const x = ref(0);
 const y = ref(0);
 const delta = reactive({
   x: 0,
-  y: 0
-})
+  y: 0,
+});
 const isInvert = ref(false);
 const isExpand = ref(false);
 const isVisible = ref(false);
@@ -130,14 +129,17 @@ const container = ref();
 const containerIcon = ref();
 const icon = ref<CursorIconType>(null);
 
-const size = computed(() => isExpand.value && icon.value ? props.size * 2 : props.size)
+const size = computed(() =>
+  isExpand.value && icon.value ? props.size * 2 : props.size
+);
 
 watch([x, y], () => {
   useAnimate(
     container,
     {
-      transform: `translate3d(${x.value - size.value / 2}px, ${y.value - size.value / 2
-        }px, 0)`,
+      transform: `translate3d(${x.value - size.value / 2}px, ${
+        y.value - size.value / 2
+      }px, 0)`,
     },
     {
       duration: 800,
@@ -169,8 +171,12 @@ watchOnce([x, y], () => {
 <template>
   <div class="cursor" :class="{ 'is-visible': isVisible }">
     <div ref="container">
-      <div class="cursor__shape" :class="{ expand: isExpand, invert: isInvert }" :style="{ '--size': `${size}px` }">
-        <UIBaseCursorIcon v-show="isExpand" :icon="icon" ref="containerIcon" />
+      <div
+        class="cursor__shape"
+        :class="{ expand: isExpand, invert: isInvert }"
+        :style="{ '--size': `${size}px` }"
+      >
+        <UIBaseCursorIcon v-show="isExpand" ref="containerIcon" :icon="icon" />
       </div>
     </div>
   </div>
