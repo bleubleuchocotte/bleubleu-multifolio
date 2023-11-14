@@ -83,6 +83,7 @@ onClickOutside(target, () => {
       tabindex="0"
       aria-disabled="false"
       role="button"
+      :data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'"
       @click="isOpen = !isOpen"
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
@@ -96,7 +97,7 @@ onClickOutside(target, () => {
           <p>Get to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
-          <IconBaseArrowShort :fill="'var(--accent-color)'" />
+          <IconBaseToward />
         </div>
       </div>
     </div>
@@ -107,6 +108,7 @@ onClickOutside(target, () => {
 .section {
   transition: transform 0.3s ease-out;
   transform: translate(calc($bookmark-width - 30vw));
+
   &.open {
     transform: translate(0);
 
@@ -114,6 +116,7 @@ onClickOutside(target, () => {
       transform: rotate(0);
     }
   }
+
   display: flex;
 
   position: absolute;
@@ -172,6 +175,7 @@ onClickOutside(target, () => {
         &:not(:last-of-type) {
           border-bottom: 1px solid var(--text-accent-color);
         }
+
         @include prop("padding-block", 0.25);
 
         & > a {
@@ -232,6 +236,7 @@ onClickOutside(target, () => {
       border-radius: 50%;
       background-color: var(--text-accent-color);
 
+      color: var(--accent-color);
       transform: rotate(180deg);
     }
   }

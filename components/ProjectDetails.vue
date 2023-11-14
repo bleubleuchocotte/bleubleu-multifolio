@@ -38,11 +38,12 @@ useIntersectionObserver(
   <article ref="target" class="project-details" :data-project-h-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
-        <p>More info</p>
+        <p>Project #{{index + 1}}</p>
         <PrismicLink
           v-if="project.url"
           class="project-details__content-heading"
           :field="project.url"
+          data-icon="IconArrowRightUp"
         >
           <h2 class="project-details__content-heading-title">
             {{ project.title }}
@@ -68,6 +69,9 @@ useIntersectionObserver(
           :field="project['description']"
           class="project-details__content-description"
         />
+        <button data-icon="IconFullscreen" class="project-details__content-more" @click="$emit('gallery', project)" @keydown.enter.space="$emit('gallery', project)">
+          More infos
+        </button>
       </div>
 
       <div class="project-details__utils">
@@ -100,6 +104,7 @@ useIntersectionObserver(
         :images="project.images.slice(0, 2)"
         role="button"
         aria-label="View project images"
+        data-icon="IconFullscreen"
         tabindex="0"
         @click="$emit('gallery', project)"
         @keydown.enter.space="$emit('gallery', project)"
@@ -122,12 +127,12 @@ useIntersectionObserver(
     flex-direction: column;
     justify-content: space-between;
 
-    min-width: 600px;
+    min-width: 500px;
   }
 
   &__right {
     min-width: 88vh;
-    @include prop('padding-inline')
+    @include prop("padding-inline");
   }
 
   &__content {
@@ -155,6 +160,13 @@ useIntersectionObserver(
 
     &-description {
       @include font("p");
+
+      @include line-clamp(3);
+    }
+
+    &-more {
+      color: var(--accent-color);
+      text-decoration: underline;
     }
   }
 
