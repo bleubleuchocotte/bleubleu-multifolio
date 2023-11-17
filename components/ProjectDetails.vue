@@ -38,11 +38,12 @@ useIntersectionObserver(
   <article ref="target" class="project-details" :data-project-h-id="project.id">
     <div class="project-details__left">
       <div class="project-details__content">
-        <p>More info</p>
+        <p>Project #{{index + 1}}</p>
         <PrismicLink
           v-if="project.url"
           class="project-details__content-heading"
           :field="project.url"
+          data-icon="IconArrowRightUp"
         >
           <h2 class="project-details__content-heading-title">
             {{ project.title }}
@@ -60,14 +61,17 @@ useIntersectionObserver(
           </h2>
         </div>
         <div class="project-details__content-tags">
-          <UIBaseTag v-for="(skill, i) in project.skills" :key="i">
-            {{ skill.skill }}
+          <UIBaseTag v-for="skill in project.skills" :key="skill.id">
+            {{ skill.name }}
           </UIBaseTag>
         </div>
         <PrismicRichText
           :field="project['description']"
           class="project-details__content-description"
         />
+        <button data-icon="IconFullscreen" class="project-details__content-more" @click="$emit('gallery', project)" @keydown.enter.space="$emit('gallery', project)">
+          More infos
+        </button>
       </div>
       <MediaPlayer class="project-details__player" />
       <div class="project-details__utils">
@@ -100,6 +104,7 @@ useIntersectionObserver(
         :images="project.images.slice(0, 2)"
         role="button"
         aria-label="View project images"
+        data-icon="IconFullscreen"
         tabindex="0"
         @click="$emit('gallery', project)"
         @keydown.enter.space="$emit('gallery', project)"
@@ -112,37 +117,22 @@ useIntersectionObserver(
 .project-details {
   display: flex;
   @include gap();
-  min-width: 100vw;
-
-  @media #{$desktop-down} {
-    min-width: initial;
-    flex-direction: column;
-    @include prop("padding-bottom");
-
-    border-bottom: 1px solid var(--border-color);
-  }
 
   height: 100%;
 
   @include prop("padding-left");
 
   &__left {
-    @include left;
-    @include prop("padding-inline", 0);
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    @media #{$desktop-down} {
-      flex-direction: column-reverse;
-    }
+    min-width: 500px;
   }
+
   &__right {
-    @include right;
-    @media #{$desktop-down} {
-      padding-inline: 0;
-    }
+    min-width: 80vh;
+    @include prop("padding-inline");
   }
 
   &__content {
@@ -170,6 +160,13 @@ useIntersectionObserver(
 
     &-description {
       @include font("p");
+
+      @include line-clamp(3);
+    }
+
+    &-more {
+      color: var(--accent-color);
+      text-decoration: underline;
     }
   }
 
@@ -177,9 +174,6 @@ useIntersectionObserver(
     display: flex;
     @media #{$desktop} {
       flex-direction: column;
-    }
-    @media #{$desktop-down} {
-      justify-content: space-between;
     }
     @include gap(0.5);
 
@@ -192,14 +186,6 @@ useIntersectionObserver(
     &-button {
       display: flex;
       @include gap(0.5);
-      @media #{$desktop-down} {
-        align-items: center;
-        gap: $base-length;
-
-        & > button {
-          rotate: 90deg;
-        }
-      }
     }
   }
 }

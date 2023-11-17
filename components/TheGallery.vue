@@ -69,15 +69,19 @@ useFocusTrap(target, { immediate: true });
       </button>
     </div>
     <UIBaseLenis ref="container" class="gallery__project-lenis">
+      <PrismicRichText
+        :field="project['description']"
+        class="gallery__project-description" />
+
       <div class="gallery__project-images">
         <div
-          v-for="(image, i) in project.images"
-          :key="i"
+          v-for="image in project.images"
+          :key="image.id"
           :data-type="image.type === 'image-duo' ? 'duo' : 'full'"
         >
           <PrismicImage
-            v-for="(field, j) in image.field"
-            :key="j"
+            v-for="field in image.field"
+            :key="image.id + field.url"
             :field="field"
           />
         </div>
@@ -106,8 +110,9 @@ useFocusTrap(target, { immediate: true });
   &__header {
     display: flex;
     justify-content: space-between;
+    @include prop('padding-bottom', 0.5);
 
-    @include prop("height");
+    border-bottom: 1px solid;
   }
 
   &__project {
@@ -123,6 +128,12 @@ useFocusTrap(target, { immediate: true });
 
     &-lenis {
       @include border-radius(1, "top");
+    }
+    
+    &-description {
+      max-width: 50%;
+      @include prop('padding-left', 0.25);
+      @include prop('padding-bottom');
     }
 
     &-images {

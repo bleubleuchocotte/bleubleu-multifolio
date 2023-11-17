@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Project } from "@/type/types";
-import { WebsiteType } from "repository/modules/website";
+import { Project, WebsiteType } from "@/type/types";
 
 defineProps({
   projects: {
@@ -68,7 +67,7 @@ const projectInGallery = ref<Project | null>(null);
     </UIBaseLenis>
 
     <Transition name="slide-fade">
-      <TheGallery
+      <LazyTheGallery
         v-if="projectInGallery != null"
         :project="projectInGallery"
         @close="projectInGallery = null"

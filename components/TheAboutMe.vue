@@ -1,17 +1,5 @@
 <script lang="ts" setup>
-import { LinkField, ImageField, RichTextField } from "@prismicio/types";
-import { PropType } from "nuxt/dist/app/compat/capi";
-
-type TheAboutMeType = {
-  me: {
-    "first-name": string;
-    "last-name": string;
-    description: RichTextField;
-    image: ImageField;
-    email: string;
-  };
-  links: { name: string; link: LinkField }[];
-};
+import { TheAboutMeType } from "@/type/types";
 
 defineProps({
   params: {
@@ -72,8 +60,8 @@ onClickOutside(target, () => {
           </NuxtLink>
         </li>
         <li
-          v-for="(link, i) in params.links"
-          :key="Math.floor(Math.random() * (100 + i))"
+          v-for="link in params.links"
+          :key="link.id"
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">
@@ -95,6 +83,7 @@ onClickOutside(target, () => {
       tabindex="0"
       aria-disabled="false"
       role="button"
+      :data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'"
       @click="isOpen = !isOpen"
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
@@ -108,7 +97,7 @@ onClickOutside(target, () => {
           <p>Get to know me here</p>
         </div>
         <div class="section__bookmark-arrow">
-          <IconBaseArrowShort :fill="'var(--accent-color)'" />
+          <IconBaseToward />
         </div>
       </div>
     </div>
@@ -119,6 +108,7 @@ onClickOutside(target, () => {
 .section {
   transition: transform 0.3s ease-out;
   transform: translate(calc($bookmark-width - 30vw));
+
   &.open {
     transform: translate(0);
 
@@ -126,6 +116,7 @@ onClickOutside(target, () => {
       transform: rotate(0);
     }
   }
+
   display: flex;
 
   position: absolute;
@@ -184,6 +175,7 @@ onClickOutside(target, () => {
         &:not(:last-of-type) {
           border-bottom: 1px solid var(--text-accent-color);
         }
+
         @include prop("padding-block", 0.25);
 
         & > a {
@@ -244,6 +236,7 @@ onClickOutside(target, () => {
       border-radius: 50%;
       background-color: var(--text-accent-color);
 
+      color: var(--accent-color);
       transform: rotate(180deg);
     }
   }

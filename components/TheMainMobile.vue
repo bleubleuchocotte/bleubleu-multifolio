@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Project } from "@/type/types";
-import { WebsiteType } from "@/repository/modules/website";
+import { Project, WebsiteType } from "@/type/types";
 
 defineProps({
   projects: {
@@ -15,24 +14,6 @@ defineProps({
 
 const accordions = ref<any[]>([]);
 const arrAriaHidden = computed(() => accordions.value.map((el) => !el.isOpen));
-
-const indexsAccordionOpen = reactive<{
-  last: number | null;
-  current: number | null;
-}>({ last: null, current: null });
-
-const onClick = (index: number) => {
-  indexsAccordionOpen.current = index;
-
-  if (
-    indexsAccordionOpen.last !== null &&
-    indexsAccordionOpen.last !== indexsAccordionOpen.current
-  ) {
-    // Un accordéon est ouvert et ce n'est pas celui qui vient d'être cliqué
-    accordions.value[indexsAccordionOpen.last].isOpen = false;
-  }
-  indexsAccordionOpen.last = index;
-};
 </script>
 
 <template>
@@ -45,7 +26,6 @@ const onClick = (index: number) => {
         ref="accordions"
         :project="project"
         :index="i"
-        @click="onClick(i)"
       >
         <ProjectDetailsMobile
           :project="project"
