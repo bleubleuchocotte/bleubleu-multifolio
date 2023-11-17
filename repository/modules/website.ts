@@ -99,7 +99,7 @@ class WebsiteModule {
       },
       host: {
         name: page.value.data["host-name"] ?? "Undefined value",
-        address: page.value.data["host-address"] ?? "Undefined value",
+        address: page.value.data["host-adress"] ?? "Undefined value",
         phone: page.value.data["host-phone-number"] ?? "Undefined value",
       },
     };

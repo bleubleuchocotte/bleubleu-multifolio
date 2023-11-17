@@ -103,7 +103,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
       top: initial;
       left: initial;
       @include font("cta");
-      @include prop("margin-top");
+      @include margin();
     }
   }
 
@@ -119,7 +119,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
     border-left: none;
 
     &-notices {
-      @include padding(0.5);
+      @include padding();
 
       h2 {
         @include prop("margin-block", 0.5);
