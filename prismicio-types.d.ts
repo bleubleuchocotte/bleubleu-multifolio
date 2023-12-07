@@ -409,51 +409,51 @@ export type MediaFullDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *project → Compétences mise en oeuvre*
+ * Item in *Project → Compétences mise en oeuvres*
  */
 export interface ProjectDocumentDataSkillsItem {
   /**
-   * Une compétence field in *project → Compétences mise en oeuvre*
+   * Une compétence field in *Project → Compétences mise en oeuvres*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: project.skills[].skill
+   * - **API ID Path**: project.skills[].name
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  skill: prismic.KeyTextField;
+  name: prismic.KeyTextField;
 }
 
 /**
- * Item in *project → Liste des médias*
+ * Item in *Project → Médias*
  */
 export interface ProjectDocumentDataMediasItem {
   /**
-   * Média principale field in *project → Liste des médias*
+   * Média principal field in *Project → Médias*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: project.medias[].media_principale
+   * - **API ID Path**: project.medias[].principal
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  media_principale: prismic.LinkToMediaField;
+  principal: prismic.LinkToMediaField;
 
   /**
-   * Média secondaire field in *project → Liste des médias*
+   * Média secondaire field in *Project → Médias*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: project.medias[].media_secondaire
+   * - **API ID Path**: project.medias[].secondary
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  media_secondaire: prismic.LinkToMediaField;
+  secondary: prismic.LinkToMediaField;
 }
 
 /**
- * Content for project documents
+ * Content for Project documents
  */
 interface ProjectDocumentData {
   /**
-   * Titre du projet field in *project*
+   * Titre du projet field in *Project*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -464,18 +464,18 @@ interface ProjectDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Url du projet field in *project*
+   * Url du projet field in *Project*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: project.url
+   * - **API ID Path**: project.project
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  url: prismic.LinkField;
+  project: prismic.LinkField;
 
   /**
-   * Date de réalisation field in *project*
+   * Date de réalisation field in *Project*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -486,7 +486,7 @@ interface ProjectDocumentData {
   date: prismic.DateField;
 
   /**
-   * Compétences mise en oeuvre field in *project*
+   * Compétences mise en oeuvres field in *Project*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -497,7 +497,7 @@ interface ProjectDocumentData {
   skills: prismic.GroupField<Simplify<ProjectDocumentDataSkillsItem>>;
 
   /**
-   * Description du projet field in *project*
+   * Description du projet field in *Project*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -505,33 +505,29 @@ interface ProjectDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.RichTextField;
-
-  /**
-   * Liste des médias field in *project*
+  description: prismic.RichTextField /**
+   * Médias field in *Project*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
    * - **API ID Path**: project.medias[]
-   * - **Tab**: Main
+   * - **Tab**: Desktop
    * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>;
-
-  /**
-   * Image pour le format responsive field in *project*
+   */;
+  medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>> /**
+   * Média | Mobile field in *Project*
    *
-   * - **Field Type**: Image
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: project.image-mobile
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "image-mobile": prismic.ImageField<never>;
+   * - **API ID Path**: project.media_mobile
+   * - **Tab**: Mobile
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */;
+  media_mobile: prismic.LinkField;
 }
 
 /**
- * project document from Prismic
+ * Project document from Prismic
  *
  * - **API ID**: `project`
  * - **Repeatable**: `true`
@@ -540,7 +536,7 @@ interface ProjectDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type ProjectDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<ProjectDocumentData>,
     "project",
     Lang
