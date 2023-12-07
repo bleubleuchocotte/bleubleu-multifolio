@@ -1,0 +1,10 @@
+{
+  "id": "video-full",
+  "label": "video-full",
+  "repeatable": true,
+  "json": {
+    "Main": {}
+  },
+  "status": false,
+  "format": "custom"
+}

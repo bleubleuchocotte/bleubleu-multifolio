@@ -1,0 +1,18 @@
+{
+  "id": "media",
+  "label": "media",
+  "repeatable": true,
+  "json": {
+    "Main": {
+      "media": {
+        "type": "Link",
+        "config": {
+          "select": "media",
+          "label": "media"
+        }
+      }
+    }
+  },
+  "status": false,
+  "format": "custom"
+}

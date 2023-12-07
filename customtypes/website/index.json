@@ -1,0 +1,178 @@
+{
+  "id": "website",
+  "label": "website",
+  "repeatable": false,
+  "json": {
+    "Main": {},
+    "options": {
+      "email": {
+        "type": "Text",
+        "config": {
+          "label": "email"
+        }
+      },
+      "accent-color": {
+        "type": "Color",
+        "config": {
+          "label": "accent-color"
+        }
+      },
+      "background-color": {
+        "type": "Color",
+        "config": {
+          "label": "background-color"
+        }
+      },
+      "text-color": {
+        "type": "Color",
+        "config": {
+          "label": "text-color"
+        }
+      },
+      "text-accent-color": {
+        "type": "Color",
+        "config": {
+          "label": "text-accent-color"
+        }
+      },
+      "ending-card-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "Image de fin des projets"
+        }
+      }
+    },
+    "header": {
+      "text-header": {
+        "type": "Text",
+        "config": {
+          "label": "Texte déroulant"
+        }
+      }
+    },
+    "footer": {
+      "links": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Nom"
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "link",
+                "select": null
+              }
+            }
+          },
+          "label": "Liste de lien"
+        }
+      }
+    },
+    "seo": {
+      "seo-title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre pour le SEO"
+        }
+      },
+      "seo-description": {
+        "type": "Text",
+        "config": {
+          "label": "Description pour le SEO"
+        }
+      },
+      "og-url": {
+        "type": "Text",
+        "config": {
+          "label": "og-url",
+          "placeholder": "This should be the undecorated URL, without session variables, user identifying parameters, or counters."
+        }
+      },
+      "og-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {
+            "width": 1200,
+            "height": 630
+          },
+          "thumbnails": [],
+          "label": "og-image"
+        }
+      },
+      "seo-favicon": {
+        "type": "Image",
+        "config": {
+          "constraint": {
+            "width": 32,
+            "height": 32
+          },
+          "thumbnails": [
+            {
+              "name": "small",
+              "width": 16,
+              "height": 16
+            }
+          ],
+          "label": "Favicon"
+        }
+      }
+    },
+    "about": {
+      "first-name": {
+        "type": "Text",
+        "config": {
+          "label": "Prénom"
+        }
+      },
+      "last-name": {
+        "type": "Text",
+        "config": {
+          "label": "Nom"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Description"
+        }
+      },
+      "about-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "La plus belle photo de vous *_*"
+        }
+      }
+    },
+    "projects": {
+      "projects": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "project": {
+              "type": "Link",
+              "config": {
+                "select": "document",
+                "customtypes": ["projet"],
+                "label": "Un projet"
+              }
+            }
+          },
+          "label": "Vos projets présent ici s'afficheront sur votre site"
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}
