@@ -18,8 +18,10 @@ const emit = defineEmits<{
 }>();
 
 onMounted(() => {
-  projectActive.value = containers.value[0];
-  projectActive.value.classList.add("active");
+  if (containers.value.length > 0) {
+    projectActive.value = containers.value[0];
+    projectActive.value.classList.add("active");
+  }
 });
 
 const callback = (e: MouseEvent | KeyboardEvent, id: string) => {

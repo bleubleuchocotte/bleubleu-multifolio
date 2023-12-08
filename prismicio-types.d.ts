@@ -409,140 +409,6 @@ export type MediaFullDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *Project → Compétences mise en oeuvres*
- */
-export interface ProjectDocumentDataSkillsItem {
-  /**
-   * Une compétence field in *Project → Compétences mise en oeuvres*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.skills[].name
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  name: prismic.KeyTextField;
-}
-
-/**
- * Item in *Project → Médias*
- */
-export interface ProjectDocumentDataMediasItem {
-  /**
-   * Média principal field in *Project → Médias*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.medias[].principal
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  principal: prismic.LinkToMediaField;
-
-  /**
-   * Média secondaire field in *Project → Médias*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.medias[].secondary
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  secondary: prismic.LinkToMediaField;
-}
-
-/**
- * Content for Project documents
- */
-interface ProjectDocumentData {
-  /**
-   * Titre du projet field in *Project*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Url du projet field in *Project*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.project
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  project: prismic.LinkField;
-
-  /**
-   * Date de réalisation field in *Project*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.date
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  date: prismic.DateField;
-
-  /**
-   * Compétences mise en oeuvres field in *Project*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.skills[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  skills: prismic.GroupField<Simplify<ProjectDocumentDataSkillsItem>>;
-
-  /**
-   * Description du projet field in *Project*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField /**
-   * Médias field in *Project*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.medias[]
-   * - **Tab**: Desktop
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */;
-  medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>> /**
-   * Média | Mobile field in *Project*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.media_mobile
-   * - **Tab**: Mobile
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */;
-  media_mobile: prismic.LinkField;
-}
-
-/**
- * Project document from Prismic
- *
- * - **API ID**: `project`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ProjectDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ProjectDocumentData>,
-    "project",
-    Lang
-  >;
-
-/**
  * Item in *projet → Compétences mise en oeuvre*
  */
 export interface ProjetDocumentDataSkillsItem {
@@ -948,7 +814,6 @@ export type AllDocumentTypes =
   | MediaComponentFullDocument
   | MediaDuoDocument
   | MediaFullDocument
-  | ProjectDocument
   | ProjetDocument
   | VideoFullDocument
   | WebsiteDocument;
@@ -979,10 +844,6 @@ declare module "@prismicio/client" {
       MediaDuoDocumentData,
       MediaFullDocument,
       MediaFullDocumentData,
-      ProjectDocument,
-      ProjectDocumentData,
-      ProjectDocumentDataSkillsItem,
-      ProjectDocumentDataMediasItem,
       ProjetDocument,
       ProjetDocumentData,
       ProjetDocumentDataSkillsItem,

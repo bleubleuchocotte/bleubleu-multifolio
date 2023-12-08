@@ -1,10 +1,17 @@
-import { LinkField, ImageField, RichTextField } from "@prismicio/types";
+import { LinkField, ImageField, RichTextField, LinkToMediaField } from "@prismicio/types";
 
 export type ImageType = {
   field: {
     [index: string]: ImageField;
   };
   type: "image-full" | "image-duo";
+  id: string;
+};
+export type MediaType = {
+  field: {
+    [index: string]: ImageField | LinkToMediaField<'filled'>;
+  };
+  type: "media-full" | "media-duo";
   id: string;
 };
 
@@ -17,6 +24,7 @@ export type Project = {
   id: string;
   date: string;
   images: ImageType[];
+  medias: MediaType[];
   description: RichTextField;
   skills: SkillType[];
   title: string;

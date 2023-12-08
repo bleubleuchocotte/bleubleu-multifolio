@@ -1,8 +1,7 @@
 import { Client } from "@prismicio/client";
 import { PrismicDocument } from "@prismicio/types";
 
-import { useAsyncData } from "#imports";
-import { ImageType, Project, SkillType } from "type/types";
+import { MediaType, Project, SkillType } from "type/types";
 
 class ProjectsModule {
   private client: Client;
@@ -25,13 +24,16 @@ class ProjectsModule {
               skills {
                 skill
               }
-              images {
-                image {
-                  ...on image-full {
-                    ...image-fullFields
+              medias {
+                media {
+                  ...on media-component-full {
+                    ...media-component-fullFields
                   }
                   ...on image-duo {
                     ...image-duoFields
+                  }
+                  ...on image-full {
+                    ...image-fullFields
                   }
                 }
               }
@@ -42,38 +44,47 @@ class ProjectsModule {
       }`,
       })
     );
-
-    if (!prismicProjects.value) {
-      throw new Error("Project could not be loaded");
-    }
-
+  
+   
     const projects: Array<Project | null> =
-      prismicProjects.value.data.projects.map(
+      prismicProjects.value?.data.projects.map(
         (el: { project: PrismicDocument }) => {
           if (!el.project.data) {
             // Si un champ n'a pas été remplie, renvoi null
             return null;
           }
 
-          const images = (
-            el.project.data.images as { image: PrismicDocument }[]
-          ).map((img) => {
-            if (
-              img.image.type !== "image-duo" &&
-              img.image.type !== "image-full"
-            ) {
-              throw new Error("Error type image");
+          
+          const medias = el.project.data.medias as {media: PrismicDocument}[];
+
+          const mediasBuffer = medias.map(el => {
+
+            let type: 'media-duo' | 'media-full' = 'media-full';
+            switch (el.media.type) {
+              case ('media-component-full'):
+                type = 'media-full'
+                break;
+              case ('image-duo'):
+                type = 'media-duo'
+                break;
+              case ('image-full'):
+                type = 'media-full'
+                break;
+            
+              default:
+                break;
             }
 
-            const result: ImageType = {
-              field: img.image.data,
-              type: img.image.type,
-              id: img.image.id,
+
+             const result: MediaType = {
+              field: el.media.data,
+              type: type,
+              id: el.media.id,
             };
 
             return result;
-          });
-
+          })
+          
           const skills = (el.project.data.skills as { skill: string }[]).map(
             (obj) => {
               const result: SkillType = {
@@ -88,7 +99,8 @@ class ProjectsModule {
           const result: Project = {
             id: el.project.id,
             date: el.project.data.date,
-            images,
+            images: [],
+            medias: mediasBuffer,
             description: el.project.data.description,
             title: el.project.data.title,
             skills,
@@ -98,7 +110,7 @@ class ProjectsModule {
 
           return result;
         }
-      );
+      ) ?? [];
 
     return projects.filter((el): el is Project => el !== null); // Permet de filtrer les champs null
   }

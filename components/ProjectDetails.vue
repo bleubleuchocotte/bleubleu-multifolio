@@ -100,8 +100,8 @@ useIntersectionObserver(
     </div>
 
     <div class="project-details__right">
-      <ProjectImagesSummary
-        :images="project.images.slice(0, 2)"
+      <ProjectMediasSummary
+        :medias="project.medias.slice(0, 2)"
         role="button"
         aria-label="View project images"
         data-icon="IconFullscreen"
