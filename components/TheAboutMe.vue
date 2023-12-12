@@ -20,13 +20,11 @@ onUnmounted(() => {
 });
 
 function callback(e: KeyboardEvent) {
-	if (isOpen.value === true && e.key === "Escape")
-		isOpen.value = false;
+	if (isOpen.value === true && e.key === "Escape") { isOpen.value = false; }
 }
 
 onClickOutside(target, () => {
-	if (isOpen.value === true)
-		isOpen.value = false;
+	if (isOpen.value === true) { isOpen.value = false; }
 });
 </script>
 

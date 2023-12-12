@@ -19,9 +19,8 @@ const projectInGallery = ref<Project | null>(null);
 
 function callback(id: string, hasToScroll: boolean) {
 	idToProject.value = id;
-	if (hasToScroll)
-		scrollToProjectId.value = `[data-project-h-id='${id}']`;
-	else scrollToProjectId.value = undefined;
+	if (hasToScroll) { scrollToProjectId.value = `[data-project-h-id='${id}']`; }
+	else { scrollToProjectId.value = undefined; }
 }
 </script>
 

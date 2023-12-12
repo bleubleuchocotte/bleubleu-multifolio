@@ -29,13 +29,11 @@ onMounted(() => {
 
 function callback(e: MouseEvent | KeyboardEvent, id: string) {
 	// Si un projet est déjà actif, on remove le style
-	if (projectActive.value)
-		projectActive.value.classList.remove("active");
+	if (projectActive.value) { projectActive.value.classList.remove("active"); }
 
 	// On attribut la nouvelle valeur
 	projectActive.value = containers.value.find(el => el === e.target);
-	if (!projectActive.value)
-		return;
+	if (!projectActive.value) { return; }
 	projectActive.value.classList.add("active");
 
 	(e.target as HTMLElement).blur();
@@ -46,16 +44,14 @@ watch(
 	() => props.idToActive,
 	() => {
 		// Logique pour activer un projet depuis le scroll des projets horizontaux
-		if (projectActive.value)
-			projectActive.value.classList.remove("active");
+		if (projectActive.value) { projectActive.value.classList.remove("active"); }
 
 		projectActive.value = containers.value.find(
 			el =>
 				el.attributes.getNamedItem("data-project-v-id")?.nodeValue
 				=== props.idToActive,
 		);
-		if (!projectActive.value)
-			return;
+		if (!projectActive.value) { return; }
 		projectActive.value.classList.add("active");
 	},
 );
