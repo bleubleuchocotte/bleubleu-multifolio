@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import type { LinkType } from "@/type/types";
+import type { WebsiteDocumentDataLinksItem } from "prismicio-types";
 
-defineProps({
-	links: {
-		type: Array<LinkType>,
-		required: true,
-	},
+type ComponentProps = {
+	links: WebsiteDocumentDataLinksItem[]
+};
+
+const props = defineProps<ComponentProps>();
+
+const _links = computed(() => {
+	return props.links.map((link) => {
+		return {
+			id: useUID(),
+			field: link.link,
+			text: link.name,
+		};
+	});
 });
 </script>
 
@@ -29,12 +38,12 @@ defineProps({
 			</div>
 			<div class="footer__right">
 				<PrismicLink
-					v-for="link in links"
+					v-for="link in _links"
 					:key="link.id"
 					class="footer__right-link"
-					:field="link.link"
+					:field="link.field"
 				>
-					{{ link.name }}
+					{{ link.text }}
 					<IconBaseArrowLink
 						:colors="{
 							background: 'transparent',

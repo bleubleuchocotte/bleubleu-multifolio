@@ -1,15 +1,15 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
-const website = $api.website;
+const options = await $api.options.getOptions();
 
 const cssVariables = [
-	`--accent-color: ${website.colors["accent-color"]}`,
-	`--accent-color-80: ${website.colors["accent-color"]}80`,
-	`--text-accent-color: ${website.colors["text-accent-color"]}`,
-	`--text-color: ${website.colors["text-color"]}`,
-	`--background-color: ${website.colors["background-color"]}`,
-	`--border-color:${website.colors["text-color"]}80`,
-	`--background-color-70: ${website.colors["background-color"]}B3`,
+	`--accent-color: ${options?.data["accent-color"]}`,
+	`--accent-color-80: ${options?.data["accent-color"]}80`,
+	`--text-accent-color: ${options?.data["text-accent-color"]}`,
+	`--text-color: ${options?.data["text-color"]}`,
+	`--background-color: ${options?.data["background-color"]}`,
+	`--border-color:${options?.data["text-color"]}80`,
+	`--background-color-70: ${options?.data["background-color"]}B3`,
 ];
 
 useHead({
@@ -22,13 +22,13 @@ useServerHeadSafe({
 			rel: "icon",
 			type: "image/png",
 			sizes: "16x16",
-			href: website.seo.favicon.url ?? "/default-favicon-16x16.png",
+			href: options?.data["seo-favicon"].url ?? "/default-favicon-16x16.png",
 		},
 		{
 			rel: "icon",
 			type: "image/png",
 			sizes: "32x32",
-			href: website.seo.favicon.url ?? "/default-favicon-32x32.png",
+			href: options?.data["seo-favicon"].url ?? "/default-favicon-32x32.png",
 		},
 	],
 });
@@ -43,20 +43,20 @@ useServerSeoMeta({
 	ogLocale: "en_US",
 	twitterCard: "summary",
 
-	colorScheme: website.colors["accent-color"],
-	themeColor: website.colors["accent-color"],
+	colorScheme: options?.data["accent-color"],
+	themeColor: options?.data["accent-color"],
 
-	title: website.seo.title,
-	description: website.seo.description,
+	title: options?.data["seo-title"],
+	description: options?.data["seo-description"],
 
-	ogTitle: website.seo.title,
-	ogDescription: website.seo.description,
-	ogUrl: website.seo.og.url,
+	ogTitle: options?.data["seo-title"],
+	ogDescription: options?.data["seo-description"],
+	ogUrl: options?.data["og-url"],
 	ogImage: {
-		url: website.seo.og.image.url ?? "Undefined value",
-		secureUrl: website.seo.og.image.url ?? "Undefined value",
-		width: website.seo.og.image.dimensions?.width ?? "Undefined value",
-		height: website.seo.og.image.dimensions?.height ?? "Undefined value",
+		url: options?.data["og-image"].url ?? "",
+		secureUrl: options?.data["og-image"].url ?? "",
+		width: options?.data["og-image"].dimensions?.width ?? "",
+		height: options?.data["og-image"].dimensions?.width ?? "",
 	},
 });
 
@@ -78,10 +78,10 @@ const showContent = ref(false);
 	>
 		<TheLoader
 			v-if="isLoading"
-			:text="`${website.me['first-name']} ${website.me['last-name']}`"
+			:text="`${options?.data['first-name']} ${options?.data['last-name']}`"
 			:colors="{
-				start: website.colors['text-color'],
-				end: website.colors['accent-color'],
+				start: options?.data['text-color'] ?? '',
+				end: options?.data['accent-color'] ?? '',
 			}"
 			@unmount="isLoading = false"
 		/>
@@ -89,11 +89,11 @@ const showContent = ref(false);
 	<Transition mode="out-in" name="translate-in">
 		<div v-show="showContent" class="body">
 			<TheHeader
-				:marquee-text="website.header.text"
-				:email="website.me.email"
+				:marquee-text="options?.data['text-header'] ?? ''"
+				:email="options?.data.email ?? ''"
 			/>
 			<NuxtPage />
-			<TheFooter :links="website.footer.links" class="desktop-only" />
+			<TheFooter :links="options?.data.links ?? []" class="desktop-only" />
 		</div>
 	</Transition>
 </template>
