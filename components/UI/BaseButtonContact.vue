@@ -2,37 +2,37 @@
 import { useClipboard } from "@vueuse/core";
 
 defineProps({
-  email: {
-    type: String,
-    required: true,
-  },
+	email: {
+		type: String,
+		required: true,
+	},
 });
 
 const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 </script>
 
 <template>
-  <button
-    :data-email="email"
-    type="button"
-    class="button"
-    :class="{ open: copied }"
-    aria-label="Copy email address to clipboard"
-    @click="copy(email)"
-  >
-    <div class="button__text">
-      <div class="button__text-bg-top">
-        <span><slot /></span>
-      </div>
-      <div class="button__text-bg-bottom" aria-hidden="true">
-        <span><slot /></span>
-      </div>
-    </div>
+	<button
+		:data-email="email"
+		type="button"
+		class="button"
+		:class="{ open: copied }"
+		aria-label="Copy email address to clipboard"
+		@click="copy(email)"
+	>
+		<div class="button__text">
+			<div class="button__text-bg-top">
+				<span><slot /></span>
+			</div>
+			<div class="button__text-bg-bottom" aria-hidden="true">
+				<span><slot /></span>
+			</div>
+		</div>
 
-    <div class="button__reveal">
-      <span>{{ copied ? "Email copied ! ♡" : "Copy my email ✉" }} </span>
-    </div>
-  </button>
+		<div class="button__reveal">
+			<span>{{ copied ? "Email copied ! ♡" : "Copy my email ✉" }} </span>
+		</div>
+	</button>
 </template>
 
 <style scoped lang="scss">

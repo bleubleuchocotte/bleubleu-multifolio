@@ -1,10 +1,12 @@
 <template>
-  <div class="container-404">
-    <p class="container-404__glitch" data-text="404">404</p>
-    <UIBaseButtonHome class="container-404__button"
-      >Let's go home</UIBaseButtonHome
-    >
-  </div>
+	<div class="container-404">
+		<p class="container-404__glitch" data-text="404">
+			404
+		</p>
+		<UIBaseButtonHome class="container-404__button">
+			Let's go home
+		</UIBaseButtonHome>
+	</div>
 </template>
 
 <style scoped lang="scss">

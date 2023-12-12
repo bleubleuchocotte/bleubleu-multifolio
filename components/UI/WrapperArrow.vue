@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { PropType } from "nuxt/dist/app/compat/capi";
-import { ColorArrow } from "@/type/types";
+import type { PropType } from "nuxt/dist/app/compat/capi";
+import type { ColorArrow } from "@/type/types";
 
 const props = defineProps({
-  colors: {
-    type: Object as PropType<ColorArrow>,
-    required: true,
-  },
-  lengthArrow: {
-    type: String as PropType<"short" | "long">,
-    required: false,
-    default: "short",
-  },
+	colors: {
+		type: Object as PropType<ColorArrow>,
+		required: true,
+	},
+	lengthArrow: {
+		type: String as PropType<"short" | "long">,
+		required: false,
+		default: "short",
+	},
 });
 
 const styles = reactive({
-  backgroundColor: props.colors.background,
-  borderColor: props.colors.border,
+	backgroundColor: props.colors.background,
+	borderColor: props.colors.border,
 });
 </script>
 
 <template>
-  <div class="wrapper-arrow__container" :style="styles">
-    <template v-if="lengthArrow === 'short'">
-      <IconBaseArrowShort :fill="colors.arrow" />
-    </template>
-    <template v-else>
-      <IconBaseArrowLong :fill="colors.arrow" />
-    </template>
-  </div>
+	<div class="wrapper-arrow__container" :style="styles">
+		<template v-if="lengthArrow === 'short'">
+			<IconBaseArrowShort :fill="colors.arrow" />
+		</template>
+		<template v-else>
+			<IconBaseArrowLong :fill="colors.arrow" />
+		</template>
+	</div>
 </template>
 
 <style scoped lang="scss">

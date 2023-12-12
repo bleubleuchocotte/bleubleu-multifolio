@@ -1,77 +1,77 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
-const page = $api.pages["legal-notices"];
+const page = await $api.pages.getLegalNotices();
 
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 </script>
 
 <template>
-  <div class="legal-container">
-    <UIBaseButtonHome class="legal-container__button"
-      >Let's go home</UIBaseButtonHome
-    >
+	<div class="legal-container">
+		<UIBaseButtonHome class="legal-container__button">
+			Let's go home
+		</UIBaseButtonHome>
 
-    <template v-if="!isDeviceMobile">
-      <div
-        v-for="i in 2"
-        :key="Math.floor(Math.random() * (100 + i))"
-        class="legal-container__bands"
-      >
-        <div
-          v-for="j in 6"
-          :key="Math.floor(Math.random() * (100 + j))"
-          class="legal-container__bands-notices"
-          :aria-hidden="!(j === 1 && i === 1)"
-        >
-          <h1>Legal Notices</h1>
+		<template v-if="!isDeviceMobile">
+			<div
+				v-for="i in 2"
+				:key="Math.floor(Math.random() * (100 + i))"
+				class="legal-container__bands"
+			>
+				<div
+					v-for="j in 6"
+					:key="Math.floor(Math.random() * (100 + j))"
+					class="legal-container__bands-notices"
+					:aria-hidden="!(j === 1 && i === 1)"
+				>
+					<h1>Legal Notices</h1>
 
-          <h2>Company Information</h2>
-          <p>Last name: {{ page.me["last-name"] }}</p>
-          <p>First name: {{ page.me["first-name"] }}</p>
-          <p>Adress: {{ page.me["address"] }}</p>
-          <p>Status: Entrepreneur individuel (EI)</p>
-          <p>Email: {{ page.me["email"] }}</p>
-          <p>Phone: {{ page.me["phone"] }}</p>
+					<h2>Company Information</h2>
+					<p>Last name: {{ page?.data['me-last-name'] }}</p>
+					<p>First name: {{ page?.data['me-first-name'] }}</p>
+					<p>Adress: {{ page?.data['me-address'] }}</p>
+					<p>Status: Entrepreneur individuel (EI)</p>
+					<p>Email: {{ page?.data['me-email'] }}</p>
+					<p>Phone: {{ page?.data['me-phone-number'] }}</p>
 
-          <template v-if="page.me['tva'] != null">
-            <h2>VAT Identification Number:</h2>
-            <p>{{ page.me["tva"] }}</p>
-          </template>
+					<template v-if="page?.data['me-tva-number'] != null">
+						<h2>VAT Identification Number:</h2>
+						<p>{{ page.data['me-tva-number'] }}</p>
+					</template>
 
-          <h2>Website Host:</h2>
-          <p>Host name: {{ page.host["name"] }}</p>
-          <p>Host address: {{ page.host["address"] }}</p>
-          <p></p>
-          <p>Host phone: {{ page.host["phone"] }}</p>
-        </div>
-      </div>
-    </template>
+					<h2>Website Host:</h2>
+					<p>Host name: {{ page?.data['host-name'] }}</p>
+					<p>Host address: {{ page?.data['host-adress'] }}</p>
+					<p />
+					<p>Host phone: {{ page?.data['host-phone-number'] }}</p>
+				</div>
+			</div>
+		</template>
 
-    <template v-else>
-      <div class="legal-container__bands-notices">
-        <h1>Legal Notices</h1>
+		<template v-else>
+			<div class="legal-container__bands-notices">
+				<h1>Legal Notices</h1>
 
-        <h2>Company Information</h2>
-        <p>Last name: {{ page.me["last-name"] }}</p>
-        <p>First name: {{ page.me["first-name"] }}</p>
-        <p>Adress: {{ page.me["address"] }}</p>
-        <p>Status: Entrepreneur individuel (EI)</p>
-        <p>Email: {{ page.me["email"] }}</p>
-        <p>Phone: {{ page.me["phone"] }}</p>
+				<h2>Company Information</h2>
+				<p>Last name: {{ page?.data['me-last-name'] }}</p>
+				<p>First name: {{ page?.data['me-first-name'] }}</p>
+				<p>Adress: {{ page?.data['me-address'] }}</p>
+				<p>Status: Entrepreneur individuel (EI)</p>
+				<p>Email: {{ page?.data['me-email'] }}</p>
+				<p>Phone: {{ page?.data['me-phone-number'] }}</p>
 
-        <template v-if="page.me['tva'] != null">
-          <h2>VAT Identification Number:</h2>
-          <p>{{ page.me["tva"] }}</p>
-        </template>
+				<template v-if="page?.data['me-tva-number'] != null">
+					<h2>VAT Identification Number:</h2>
+					<p>{{ page.data['me-tva-number'] }}</p>
+				</template>
 
-        <h2>Website Host:</h2>
-        <p>Host name: {{ page.host["name"] }}</p>
-        <p>Host address: {{ page.host["address"] }}</p>
-        <p></p>
-        <p>Host phone: {{ page.host["phone"] }}</p>
-      </div>
-    </template>
-  </div>
+				<h2>Website Host:</h2>
+				<p>Host name: {{ page?.data['host-name'] }}</p>
+				<p>Host address: {{ page?.data['host-adress'] }}</p>
+				<p />
+				<p>Host phone: {{ page?.data['host-phone-number'] }}</p>
+			</div>
+		</template>
+	</div>
 </template>
 
 <style scoped lang="scss">

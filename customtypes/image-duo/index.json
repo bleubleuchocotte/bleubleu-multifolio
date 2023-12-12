@@ -1,0 +1,33 @@
+{
+	"id": "image-duo",
+	"label": "image-duo",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"image-1": {
+				"type": "Image",
+				"config": {
+					"constraint": {
+						"width": null,
+						"height": null
+					},
+					"thumbnails": [],
+					"label": "Image gauche"
+				}
+			},
+			"image-2": {
+				"type": "Image",
+				"config": {
+					"constraint": {
+						"width": null,
+						"height": null
+					},
+					"thumbnails": [],
+					"label": "Image droite"
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
+}
