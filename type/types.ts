@@ -9,7 +9,8 @@ export type ImageType = {
 };
 export type MediaType = {
 	field: {
-		[index: string]: ImageField | LinkToMediaField<"filled">
+		principal?: LinkToMediaField<"filled">
+		secondary?: LinkToMediaField<"filled">
 	}
 	type: "media-full" | "media-duo"
 	id: string
