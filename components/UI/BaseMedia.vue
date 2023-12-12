@@ -3,16 +3,31 @@ import { MediaType } from 'type/types';
 
 type ComponentProps = {
 	media: MediaType
+	videoSettings?: {
+		controls?: boolean,
+		autoplay?: boolean,
+		loop?: boolean,
+		muted?: boolean
+	}
 }
 
-defineProps<ComponentProps>()
+withDefaults(defineProps<ComponentProps>(), {
+	videoSettings: () => {
+		return {
+			autoplay: true,
+			loop: true,
+			muted: true,
+			controls: false
+		}
+	}
+})
 </script>
 
 <template>
 	<div class="media">
 		<template v-for="field in Object.values(media.field)">
 			<PrismicImage v-if="('alt' in field) || ('kind' in field && field.kind === 'image')" :key="media.id + field.url" :field="field" widths="defaults" class="media__image" :data-type="media.type"/>
-			<video muted v-else-if="'kind' in field" class="media__video" autoplay loop :data-type="media.type">
+			<video v-else-if="'kind' in field" class="media__video" :data-type="media.type" v-bind="videoSettings">
 				<source :src="field.url"  />
 			</video>
 		</template>
