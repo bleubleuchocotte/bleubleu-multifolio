@@ -12,5 +12,6 @@ export default antfu({
 		"no-await-in-loop": ["error"], // On désactive l'usage de `await` dans les boucles
 		"no-nested-ternary": ["error"], // Nested ternay interdit
 		"ts/consistent-type-definitions": ["error", "type"], // On oblige l'utilisation de `type` au lieu de `interface`
+		"curly": ["error", "all"],
 	},
 });

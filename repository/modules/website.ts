@@ -13,8 +13,7 @@ class WebsiteModule {
 		const { data: website } = await useAsyncData(() =>
 			this.client.getSingle("website"),
 		);
-		if (!website.value)
-			throw new Error("Prismic document could not be accessed");
+		if (!website.value) { throw new Error("Prismic document could not be accessed"); }
 
 		const links = (
 			website.value.data.links as { name: string, link: LinkField }[]
@@ -67,8 +66,7 @@ class WebsiteModule {
 			this.client.getSingle(name),
 		);
 
-		if (!page.value)
-			throw new Error("Prismic document could not be accessed");
+		if (!page.value) { throw new Error("Prismic document could not be accessed"); }
 
     type PageType = {
     	me: {
