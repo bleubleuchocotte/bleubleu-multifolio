@@ -1,15 +1,8 @@
-import type { Client } from "@prismicio/client";
 import type { PrismicDocument } from "@prismicio/types";
-
 import type { MediaType, Project, SkillType } from "type/types";
+import PrismicFactory from "@/repository/factory";
 
-class ProjectsModule {
-	private client: Client;
-
-	constructor(client: Client) {
-		this.client = client;
-	}
-
+class ProjectsModule extends PrismicFactory {
 	async getProjects() {
 		const { data: prismicProjects } = await useAsyncData("GetAllProjects", () =>
 			this.client.getSingle("website", {
