@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { MediaType } from 'type/types';
+import type { MediaType } from "type/types";
 
 type ComponentProps = {
 	media: MediaType
 	videoSettings?: {
-		controls?: boolean,
-		autoplay?: boolean,
-		loop?: boolean,
+		controls?: boolean
+		autoplay?: boolean
+		loop?: boolean
 		muted?: boolean
 	}
-}
+};
 
 withDefaults(defineProps<ComponentProps>(), {
 	videoSettings: () => {
@@ -17,18 +17,18 @@ withDefaults(defineProps<ComponentProps>(), {
 			autoplay: true,
 			loop: true,
 			muted: true,
-			controls: false
-		}
-	}
-})
+			controls: false,
+		};
+	},
+});
 </script>
 
 <template>
 	<div class="media">
 		<template v-for="field in Object.values(media.field)">
-			<PrismicImage v-if="('alt' in field) || ('kind' in field && field.kind === 'image')" :key="media.id + field.url" :field="field" widths="defaults" class="media__image" :data-type="media.type"/>
+			<PrismicImage v-if="('alt' in field) || ('kind' in field && field.kind === 'image')" :key="media.id + field.url" :field="field" widths="defaults" class="media__image" :data-type="media.type" />
 			<video v-else-if="'kind' in field" class="media__video" :data-type="media.type" v-bind="videoSettings">
-				<source :src="field.url"  />
+				<source :src="field.url">
 			</video>
 		</template>
 	</div>
@@ -38,7 +38,7 @@ withDefaults(defineProps<ComponentProps>(), {
 .media {
 	display: flex;
 	@include prop("gap", 0.8);
-	
+
 	&__image, &__video {
 		width: 100%;
 		height: 100%;

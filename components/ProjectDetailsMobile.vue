@@ -1,66 +1,67 @@
 <script setup lang="ts">
-import { Project } from "~/type/types";
+import type { Project } from "~/type/types";
+
 defineProps({
-  project: {
-    type: Object as PropType<Project>,
-    required: true,
-  },
-  index: {
-    type: Number,
-    required: true,
-  },
-  hidden: {
-    type: Boolean,
-    required: true,
-  },
+	project: {
+		type: Object as PropType<Project>,
+		required: true,
+	},
+	index: {
+		type: Number,
+		required: true,
+	},
+	hidden: {
+		type: Boolean,
+		required: true,
+	},
 });
 </script>
 
 <template>
-  <article class="project-details-mobile">
-    <UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
-    <template v-if="project.url">
-      <PrismicLink
-        class="project-details-mobile__content-heading"
-        :field="project.url"
-        :tabindex="hidden ? -1 : 0"
-      >
-        <h3>
-          {{ project.title }}
-        </h3>
-        <IconBaseArrowLink
-          :colors="{
-            background: 'var(--accent-color)',
-            arrow: 'var(--background-color)',
-          }"
-        />
-      </PrismicLink>
-    </template>
-    <template v-else>
-      <div class="project-details-mobile__content-heading">
-        <h3>
-          {{ project.title }}
-        </h3>
-      </div>
-    </template>
+	<article class="project-details-mobile">
+		<UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
+		<template v-if="project.url">
+			<PrismicLink
+				class="project-details-mobile__content-heading"
+				:field="project.url"
+				:tabindex="hidden ? -1 : 0"
+			>
+				<h3>
+					{{ project.title }}
+				</h3>
+				<IconBaseArrowLink
+					:colors="{
+						background: 'var(--accent-color)',
+						arrow: 'var(--background-color)',
+					}"
+				/>
+			</PrismicLink>
+		</template>
+		<template v-else>
+			<div class="project-details-mobile__content-heading">
+				<h3>
+					{{ project.title }}
+				</h3>
+			</div>
+		</template>
 
-    <div class="project-details-mobile__content-tags">
-      <UIBaseTag v-for="skill in project.skills" :key="skill.id">
-        {{ skill.name }}
-      </UIBaseTag>
-    </div>
+		<div class="project-details-mobile__content-tags">
+			<UIBaseTag v-for="skill in project.skills" :key="skill.id">
+				{{ skill.name }}
+			</UIBaseTag>
+		</div>
 
-    <PrismicImage
-      v-if="project['image-mobile']"
-      :field="project['image-mobile']"
-      class="project-details-mobile__image"
-    />
+		<PrismicImage
+			v-if="project['image-mobile']"
+			:field="project['image-mobile']"
+			class="project-details-mobile__image"
+		/>
 
-    <PrismicRichText
-      :field="project['description']"
-      class="project-details-mobile__content-description"
-    />
-  </article>
+		<PrismicRichText
+			:field="project.description"
+			class="project-details-mobile__content-description"
+		/>
+	</article>
 </template>
 
 <style scoped lang="scss">

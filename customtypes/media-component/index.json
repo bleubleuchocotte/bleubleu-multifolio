@@ -1,25 +1,25 @@
 {
-  "id": "media-component",
-  "label": "media-component",
-  "repeatable": true,
-  "json": {
-    "Main": {
-      "media_principal": {
-        "type": "Link",
-        "config": {
-          "select": "media",
-          "label": "Média principal"
-        }
-      },
-      "media_secondaire": {
-        "type": "Link",
-        "config": {
-          "select": "media",
-          "label": "Média secondaire"
-        }
-      }
-    }
-  },
-  "status": true,
-  "format": "custom"
+	"id": "media-component",
+	"label": "media-component",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"media_principal": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "Média principal"
+				}
+			},
+			"media_secondaire": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "Média secondaire"
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
 }

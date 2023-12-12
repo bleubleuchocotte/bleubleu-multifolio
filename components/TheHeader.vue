@@ -2,33 +2,35 @@
 import "vue3-marquee/dist/style.css";
 
 defineProps({
-  email: {
-    type: String,
-    required: true,
-  },
-  marqueeText: {
-    type: String,
-    required: true,
-  },
+	email: {
+		type: String,
+		required: true,
+	},
+	marqueeText: {
+		type: String,
+		required: true,
+	},
 });
 </script>
 
 <template>
-  <header class="header">
-    <div class="header__slider">
-      <Vue3Marquee
-        :direction="'normal'"
-        :duration="10"
-        class="header__slider-container"
-      >
-        <p style="margin-left: 5em" class="h1">{{ marqueeText }}</p>
-      </Vue3Marquee>
-    </div>
+	<header class="header">
+		<div class="header__slider">
+			<Vue3Marquee
+				direction="normal"
+				:duration="10"
+				class="header__slider-container"
+			>
+				<p style="margin-left: 5em" class="h1">
+					{{ marqueeText }}
+				</p>
+			</Vue3Marquee>
+		</div>
 
-    <UIBaseButtonContact :email="email" class="header__button desktop-only">
-      Contact
-    </UIBaseButtonContact>
-  </header>
+		<UIBaseButtonContact :email="email" class="header__button desktop-only">
+			Contact
+		</UIBaseButtonContact>
+	</header>
 </template>
 
 <style scoped lang="scss">

@@ -1,107 +1,110 @@
 <script lang="ts" setup>
-import { TheAboutMeType } from "@/type/types";
+import type { TheAboutMeType } from "@/type/types";
 
 defineProps({
-  params: {
-    type: Object as PropType<TheAboutMeType>,
-    required: true,
-  },
+	params: {
+		type: Object as PropType<TheAboutMeType>,
+		required: true,
+	},
 });
 
 onMounted(() => {
-  document.addEventListener("keydown", callback);
+	document.addEventListener("keydown", callback);
 });
 
 onUnmounted(() => {
-  document.removeEventListener("keydown", callback);
+	document.removeEventListener("keydown", callback);
 });
 
-const callback = (e: KeyboardEvent) => {
-  if (isOpen.value === true && e.key === "Escape") isOpen.value = false;
-};
+function callback(e: KeyboardEvent) {
+	if (isOpen.value === true && e.key === "Escape")
+		isOpen.value = false;
+}
 
 const isOpen = ref(false);
 const target = ref();
 
 onClickOutside(target, () => {
-  if (isOpen.value === true) isOpen.value = false;
+	if (isOpen.value === true)
+		isOpen.value = false;
 });
 </script>
 
 <template>
-  <section
-    ref="target"
-    class="section invert-selection"
-    :class="{ open: isOpen }"
-  >
-    <UIBaseLenis class="section__content">
-      <div class="section__content-image">
-        <PrismicImage :field="params.me.image" />
-      </div>
-      <PrismicRichText
-        :field="params.me.description"
-        class="section__content-text"
-      />
-      <UIBaseButtonContact
-        :email="params.me.email"
-        class="section__content-contact"
-        >Contact
-      </UIBaseButtonContact>
-      <ul class="section__content-links">
-        <li class="section__content-links-item">
-          <NuxtLink to="https://bleubleu.studio" :target="'_blank'">
-            <span> Bleubleu.studio </span>
-            <IconBaseArrowLink
-              :colors="{
-                background: 'var(--accent-color)',
-                arrow: 'var(--text-accent-color)',
-              }"
-            />
-          </NuxtLink>
-        </li>
-        <li
-          v-for="link in params.links"
-          :key="link.id"
-          class="section__content-links-item"
-        >
-          <PrismicLink :field="link.link">
-            <span>
-              {{ link.name }}
-            </span>
-            <IconBaseArrowLink
-              :colors="{
-                background: 'var(--accent-color)',
-                arrow: 'var(--text-accent-color)',
-              }"
-            />
-          </PrismicLink>
-        </li>
-      </ul>
-    </UIBaseLenis>
-    <div
-      class="section__bookmark"
-      tabindex="0"
-      aria-disabled="false"
-      role="button"
-      :data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'"
-      @click="isOpen = !isOpen"
-      @keydown.enter="isOpen = !isOpen"
-      @keydown.space.prevent="isOpen = !isOpen"
-    >
-      <h1 class="section__bookmark-heading">
-        {{ params.me["first-name"] }} {{ params.me["last-name"] }}
-      </h1>
-      <div class="section__bookmark-flex">
-        <div>
-          <p>Explore further</p>
-          <p>Get to know me here</p>
-        </div>
-        <div class="section__bookmark-arrow">
-          <IconBaseToward />
-        </div>
-      </div>
-    </div>
-  </section>
+	<section
+		ref="target"
+		class="section invert-selection"
+		:class="{ open: isOpen }"
+	>
+		<UIBaseLenis class="section__content">
+			<div class="section__content-image">
+				<PrismicImage :field="params.me.image" />
+			</div>
+			<PrismicRichText
+				:field="params.me.description"
+				class="section__content-text"
+			/>
+			<UIBaseButtonContact
+				:email="params.me.email"
+				class="section__content-contact"
+			>
+				Contact
+			</UIBaseButtonContact>
+			<ul class="section__content-links">
+				<li class="section__content-links-item">
+					<NuxtLink to="https://bleubleu.studio" target="_blank">
+						<span> Bleubleu.studio </span>
+						<IconBaseArrowLink
+							:colors="{
+								background: 'var(--accent-color)',
+								arrow: 'var(--text-accent-color)',
+							}"
+						/>
+					</NuxtLink>
+				</li>
+				<li
+					v-for="link in params.links"
+					:key="link.id"
+					class="section__content-links-item"
+				>
+					<PrismicLink :field="link.link">
+						<span>
+							{{ link.name }}
+						</span>
+						<IconBaseArrowLink
+							:colors="{
+								background: 'var(--accent-color)',
+								arrow: 'var(--text-accent-color)',
+							}"
+						/>
+					</PrismicLink>
+				</li>
+			</ul>
+		</UIBaseLenis>
+		<div
+			class="section__bookmark"
+			tabindex="0"
+			aria-disabled="false"
+			role="button"
+			:data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'"
+			@click="isOpen = !isOpen"
+			@keydown.enter="isOpen = !isOpen"
+			@keydown.space.prevent="isOpen = !isOpen"
+		>
+			<h1 class="section__bookmark-heading">
+				{{ params.me["first-name"] }} {{ params.me["last-name"] }}
+			</h1>
+			<div class="section__bookmark-flex">
+				<div>
+					<p>Explore further</p>
+					<p>Get to know me here</p>
+				</div>
+				<div class="section__bookmark-arrow">
+					<IconBaseToward />
+				</div>
+			</div>
+		</div>
+	</section>
 </template>
 
 <style scoped lang="scss">
