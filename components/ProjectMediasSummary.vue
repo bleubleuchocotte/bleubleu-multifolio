@@ -30,6 +30,7 @@ defineProps<ComponentProps>();
 
     &-item {
       display: flex;
+      flex: 1;
       overflow: hidden;
       transition: transform 0.1s ease-out;
 
