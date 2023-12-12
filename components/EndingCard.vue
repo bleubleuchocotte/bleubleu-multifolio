@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import type { ImageField } from "@prismicio/types";
 
-defineProps({
-	email: {
-		type: String,
-		required: true,
-	},
-	endingCardImage: {
-		type: Object as PropType<ImageField>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	email: string
+	endingCardImage: ImageField
+};
+
+defineProps<ComponentProps>();
 
 defineEmits<{ (e: "goToStart"): void }>();
 </script>
