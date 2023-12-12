@@ -41,6 +41,7 @@ withDefaults(defineProps<ComponentProps>(), {
 
 	&__image, &__video {
 		width: 100%;
+		min-width: 0;
 		height: 100%;
 		object-fit: cover;
 		@include border-radius();
