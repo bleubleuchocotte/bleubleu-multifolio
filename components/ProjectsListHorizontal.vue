@@ -16,6 +16,8 @@ const emits = defineEmits<{
 	(e: "goToStart"): void
 }>();
 
+const currentProjectIndex = ref(0);
+
 onMounted(() => {
 	useEventListener(document, "keydown", (e) => {
 		if (
@@ -48,8 +50,6 @@ onMounted(() => {
 		}
 	});
 });
-
-const currentProjectIndex = ref(0);
 
 function onTarget(id: string, index: number) {
 	emits("target", id);

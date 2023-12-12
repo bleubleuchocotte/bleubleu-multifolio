@@ -27,7 +27,7 @@ withDefaults(defineProps<ComponentProps>(), {
 	<div class="media">
 		<template v-for="field in Object.values(media.field)">
 			<PrismicImage v-if="('alt' in field) || ('kind' in field && field.kind === 'image')" :key="media.id + field.url" :field="field" widths="defaults" class="media__image" :data-type="media.type" />
-			<video v-else-if="'kind' in field" class="media__video" :data-type="media.type" v-bind="videoSettings">
+			<video v-else-if="'kind' in field" v-bind="videoSettings" :key="field.url" class="media__video" :data-type="media.type">
 				<source :src="field.url">
 			</video>
 		</template>

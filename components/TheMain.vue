@@ -12,17 +12,17 @@ defineProps({
 	},
 });
 
+const scrollToProjectId = ref<string>();
+const idToProject = ref<string>();
+
+const projectInGallery = ref<Project | null>(null);
+
 function callback(id: string, hasToScroll: boolean) {
 	idToProject.value = id;
 	if (hasToScroll)
 		scrollToProjectId.value = `[data-project-h-id='${id}']`;
 	else scrollToProjectId.value = undefined;
 }
-
-const scrollToProjectId = ref<string>();
-const idToProject = ref<string>();
-
-const projectInGallery = ref<Project | null>(null);
 </script>
 
 <template>

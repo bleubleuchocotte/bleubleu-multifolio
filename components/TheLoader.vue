@@ -69,6 +69,10 @@ const displayString = ref("Loading...");
 let index = 0;
 const ratio = ref(0);
 
+const styles = reactive({
+	color: `${interpolate(props.colors.start, props.colors.end, 0)}`,
+});
+
 const { pause } = useIntervalFn(() => {
 	const result = decodeString(displayString, props.text, index);
 	index += 1;
@@ -87,10 +91,6 @@ const { pause } = useIntervalFn(() => {
 		}, 400);
 	}
 }, 75);
-
-const styles = reactive({
-	color: `${interpolate(props.colors.start, props.colors.end, 0)}`,
-});
 </script>
 
 <template>

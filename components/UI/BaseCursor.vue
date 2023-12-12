@@ -9,6 +9,23 @@ const props = defineProps({
 	},
 });
 
+const x = ref(0);
+const y = ref(0);
+const delta = reactive({
+	x: 0,
+	y: 0,
+});
+const isInvert = ref(false);
+const isExpand = ref(false);
+const isVisible = ref(false);
+const container = ref();
+const containerIcon = ref();
+const icon = ref<CursorIconType>(null);
+
+const size = computed(() =>
+	isExpand.value && icon.value ? props.size * 2 : props.size,
+);
+
 function callback(e: MouseEvent) {
 	x.value = e.clientX;
 	y.value = e.clientY;
@@ -111,23 +128,6 @@ function hasParentWithClass(
 }
 
 useEventListener(document, "mousemove", callback);
-
-const x = ref(0);
-const y = ref(0);
-const delta = reactive({
-	x: 0,
-	y: 0,
-});
-const isInvert = ref(false);
-const isExpand = ref(false);
-const isVisible = ref(false);
-const container = ref();
-const containerIcon = ref();
-const icon = ref<CursorIconType>(null);
-
-const size = computed(() =>
-	isExpand.value && icon.value ? props.size * 2 : props.size,
-);
 
 watch([x, y], () => {
 	useAnimate(

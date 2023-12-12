@@ -25,6 +25,11 @@ const props = defineProps({
 	},
 });
 
+const container = ref(null);
+let lenis: Lenis;
+
+const velocity = ref(0);
+
 onMounted(() => {
 	if (container.value === null)
 		return;
@@ -49,9 +54,6 @@ onMounted(() => {
 	requestAnimationFrame(raf);
 });
 
-const container = ref(null);
-let lenis: Lenis;
-
 watch(
 	() => props.target,
 	() => {
@@ -59,8 +61,6 @@ watch(
 			lenis.scrollTo(props.target);
 	},
 );
-
-const velocity = ref(0);
 </script>
 
 <template>

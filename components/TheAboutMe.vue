@@ -8,6 +8,9 @@ defineProps({
 	},
 });
 
+const isOpen = ref(false);
+const target = ref();
+
 onMounted(() => {
 	document.addEventListener("keydown", callback);
 });
@@ -20,9 +23,6 @@ function callback(e: KeyboardEvent) {
 	if (isOpen.value === true && e.key === "Escape")
 		isOpen.value = false;
 }
-
-const isOpen = ref(false);
-const target = ref();
 
 onClickOutside(target, () => {
 	if (isOpen.value === true)

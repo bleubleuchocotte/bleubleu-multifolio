@@ -17,6 +17,9 @@ const emit = defineEmits<{
 	(e: "target", payload: string): void
 }>();
 
+const containers = ref<Array<HTMLElement>>([]);
+const projectActive = ref<HTMLElement>();
+
 onMounted(() => {
 	if (containers.value.length > 0) {
 		projectActive.value = containers.value[0];
@@ -38,9 +41,6 @@ function callback(e: MouseEvent | KeyboardEvent, id: string) {
 	(e.target as HTMLElement).blur();
 	emit("target", id);
 }
-
-const containers = ref<Array<HTMLElement>>([]);
-const projectActive = ref<HTMLElement>();
 
 watch(
 	() => props.idToActive,
