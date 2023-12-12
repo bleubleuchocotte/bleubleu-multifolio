@@ -58,6 +58,8 @@ useServerSeoMeta({
 		width: options?.data["og-image"].dimensions?.width ?? "",
 		height: options?.data["og-image"].dimensions?.width ?? "",
 	},
+
+	publisher: `${options?.data["first-name"]} ${options?.data["last-name"]}`,
 });
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
