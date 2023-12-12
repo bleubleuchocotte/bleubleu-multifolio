@@ -5,9 +5,11 @@ class PagesModule extends PrismicFactory {
 	async getHome() {
 		const { data } = await useAsyncData("GetHomePage", () => this.client.getSingle<WebsiteDocument>("website", {
 			graphQuery: `{
-				about-image
-				description
-				ending-card-image
+				website {
+					about-image
+					description
+					ending-card-image
+				}
 			}`,
 		}));
 
