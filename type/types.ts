@@ -82,6 +82,20 @@ export type TheAboutMeType = {
 	links: LinkType[]
 };
 
+export type HomePageProps = {
+	desktop: {
+		projects: Project[]
+		content: {
+			about: TheAboutMeType
+			endindCardImage: ImageField
+		}
+	}
+	mobile: {
+		projects: Project[]
+		content: TheAboutMeType
+	}
+};
+
 /**
  * D'après la doc de lenis :
  * number: value to scroll in pixels

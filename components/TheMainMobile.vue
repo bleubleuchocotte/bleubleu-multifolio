@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import type { Project, WebsiteType } from "@/type/types";
+import type { Project, TheAboutMeType } from "@/type/types";
 
-defineProps({
-	projects: {
-		type: Array<Project>,
-		required: true,
-	},
-	website: {
-		type: Object as PropType<WebsiteType>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	projects: Project[]
+	content: TheAboutMeType
+};
+
+defineProps<ComponentProps>();
 
 const accordions = ref<any[]>([]);
 const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
@@ -37,7 +33,7 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 
 		<footer>
 			<TheAboutMeMobile
-				:params="{ me: website.me, links: website.footer.links }"
+				:params="content"
 			/>
 		</footer>
 	</div>
