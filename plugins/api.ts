@@ -9,7 +9,7 @@ export default defineNuxtPlugin(async () => {
 	const modules = {
 		options: new OptionsModule(client),
 		pages: new PagesModule(client),
-		projects: await new ProjectsModule(client).getProjects(),
+		projects: new ProjectsModule(client),
 	};
 
 	return {
