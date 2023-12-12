@@ -1,5 +1,5 @@
-import type { WebsiteDocument } from "prismicio-types";
 import PrismicFactory from "../factory";
+import type { WebsiteDocument } from "@/prismicio-types";
 
 class OptionsModule extends PrismicFactory {
 	async getOptions() {

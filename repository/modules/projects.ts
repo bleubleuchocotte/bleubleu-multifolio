@@ -1,5 +1,5 @@
 import type { PrismicDocument } from "@prismicio/types";
-import type { MediaType, Project, SkillType } from "type/types";
+import type { MediaType, Project, SkillType } from "@/type/types";
 import PrismicFactory from "@/repository/factory";
 
 class ProjectsModule extends PrismicFactory {
