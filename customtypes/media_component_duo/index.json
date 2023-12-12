@@ -1,0 +1,33 @@
+{
+  "id": "media_component_duo",
+  "label": "media-component-duo",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "media_de_gauche": {
+        "type": "Link",
+        "config": {
+          "label": "Média de gauche",
+          "placeholder": "",
+          "select": "media"
+        }
+      },
+      "media_de_droite": {
+        "type": "Link",
+        "config": {
+          "label": "Média de droite",
+          "placeholder": "",
+          "select": "media"
+        }
+      }
+    }
+  }
+}

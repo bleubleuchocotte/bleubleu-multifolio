@@ -1,0 +1,27 @@
+{
+	"id": "media-full",
+	"label": "media-full",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"full-media-thumbnail": {
+				"type": "Image",
+				"config": {
+					"constraint": {},
+					"thumbnails": [],
+					"label": "full-media-thumbnail"
+				}
+			},
+			"full-media-content": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "full-media-content",
+					"placeholder": "Audio ou vidéo /!\\ Si image, mettre seulement dans la thumbnail."
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
+}

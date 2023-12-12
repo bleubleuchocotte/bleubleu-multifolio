@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ImageType } from "@/type/types";
+import type { ImageType } from "@/type/types";
 
 defineProps({
-  images: {
-    type: Array<ImageType>,
-    required: false,
-    default: [],
-  },
+	images: {
+		type: Array<ImageType>,
+		required: false,
+		default: [],
+	},
 });
 </script>
 
 <template>
-  <div class="project-images-summary__grid">
-    <template v-for="image in images" :key="image.id">
-      <div class="project-images-summary__grid-item" :data-type="image.type">
-        <PrismicImage
-          v-for="field in Object.values(image.field)"
-          :key="image.id + field.url"
-          :field="field"
-          widths="defaults"
-        />
-      </div>
-    </template>
-  </div>
+	<div class="project-images-summary__grid">
+		<template v-for="image in images" :key="image.id">
+			<div class="project-images-summary__grid-item" :data-type="image.type">
+				<PrismicImage
+					v-for="field in Object.values(image.field)"
+					:key="image.id + field.url"
+					:field="field"
+					widths="defaults"
+				/>
+			</div>
+		</template>
+	</div>
 </template>
 
 <style scoped lang="scss">

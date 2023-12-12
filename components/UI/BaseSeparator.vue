@@ -1,19 +1,19 @@
 <script setup lang="ts">
 const props = defineProps({
-  width: {
-    type: Number,
-    required: false,
-    default: 1,
-  },
+	width: {
+		type: Number,
+		required: false,
+		default: 1,
+	},
 });
 
 const styles = reactive({
-  "--width": `${props.width}px`,
+	"--width": `${props.width}px`,
 });
 </script>
 
 <template>
-  <div :style="styles"></div>
+	<div :style="styles" />
 </template>
 
 <style scoped lang="scss">

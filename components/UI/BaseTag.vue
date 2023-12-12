@@ -1,5 +1,5 @@
 <template>
-  <span class="tag__text"><slot></slot></span>
+	<span class="tag__text"><slot /></span>
 </template>
 
 <style scoped lang="scss">
