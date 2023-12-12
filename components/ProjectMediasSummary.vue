@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { MediaType } from 'type/types';
+import type { MediaType } from "type/types";
 
 type ComponentProps = {
 	medias: MediaType[]
-}
+};
 
-defineProps<ComponentProps>()
+defineProps<ComponentProps>();
 </script>
 
 <template>
-  <div class="project-images-summary__grid">
-    <template v-for="media in medias" :key="media.id">
-      <div class="project-images-summary__grid-item">
-				<UIBaseMedia :media="media"/>
-      </div>
-    </template>
-  </div>
+	<div class="project-images-summary__grid">
+		<template v-for="media in medias" :key="media.id">
+			<div class="project-images-summary__grid-item">
+				<UIBaseMedia :media="media" />
+			</div>
+		</template>
+	</div>
 </template>
 
 <style scoped lang="scss">

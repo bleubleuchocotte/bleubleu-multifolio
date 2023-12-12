@@ -1,54 +1,55 @@
 <script setup lang="ts">
-import { ImageField } from "@prismicio/types";
+import type { ImageField } from "@prismicio/types";
 
 defineProps({
-  email: {
-    type: String,
-    required: true,
-  },
-  endingCardImage: {
-    type: Object as PropType<ImageField>,
-    required: true,
-  },
+	email: {
+		type: String,
+		required: true,
+	},
+	endingCardImage: {
+		type: Object as PropType<ImageField>,
+		required: true,
+	},
 });
 
 defineEmits<{ (e: "goToStart"): void }>();
 </script>
 
 <template>
-  <article class="ending-card invert-selection">
-    <div class="ending-card__content">
-      <p class="ending-card__content-caption">
-        Finished viewing?<br />
-        Reach out for collaborations or inquiries!
-      </p>
-      <PrismicImage
-        class="ending-card__content-image"
-        :field="endingCardImage"
-      />
-      <div class="ending-card__content-start-button">
-        <button type="button" @click="$emit('goToStart')">
-          Bring me to start
-        </button>
-        <UIBaseButtonNavigation
-          class="ending-card__content-arrow"
-          :colors="{
-            background: 'var(--text-accent-color)',
-            arrow: 'var(--accent-color)',
-          }"
-          :orientation="'left'"
-          :length-arrow="'short'"
-          @click="$emit('goToStart')"
-        />
-      </div>
+	<article class="ending-card invert-selection">
+		<div class="ending-card__content">
+			<p class="ending-card__content-caption">
+				Finished viewing?<br>
+				Reach out for collaborations or inquiries!
+			</p>
+			<PrismicImage
+				class="ending-card__content-image"
+				:field="endingCardImage"
+			/>
+			<div class="ending-card__content-start-button">
+				<button type="button" @click="$emit('goToStart')">
+					Bring me to start
+				</button>
+				<UIBaseButtonNavigation
+					class="ending-card__content-arrow"
+					:colors="{
+						background: 'var(--text-accent-color)',
+						arrow: 'var(--accent-color)',
+					}"
+					orientation="left"
+					length-arrow="short"
+					@click="$emit('goToStart')"
+				/>
+			</div>
 
-      <UIBaseButtonContact
-        :email="email"
-        class="ending-card__content-contact-button"
-        >Contact
-      </UIBaseButtonContact>
-    </div>
-  </article>
+			<UIBaseButtonContact
+				:email="email"
+				class="ending-card__content-contact-button"
+			>
+				Contact
+			</UIBaseButtonContact>
+		</div>
+	</article>
 </template>
 
 <style scoped lang="scss">

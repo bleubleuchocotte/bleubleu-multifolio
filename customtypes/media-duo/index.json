@@ -1,43 +1,43 @@
 {
-  "id": "media-duo",
-  "label": "media-duo",
-  "repeatable": true,
-  "json": {
-    "Main": {
-      "left-media-thumbnail": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "left-media-thumbnail"
-        }
-      },
-      "left-media-content": {
-        "type": "Link",
-        "config": {
-          "select": "media",
-          "label": "left-media-content",
-          "placeholder": "Audio ou vidéo /!\\ Si image, mettre seulement dans la thumbnail."
-        }
-      },
-      "right-media-thumbnail": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "right-media-thumbnail"
-        }
-      },
-      "right-media-content": {
-        "type": "Link",
-        "config": {
-          "select": "media",
-          "label": "right-media-content",
-          "placeholder": "Audio ou vidéo /!\\ Si image, mettre seulement dans la thumbnail."
-        }
-      }
-    }
-  },
-  "status": true,
-  "format": "custom"
+	"id": "media-duo",
+	"label": "media-duo",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"left-media-thumbnail": {
+				"type": "Image",
+				"config": {
+					"constraint": {},
+					"thumbnails": [],
+					"label": "left-media-thumbnail"
+				}
+			},
+			"left-media-content": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "left-media-content",
+					"placeholder": "Audio ou vidéo /!\\ Si image, mettre seulement dans la thumbnail."
+				}
+			},
+			"right-media-thumbnail": {
+				"type": "Image",
+				"config": {
+					"constraint": {},
+					"thumbnails": [],
+					"label": "right-media-thumbnail"
+				}
+			},
+			"right-media-content": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "right-media-content",
+					"placeholder": "Audio ou vidéo /!\\ Si image, mettre seulement dans la thumbnail."
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
 }

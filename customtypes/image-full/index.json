@@ -1,22 +1,22 @@
 {
-  "id": "image-full",
-  "label": "image-full",
-  "repeatable": true,
-  "json": {
-    "Main": {
-      "image": {
-        "type": "Image",
-        "config": {
-          "constraint": {
-            "width": null,
-            "height": null
-          },
-          "thumbnails": [],
-          "label": "image en pleine largeur"
-        }
-      }
-    }
-  },
-  "status": true,
-  "format": "custom"
+	"id": "image-full",
+	"label": "image-full",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"image": {
+				"type": "Image",
+				"config": {
+					"constraint": {
+						"width": null,
+						"height": null
+					},
+					"thumbnails": [],
+					"label": "image en pleine largeur"
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
 }

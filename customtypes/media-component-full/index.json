@@ -1,18 +1,18 @@
 {
-  "id": "media-component-full",
-  "label": "media-component-full",
-  "repeatable": true,
-  "json": {
-    "Main": {
-      "media": {
-        "type": "Link",
-        "config": {
-          "select": "media",
-          "label": "media"
-        }
-      }
-    }
-  },
-  "status": true,
-  "format": "custom"
+	"id": "media-component-full",
+	"label": "media-component-full",
+	"repeatable": true,
+	"json": {
+		"Main": {
+			"media": {
+				"type": "Link",
+				"config": {
+					"select": "media",
+					"label": "media"
+				}
+			}
+		}
+	},
+	"status": true,
+	"format": "custom"
 }

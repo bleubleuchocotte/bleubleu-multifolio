@@ -1,46 +1,35 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "scripts": {
-    "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
-    "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "slicemachine": "start-slicemachine"
-  },
-  "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@nuxtjs/prismic": "3.1.0",
-    "@slicemachine/adapter-nuxt": "^0.3.28",
-    "@types/node": "^18.16.19",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@vueuse/core": "^10.2.1",
-    "@vueuse/nuxt": "^10.2.1",
-    "consola": "^3.2.3",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.6.3",
-    "nuxt-simple-robots": "^3.0.2",
-    "nuxt-simple-sitemap": "^3.0.11",
-    "prettier": "^2.8.8",
-    "slice-machine-ui": "^1.21.2",
-    "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "@nuxtjs/device": "^3.1.1",
-    "@pinia/nuxt": "^0.4.11",
-    "@studio-freight/lenis": "^1.0.16",
-    "@vueuse/integrations": "^10.4.1",
-    "focus-trap": "^7.5.3",
-    "pinia": "^2.1.6",
-    "sass": "^1.63.6",
-    "sass-loader": "^13.3.2",
-    "vue3-marquee": "^3.2.1"
-  }
+	"name": "nuxt-app",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"slicemachine": "start-slicemachine",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"dependencies": {
+		"@nuxtjs/device": "^3.1.1",
+		"@studio-freight/lenis": "^1.0.16",
+		"@vueuse/integrations": "^10.4.1",
+		"focus-trap": "^7.5.3",
+		"sass": "^1.63.6",
+		"vue3-marquee": "^3.2.1"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^2.4.5",
+		"@nuxtjs/prismic": "3.1.0",
+		"@slicemachine/adapter-nuxt": "^0.3.28",
+		"@vueuse/core": "^10.2.1",
+		"@vueuse/nuxt": "^10.2.1",
+		"eslint": "^8.55.0",
+		"nuxt": "^3.6.3",
+		"nuxt-simple-robots": "^3.0.2",
+		"nuxt-simple-sitemap": "^3.0.11",
+		"slice-machine-ui": "^1.21.2"
+	}
 }
