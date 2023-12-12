@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CursorIconType } from "type/types";
+import type { CursorIconType } from "@/type/types";
 import IconArrowRight from "@/components/Icon/BaseArrowRight.vue";
 import IconArrowLeft from "@/components/Icon/BaseArrowLeft.vue";
 import IconFullscreen from "@/components/Icon/BaseFullscreen.vue";

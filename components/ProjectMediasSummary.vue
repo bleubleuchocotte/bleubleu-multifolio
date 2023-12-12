@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MediaType } from "type/types";
+import type { MediaType } from "@/type/types";
 
 type ComponentProps = {
 	medias: MediaType[]

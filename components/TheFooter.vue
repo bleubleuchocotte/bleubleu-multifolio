@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { WebsiteDocumentDataLinksItem } from "prismicio-types";
+import type { WebsiteDocumentDataLinksItem } from "@/prismicio-types";
 
 type ComponentProps = {
 	links: WebsiteDocumentDataLinksItem[]
