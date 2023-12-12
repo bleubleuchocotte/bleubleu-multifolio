@@ -75,15 +75,11 @@ useFocusTrap(target, { immediate: true });
 
       <div class="gallery__project-images">
         <div
-          v-for="image in project.images"
-          :key="image.id"
-          :data-type="image.type === 'image-duo' ? 'duo' : 'full'"
+          v-for="media in project.medias"
+          :key="media.id"
+          :data-type="media.type === 'media-duo' ? 'duo' : 'full'"
         >
-          <PrismicImage
-            v-for="field in image.field"
-            :key="image.id + field.url"
-            :field="field"
-          />
+          <UIBaseMedia :media="media" :video-settings="{controls: true,}"/>
         </div>
       </div>
     </UIBaseLenis>
