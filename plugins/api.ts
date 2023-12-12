@@ -1,16 +1,15 @@
+import PagesModule from "@/repository/modules/pages";
+import OptionsModule from "@/repository/modules/options";
 import ProjectsModule from "@/repository/modules/projects";
-import WebsiteModule from "@/repository/modules/website";
 
 export default defineNuxtPlugin(async () => {
 	const { client } = usePrismic();
 
 	// An object containing all repositories we need to expose
 	const modules = {
-		website: await new WebsiteModule(client).getWebsite(),
-		pages: {
-			"legal-notices": await new WebsiteModule(client).getPage("legal_notices"),
-		},
-		projects: await new ProjectsModule(client).getProjects(),
+		options: new OptionsModule(client),
+		pages: new PagesModule(client),
+		projects: new ProjectsModule(client),
 	};
 
 	return {

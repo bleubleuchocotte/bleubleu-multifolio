@@ -1,4 +1,4 @@
-import type { ImageField, LinkField, LinkToMediaField, RichTextField } from "@prismicio/types";
+import type { ImageField, LinkField, LinkToMediaField, RichTextField } from "@prismicio/client";
 
 export type ImageType = {
 	field: {
@@ -9,7 +9,8 @@ export type ImageType = {
 };
 export type MediaType = {
 	field: {
-		[index: string]: ImageField | LinkToMediaField<"filled">
+		principal?: LinkToMediaField<"filled">
+		secondary?: LinkToMediaField<"filled">
 	}
 	type: "media-full" | "media-duo"
 	id: string
@@ -80,6 +81,20 @@ export type TheAboutMeType = {
 		email: string
 	}
 	links: LinkType[]
+};
+
+export type HomePageProps = {
+	desktop: {
+		projects: Project[]
+		content: {
+			about: TheAboutMeType
+			endindCardImage: ImageField
+		}
+	}
+	mobile: {
+		projects: Project[]
+		content: TheAboutMeType
+	}
 };
 
 /**

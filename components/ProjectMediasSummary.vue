@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MediaType } from "type/types";
+import type { MediaType } from "@/type/types";
 
 type ComponentProps = {
 	medias: MediaType[]
@@ -30,6 +30,7 @@ defineProps<ComponentProps>();
 
     &-item {
       display: flex;
+      flex: 1;
       overflow: hidden;
       transition: transform 0.1s ease-out;
 

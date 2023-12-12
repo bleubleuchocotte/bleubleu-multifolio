@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CursorIconType } from "type/types";
+import type { CursorIconType } from "@/type/types";
 
 const props = defineProps({
 	size: {

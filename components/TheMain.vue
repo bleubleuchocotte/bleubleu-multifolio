@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { Project, WebsiteType } from "@/type/types";
+import type { ImageField } from "@prismicio/client";
+import type { Project, TheAboutMeType } from "@/type/types";
 
-defineProps({
-	projects: {
-		type: Array<Project>,
-		required: true,
-	},
-	website: {
-		type: Object as PropType<WebsiteType>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	projects: Project[]
+	content: {
+		about: TheAboutMeType
+		endindCardImage: ImageField
+	}
+};
+
+defineProps<ComponentProps>();
 
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
@@ -26,7 +26,7 @@ function callback(id: string, hasToScroll: boolean) {
 
 <template>
 	<main class="main">
-		<TheAboutMe :params="{ me: website.me, links: website.footer.links }" />
+		<TheAboutMe :params="content.about" />
 		<div class="main__left">
 			<section class="main__left-container">
 				<p>My projects</p>
@@ -58,8 +58,8 @@ function callback(id: string, hasToScroll: boolean) {
 			/>
 
 			<EndingCard
-				:email="website.me.email"
-				:ending-card-image="website['ending-card-image']"
+				:email="content.about.me.email"
+				:ending-card-image="content.endindCardImage"
 				@go-to-start="
 					() => (scrollToProjectId = `[data-project-h-id='${projects[0].id}']`)
 				"
