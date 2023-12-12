@@ -1,81 +1,76 @@
 {
-	"id": "projet",
-	"label": "projet",
-	"repeatable": true,
-	"json": {
-		"Main": {
-			"title": {
-				"type": "Text",
-				"config": {
-					"label": "Titre du projet"
-				}
-			},
-			"url": {
-				"type": "Link",
-				"config": {
-					"allowTargetBlank": true,
-					"label": "Url du projet",
-					"select": null
-				}
-			},
-			"date": {
-				"type": "Date",
-				"config": {
-					"label": "Date de réalisation"
-				}
-			},
-			"skills": {
-				"type": "Group",
-				"config": {
-					"fields": {
-						"skill": {
-							"type": "Text",
-							"config": {
-								"label": "Une compétence"
-							}
-						}
-					},
-					"label": "Compétences mise en oeuvre"
-				}
-			},
-			"description": {
-				"type": "StructuredText",
-				"config": {
-					"single": "paragraph",
-					"label": "Description du projet"
-				}
-			},
-			"medias": {
-				"type": "Group",
-				"config": {
-					"fields": {
-						"media": {
-							"type": "Link",
-							"config": {
-								"select": "document",
-								"customtypes": [
-									"image-duo",
-									"image-full",
-									"media",
-									"media-component-full"
-								],
-								"label": "media"
-							}
-						}
-					},
-					"label": "Liste des médias"
-				}
-			},
-			"image-mobile": {
-				"type": "Image",
-				"config": {
-					"constraint": {},
-					"thumbnails": [],
-					"label": "Image pour le format responsive"
-				}
-			}
-		}
-	},
-	"status": true,
-	"format": "custom"
+  "id": "projet",
+  "label": "projet",
+  "repeatable": true,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre du projet"
+        }
+      },
+      "url": {
+        "type": "Link",
+        "config": {
+          "allowTargetBlank": true,
+          "label": "Url du projet",
+          "select": null
+        }
+      },
+      "date": {
+        "type": "Date",
+        "config": {
+          "label": "Date de réalisation"
+        }
+      },
+      "skills": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "skill": {
+              "type": "Text",
+              "config": {
+                "label": "Une compétence"
+              }
+            }
+          },
+          "label": "Compétences mise en oeuvre"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph",
+          "label": "Description du projet"
+        }
+      },
+      "medias": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "media": {
+              "type": "Link",
+              "config": {
+                "label": "media",
+                "select": "document",
+                "customtypes": ["media-component-full", "media_component_duo"]
+              }
+            }
+          },
+          "label": "Liste des médias"
+        }
+      },
+      "image-mobile": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "Image pour le format responsive"
+        }
+      }
+    }
+  }
 }
