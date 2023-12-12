@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HomePageProps, LinkType } from "type/types";
+import type { HomePageProps, LinkType } from "@/type/types";
 
 const { $api } = useNuxtApp();
 
