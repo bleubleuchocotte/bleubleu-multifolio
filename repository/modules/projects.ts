@@ -1,4 +1,4 @@
-import type { PrismicDocument } from "@prismicio/types";
+import type { PrismicDocument } from "@prismicio/client";
 import type { MediaType, Project, SkillType } from "@/type/types";
 import PrismicFactory from "@/repository/factory";
 

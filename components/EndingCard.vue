@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ImageField } from "@prismicio/types";
+import type { ImageField } from "@prismicio/client";
 
 type ComponentProps = {
 	email: string

@@ -1,4 +1,4 @@
-import type { ImageField, LinkField, LinkToMediaField, RichTextField } from "@prismicio/types";
+import type { ImageField, LinkField, LinkToMediaField, RichTextField } from "@prismicio/client";
 
 export type ImageType = {
 	field: {
