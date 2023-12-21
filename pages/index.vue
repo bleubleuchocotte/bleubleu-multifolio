@@ -8,7 +8,7 @@ const options = await $api.options.getOptions();
 const projects = await $api.projects.getProjects();
 
 if (!options || !page) {
-	throw new Error("Erreur");
+	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
 }
 
 const isMobile = useMediaQuery("(max-width: 1025px)"); // Client side
