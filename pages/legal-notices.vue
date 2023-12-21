@@ -2,6 +2,10 @@
 const { $api } = useNuxtApp();
 const page = await $api.pages.getLegalNotices();
 
+if (!page) {
+	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
+}
+
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 </script>
 
@@ -26,23 +30,23 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 					<h1>Legal Notices</h1>
 
 					<h2>Company Information</h2>
-					<p>Last name: {{ page?.data['me-last-name'] }}</p>
-					<p>First name: {{ page?.data['me-first-name'] }}</p>
-					<p>Adress: {{ page?.data['me-address'] }}</p>
+					<p>Last name: {{ page.data['me-last-name'] }}</p>
+					<p>First name: {{ page.data['me-first-name'] }}</p>
+					<p>Adress: {{ page.data['me-address'] }}</p>
 					<p>Status: Entrepreneur individuel (EI)</p>
-					<p>Email: {{ page?.data['me-email'] }}</p>
-					<p>Phone: {{ page?.data['me-phone-number'] }}</p>
+					<p>Email: {{ page.data['me-email'] }}</p>
+					<p>Phone: {{ page.data['me-phone-number'] }}</p>
 
-					<template v-if="page?.data['me-tva-number'] != null">
+					<template v-if="page.data['me-tva-number'] != null">
 						<h2>VAT Identification Number:</h2>
 						<p>{{ page.data['me-tva-number'] }}</p>
 					</template>
 
 					<h2>Website Host:</h2>
-					<p>Host name: {{ page?.data['host-name'] }}</p>
-					<p>Host address: {{ page?.data['host-adress'] }}</p>
+					<p>Host name: {{ page.data['host-name'] }}</p>
+					<p>Host address: {{ page.data['host-adress'] }}</p>
 					<p />
-					<p>Host phone: {{ page?.data['host-phone-number'] }}</p>
+					<p>Host phone: {{ page.data['host-phone-number'] }}</p>
 				</div>
 			</div>
 		</template>
@@ -52,23 +56,23 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 				<h1>Legal Notices</h1>
 
 				<h2>Company Information</h2>
-				<p>Last name: {{ page?.data['me-last-name'] }}</p>
-				<p>First name: {{ page?.data['me-first-name'] }}</p>
-				<p>Adress: {{ page?.data['me-address'] }}</p>
+				<p>Last name: {{ page.data['me-last-name'] }}</p>
+				<p>First name: {{ page.data['me-first-name'] }}</p>
+				<p>Adress: {{ page.data['me-address'] }}</p>
 				<p>Status: Entrepreneur individuel (EI)</p>
-				<p>Email: {{ page?.data['me-email'] }}</p>
-				<p>Phone: {{ page?.data['me-phone-number'] }}</p>
+				<p>Email: {{ page.data['me-email'] }}</p>
+				<p>Phone: {{ page.data['me-phone-number'] }}</p>
 
-				<template v-if="page?.data['me-tva-number'] != null">
+				<template v-if="page.data['me-tva-number'] != null">
 					<h2>VAT Identification Number:</h2>
 					<p>{{ page.data['me-tva-number'] }}</p>
 				</template>
 
 				<h2>Website Host:</h2>
-				<p>Host name: {{ page?.data['host-name'] }}</p>
-				<p>Host address: {{ page?.data['host-adress'] }}</p>
+				<p>Host name: {{ page.data['host-name'] }}</p>
+				<p>Host address: {{ page.data['host-adress'] }}</p>
 				<p />
-				<p>Host phone: {{ page?.data['host-phone-number'] }}</p>
+				<p>Host phone: {{ page.data['host-phone-number'] }}</p>
 			</div>
 		</template>
 	</div>
