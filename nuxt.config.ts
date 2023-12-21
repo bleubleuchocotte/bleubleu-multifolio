@@ -47,7 +47,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/device",
 	],
 	prismic: {
-		endpoint: "multifolio",
+		endpoint: process.env.PRISMIC_ENDPOINT,
 		toolbar: false,
 		preview: false,
 	},
