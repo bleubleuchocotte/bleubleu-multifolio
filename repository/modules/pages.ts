@@ -1,5 +1,5 @@
 import PrismicFactory from "../factory";
-import type { LegalNoticesDocument, WebsiteDocument } from "@/prismicio-types";
+import type { PageLegalNoticeDocument, WebsiteDocument } from "@/prismicio-types";
 
 class PagesModule extends PrismicFactory {
 	async getHome() {
@@ -16,8 +16,8 @@ class PagesModule extends PrismicFactory {
 		return data.value;
 	}
 
-	async getLegalNotices() {
-		const { data } = await useAsyncData("GetLegalNoticesPage", () => this.client.getSingle<LegalNoticesDocument>("legal_notices"));
+	async getLegalNotice() {
+		const { data } = await useAsyncData("GetLegalNoticePage", () => this.client.getSingle<PageLegalNoticeDocument>("page_legal_notice"));
 
 		return data.value;
 	}

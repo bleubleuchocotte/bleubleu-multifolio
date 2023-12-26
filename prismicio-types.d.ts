@@ -5,124 +5,6 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for legal_notices documents
- */
-interface LegalNoticesDocumentData {
-  /**
-   * me-first-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Thomas
-   * - **API ID Path**: legal_notices.me-first-name
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-first-name": prismic.KeyTextField;
-
-  /**
-   * me-last-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Auffroy
-   * - **API ID Path**: legal_notices.me-last-name
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-last-name": prismic.KeyTextField;
-
-  /**
-   * me-address field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Adresse de mon entreprise
-   * - **API ID Path**: legal_notices.me-address
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-address": prismic.KeyTextField;
-
-  /**
-   * me-email field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Mél permettant de contacter mon entreprise
-   * - **API ID Path**: legal_notices.me-email
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-email": prismic.KeyTextField;
-
-  /**
-   * me-phone-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: N° de téléphone permettant de contacter mon entreprise
-   * - **API ID Path**: legal_notices.me-phone-number
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-phone-number": prismic.KeyTextField;
-
-  /**
-   * me-tva-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Laissez vide si non-déclaré
-   * - **API ID Path**: legal_notices.me-tva-number
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-tva-number": prismic.KeyTextField /**
-   * host-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Nom ou dénomination sociale
-   * - **API ID Path**: legal_notices.host-name
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  "host-name": prismic.KeyTextField;
-
-  /**
-   * host-adress field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: legal_notices.host-adress
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "host-adress": prismic.KeyTextField;
-
-  /**
-   * host-phone-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: legal_notices.host-phone-number
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "host-phone-number": prismic.KeyTextField;
-}
-
-/**
- * legal_notices document from Prismic
- *
- * - **API ID**: `legal_notices`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type LegalNoticesDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<LegalNoticesDocumentData>,
-    "legal_notices",
-    Lang
-  >;
-
-/**
  * Content for media-component-full documents
  */
 interface MediaComponentFullDocumentData {
@@ -194,6 +76,38 @@ export type MediaComponentDuoDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<MediaComponentDuoDocumentData>,
     "media_component_duo",
+    Lang
+  >;
+
+/**
+ * Content for Page | Legal notice documents
+ */
+interface PageLegalNoticeDocumentData {
+  /**
+   * Mentions légales field in *Page | Legal notice*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page_legal_notice.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Page | Legal notice document from Prismic
+ *
+ * - **API ID**: `page_legal_notice`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PageLegalNoticeDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PageLegalNoticeDocumentData>,
+    "page_legal_notice",
     Lang
   >;
 
@@ -566,9 +480,9 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | LegalNoticesDocument
   | MediaComponentFullDocument
   | MediaComponentDuoDocument
+  | PageLegalNoticeDocument
   | ProjetDocument
   | WebsiteDocument;
 
@@ -582,12 +496,12 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      LegalNoticesDocument,
-      LegalNoticesDocumentData,
       MediaComponentFullDocument,
       MediaComponentFullDocumentData,
       MediaComponentDuoDocument,
       MediaComponentDuoDocumentData,
+      PageLegalNoticeDocument,
+      PageLegalNoticeDocumentData,
       ProjetDocument,
       ProjetDocumentData,
       ProjetDocumentDataSkillsItem,
