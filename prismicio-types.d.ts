@@ -476,17 +476,6 @@ interface WebsiteDocumentData {
   "seo-description": prismic.KeyTextField;
 
   /**
-   * og-url field in *website*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: This should be the undecorated URL, without session variables, user identifying parameters, or counters.
-   * - **API ID Path**: website.og-url
-   * - **Tab**: seo
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "og-url": prismic.KeyTextField;
-
-  /**
    * og-image field in *website*
    *
    * - **Field Type**: Image
