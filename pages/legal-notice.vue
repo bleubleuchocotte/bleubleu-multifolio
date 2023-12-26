@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
-const page = await $api.pages.getLegalNotices();
+const page = await $api.pages.getLegalNotice();
 
 if (!page) {
 	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
@@ -21,59 +21,17 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 				:key="Math.floor(Math.random() * (100 + i))"
 				class="legal-container__bands"
 			>
-				<div
-					v-for="j in 6"
-					:key="Math.floor(Math.random() * (100 + j))"
+				<PrismicRichText
+					v-for="j in 6" :key="Math.floor(Math.random() * (100 + j))"
+					:field="page.data.content"
 					class="legal-container__bands-notices"
 					:aria-hidden="!(j === 1 && i === 1)"
-				>
-					<h1>Legal Notices</h1>
-
-					<h2>Company Information</h2>
-					<p>Last name: {{ page.data['me-last-name'] }}</p>
-					<p>First name: {{ page.data['me-first-name'] }}</p>
-					<p>Adress: {{ page.data['me-address'] }}</p>
-					<p>Status: Entrepreneur individuel (EI)</p>
-					<p>Email: {{ page.data['me-email'] }}</p>
-					<p>Phone: {{ page.data['me-phone-number'] }}</p>
-
-					<template v-if="page.data['me-tva-number'] != null">
-						<h2>VAT Identification Number:</h2>
-						<p>{{ page.data['me-tva-number'] }}</p>
-					</template>
-
-					<h2>Website Host:</h2>
-					<p>Host name: {{ page.data['host-name'] }}</p>
-					<p>Host address: {{ page.data['host-adress'] }}</p>
-					<p />
-					<p>Host phone: {{ page.data['host-phone-number'] }}</p>
-				</div>
+				/>
 			</div>
 		</template>
 
 		<template v-else>
-			<div class="legal-container__bands-notices">
-				<h1>Legal Notices</h1>
-
-				<h2>Company Information</h2>
-				<p>Last name: {{ page.data['me-last-name'] }}</p>
-				<p>First name: {{ page.data['me-first-name'] }}</p>
-				<p>Adress: {{ page.data['me-address'] }}</p>
-				<p>Status: Entrepreneur individuel (EI)</p>
-				<p>Email: {{ page.data['me-email'] }}</p>
-				<p>Phone: {{ page.data['me-phone-number'] }}</p>
-
-				<template v-if="page.data['me-tva-number'] != null">
-					<h2>VAT Identification Number:</h2>
-					<p>{{ page.data['me-tva-number'] }}</p>
-				</template>
-
-				<h2>Website Host:</h2>
-				<p>Host name: {{ page.data['host-name'] }}</p>
-				<p>Host address: {{ page.data['host-adress'] }}</p>
-				<p />
-				<p>Host phone: {{ page.data['host-phone-number'] }}</p>
-			</div>
+			<PrismicRichText :field="page.data.content" class="legal-container__bands-notices" />
 		</template>
 	</div>
 </template>
@@ -124,10 +82,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 
     &-notices {
       @include padding();
-
-      h2 {
-        @include prop("margin-block", 0.5);
-      }
     }
   }
 }
