@@ -81,6 +81,9 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
     border-left: none;
 
     &-notices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
       @include padding();
     }
   }
