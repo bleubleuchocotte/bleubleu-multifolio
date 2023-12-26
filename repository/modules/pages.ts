@@ -1,5 +1,5 @@
 import PrismicFactory from "../factory";
-import type { LegalNoticesDocument, PageLegalNoticeDocument, WebsiteDocument } from "@/prismicio-types";
+import type { PageLegalNoticeDocument, WebsiteDocument } from "@/prismicio-types";
 
 class PagesModule extends PrismicFactory {
 	async getHome() {
