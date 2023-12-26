@@ -14,7 +14,6 @@ class OptionsModule extends PrismicFactory {
 						last-name
 						links
 						og-image
-						og-url
 						seo-description
 						seo-favicon
 						seo-title
