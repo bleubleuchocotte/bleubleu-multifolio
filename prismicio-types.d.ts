@@ -5,199 +5,6 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for image-duo documents
- */
-interface ImageDuoDocumentData {
-  /**
-   * Image gauche field in *image-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-duo.image-1
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "image-1": prismic.ImageField<never>;
-
-  /**
-   * Image droite field in *image-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-duo.image-2
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "image-2": prismic.ImageField<never>;
-}
-
-/**
- * image-duo document from Prismic
- *
- * - **API ID**: `image-duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ImageDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<ImageDuoDocumentData>,
-    "image-duo",
-    Lang
-  >;
-
-/**
- * Content for image-full documents
- */
-interface ImageFullDocumentData {
-  /**
-   * image en pleine largeur field in *image-full*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-full.image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * image-full document from Prismic
- *
- * - **API ID**: `image-full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ImageFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<ImageFullDocumentData>,
-    "image-full",
-    Lang
-  >;
-
-/**
- * Content for legal_notices documents
- */
-interface LegalNoticesDocumentData {
-  /**
-   * me-first-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Thomas
-   * - **API ID Path**: legal_notices.me-first-name
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-first-name": prismic.KeyTextField;
-
-  /**
-   * me-last-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Auffroy
-   * - **API ID Path**: legal_notices.me-last-name
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-last-name": prismic.KeyTextField;
-
-  /**
-   * me-address field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Adresse de mon entreprise
-   * - **API ID Path**: legal_notices.me-address
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-address": prismic.KeyTextField;
-
-  /**
-   * me-email field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Mél permettant de contacter mon entreprise
-   * - **API ID Path**: legal_notices.me-email
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-email": prismic.KeyTextField;
-
-  /**
-   * me-phone-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: N° de téléphone permettant de contacter mon entreprise
-   * - **API ID Path**: legal_notices.me-phone-number
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-phone-number": prismic.KeyTextField;
-
-  /**
-   * me-tva-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Laissez vide si non-déclaré
-   * - **API ID Path**: legal_notices.me-tva-number
-   * - **Tab**: me
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "me-tva-number": prismic.KeyTextField /**
-   * host-name field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Nom ou dénomination sociale
-   * - **API ID Path**: legal_notices.host-name
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  "host-name": prismic.KeyTextField;
-
-  /**
-   * host-adress field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: legal_notices.host-adress
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "host-adress": prismic.KeyTextField;
-
-  /**
-   * host-phone-number field in *legal_notices*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: legal_notices.host-phone-number
-   * - **Tab**: host
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "host-phone-number": prismic.KeyTextField;
-}
-
-/**
- * legal_notices document from Prismic
- *
- * - **API ID**: `legal_notices`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type LegalNoticesDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<LegalNoticesDocumentData>,
-    "legal_notices",
-    Lang
-  >;
-
-/**
  * Content for media-component-full documents
  */
 interface MediaComponentFullDocumentData {
@@ -226,114 +33,6 @@ export type MediaComponentFullDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<MediaComponentFullDocumentData>,
     "media-component-full",
-    Lang
-  >;
-
-/**
- * Content for media-duo documents
- */
-interface MediaDuoDocumentData {
-  /**
-   * left-media-thumbnail field in *media-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-duo.left-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "left-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * left-media-content field in *media-duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-duo.left-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "left-media-content": prismic.LinkToMediaField;
-
-  /**
-   * right-media-thumbnail field in *media-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-duo.right-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "right-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * right-media-content field in *media-duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-duo.right-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "right-media-content": prismic.LinkToMediaField;
-}
-
-/**
- * media-duo document from Prismic
- *
- * - **API ID**: `media-duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type MediaDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<MediaDuoDocumentData>,
-    "media-duo",
-    Lang
-  >;
-
-/**
- * Content for media-full documents
- */
-interface MediaFullDocumentData {
-  /**
-   * full-media-thumbnail field in *media-full*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-full.full-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "full-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * full-media-content field in *media-full*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-full.full-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "full-media-content": prismic.LinkToMediaField;
-}
-
-/**
- * media-full document from Prismic
- *
- * - **API ID**: `media-full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type MediaFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<MediaFullDocumentData>,
-    "media-full",
     Lang
   >;
 
@@ -377,6 +76,38 @@ export type MediaComponentDuoDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<MediaComponentDuoDocumentData>,
     "media_component_duo",
+    Lang
+  >;
+
+/**
+ * Content for Page | Legal notice documents
+ */
+interface PageLegalNoticeDocumentData {
+  /**
+   * Mentions légales field in *Page | Legal notice*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page_legal_notice.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Page | Legal notice document from Prismic
+ *
+ * - **API ID**: `page_legal_notice`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PageLegalNoticeDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PageLegalNoticeDocumentData>,
+    "page_legal_notice",
     Lang
   >;
 
@@ -659,17 +390,6 @@ interface WebsiteDocumentData {
   "seo-description": prismic.KeyTextField;
 
   /**
-   * og-url field in *website*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: This should be the undecorated URL, without session variables, user identifying parameters, or counters.
-   * - **API ID Path**: website.og-url
-   * - **Tab**: seo
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  "og-url": prismic.KeyTextField;
-
-  /**
    * og-image field in *website*
    *
    * - **Field Type**: Image
@@ -760,13 +480,9 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | ImageDuoDocument
-  | ImageFullDocument
-  | LegalNoticesDocument
   | MediaComponentFullDocument
-  | MediaDuoDocument
-  | MediaFullDocument
   | MediaComponentDuoDocument
+  | PageLegalNoticeDocument
   | ProjetDocument
   | WebsiteDocument;
 
@@ -780,20 +496,12 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      ImageDuoDocument,
-      ImageDuoDocumentData,
-      ImageFullDocument,
-      ImageFullDocumentData,
-      LegalNoticesDocument,
-      LegalNoticesDocumentData,
       MediaComponentFullDocument,
       MediaComponentFullDocumentData,
-      MediaDuoDocument,
-      MediaDuoDocumentData,
-      MediaFullDocument,
-      MediaFullDocumentData,
       MediaComponentDuoDocument,
       MediaComponentDuoDocumentData,
+      PageLegalNoticeDocument,
+      PageLegalNoticeDocumentData,
       ProjetDocument,
       ProjetDocumentData,
       ProjetDocumentDataSkillsItem,
