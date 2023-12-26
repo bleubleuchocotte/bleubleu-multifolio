@@ -5,81 +5,6 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for image-duo documents
- */
-interface ImageDuoDocumentData {
-  /**
-   * Image gauche field in *image-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-duo.image-1
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "image-1": prismic.ImageField<never>;
-
-  /**
-   * Image droite field in *image-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-duo.image-2
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "image-2": prismic.ImageField<never>;
-}
-
-/**
- * image-duo document from Prismic
- *
- * - **API ID**: `image-duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ImageDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<ImageDuoDocumentData>,
-    "image-duo",
-    Lang
-  >;
-
-/**
- * Content for image-full documents
- */
-interface ImageFullDocumentData {
-  /**
-   * image en pleine largeur field in *image-full*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image-full.image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * image-full document from Prismic
- *
- * - **API ID**: `image-full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ImageFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<ImageFullDocumentData>,
-    "image-full",
-    Lang
-  >;
-
-/**
  * Content for legal_notices documents
  */
 interface LegalNoticesDocumentData {
@@ -226,114 +151,6 @@ export type MediaComponentFullDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<MediaComponentFullDocumentData>,
     "media-component-full",
-    Lang
-  >;
-
-/**
- * Content for media-duo documents
- */
-interface MediaDuoDocumentData {
-  /**
-   * left-media-thumbnail field in *media-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-duo.left-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "left-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * left-media-content field in *media-duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-duo.left-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "left-media-content": prismic.LinkToMediaField;
-
-  /**
-   * right-media-thumbnail field in *media-duo*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-duo.right-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "right-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * right-media-content field in *media-duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-duo.right-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "right-media-content": prismic.LinkToMediaField;
-}
-
-/**
- * media-duo document from Prismic
- *
- * - **API ID**: `media-duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type MediaDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<MediaDuoDocumentData>,
-    "media-duo",
-    Lang
-  >;
-
-/**
- * Content for media-full documents
- */
-interface MediaFullDocumentData {
-  /**
-   * full-media-thumbnail field in *media-full*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media-full.full-media-thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  "full-media-thumbnail": prismic.ImageField<never>;
-
-  /**
-   * full-media-content field in *media-full*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: Audio ou vidéo /!\ Si image, mettre seulement dans la thumbnail.
-   * - **API ID Path**: media-full.full-media-content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  "full-media-content": prismic.LinkToMediaField;
-}
-
-/**
- * media-full document from Prismic
- *
- * - **API ID**: `media-full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type MediaFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<MediaFullDocumentData>,
-    "media-full",
     Lang
   >;
 
@@ -760,12 +577,8 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | ImageDuoDocument
-  | ImageFullDocument
   | LegalNoticesDocument
   | MediaComponentFullDocument
-  | MediaDuoDocument
-  | MediaFullDocument
   | MediaComponentDuoDocument
   | ProjetDocument
   | WebsiteDocument;
@@ -780,18 +593,10 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      ImageDuoDocument,
-      ImageDuoDocumentData,
-      ImageFullDocument,
-      ImageFullDocumentData,
       LegalNoticesDocument,
       LegalNoticesDocumentData,
       MediaComponentFullDocument,
       MediaComponentFullDocumentData,
-      MediaDuoDocument,
-      MediaDuoDocumentData,
-      MediaFullDocument,
-      MediaFullDocumentData,
       MediaComponentDuoDocument,
       MediaComponentDuoDocumentData,
       ProjetDocument,
