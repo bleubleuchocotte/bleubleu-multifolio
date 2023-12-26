@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const request = useRequestURL();
+
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
@@ -22,13 +24,13 @@ useServerHeadSafe({
 			rel: "icon",
 			type: "image/png",
 			sizes: "16x16",
-			href: options?.data["seo-favicon"].url ?? "/default-favicon-16x16.png",
+			href: options?.data["seo-favicon"].url ?? `${request.origin}/default-favicon-16x16.png`,
 		},
 		{
 			rel: "icon",
 			type: "image/png",
 			sizes: "32x32",
-			href: options?.data["seo-favicon"].url ?? "/default-favicon-32x32.png",
+			href: options?.data["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
 	],
 });
@@ -51,7 +53,7 @@ useServerSeoMeta({
 
 	ogTitle: options?.data["seo-title"],
 	ogDescription: options?.data["seo-description"],
-	ogUrl: options?.data["og-url"],
+	ogUrl: request.origin + request.pathname,
 	ogImage: {
 		url: options?.data["og-image"].url ?? "",
 		secureUrl: options?.data["og-image"].url ?? "",
