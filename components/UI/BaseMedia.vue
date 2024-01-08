@@ -38,6 +38,7 @@ withDefaults(defineProps<ComponentProps>(), {
 .media {
 	display: flex;
 	@include prop("gap", 0.8);
+	width: 100%;
 
 	&__image, &__video {
 		width: 100%;
