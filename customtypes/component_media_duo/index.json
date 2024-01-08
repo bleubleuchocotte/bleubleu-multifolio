@@ -1,6 +1,6 @@
 {
-  "id": "media_component_duo",
-  "label": "media-component-duo",
+  "id": "component_media_duo",
+  "label": "Component | Media duo",
   "format": "custom",
   "repeatable": true,
   "status": true,
@@ -12,7 +12,7 @@
         },
         "type": "UID"
       },
-      "media_de_gauche": {
+      "media_left": {
         "type": "Link",
         "config": {
           "label": "Média de gauche",
@@ -20,7 +20,7 @@
           "select": "media"
         }
       },
-      "media_de_droite": {
+      "media_right": {
         "type": "Link",
         "config": {
           "label": "Média de droite",

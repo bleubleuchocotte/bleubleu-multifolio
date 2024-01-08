@@ -1,0 +1,25 @@
+{
+  "id": "component_media_full",
+  "label": "Component | Media Full",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "media_full": {
+        "type": "Link",
+        "config": {
+          "label": "Média pleine largeur",
+          "placeholder": "",
+          "select": "media"
+        }
+      }
+    }
+  }
+}

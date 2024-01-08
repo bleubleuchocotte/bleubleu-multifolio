@@ -5,77 +5,77 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for media-component-full documents
+ * Content for Component | Media duo documents
  */
-interface MediaComponentFullDocumentData {
+interface ComponentMediaDuoDocumentData {
   /**
-   * media field in *media-component-full*
+   * Média de gauche field in *Component | Media duo*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: media-component-full.media
+   * - **API ID Path**: component_media_duo.media_left
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  media: prismic.LinkToMediaField;
+  media_left: prismic.LinkToMediaField;
+
+  /**
+   * Média de droite field in *Component | Media duo*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: component_media_duo.media_right
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  media_right: prismic.LinkToMediaField;
 }
 
 /**
- * media-component-full document from Prismic
+ * Component | Media duo document from Prismic
  *
- * - **API ID**: `media-component-full`
+ * - **API ID**: `component_media_duo`
  * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type MediaComponentFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<MediaComponentFullDocumentData>,
-    "media-component-full",
+export type ComponentMediaDuoDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ComponentMediaDuoDocumentData>,
+    "component_media_duo",
     Lang
   >;
 
 /**
- * Content for media-component-duo documents
+ * Content for Component | Media Full documents
  */
-interface MediaComponentDuoDocumentData {
+interface ComponentMediaFullDocumentData {
   /**
-   * Média de gauche field in *media-component-duo*
+   * Média pleine largeur field in *Component | Media Full*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: *None*
-   * - **API ID Path**: media_component_duo.media_de_gauche
+   * - **API ID Path**: component_media_full.media_full
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  media_de_gauche: prismic.LinkToMediaField;
-
-  /**
-   * Média de droite field in *media-component-duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: media_component_duo.media_de_droite
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  media_de_droite: prismic.LinkToMediaField;
+  media_full: prismic.LinkToMediaField;
 }
 
 /**
- * media-component-duo document from Prismic
+ * Component | Media Full document from Prismic
  *
- * - **API ID**: `media_component_duo`
+ * - **API ID**: `component_media_full`
  * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type MediaComponentDuoDocument<Lang extends string = string> =
+export type ComponentMediaFullDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
-    Simplify<MediaComponentDuoDocumentData>,
-    "media_component_duo",
+    Simplify<ComponentMediaFullDocumentData>,
+    "component_media_full",
     Lang
   >;
 
@@ -112,11 +112,11 @@ export type PageLegalNoticeDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *projet → Compétences mise en oeuvre*
+ * Item in *Projet → Compétences mise en oeuvre*
  */
 export interface ProjetDocumentDataSkillsItem {
   /**
-   * Une compétence field in *projet → Compétences mise en oeuvre*
+   * Une compétence field in *Projet → Compétences mise en oeuvre*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -127,11 +127,11 @@ export interface ProjetDocumentDataSkillsItem {
 }
 
 /**
- * Item in *projet → Liste des médias*
+ * Item in *Projet → Liste des médias*
  */
 export interface ProjetDocumentDataMediasItem {
   /**
-   * media field in *projet → Liste des médias*
+   * media field in *Projet → Liste des médias*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
@@ -139,16 +139,16 @@ export interface ProjetDocumentDataMediasItem {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   media: prismic.ContentRelationshipField<
-    "media-component-full" | "media_component_duo"
+    "component_media_duo" | "component_media_full"
   >;
 }
 
 /**
- * Content for projet documents
+ * Content for Projet documents
  */
 interface ProjetDocumentData {
   /**
-   * Titre du projet field in *projet*
+   * Titre du projet field in *Projet*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -159,7 +159,7 @@ interface ProjetDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Url du projet field in *projet*
+   * Url du projet field in *Projet*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -170,7 +170,7 @@ interface ProjetDocumentData {
   url: prismic.LinkField;
 
   /**
-   * Date de réalisation field in *projet*
+   * Date de réalisation field in *Projet*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -181,7 +181,7 @@ interface ProjetDocumentData {
   date: prismic.DateField;
 
   /**
-   * Compétences mise en oeuvre field in *projet*
+   * Compétences mise en oeuvre field in *Projet*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -192,7 +192,7 @@ interface ProjetDocumentData {
   skills: prismic.GroupField<Simplify<ProjetDocumentDataSkillsItem>>;
 
   /**
-   * Description du projet field in *projet*
+   * Description du projet field in *Projet*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -203,7 +203,7 @@ interface ProjetDocumentData {
   description: prismic.RichTextField;
 
   /**
-   * Liste des médias field in *projet*
+   * Liste des médias field in *Projet*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -214,7 +214,7 @@ interface ProjetDocumentData {
   medias: prismic.GroupField<Simplify<ProjetDocumentDataMediasItem>>;
 
   /**
-   * Image pour le format responsive field in *projet*
+   * Image pour le format responsive field in *Projet*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -226,7 +226,7 @@ interface ProjetDocumentData {
 }
 
 /**
- * projet document from Prismic
+ * Projet document from Prismic
  *
  * - **API ID**: `projet`
  * - **Repeatable**: `true`
@@ -242,11 +242,11 @@ export type ProjetDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *website → Liste de lien*
+ * Item in *Website → Liste de lien*
  */
 export interface WebsiteDocumentDataLinksItem {
   /**
-   * Nom field in *website → Liste de lien*
+   * Nom field in *Website → Liste de lien*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -256,7 +256,7 @@ export interface WebsiteDocumentDataLinksItem {
   name: prismic.KeyTextField;
 
   /**
-   * link field in *website → Liste de lien*
+   * link field in *Website → Liste de lien*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -267,11 +267,11 @@ export interface WebsiteDocumentDataLinksItem {
 }
 
 /**
- * Item in *website → Vos projets présent ici s'afficheront sur votre site*
+ * Item in *Website → Vos projets présent ici s'afficheront sur votre site*
  */
 export interface WebsiteDocumentDataProjectsItem {
   /**
-   * Un projet field in *website → Vos projets présent ici s'afficheront sur votre site*
+   * Un projet field in *Website → Vos projets présent ici s'afficheront sur votre site*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
@@ -282,11 +282,11 @@ export interface WebsiteDocumentDataProjectsItem {
 }
 
 /**
- * Content for website documents
+ * Content for Website documents
  */
 interface WebsiteDocumentData {
   /**
-   * email field in *website*
+   * email field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -297,7 +297,7 @@ interface WebsiteDocumentData {
   email: prismic.KeyTextField;
 
   /**
-   * accent-color field in *website*
+   * accent-color field in *Website*
    *
    * - **Field Type**: Color
    * - **Placeholder**: *None*
@@ -308,7 +308,7 @@ interface WebsiteDocumentData {
   "accent-color": prismic.ColorField;
 
   /**
-   * background-color field in *website*
+   * background-color field in *Website*
    *
    * - **Field Type**: Color
    * - **Placeholder**: *None*
@@ -319,7 +319,7 @@ interface WebsiteDocumentData {
   "background-color": prismic.ColorField;
 
   /**
-   * text-color field in *website*
+   * text-color field in *Website*
    *
    * - **Field Type**: Color
    * - **Placeholder**: *None*
@@ -330,7 +330,7 @@ interface WebsiteDocumentData {
   "text-color": prismic.ColorField;
 
   /**
-   * text-accent-color field in *website*
+   * text-accent-color field in *Website*
    *
    * - **Field Type**: Color
    * - **Placeholder**: *None*
@@ -341,7 +341,7 @@ interface WebsiteDocumentData {
   "text-accent-color": prismic.ColorField;
 
   /**
-   * Image de fin des projets field in *website*
+   * Image de fin des projets field in *Website*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -350,7 +350,7 @@ interface WebsiteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   "ending-card-image": prismic.ImageField<never> /**
-   * Texte déroulant field in *website*
+   * Texte déroulant field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -359,7 +359,7 @@ interface WebsiteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */;
   "text-header": prismic.KeyTextField /**
-   * Liste de lien field in *website*
+   * Liste de lien field in *Website*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -368,7 +368,7 @@ interface WebsiteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */;
   links: prismic.GroupField<Simplify<WebsiteDocumentDataLinksItem>> /**
-   * Titre pour le SEO field in *website*
+   * Titre pour le SEO field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -379,7 +379,7 @@ interface WebsiteDocumentData {
   "seo-title": prismic.KeyTextField;
 
   /**
-   * Description pour le SEO field in *website*
+   * Description pour le SEO field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -390,7 +390,7 @@ interface WebsiteDocumentData {
   "seo-description": prismic.KeyTextField;
 
   /**
-   * og-image field in *website*
+   * og-image field in *Website*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -401,7 +401,7 @@ interface WebsiteDocumentData {
   "og-image": prismic.ImageField<never>;
 
   /**
-   * Favicon field in *website*
+   * Favicon field in *Website*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -410,7 +410,7 @@ interface WebsiteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   "seo-favicon": prismic.ImageField<"small"> /**
-   * Prénom field in *website*
+   * Prénom field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -421,7 +421,7 @@ interface WebsiteDocumentData {
   "first-name": prismic.KeyTextField;
 
   /**
-   * Nom field in *website*
+   * Nom field in *Website*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -432,7 +432,7 @@ interface WebsiteDocumentData {
   "last-name": prismic.KeyTextField;
 
   /**
-   * Description field in *website*
+   * Description field in *Website*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -443,7 +443,7 @@ interface WebsiteDocumentData {
   description: prismic.RichTextField;
 
   /**
-   * La plus belle photo de vous *_* field in *website*
+   * La plus belle photo de vous *_* field in *Website*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -452,7 +452,7 @@ interface WebsiteDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   "about-image": prismic.ImageField<never> /**
-   * Vos projets présent ici s'afficheront sur votre site field in *website*
+   * Vos projets présent ici s'afficheront sur votre site field in *Website*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -464,7 +464,7 @@ interface WebsiteDocumentData {
 }
 
 /**
- * website document from Prismic
+ * Website document from Prismic
  *
  * - **API ID**: `website`
  * - **Repeatable**: `false`
@@ -480,8 +480,8 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | MediaComponentFullDocument
-  | MediaComponentDuoDocument
+  | ComponentMediaDuoDocument
+  | ComponentMediaFullDocument
   | PageLegalNoticeDocument
   | ProjetDocument
   | WebsiteDocument;
@@ -496,10 +496,10 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      MediaComponentFullDocument,
-      MediaComponentFullDocumentData,
-      MediaComponentDuoDocument,
-      MediaComponentDuoDocumentData,
+      ComponentMediaDuoDocument,
+      ComponentMediaDuoDocumentData,
+      ComponentMediaFullDocument,
+      ComponentMediaFullDocumentData,
       PageLegalNoticeDocument,
       PageLegalNoticeDocumentData,
       ProjetDocument,
