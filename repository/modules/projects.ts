@@ -1,5 +1,5 @@
 import type { FilledContentRelationshipField, LinkToMediaField } from "@prismicio/client";
-import type { MediaComponentDuoDocumentData, MediaComponentFullDocumentData, ProjetDocument, WebsiteDocument } from "prismicio-types";
+import type { ComponentMediaDuoDocumentData, ComponentMediaFullDocumentData, ProjetDocument, WebsiteDocument } from "prismicio-types";
 import type { MediaType, Project, SkillType } from "@/type/types";
 import PrismicFactory from "@/repository/factory";
 
@@ -20,11 +20,11 @@ class ProjectsModule extends PrismicFactory {
               }
               medias {
                 media {
-                  ...on media-component-full {
-                    ...media-component-fullFields
+                  ...on component_media_full {
+                    ...component_media_fullFields
                   }
-									...on media_component_duo {
-                    ...media_component_duoFields
+									...on component_media_duo {
+                    ...component_media_duoFields
                   }
                 }
               }
@@ -41,21 +41,21 @@ class ProjectsModule extends PrismicFactory {
 			const projectPrismic = el.project as unknown as ProjetDocument; // ProjetDocument est un objet nested dans website
 
 			const medias = projectPrismic.data.medias.map((el) => {
-				const mediaPrismic = el.media as FilledContentRelationshipField<"media_component_duo" | "media-component-full", "", MediaComponentDuoDocumentData | MediaComponentFullDocumentData>;
+				const mediaPrismic = el.media as FilledContentRelationshipField<"component_media_duo" | "component_media_full", "", ComponentMediaDuoDocumentData | ComponentMediaFullDocumentData>;
 
 				const result: MediaType = {
 					field: {},
-					type: mediaPrismic.type === "media_component_duo" ? "media-duo" : "media-full",
+					type: mediaPrismic.type === "component_media_duo" ? "media-duo" : "media-full",
 					id: mediaPrismic.id,
 				};
 
 				switch (mediaPrismic.type) {
-					case "media-component-full":
-						result.field.principal = (mediaPrismic.data as MediaComponentFullDocumentData).media as LinkToMediaField<"filled">;
+					case "component_media_full":
+						result.field.principal = (mediaPrismic.data as ComponentMediaFullDocumentData).media_full as LinkToMediaField<"filled">;
 						break;
-					case "media_component_duo":
-						result.field.principal = (mediaPrismic.data as MediaComponentDuoDocumentData).media_de_gauche as LinkToMediaField<"filled">;
-						result.field.secondary = (mediaPrismic.data as MediaComponentDuoDocumentData).media_de_droite as LinkToMediaField<"filled">;
+					case "component_media_duo":
+						result.field.principal = (mediaPrismic.data as ComponentMediaDuoDocumentData).media_left as LinkToMediaField<"filled">;
+						result.field.secondary = (mediaPrismic.data as ComponentMediaDuoDocumentData).media_right as LinkToMediaField<"filled">;
 						break;
 
 					default:

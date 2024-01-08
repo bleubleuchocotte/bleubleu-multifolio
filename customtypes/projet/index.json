@@ -1,6 +1,6 @@
 {
   "id": "projet",
-  "label": "projet",
+  "label": "Projet",
   "repeatable": true,
   "status": true,
   "format": "custom",
@@ -56,7 +56,7 @@
               "config": {
                 "label": "media",
                 "select": "document",
-                "customtypes": ["media-component-full", "media_component_duo"]
+                "customtypes": ["component_media_duo", "component_media_full"]
               }
             }
           },
