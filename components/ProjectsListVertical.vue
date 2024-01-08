@@ -74,7 +74,7 @@ watch(
 			</h2>
 			<div class="projects-list-vertical__element-data">
 				<p>{{ project.date.slice(0, 4) }}</p>
-				<p>{{ project.skills[0].name }}</p>
+				<p>{{ project.skills[0]?.name }}</p>
 			</div>
 		</li>
 	</ul>

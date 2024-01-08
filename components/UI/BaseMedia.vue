@@ -11,7 +11,7 @@ type ComponentProps = {
 	}
 };
 
-withDefaults(defineProps<ComponentProps>(), {
+const props = withDefaults(defineProps<ComponentProps>(), {
 	videoSettings: () => {
 		return {
 			autoplay: true,
@@ -21,23 +21,34 @@ withDefaults(defineProps<ComponentProps>(), {
 		};
 	},
 });
+
+const videos = ref<HTMLVideoElement[] | null>(null);
+
+const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) => {
+	if (props.videoSettings.autoplay) {
+		videos.value?.forEach((video) => {
+			isVisible ? video.play() : video.pause();
+		});
+	}
+};
 </script>
 
 <template>
-	<div class="media">
+	<UIBaseIntersectionObserver class="media" @is-visible="onVisibilityChanged">
 		<template v-for="field in (Object.values(media.field))">
 			<img v-if="field.kind === 'image'" :key="media.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="media.type">
-			<video v-else v-bind="videoSettings" :key="field.url" class="media__video" :data-type="media.type">
+			<video v-else v-bind="videoSettings" :key="field.url" ref="videos" class="media__video" :data-type="media.type">
 				<source :src="field.url">
 			</video>
 		</template>
-	</div>
+	</UIBaseIntersectionObserver>
 </template>
 
 <style scoped lang="scss">
 .media {
 	display: flex;
 	@include prop("gap", 0.8);
+	width: 100%;
 
 	&__image, &__video {
 		width: 100%;

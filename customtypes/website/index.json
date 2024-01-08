@@ -1,6 +1,6 @@
 {
   "id": "website",
-  "label": "website",
+  "label": "Website",
   "repeatable": false,
   "status": true,
   "format": "custom",
