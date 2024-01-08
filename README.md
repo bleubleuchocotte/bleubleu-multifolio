@@ -2,11 +2,11 @@
 
 ## Sommaire
 1. Introduction
-2. Utilisateurs Nouveaux
+2. Nouveaux utilisateurs
    - Prismic
    - GitHub
    - Netlify / Autre Hébergeur
-3. Utilisateurs Actifs
+3. Utilisateurs ayant déjà fais le setup
    - Prismic
    - GitHub
    - Netlify / Autre Hébergeur
