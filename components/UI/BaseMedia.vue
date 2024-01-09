@@ -36,7 +36,7 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 <template>
 	<UIBaseIntersectionObserver class="media" @is-visible="onVisibilityChanged">
 		<template v-for="field in (Object.values(media.field))">
-			<img v-if="field.kind === 'image'" :key="media.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="media.type">
+			<img v-if="field.kind === 'image'" :key="media.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="media.type" alt="">
 			<video v-else v-bind="videoSettings" :key="field.url" ref="videos" class="media__video" :data-type="media.type">
 				<source :src="field.url">
 			</video>
