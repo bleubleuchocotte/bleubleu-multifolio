@@ -51,8 +51,8 @@ const _links = computed(() => {
 						}"
 					/>
 				</PrismicLink>
-				<NuxtLink to="/legal-notices">
-					Legal notices
+				<NuxtLink to="/legal-notice">
+					Legal notice
 				</NuxtLink>
 				<span>© {{ new Date().getFullYear() }} Bleubleu Chocotte</span>
 			</div>
