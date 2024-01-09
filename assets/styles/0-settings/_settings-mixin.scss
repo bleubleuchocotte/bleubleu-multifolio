@@ -307,3 +307,11 @@ TRANSITION
   transition-duration: $duration;
   transition-timing-function: $v;
 }
+
+
+@mixin line-clamp($int: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $int;
+  overflow: hidden;
+}

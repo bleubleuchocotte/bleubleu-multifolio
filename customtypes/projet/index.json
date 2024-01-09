@@ -1,0 +1,76 @@
+{
+  "id": "projet",
+  "label": "Projet",
+  "repeatable": true,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre du projet"
+        }
+      },
+      "url": {
+        "type": "Link",
+        "config": {
+          "allowTargetBlank": true,
+          "label": "Url du projet",
+          "select": null
+        }
+      },
+      "date": {
+        "type": "Date",
+        "config": {
+          "label": "Date de réalisation"
+        }
+      },
+      "skills": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "skill": {
+              "type": "Text",
+              "config": {
+                "label": "Une compétence"
+              }
+            }
+          },
+          "label": "Compétences mise en oeuvre"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph",
+          "label": "Description du projet"
+        }
+      },
+      "medias": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "media": {
+              "type": "Link",
+              "config": {
+                "label": "media",
+                "select": "document",
+                "customtypes": ["component_media_duo", "component_media_full"]
+              }
+            }
+          },
+          "label": "Liste des médias"
+        }
+      },
+      "image-mobile": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "Image pour le format responsive"
+        }
+      }
+    }
+  }
+}
