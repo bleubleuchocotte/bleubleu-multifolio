@@ -21,6 +21,8 @@ defineEmits<{ (e: "goToStart"): void }>();
 			<PrismicImage
 				class="ending-card__content-image"
 				:field="endingCardImage"
+				:height="endingCardImage.dimensions?.height ?? 500"
+				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
 			<div class="ending-card__content-start-button">
 				<button type="button" @click="$emit('goToStart')">
