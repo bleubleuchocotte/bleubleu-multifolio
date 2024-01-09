@@ -84,8 +84,8 @@ function scrollToTop() {
 			</li>
 
 			<li class="about-me-mobile__links-item">
-				<NuxtLink to="/legal-notices">
-					Legal policy
+				<NuxtLink to="/legal-notice">
+					Legal notice
 				</NuxtLink>
 			</li>
 		</ul>
