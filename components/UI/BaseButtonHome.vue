@@ -1,18 +1,18 @@
 <template>
-  <NuxtLink to="/" class="button">
-    <div class="button__text">
-      <div class="button__text-bg-top">
-        <span><slot /></span>
-      </div>
-      <div class="button__text-bg-bottom">
-        <span><slot /></span>
-      </div>
-    </div>
+	<NuxtLink to="/" class="button">
+		<div class="button__text">
+			<div class="button__text-bg-top">
+				<span><slot /></span>
+			</div>
+			<div class="button__text-bg-bottom">
+				<span><slot /></span>
+			</div>
+		</div>
 
-    <div class="button__reveal">
-      <span>⏎</span>
-    </div>
-  </NuxtLink>
+		<div class="button__reveal">
+			<span>⏎</span>
+		</div>
+	</NuxtLink>
 </template>
 
 <style scoped lang="scss">
