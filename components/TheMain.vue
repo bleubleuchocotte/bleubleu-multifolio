@@ -1,79 +1,79 @@
 <script setup lang="ts">
-import { Project, WebsiteType } from "@/type/types";
+import type { ImageField } from "@prismicio/client";
+import type { Project, TheAboutMeType } from "@/type/types";
 
-defineProps({
-  projects: {
-    type: Array<Project>,
-    required: true,
-  },
-  website: {
-    type: Object as PropType<WebsiteType>,
-    required: true,
-  },
-});
-
-const callback = (id: string, hasToScroll: boolean) => {
-  idToProject.value = id;
-  if (hasToScroll) scrollToProjectId.value = `[data-project-h-id='${id}']`;
-  else scrollToProjectId.value = undefined;
+type ComponentProps = {
+	projects: Project[]
+	content: {
+		about: TheAboutMeType
+		endindCardImage: ImageField
+	}
 };
+
+defineProps<ComponentProps>();
 
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
 const projectInGallery = ref<Project | null>(null);
+
+function callback(id: string, hasToScroll: boolean) {
+	idToProject.value = id;
+	if (hasToScroll) { scrollToProjectId.value = `[data-project-h-id='${id}']`; }
+	else { scrollToProjectId.value = undefined; }
+}
 </script>
 
 <template>
-  <main class="main">
-    <TheAboutMe :params="{ me: website.me, links: website.footer.links }" />
-    <div class="main__left">
-      <section class="main__left-container">
-        <p>My projects</p>
-        <UIBaseLenis :orientation="'vertical'">
-          <ProjectsListVertical
-            :projects="projects"
-            :id-to-active="idToProject"
-            @target="
-                  (id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
-                "
-          />
-        </UIBaseLenis>
-      </section>
-    </div>
-    <UIBaseSeparator :width="1" />
-    <UIBaseLenis
-      :orientation="'horizontal'"
-      class="main__right"
-      :target="scrollToProjectId"
-      :request-lenis="true"
-    >
-      <ProjectsListHorizontal
-        :projects="projects"
-        @target="(id: string) => callback(id, false)"
-        @target-then-scroll="(id: string) => callback(id, true)"
-        @gallery="(project: Project) => (projectInGallery = project)"
-        @go-to-end="() => (scrollToProjectId = `end`)"
-        @go-to-start="() => (scrollToProjectId = 'start')"
-      />
+	<main class="main">
+		<TheAboutMe :params="content.about" />
+		<div class="main__left">
+			<section class="main__left-container">
+				<p>My projects</p>
+				<UIBaseLenis orientation="vertical">
+					<ProjectsListVertical
+						:projects="projects"
+						:id-to-active="idToProject"
+						@target="
+							(id: string) => (scrollToProjectId = `[data-project-h-id='${id}']`)
+						"
+					/>
+				</UIBaseLenis>
+			</section>
+		</div>
+		<UIBaseSeparator :width="1" />
+		<UIBaseLenis
+			orientation="horizontal"
+			class="main__right"
+			:target="scrollToProjectId"
+			:request-lenis="true"
+		>
+			<ProjectsListHorizontal
+				:projects="projects"
+				@target="(id: string) => callback(id, false)"
+				@target-then-scroll="(id: string) => callback(id, true)"
+				@gallery="(project: Project) => (projectInGallery = project)"
+				@go-to-end="() => (scrollToProjectId = `end`)"
+				@go-to-start="() => (scrollToProjectId = 'start')"
+			/>
 
-      <EndingCard
-        :email="website.me.email"
-        :ending-card-image="website['ending-card-image']"
-        @go-to-start="
-          () => (scrollToProjectId = `[data-project-h-id='${projects[0].id}']`)
-        "
-      />
-    </UIBaseLenis>
+			<EndingCard
+				:email="content.about.me.email"
+				:ending-card-image="content.endindCardImage"
+				@go-to-start="
+					() => (scrollToProjectId = `[data-project-h-id='${projects[0].id}']`)
+				"
+			/>
+		</UIBaseLenis>
 
-    <Transition name="slide-fade">
-      <LazyTheGallery
-        v-if="projectInGallery != null"
-        :project="projectInGallery"
-        @close="projectInGallery = null"
-      />
-    </Transition>
-  </main>
+		<Transition name="slide-fade">
+			<LazyTheGallery
+				v-if="projectInGallery != null"
+				:project="projectInGallery"
+				@close="projectInGallery = null"
+			/>
+		</Transition>
+	</main>
 </template>
 
 <style scoped lang="scss">
