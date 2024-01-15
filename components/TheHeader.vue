@@ -39,12 +39,6 @@ defineProps({
   @include gap();
   @include margin();
 
-  min-height: 45px;
-
-  @media #{$mobile-down} {
-    height: 35px;
-  }
-
   &__slider {
     @include transition();
     @include border(0.5, var(--border-color));
