@@ -24,7 +24,9 @@ const target = ref<HTMLElement>();
 useIntersectionObserver(
 	target,
 	([{ isIntersecting, intersectionRatio }]) => {
-		if (isIntersecting && intersectionRatio > 0.5) { emit("target", props.project.id); }
+		if (isIntersecting && intersectionRatio > 0.5) {
+			emit("target", props.project.id);
+		}
 	},
 	{
 		threshold: [...Array(4).keys()].map(el => el / 4),

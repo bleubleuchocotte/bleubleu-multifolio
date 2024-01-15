@@ -29,7 +29,9 @@ onClickOutside(container, () => emit("close"), {
 });
 
 function callback(e: KeyboardEvent) {
-	if (e.key === "Escape") { emit("close"); }
+	if (e.key === "Escape") {
+		emit("close");
+	}
 }
 
 const target = ref();
