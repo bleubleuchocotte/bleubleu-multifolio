@@ -56,7 +56,9 @@ function callback(e: MouseEvent) {
 }
 
 function typeDataIconAttribute(str: string | null): CursorIconType {
-	if (!str) { return null; }
+	if (!str) {
+		return null;
+	}
 
 	switch (str) {
 		case "IconArrowRight":
@@ -79,18 +81,24 @@ function typeDataIconAttribute(str: string | null): CursorIconType {
 
 function getParentDataIcon(element: HTMLElement, depth: number) {
 	const attr = element.attributes.getNamedItem("data-icon");
-	if (attr?.value) { return attr.value; }
+	if (attr?.value) {
+		return attr.value;
+	}
 
 	let parent = element.parentElement;
 	let counter = 0;
 
-	if (parent === null) { return null; }
+	if (parent === null) {
+		return null;
+	}
 
 	while (parent && counter < depth) {
 		counter += 1;
 
 		const attr = element.attributes.getNamedItem("data-icon");
-		if (attr?.value) { return attr.value; }
+		if (attr?.value) {
+			return attr.value;
+		}
 
 		parent = parent.parentElement;
 	}
@@ -102,17 +110,23 @@ function hasParentWithClass(
 	className: string,
 	depth: number,
 ) {
-	if (element.classList.contains(className)) { return true; }
+	if (element.classList.contains(className)) {
+		return true;
+	}
 
 	let parent = element.parentElement;
 	let counter = 0;
 
-	if (parent === null) { return false; }
+	if (parent === null) {
+		return false;
+	}
 
 	while (parent && counter < depth) {
 		counter += 1;
 
-		if (parent.classList.contains(className)) { return true; }
+		if (parent.classList.contains(className)) {
+			return true;
+		}
 
 		parent = parent.parentElement;
 	}

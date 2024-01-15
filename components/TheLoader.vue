@@ -27,8 +27,12 @@ function decodeString(
 		displayString.value = chars.join("");
 	}
 
-	if (displayString.value === originalString) { return true; }
-	else { return false; }
+	if (displayString.value === originalString) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 function randomString(length: number) {
