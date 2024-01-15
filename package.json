@@ -10,7 +10,8 @@
 		"postinstall": "nuxt prepare",
 		"slicemachine": "start-slicemachine",
 		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
+		"lint:fix": "eslint . --fix",
+		"typecheck": "nuxi typecheck"
 	},
 	"dependencies": {
 		"@nuxtjs/device": "^3.1.1",
