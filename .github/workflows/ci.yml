@@ -52,4 +52,4 @@ jobs:
         run: nci
 
       - name: Typecheck
-        run: nr typecheck
+        run: nr typecheck --dotenv .env.example

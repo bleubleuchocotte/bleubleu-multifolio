@@ -26,11 +26,15 @@ const height = ref(0);
 
 onMounted(() => {
 	// Pas forcément néssaire vu qu'à chaque clic, onUpdated est call à cause de la varibale isOpen
-	if (target.value) { height.value = target.value.scrollHeight; }
+	if (target.value) {
+		height.value = target.value.scrollHeight;
+	}
 });
 
 onUpdated(() => {
-	if (target.value) { height.value = target.value.scrollHeight; }
+	if (target.value) {
+		height.value = target.value.scrollHeight;
+	}
 });
 </script>
 
