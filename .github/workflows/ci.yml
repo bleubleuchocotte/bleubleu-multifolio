@@ -51,5 +51,11 @@ jobs:
       - name: Install
         run: nci
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo PRISMIC_ENDPOINT="fake-endpoint" >> .env
+          cat .env
+
       - name: Typecheck
-        run: nr typecheck --dotenv .env.example
+        run: nr typecheck
