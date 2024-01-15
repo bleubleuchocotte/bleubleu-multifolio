@@ -16,6 +16,7 @@ const i = ref(props.index < 10 ? `0${props.index}` : props.index.toString());
 <style scoped lang="scss">
 .project-index {
   display: inline-block;
-  @include prop("min-width", 1.5);
+	@include prop("margin-right");
+	font-variant-numeric: tabular-nums;
 }
 </style>
