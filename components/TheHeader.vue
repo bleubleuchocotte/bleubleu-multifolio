@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import "vue3-marquee/dist/style.css";
-
 defineProps({
 	email: {
 		type: String,
@@ -16,15 +14,17 @@ defineProps({
 <template>
 	<header class="header">
 		<div class="header__slider">
-			<Vue3Marquee
-				direction="normal"
-				:duration="10"
-				class="header__slider-container"
-			>
-				<p style="margin-left: 5em" class="h1">
-					{{ marqueeText }}
-				</p>
-			</Vue3Marquee>
+			<ClientOnly>
+				<Vue3Marquee
+					direction="normal"
+					:duration="10"
+					class="header__slider-container"
+				>
+					<p style="margin-left: 5em" class="h1">
+						{{ marqueeText }}
+					</p>
+				</Vue3Marquee>
+			</ClientOnly>
 		</div>
 
 		<UIBaseButtonContact :email="email" class="header__button desktop-only">
