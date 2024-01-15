@@ -34,10 +34,4 @@ export default defineNuxtConfig({
 		toolbar: false,
 		preview: false,
 	},
-	plugins: [
-		{
-			src: "@/plugins/Vue3Marquee.client.ts",
-			mode: "client",
-		},
-	],
 });
