@@ -1,4 +1,3 @@
-// eslint.config.js
 import antfu from "@antfu/eslint-config";
 
 export default antfu(
@@ -15,6 +14,10 @@ export default antfu(
 			"ts/consistent-type-definitions": ["error", "type"], // On oblige l'utilisation de `type` au lieu de `interface`
 			"curly": ["error", "all"], // On oblige d'avoir des curly bracket même pour les conditions uni-ligne
 			"node/prefer-global/process": ["error", "always"], // On autorise l'utilisation de process au lieu de require(process)
+		},
+
+		formatters: {
+			css: true,
 		},
 	},
 	{

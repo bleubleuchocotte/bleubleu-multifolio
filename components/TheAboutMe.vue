@@ -111,139 +111,139 @@ onClickOutside(target, () => {
 
 <style scoped lang="scss">
 .section {
-  transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 30vw));
+	transition: transform 0.3s ease-out;
+	transform: translate(calc($bookmark-width - 30vw));
 
-  &.open {
-    transform: translate(0);
+	&.open {
+		transform: translate(0);
 
-    .section__bookmark-arrow {
-      transform: rotate(0);
-    }
-  }
+		.section__bookmark-arrow {
+			transform: rotate(0);
+		}
+	}
 
-  display: flex;
+	display: flex;
 
-  position: absolute;
-  z-index: 10;
-  left: 0;
+	position: absolute;
+	z-index: 10;
+	left: 0;
 
-  height: 100%;
-  width: 30vw;
+	height: 100%;
+	width: 30vw;
 
-  background-color: var(--accent-color);
-  color: var(--text-accent-color);
-  @include border-radius(1, "right");
+	background-color: var(--accent-color);
+	color: var(--text-accent-color);
+	@include border-radius(1, "right");
 
-  &__content {
-    width: 100%;
-    @include padding();
+	&__content {
+		width: 100%;
+		@include padding();
 
-    border-right: 1px solid var(--text-accent-color);
+		border-right: 1px solid var(--text-accent-color);
 
-    & > p {
-      @include font("h2");
-    }
+		& > p {
+			@include font("h2");
+		}
 
-    &-text {
-      @include prop("margin-bottom");
-    }
+		&-text {
+			@include prop("margin-bottom");
+		}
 
-    &-contact {
-      height: 10%;
-      width: 100%;
-      z-index: 0;
-      border: 1px solid var(--text-accent-color);
+		&-contact {
+			height: 10%;
+			width: 100%;
+			z-index: 0;
+			border: 1px solid var(--text-accent-color);
 
-      @include prop("margin-bottom");
-      @include font("h2");
+			@include prop("margin-bottom");
+			@include font("h2");
 
-      &:deep(.button__reveal) {
-        border-radius: 0;
-        border: unset;
-      }
-    }
+			&:deep(.button__reveal) {
+				border-radius: 0;
+				border: unset;
+			}
+		}
 
-    &-image {
-      overflow: hidden;
-      aspect-ratio: calc(
-        16 / 9
-      ); // Permet d'avoir le même ration que l'image prismic
-      @include prop("margin-bottom");
+		&-image {
+			overflow: hidden;
+			aspect-ratio: calc(
+				16 / 9
+			); // Permet d'avoir le même ration que l'image prismic
+			@include prop("margin-bottom");
 
-      border: 1px solid var(--text-accent-color);
-      @include border-radius();
-    }
+			border: 1px solid var(--text-accent-color);
+			@include border-radius();
+		}
 
-    &-links {
-      &-item {
-        &:not(:last-of-type) {
-          border-bottom: 1px solid var(--text-accent-color);
-        }
+		&-links {
+			&-item {
+				&:not(:last-of-type) {
+					border-bottom: 1px solid var(--text-accent-color);
+				}
 
-        @include prop("padding-block", 0.25);
+				@include prop("padding-block", 0.25);
 
-        & > a {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          @include gap(0.5);
+				& > a {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					@include gap(0.5);
 
-          span {
-            pointer-events: none;
-            transition: transform 0.2s ease-out;
-          }
+					span {
+						pointer-events: none;
+						transition: transform 0.2s ease-out;
+					}
 
-          &:hover span {
-            transform: translate3d(5px, 0, 0);
-          }
-        }
-      }
-    }
-  }
+					&:hover span {
+						transform: translate3d(5px, 0, 0);
+					}
+				}
+			}
+		}
+	}
 
-  &__bookmark {
-    writing-mode: vertical-rl;
-    rotate: 180deg;
+	&__bookmark {
+		writing-mode: vertical-rl;
+		rotate: 180deg;
 
-    display: flex;
-    justify-content: space-between;
-    @include padding(calc(1 / 3));
+		display: flex;
+		justify-content: space-between;
+		@include padding(calc(1 / 3));
 
-    min-width: $bookmark-width;
+		min-width: $bookmark-width;
 
-    & > * {
-      pointer-events: none;
-    }
+		& > * {
+			pointer-events: none;
+		}
 
-    &-heading {
-      text-transform: uppercase;
-      align-self: center;
-    }
+		&-heading {
+			text-transform: uppercase;
+			align-self: center;
+		}
 
-    &-flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+		&-flex {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-      @include gap(calc(1 / 3));
+			@include gap(calc(1 / 3));
 
-      text-align: right;
-    }
+			text-align: right;
+		}
 
-    &-arrow {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+		&-arrow {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: var(--text-accent-color);
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background-color: var(--text-accent-color);
 
-      color: var(--accent-color);
-      transform: rotate(180deg);
-    }
-  }
+			color: var(--accent-color);
+			transform: rotate(180deg);
+		}
+	}
 }
 </style>
