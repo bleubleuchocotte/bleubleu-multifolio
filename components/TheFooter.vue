@@ -62,31 +62,31 @@ const _links = computed(() => {
 
 <style scoped lang="scss">
 .footer {
-  display: flex;
+	display: flex;
 
-  @include prop("padding-block");
+	@include prop("padding-block");
 
-  &__left {
-    @include left;
+	&__left {
+		@include left;
 
-    &-link {
-      display: flex;
-      width: fit-content;
-      align-items: flex-end;
-    }
-  }
-  &__right {
-    @include right;
+		&-link {
+			display: flex;
+			width: fit-content;
+			align-items: flex-end;
+		}
+	}
+	&__right {
+		@include right;
 
-    display: flex;
-    justify-content: space-between;
+		display: flex;
+		justify-content: space-between;
 
-    padding-left: 0;
+		padding-left: 0;
 
-    &-link {
-      display: flex;
-      align-items: flex-end;
-    }
-  }
+		&-link {
+			display: flex;
+			align-items: flex-end;
+		}
+	}
 }
 </style>

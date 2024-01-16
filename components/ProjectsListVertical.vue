@@ -90,68 +90,68 @@ watch(
 
 <style scoped lang="scss">
 .projects-list-vertical {
-  height: 100%;
-  @include prop("padding-top");
+	height: 100%;
+	@include prop("padding-top");
 
-  @media #{$desktop-down} {
-    @include prop("padding-top", 0, !important);
-  }
+	@media #{$desktop-down} {
+		@include prop("padding-top", 0, !important);
+	}
 
-  &__element {
-    @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
-    display: flex;
-    justify-content: space-between;
-    @include gap(0.5);
-    border-bottom: 1px solid var(--border-color);
+	&__element {
+		@include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
+		display: flex;
+		justify-content: space-between;
+		@include gap(0.5);
+		border-bottom: 1px solid var(--border-color);
 
-    @include prop("padding-block", 0.5);
+		@include prop("padding-block", 0.5);
 
-    cursor: pointer;
+		cursor: pointer;
 
-    &:hover,
-    &:focus-within,
-    &.active {
-      color: var(--accent-color);
-      border-bottom: 1px solid;
-    }
+		&:hover,
+		&:focus-within,
+		&.active {
+			color: var(--accent-color);
+			border-bottom: 1px solid;
+		}
 
-    &.active &-name:before {
-      width: 10px;
-      margin-right: 5px;
-    }
+		&.active &-name:before {
+			width: 10px;
+			margin-right: 5px;
+		}
 
-    &-name,
-    &-data {
-      pointer-events: none;
-    }
+		&-name,
+		&-data {
+			pointer-events: none;
+		}
 
-    &-name {
-      display: flex;
-      text-transform: uppercase;
-      align-self: flex-end;
+		&-name {
+			display: flex;
+			text-transform: uppercase;
+			align-self: flex-end;
 
-      white-space: nowrap;
+			white-space: nowrap;
 
-      @include font("h3");
+			@include font("h3");
 
-      &::before {
-        @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
-        content: "";
-        height: 1px;
-        width: 0;
-        margin-right: 0;
-        background-color: var(--accent-color);
+			&::before {
+				@include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
+				content: "";
+				height: 1px;
+				width: 0;
+				margin-right: 0;
+				background-color: var(--accent-color);
 
-        align-self: center;
-      }
-    }
+				align-self: center;
+			}
+		}
 
-    &-data {
-      text-align: right;
-      & > p {
-        @include font("small");
-      }
-    }
-  }
+		&-data {
+			text-align: right;
+			& > p {
+				@include font("small");
+			}
+		}
+	}
 }
 </style>

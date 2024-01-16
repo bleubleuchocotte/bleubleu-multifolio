@@ -115,78 +115,78 @@ useIntersectionObserver(
 
 <style scoped lang="scss">
 .project-details {
-  display: flex;
-  @include gap();
+	display: flex;
+	@include gap();
 
-  height: 100%;
+	height: 100%;
 
-  @include prop("padding-left");
+	@include prop("padding-left");
 
-  &__left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	&__left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 
-    min-width: 500px;
-  }
+		min-width: 500px;
+	}
 
-  &__right {
-    min-width: 80vh;
-    @include prop("padding-inline");
-  }
+	&__right {
+		min-width: 80vh;
+		@include prop("padding-inline");
+	}
 
-  &__content {
-    @include prop("padding-bottom");
-    border-bottom: 1px solid var(--border-color);
+	&__content {
+		@include prop("padding-bottom");
+		border-bottom: 1px solid var(--border-color);
 
-    &-heading {
-      @include prop("margin-top");
-      display: flex;
-      @include gap(calc(1 / 3));
-      align-items: center;
-      width: fit-content;
+		&-heading {
+			@include prop("margin-top");
+			display: flex;
+			@include gap(calc(1 / 3));
+			align-items: center;
+			width: fit-content;
 
-      &-title {
-        pointer-events: none;
-      }
-    }
+			&-title {
+				pointer-events: none;
+			}
+		}
 
-    &-tags {
-      display: flex;
-      flex-wrap: wrap;
-      @include gap(calc(1 / 6));
-      @include prop("margin-block", 0.5);
-    }
+		&-tags {
+			display: flex;
+			flex-wrap: wrap;
+			@include gap(calc(1 / 6));
+			@include prop("margin-block", 0.5);
+		}
 
-    &-description {
-      @include font("p");
+		&-description {
+			@include font("p");
 
-      @include line-clamp(3);
-    }
+			@include line-clamp(3);
+		}
 
-    &-more {
-      color: var(--accent-color);
-      text-decoration: underline;
-    }
-  }
+		&-more {
+			color: var(--accent-color);
+			text-decoration: underline;
+		}
+	}
 
-  &__utils {
-    display: flex;
-    @media #{$desktop} {
-      flex-direction: column;
-    }
-    @include gap(0.5);
+	&__utils {
+		display: flex;
+		@media #{$desktop} {
+			flex-direction: column;
+		}
+		@include gap(0.5);
 
-    &-index {
-      @include font("enormous");
-      color: var(--accent-color);
-      line-height: 1;
-    }
+		&-index {
+			@include font("enormous");
+			color: var(--accent-color);
+			line-height: 1;
+		}
 
-    &-button {
-      display: flex;
-      @include gap(0.5);
-    }
-  }
+		&-button {
+			display: flex;
+			@include gap(0.5);
+		}
+	}
 }
 </style>
