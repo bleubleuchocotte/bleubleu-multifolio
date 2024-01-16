@@ -73,10 +73,10 @@ watch(
 
 <style scoped lang="scss">
 div[data-lenis] {
-  height: 100%;
-  overflow: hidden;
-  @media #{$low-accuracy} {
-    overflow: overlay;
-  }
+	height: 100%;
+	overflow: hidden;
+	@media #{$low-accuracy} {
+		overflow: overlay;
+	}
 }
 </style>

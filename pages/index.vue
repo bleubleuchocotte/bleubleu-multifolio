@@ -85,10 +85,10 @@ const props: HomePageProps = {
 
 <style scoped lang="scss">
 .index-page {
-  min-height: 0;
+	min-height: 0;
 
-  &__desktop {
-    height: 100%;
-  }
+	&__desktop {
+		height: 100%;
+	}
 }
 </style>

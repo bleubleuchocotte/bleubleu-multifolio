@@ -1,26 +1,26 @@
 html.lenis {
-  height: auto;
+	height: auto;
 }
 
 .lenis.lenis-smooth {
-  scroll-behavior: auto;
+	scroll-behavior: auto;
 }
 
 .lenis.lenis-smooth [data-lenis-prevent] {
-  -ms-scroll-chaining: none;
-  overscroll-behavior: contain;
+	-ms-scroll-chaining: none;
+	overscroll-behavior: contain;
 }
 
 .lenis.lenis-stopped {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .lenis.lenis-scrolling iframe {
-  pointer-events: none;
+	pointer-events: none;
 }
 
 body,
 html {
-  -ms-scroll-chaining: none;
-  overscroll-behavior: none;
+	-ms-scroll-chaining: none;
+	overscroll-behavior: none;
 }

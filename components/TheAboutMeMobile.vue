@@ -95,65 +95,65 @@ function scrollToTop() {
 
 <style scoped lang="scss">
 .about-me-mobile {
-  display: flex;
-  flex-direction: column;
-  @include gap();
+	display: flex;
+	flex-direction: column;
+	@include gap();
 
-  @include border-radius();
-  @include prop("padding-inline", 0.5);
-  @include prop("padding-block", 0.75);
+	@include border-radius();
+	@include prop("padding-inline", 0.5);
+	@include prop("padding-block", 0.75);
 
-  color: var(--background-color);
-  background-color: var(--accent-color);
+	color: var(--background-color);
+	background-color: var(--accent-color);
 
-  &__heading {
-    display: flex;
-    justify-content: space-between;
+	&__heading {
+		display: flex;
+		justify-content: space-between;
 
-    @include prop("padding-block", 0.5);
+		@include prop("padding-block", 0.5);
 
-    border-bottom: 1px solid var(--background-color);
+		border-bottom: 1px solid var(--background-color);
 
-    &-arrow {
-      width: 30px;
-      height: 30px;
-      padding: 1px;
+		&-arrow {
+			width: 30px;
+			height: 30px;
+			padding: 1px;
 
-      rotate: -90deg;
-    }
-  }
+			rotate: -90deg;
+		}
+	}
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    @include gap(0.5);
+	&__content {
+		display: flex;
+		flex-direction: column;
+		@include gap(0.5);
 
-    &-contact {
-      text-align: center;
-      @include padding();
-      @include border(1, var(--background-color));
-    }
+		&-contact {
+			text-align: center;
+			@include padding();
+			@include border(1, var(--background-color));
+		}
 
-    &-image {
-      aspect-ratio: 16/9;
-      @include border(1, var(--background-color));
-    }
-  }
+		&-image {
+			aspect-ratio: 16/9;
+			@include border(1, var(--background-color));
+		}
+	}
 
-  &__links {
-    &-item {
-      &:not(:last-of-type) {
-        border-bottom: 1px solid var(--background-color);
-      }
-      @include prop("padding-block", 0.25);
+	&__links {
+		&-item {
+			&:not(:last-of-type) {
+				border-bottom: 1px solid var(--background-color);
+			}
+			@include prop("padding-block", 0.25);
 
-      & > a {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        @include gap(0.5);
-      }
-    }
-  }
+			& > a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				@include gap(0.5);
+			}
+		}
+	}
 }
 </style>

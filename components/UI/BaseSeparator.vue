@@ -18,15 +18,15 @@ const styles = reactive({
 
 <style scoped lang="scss">
 div {
-  position: relative;
+	position: relative;
 
-  height: 100%;
-  width: var(--width);
+	height: 100%;
+	width: var(--width);
 
-  background-color: var(--border-color);
+	background-color: var(--border-color);
 
-  &::before {
-    @include gradientScroll(left);
-  }
+	&::before {
+		@include gradientScroll(left);
+	}
 }
 </style>

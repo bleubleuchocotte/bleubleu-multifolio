@@ -35,27 +35,27 @@ defineProps({
 
 <style scoped lang="scss">
 .header {
-  display: flex;
-  @include gap();
-  @include margin();
+	display: flex;
+	@include gap();
+	@include margin();
 
-  &__slider {
-    @include transition();
-    @include border(0.5, var(--border-color));
+	&__slider {
+		@include transition();
+		@include border(0.5, var(--border-color));
 		padding: 0;
 
-    width: 100%;
+		width: 100%;
 
-    &-container {
-      align-items: center;
-      height: 100%;
-      overflow: hidden;
-    }
-  }
+		&-container {
+			align-items: center;
+			height: 100%;
+			overflow: hidden;
+		}
+	}
 
-  &__button {
-    min-width: 200px;
-    flex: 1;
-  }
+	&__button {
+		min-width: 200px;
+		flex: 1;
+	}
 }
 </style>

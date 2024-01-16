@@ -187,45 +187,45 @@ watchOnce([x, y], () => {
 
 <style scoped lang="scss">
 .cursor {
-  opacity: 0;
+	opacity: 0;
 
-  &.is-visible {
-    opacity: 1;
-  }
+	&.is-visible {
+		opacity: 1;
+	}
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
 
-  height: 100vh;
-  width: 100vw;
+	height: 100vh;
+	width: 100vw;
 
-  pointer-events: none;
+	pointer-events: none;
 
-  overflow: hidden;
+	overflow: hidden;
 
-  &__shape {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	&__shape {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-    transition: all 0.2s ease-out;
-    height: var(--size);
-    aspect-ratio: 1;
+		transition: all 0.2s ease-out;
+		height: var(--size);
+		aspect-ratio: 1;
 
-    border: 1px solid var(--accent-color);
+		border: 1px solid var(--accent-color);
 
-    &.invert {
-      border: 1px solid var(--background-color);
-    }
+		&.invert {
+			border: 1px solid var(--background-color);
+		}
 
-    border-radius: 50%;
+		border-radius: 50%;
 
-    &.expand {
-      border: 1px solid var(--background-color);
-      background-color: var(--accent-color);
-    }
-  }
+		&.expand {
+			border: 1px solid var(--background-color);
+			background-color: var(--accent-color);
+		}
+	}
 }
 </style>

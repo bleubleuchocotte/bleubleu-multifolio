@@ -82,57 +82,57 @@ function callback(id: string, hasToScroll: boolean) {
 
 <style scoped lang="scss">
 .main {
-  display: flex;
-  position: relative;
-  overflow: hidden;
+	display: flex;
+	position: relative;
+	overflow: hidden;
 
-  @media #{$desktop-down} {
-    flex-direction: column;
-    @include gap();
-  }
+	@media #{$desktop-down} {
+		flex-direction: column;
+		@include gap();
+	}
 
-  &__left {
-    @include left;
-    @media #{$desktop-down} {
-      height: 20vh;
-    }
+	&__left {
+		@include left;
+		@media #{$desktop-down} {
+			height: 20vh;
+		}
 
-    &-container {
-      height: 100%;
-      @media #{$desktop} {
-        padding-left: $bookmark-width;
-      }
-      @include prop("padding-bottom");
-    }
-  }
+		&-container {
+			height: 100%;
+			@media #{$desktop} {
+				padding-left: $bookmark-width;
+			}
+			@include prop("padding-bottom");
+		}
+	}
 
-  &__right {
-    @include right;
-    @include prop("padding-inline", 0);
-    @include prop("padding-right", 2);
-    position: relative;
-    display: flex;
+	&__right {
+		@include right;
+		@include prop("padding-inline", 0);
+		@include prop("padding-right", 2);
+		position: relative;
+		display: flex;
 
-    @media #{$desktop-down} {
-      flex-direction: column;
-      @include gap();
-    }
-  }
-  &::after {
-    @include gradientScroll(right);
-  }
+		@media #{$desktop-down} {
+			flex-direction: column;
+			@include gap();
+		}
+	}
+	&::after {
+		@include gradientScroll(right);
+	}
 }
 </style>
 
 <style>
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateY(20px);
-  opacity: 0;
+	transform: translateY(20px);
+	opacity: 0;
 }
 </style>
