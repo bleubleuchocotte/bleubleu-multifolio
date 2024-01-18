@@ -19,7 +19,7 @@
 		"@studio-freight/lenis": "^1.0.33",
 		"@vueuse/integrations": "^10.7.2",
 		"focus-trap": "^7.5.4",
-		"sass": "^1.69.7",
+		"sass": "^1.70.0",
 		"vue3-marquee": "^4.1.0"
 	},
 	"devDependencies": {
