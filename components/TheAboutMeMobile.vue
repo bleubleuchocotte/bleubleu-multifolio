@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { TheAboutMeType } from "@/type/types";
 
-defineProps({
-	params: {
-		type: Object as PropType<TheAboutMeType>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	params: TheAboutMeType
+};
+
+defineProps<ComponentProps>();
 
 function scrollToTop() {
 	window.scrollTo({ top: 0, behavior: "smooth" });
