@@ -1,74 +1,74 @@
 @font-face {
-  font-family: "Manrope";
-  src: url("/font/Manrope-VariableFont_wght.ttf");
-  font-display: swap;
+	font-family: "Manrope";
+	src: url("/font/Manrope-VariableFont_wght.ttf");
+	font-display: swap;
 }
 
 button:focus-visible,
 a:focus-visible,
 div[role="button"]:focus-visible {
-  outline: 2px solid var(--accent-color);
-  @include padding(0.25);
+	outline: 2px solid var(--accent-color);
+	@include padding(0.25);
 }
 
 .invert-selection button:focus-visible,
 .invert-selection a:focus-visible,
 .invert-selection div[role="button"]:focus-visible {
-  outline: 2px solid var(--background-color);
+	outline: 2px solid var(--background-color);
 }
 
 button,
 div[role="button"] {
-  cursor: pointer;
-  & > * {
-    pointer-events: none;
-  }
+	cursor: pointer;
+	& > * {
+		pointer-events: none;
+	}
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--background-color);
-  font-family: "Manrope";
-  @media #{$desktop} {
-    overflow: hidden;
-  }
+	color: var(--text-color);
+	background-color: var(--background-color);
+	font-family: "Manrope";
+	@media #{$desktop} {
+		overflow: hidden;
+	}
 }
 
 h1,
 .h1 {
-  @include font("h1");
+	@include font("h1");
 }
 h2 {
-  @include font("h2");
+	@include font("h2");
 }
 h3 {
-  @include font("h3");
+	@include font("h3");
 }
 h4 {
-  @include font("h4");
+	@include font("h4");
 }
 p {
-  @include font("p");
+	@include font("p");
 }
 
 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .desktop-only {
-  @media #{$desktop-down} {
-    display: none;
-  }
+	@media #{$desktop-down} {
+		display: none;
+	}
 }
 
 ::selection {
-  background-color: var(--accent-color);
-  color: var(--background-color);
+	background-color: var(--accent-color);
+	color: var(--background-color);
 }
 
 .invert-selection *::selection {
-  background-color: var(--background-color);
-  color: var(--accent-color);
+	background-color: var(--background-color);
+	color: var(--accent-color);
 }
