@@ -23,7 +23,7 @@
 		"vue3-marquee": "^4.1.0"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^2.6.2",
+		"@antfu/eslint-config": "^2.6.3",
 		"@nuxtjs/prismic": "3.1.0",
 		"@slicemachine/adapter-nuxt": "^0.3.32",
 		"@vueuse/core": "^10.7.2",
