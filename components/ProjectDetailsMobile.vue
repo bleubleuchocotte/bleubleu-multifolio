@@ -51,11 +51,7 @@ defineProps({
 			</UIBaseTag>
 		</div>
 
-		<PrismicImage
-			v-if="project['image-mobile']"
-			:field="project['image-mobile']"
-			class="project-details-mobile__image"
-		/>
+		<ProjectMobileSlider :medias="project.medias" />
 
 		<PrismicRichText
 			:field="project.description"
@@ -68,9 +64,7 @@ defineProps({
 .project-details-mobile {
 	display: flex;
 	@include gap();
-	min-width: 100vw;
 
-	min-width: initial;
 	flex-direction: column;
 	@include prop("padding-block");
 
@@ -117,12 +111,6 @@ defineProps({
 			@include font("p");
 			@include prop("margin-bottom");
 		}
-	}
-
-	&__image {
-		@include border-radius();
-		width: 100%;
-		aspect-ratio: 9/16;
 	}
 }
 </style>
