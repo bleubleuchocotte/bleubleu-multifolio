@@ -24,12 +24,10 @@ export type SkillType = {
 export type Project = {
 	id: string
 	date: string
-	images: ImageType[]
 	medias: MediaType[]
 	description: RichTextField
 	skills: SkillType[]
 	title: string
-	"image-mobile": ImageField | null
 	url: LinkField | null
 };
 

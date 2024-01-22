@@ -11,10 +11,7 @@ class ProjectsModule extends PrismicFactory {
         website {
           projects {
             project {
-              title
-              url
-              date
-              description
+							...projectFields
               skills {
                 skill
               }
@@ -28,7 +25,6 @@ class ProjectsModule extends PrismicFactory {
                   }
                 }
               }
-              image-mobile
             }
           }
         }
@@ -75,15 +71,13 @@ class ProjectsModule extends PrismicFactory {
 			});
 
 			const result: Project = {
-				"id": projectPrismic.id,
-				"date": projectPrismic.data.date ?? "",
-				"images": [],
-				"medias": medias,
-				"description": projectPrismic.data.description,
-				"title": projectPrismic.data.title ?? "",
+				id: projectPrismic.id,
+				date: projectPrismic.data.date ?? "",
+				medias,
+				description: projectPrismic.data.description,
+				title: projectPrismic.data.title ?? "",
 				skills,
-				"image-mobile": projectPrismic.data["image-mobile"],
-				"url": projectPrismic.data.url ? projectPrismic.data.url : null,
+				url: projectPrismic.data.url ? projectPrismic.data.url : null,
 			};
 
 			return result;
