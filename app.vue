@@ -105,49 +105,49 @@ const showContent = ref(false);
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+	transition: all 0.4s;
 }
 .page-enter-from,
 .page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
+	opacity: 0;
+	filter: blur(1rem);
 }
 
 .translate-out-enter-active,
 .translate-out-leave-active {
-  transition: all 0.4s ease-out;
+	transition: all 0.4s ease-out;
 }
 
 .translate-out-enter-from,
 .translate-out-leave-to {
-  opacity: 0;
-  transform: translateY(-20vh);
+	opacity: 0;
+	transform: translateY(-20vh);
 }
 
 .translate-in-enter-active,
 .translate-in-leave-active {
-  transition: all 0.4s ease-out;
+	transition: all 0.4s ease-out;
 }
 
 .translate-in-enter-from,
 .translate-in-leave-to {
-  opacity: 0;
-  transform: translateY(80vh);
+	opacity: 0;
+	transform: translateY(80vh);
 }
 </style>
 
 <style scoped lang="scss">
 .body {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  height: 100vh;
+	height: 100vh;
 
-  @media #{$desktop-down} {
-    height: auto;
-    @include gap();
-  }
+	@media #{$desktop-down} {
+		height: auto;
+		@include gap();
+	}
 
-  justify-content: space-between;
+	justify-content: space-between;
 }
 </style>

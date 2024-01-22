@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import "vue3-marquee/dist/style.css";
-
 defineProps({
 	email: {
 		type: String,
@@ -16,15 +14,17 @@ defineProps({
 <template>
 	<header class="header">
 		<div class="header__slider">
-			<Vue3Marquee
-				direction="normal"
-				:duration="10"
-				class="header__slider-container"
-			>
-				<p style="margin-left: 5em" class="h1">
-					{{ marqueeText }}
-				</p>
-			</Vue3Marquee>
+			<ClientOnly>
+				<Vue3Marquee
+					direction="normal"
+					:duration="10"
+					class="header__slider-container"
+				>
+					<p style="margin-left: 5em" class="h1">
+						{{ marqueeText }}
+					</p>
+				</Vue3Marquee>
+			</ClientOnly>
 		</div>
 
 		<UIBaseButtonContact :email="email" class="header__button desktop-only">
@@ -35,32 +35,27 @@ defineProps({
 
 <style scoped lang="scss">
 .header {
-  display: flex;
-  @include gap();
-  @include margin();
+	display: flex;
+	@include gap();
+	@include margin();
 
-  height: 45px;
+	&__slider {
+		@include transition();
+		@include border(0.5, var(--border-color));
+		padding: 0;
 
-  @media #{$mobile-down} {
-    height: 35px;
-  }
+		width: 100%;
 
-  &__slider {
-    @include transition();
-    @include border(0.5, var(--border-color));
+		&-container {
+			align-items: center;
+			height: 100%;
+			overflow: hidden;
+		}
+	}
 
-    width: 100%;
-
-    &-container {
-      align-items: center;
-      height: 100%;
-      overflow: hidden;
-    }
-  }
-
-  &__button {
-    min-width: 200px;
-    flex: 1;
-  }
+	&__button {
+		min-width: 200px;
+		flex: 1;
+	}
 }
 </style>
