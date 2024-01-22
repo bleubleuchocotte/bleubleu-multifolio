@@ -42,6 +42,6 @@ const icon = computed(() => {
 
 <style scoped lang="scss">
 .cursor-icon {
-  color: var(--background-color);
+	color: var(--background-color);
 }
 </style>

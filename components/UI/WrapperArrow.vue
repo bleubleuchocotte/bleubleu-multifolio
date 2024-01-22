@@ -33,17 +33,17 @@ const styles = reactive({
 
 <style scoped lang="scss">
 .wrapper-arrow {
-  &__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-    height: 100%;
-    width: 100%;
+		height: 100%;
+		width: 100%;
 
-    border: 1px solid;
-    border-color: transparent;
-    border-radius: 50%;
-  }
+		border: 1px solid;
+		border-color: transparent;
+		border-radius: 50%;
+	}
 }
 </style>
