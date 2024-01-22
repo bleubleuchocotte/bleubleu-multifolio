@@ -27,8 +27,12 @@ function decodeString(
 		displayString.value = chars.join("");
 	}
 
-	if (displayString.value === originalString) { return true; }
-	else { return false; }
+	if (displayString.value === originalString) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 function randomString(length: number) {
@@ -99,15 +103,15 @@ const { pause } = useIntervalFn(() => {
 
 <style scoped lang="scss">
 .loader {
-  font-size: 5vw;
-  text-transform: uppercase;
-  line-height: 1;
+	font-size: 5vw;
+	text-transform: uppercase;
+	line-height: 1;
 
-  height: 100vh;
-  width: 100vw;
+	height: 100vh;
+	width: 100vw;
 
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 </style>

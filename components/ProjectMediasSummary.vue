@@ -20,30 +20,30 @@ defineProps<ComponentProps>();
 
 <style scoped lang="scss">
 .project-images-summary {
-  &__grid {
-    height: 100%;
-    cursor: pointer;
+	&__grid {
+		height: 100%;
+		cursor: pointer;
 
-    display: flex;
-    flex-direction: column;
-    @include prop("gap", 0.8);
+		display: flex;
+		flex-direction: column;
+		@include prop("gap", 0.8);
 
-    &-item {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-      transition: transform 0.1s ease-out;
+		&-item {
+			display: flex;
+			flex: 1;
+			overflow: hidden;
+			transition: transform 0.1s ease-out;
 
-      &:first-of-type {
-        transform: translate3d(calc(var(--v) * 1.5px), 0, 0)
-          skewX(calc(var(--v) * -0.02deg));
-      }
+			&:first-of-type {
+				transform: translate3d(calc(var(--v) * 1.5px), 0, 0)
+					skewX(calc(var(--v) * -0.02deg));
+			}
 
-      &:last-of-type {
-        transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
-          skewX(calc(var(--v) * -0.02deg));
-      }
-    }
-  }
+			&:last-of-type {
+				transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
+					skewX(calc(var(--v) * -0.02deg));
+			}
+		}
+	}
 }
 </style>

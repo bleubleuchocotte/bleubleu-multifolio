@@ -35,11 +35,11 @@ defineProps({
 
 <style scoped lang="scss">
 button {
-  width: 75px;
-  height: 75px;
+	width: 75px;
+	height: 75px;
 
-  &.rotate {
-    transform: rotate(180deg);
-  }
+	&.rotate {
+		transform: rotate(180deg);
+	}
 }
 </style>

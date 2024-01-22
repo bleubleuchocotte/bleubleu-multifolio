@@ -44,8 +44,8 @@ const props: HomePageProps = {
 			me: {
 				"first-name": options.data["first-name"] ?? "",
 				"last-name": options.data["last-name"] ?? "",
-				"description": options.data.description,
-				"image": options.data["about-image"],
+				"description": page.data.description,
+				"image": page.data["about-image"],
 				"email": options.data.email ?? "",
 			},
 			links: options.data.links.map((link) => {
@@ -85,10 +85,10 @@ const props: HomePageProps = {
 
 <style scoped lang="scss">
 .index-page {
-  min-height: 0;
+	min-height: 0;
 
-  &__desktop {
-    height: 100%;
-  }
+	&__desktop {
+		height: 100%;
+	}
 }
 </style>

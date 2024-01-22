@@ -66,63 +66,63 @@ defineProps({
 
 <style scoped lang="scss">
 .project-details-mobile {
-  display: flex;
-  @include gap();
-  min-width: 100vw;
+	display: flex;
+	@include gap();
+	min-width: 100vw;
 
-  min-width: initial;
-  flex-direction: column;
-  @include prop("padding-block");
+	min-width: initial;
+	flex-direction: column;
+	@include prop("padding-block");
 
-  position: relative;
+	position: relative;
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    background-color: var(--border-color);
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 1px;
-  }
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		background-color: var(--border-color);
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 1px;
+	}
 
-  height: 100%;
+	height: 100%;
 
-  &__index {
-    @include font("enormous");
-    color: var(--accent-color);
-    line-height: 1;
-  }
+	&__index {
+		@include font("enormous");
+		color: var(--accent-color);
+		line-height: 1;
+	}
 
-  &__content {
-    &-heading {
-      display: flex;
-      align-items: center;
-      @include gap(calc(1 / 3));
-      @include prop("margin-top");
+	&__content {
+		&-heading {
+			display: flex;
+			align-items: center;
+			@include gap(calc(1 / 3));
+			@include prop("margin-top");
 
-      & > h3 {
-        @include font("h2");
-      }
-    }
+			& > h3 {
+				@include font("h2");
+			}
+		}
 
-    &-tags {
-      display: flex;
-      flex-wrap: wrap;
-      @include gap(calc(1 / 6));
-    }
+		&-tags {
+			display: flex;
+			flex-wrap: wrap;
+			@include gap(calc(1 / 6));
+		}
 
-    &-description {
-      @include font("p");
-      @include prop("margin-bottom");
-    }
-  }
+		&-description {
+			@include font("p");
+			@include prop("margin-bottom");
+		}
+	}
 
-  &__image {
-    @include border-radius();
-    width: 100%;
-    aspect-ratio: 9/16;
-  }
+	&__image {
+		@include border-radius();
+		width: 100%;
+		aspect-ratio: 9/16;
+	}
 }
 </style>

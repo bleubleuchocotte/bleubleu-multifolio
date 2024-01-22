@@ -50,7 +50,8 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 	@include prop("gap", 0.8);
 	width: 100%;
 
-	&__image, &__video {
+	&__image,
+	&__video {
 		width: 100%;
 		min-width: 0;
 		height: 100%;

@@ -1,5 +1,5 @@
 import type { FilledContentRelationshipField, LinkToMediaField } from "@prismicio/client";
-import type { ComponentMediaDuoDocumentData, ComponentMediaFullDocumentData, ProjetDocument, WebsiteDocument } from "prismicio-types";
+import type { ComponentMediaDuoDocumentData, ComponentMediaFullDocumentData, ProjetDocument, WebsiteDocument } from "@/prismicio-types";
 import type { MediaType, Project, SkillType } from "@/type/types";
 import PrismicFactory from "@/repository/factory";
 
