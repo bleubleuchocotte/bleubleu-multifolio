@@ -27,6 +27,6 @@ defineProps({
 
 <style scoped lang="scss">
 svg {
-  pointer-events: none;
+	pointer-events: none;
 }
 </style>

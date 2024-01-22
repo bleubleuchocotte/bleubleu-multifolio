@@ -26,11 +26,15 @@ const height = ref(0);
 
 onMounted(() => {
 	// Pas forcément néssaire vu qu'à chaque clic, onUpdated est call à cause de la varibale isOpen
-	if (target.value) { height.value = target.value.scrollHeight; }
+	if (target.value) {
+		height.value = target.value.scrollHeight;
+	}
 });
 
 onUpdated(() => {
-	if (target.value) { height.value = target.value.scrollHeight; }
+	if (target.value) {
+		height.value = target.value.scrollHeight;
+	}
 });
 </script>
 
@@ -63,19 +67,19 @@ onUpdated(() => {
 
 <style scoped lang="scss">
 .accordion {
-  &__button {
-    width: 100%;
-  }
+	&__button {
+		width: 100%;
+	}
 
-  &__content {
-    max-height: 0;
-    overflow: hidden;
+	&__content {
+		max-height: 0;
+		overflow: hidden;
 
-    transition: max-height 0.2s ease-in-out;
+		transition: max-height 0.2s ease-in-out;
 
-    &[aria-hidden="false"] {
-      max-height: var(--accordion-height);
-    }
-  }
+		&[aria-hidden="false"] {
+			max-height: var(--accordion-height);
+		}
+	}
 }
 </style>

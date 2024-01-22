@@ -29,7 +29,9 @@ onClickOutside(container, () => emit("close"), {
 });
 
 function callback(e: KeyboardEvent) {
-	if (e.key === "Escape") { emit("close"); }
+	if (e.key === "Escape") {
+		emit("close");
+	}
 }
 
 const target = ref();
@@ -93,79 +95,79 @@ useFocusTrap(target, { immediate: true });
 
 <style scoped lang="scss">
 .gallery {
-  position: fixed;
-  inset: 0;
+	position: fixed;
+	inset: 0;
 
-  display: flex;
-  flex-direction: column;
-  @include gap(0.5);
+	display: flex;
+	flex-direction: column;
+	@include gap(0.5);
 
-  padding-inline: 15vw;
-  @include prop("padding-top");
+	padding-inline: 15vw;
+	@include prop("padding-top");
 
-  background-color: var(--background-color-70);
-  backdrop-filter: blur(20px);
+	background-color: var(--background-color-70);
+	backdrop-filter: blur(20px);
 
-  z-index: 10;
+	z-index: 10;
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    @include prop('padding-bottom', 0.5);
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		@include prop("padding-bottom", 0.5);
 
-    border-bottom: 1px solid;
-  }
+		border-bottom: 1px solid;
+	}
 
-  &__project {
-    &-heading {
-      display: flex;
-      @include gap(calc(1 / 3));
-      align-items: center;
+	&__project {
+		&-heading {
+			display: flex;
+			@include gap(calc(1 / 3));
+			align-items: center;
 
-      &-title {
-        pointer-events: none;
-      }
-    }
+			&-title {
+				pointer-events: none;
+			}
+		}
 
-    &-lenis {
-      @include border-radius(1, "top");
-    }
+		&-lenis {
+			@include border-radius(1, "top");
+		}
 
-    &-description {
-      max-width: 50%;
-      @include prop('padding-left', 0.25);
-      @include prop('padding-bottom');
-    }
+		&-description {
+			max-width: 50%;
+			@include prop("padding-left", 0.25);
+			@include prop("padding-bottom");
+		}
 
-    &-images {
-      display: flex;
-      flex-direction: column;
-      @include gap();
-      height: 100%;
+		&-images {
+			display: flex;
+			flex-direction: column;
+			@include gap();
+			height: 100%;
 
-      img {
-        @include border-radius();
-        min-width: 0;
-      }
-      [data-type="duo"] {
-        display: flex;
-        @include gap();
-        width: 100%;
+			img {
+				@include border-radius();
+				min-width: 0;
+			}
+			[data-type="duo"] {
+				display: flex;
+				@include gap();
+				width: 100%;
 
-        img {
-          aspect-ratio: 1;
-        }
-      }
-      [data-type="full"] {
-        img {
-          aspect-ratio: 16/9;
-        }
-      }
+				img {
+					aspect-ratio: 1;
+				}
+			}
+			[data-type="full"] {
+				img {
+					aspect-ratio: 16/9;
+				}
+			}
 
-      [data-type]:last-of-type {
-        @include prop("padding-bottom", 2.5);
-      }
-    }
-  }
+			[data-type]:last-of-type {
+				@include prop("padding-bottom", 2.5);
+			}
+		}
+	}
 }
 </style>

@@ -31,7 +31,9 @@ let lenis: Lenis;
 const velocity = ref(0);
 
 onMounted(() => {
-	if (container.value === null) { return; }
+	if (container.value === null) {
+		return;
+	}
 	lenis = new Lenis({
 		wrapper: container.value, // element which has overflow
 		content: container.value, // usually wrapper's direct child
@@ -56,7 +58,9 @@ onMounted(() => {
 watch(
 	() => props.target,
 	() => {
-		if (props.target) { lenis.scrollTo(props.target); }
+		if (props.target) {
+			lenis.scrollTo(props.target);
+		}
 	},
 );
 </script>
@@ -69,10 +73,10 @@ watch(
 
 <style scoped lang="scss">
 div[data-lenis] {
-  height: 100%;
-  overflow: hidden;
-  @media #{$low-accuracy} {
-    overflow: overlay;
-  }
+	height: 100%;
+	overflow: hidden;
+	@media #{$low-accuracy} {
+		overflow: overlay;
+	}
 }
 </style>

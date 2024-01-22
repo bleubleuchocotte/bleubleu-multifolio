@@ -41,10 +41,10 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 
 <style scoped lang="scss">
 .main-mobile {
-  display: flex;
-  flex-direction: column;
-  @include gap(2);
-  @include prop("padding-inline");
-  @include prop("padding-bottom");
+	display: flex;
+	flex-direction: column;
+	@include gap(2);
+	@include prop("padding-inline");
+	@include prop("padding-bottom");
 }
 </style>
