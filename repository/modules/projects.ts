@@ -1,20 +1,13 @@
-import { Client } from "@prismicio/client";
-import { PrismicDocument } from "@prismicio/types";
+import type { FilledContentRelationshipField, LinkToMediaField } from "@prismicio/client";
+import type { ComponentMediaDuoDocumentData, ComponentMediaFullDocumentData, ProjetDocument, WebsiteDocument } from "@/prismicio-types";
+import type { MediaType, Project, SkillType } from "@/type/types";
+import PrismicFactory from "@/repository/factory";
 
-import { useAsyncData } from "#imports";
-import { ImageType, Project, SkillType } from "type/types";
-
-class ProjectsModule {
-  private client: Client;
-
-  constructor(client: Client) {
-    this.client = client;
-  }
-
-  async getProjects() {
-    const { data: prismicProjects } = await useAsyncData("GetAllProjects", () =>
-      this.client.getSingle("website", {
-        graphQuery: `{
+class ProjectsModule extends PrismicFactory {
+	async getProjects() {
+		const { data } = await useAsyncData<WebsiteDocument>("GetAllProjects", () =>
+			this.client.getSingle("website", {
+				graphQuery: `{
         website {
           projects {
             project {
@@ -25,13 +18,13 @@ class ProjectsModule {
               skills {
                 skill
               }
-              images {
-                image {
-                  ...on image-full {
-                    ...image-fullFields
+              medias {
+                media {
+                  ...on component_media_full {
+                    ...component_media_fullFields
                   }
-                  ...on image-duo {
-                    ...image-duoFields
+									...on component_media_duo {
+                    ...component_media_duoFields
                   }
                 }
               }
@@ -40,67 +33,63 @@ class ProjectsModule {
           }
         }
       }`,
-      })
-    );
+			}));
 
-    if (!prismicProjects.value) {
-      throw new Error("Project could not be loaded");
-    }
+		const projectsPrismic = data.value?.data.projects ?? [];
 
-    const projects: Array<Project | null> =
-      prismicProjects.value.data.projects.map(
-        (el: { project: PrismicDocument }) => {
-          if (!el.project.data) {
-            // Si un champ n'a pas été remplie, renvoi null
-            return null;
-          }
+		const projects = projectsPrismic.map((el) => {
+			const projectPrismic = el.project as unknown as ProjetDocument; // ProjetDocument est un objet nested dans website
 
-          const images = (
-            el.project.data.images as { image: PrismicDocument }[]
-          ).map((img) => {
-            if (
-              img.image.type !== "image-duo" &&
-              img.image.type !== "image-full"
-            ) {
-              throw new Error("Error type image");
-            }
+			const medias = projectPrismic.data.medias.map((el) => {
+				const mediaPrismic = el.media as FilledContentRelationshipField<"component_media_duo" | "component_media_full", "", ComponentMediaDuoDocumentData | ComponentMediaFullDocumentData>;
 
-            const result: ImageType = {
-              field: img.image.data,
-              type: img.image.type,
-              id: img.image.id,
-            };
+				const result: MediaType = {
+					field: {},
+					type: mediaPrismic.type === "component_media_duo" ? "media-duo" : "media-full",
+					id: mediaPrismic.id,
+				};
 
-            return result;
-          });
+				switch (mediaPrismic.type) {
+					case "component_media_full":
+						result.field.principal = (mediaPrismic.data as ComponentMediaFullDocumentData).media_full as LinkToMediaField<"filled">;
+						break;
+					case "component_media_duo":
+						result.field.principal = (mediaPrismic.data as ComponentMediaDuoDocumentData).media_left as LinkToMediaField<"filled">;
+						result.field.secondary = (mediaPrismic.data as ComponentMediaDuoDocumentData).media_right as LinkToMediaField<"filled">;
+						break;
 
-          const skills = (el.project.data.skills as { skill: string }[]).map(
-            (obj) => {
-              const result: SkillType = {
-                name: obj.skill,
-                id: useUID(),
-              };
+					default:
+						break;
+				}
 
-              return result;
-            }
-          );
+				return result;
+			});
 
-          const result: Project = {
-            id: el.project.id,
-            date: el.project.data.date,
-            images,
-            description: el.project.data.description,
-            title: el.project.data.title,
-            skills,
-            "image-mobile": el.project.data["image-mobile"],
-            url: el.project.data.url ? el.project.data.url : null,
-          };
+			const skills = projectPrismic.data.skills.map((obj) => {
+				const result: SkillType = {
+					name: obj.skill ?? "",
+					id: useUID(),
+				};
 
-          return result;
-        }
-      );
+				return result;
+			});
 
-    return projects.filter((el): el is Project => el !== null); // Permet de filtrer les champs null
-  }
+			const result: Project = {
+				"id": projectPrismic.id,
+				"date": projectPrismic.data.date ?? "",
+				"images": [],
+				"medias": medias,
+				"description": projectPrismic.data.description,
+				"title": projectPrismic.data.title ?? "",
+				skills,
+				"image-mobile": projectPrismic.data["image-mobile"],
+				"url": projectPrismic.data.url ? projectPrismic.data.url : null,
+			};
+
+			return result;
+		});
+
+		return projects.filter((el): el is Project => el !== null); // Permet de filtrer les champs null
+	}
 }
 export default ProjectsModule;

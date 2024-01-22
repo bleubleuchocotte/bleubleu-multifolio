@@ -1,32 +1,32 @@
 <script setup lang="ts">
 const props = defineProps({
-  width: {
-    type: Number,
-    required: false,
-    default: 1,
-  },
+	width: {
+		type: Number,
+		required: false,
+		default: 1,
+	},
 });
 
 const styles = reactive({
-  "--width": `${props.width}px`,
+	"--width": `${props.width}px`,
 });
 </script>
 
 <template>
-  <div :style="styles"></div>
+	<div :style="styles" />
 </template>
 
 <style scoped lang="scss">
 div {
-  position: relative;
+	position: relative;
 
-  height: 100%;
-  width: var(--width);
+	height: 100%;
+	width: var(--width);
 
-  background-color: var(--border-color);
+	background-color: var(--border-color);
 
-  &::before {
-    @include gradientScroll(left);
-  }
+	&::before {
+		@include gradientScroll(left);
+	}
 }
 </style>
