@@ -19,7 +19,7 @@
 		"@studio-freight/lenis": "^1.0.33",
 		"@vueuse/integrations": "^10.7.2",
 		"focus-trap": "^7.5.4",
-		"sass": "^1.69.7",
+		"sass": "^1.70.0",
 		"vue3-marquee": "^4.1.0"
 	},
 	"devDependencies": {
@@ -30,7 +30,7 @@
 		"@vueuse/nuxt": "^10.7.2",
 		"eslint": "^8.56.0",
 		"eslint-plugin-format": "^0.1.0",
-		"nuxt": "^3.9.1",
+		"nuxt": "^3.9.2",
 		"nuxt-simple-robots": "^3.1.10",
 		"nuxt-simple-sitemap": "^4.4.1",
 		"slice-machine-ui": "^1.22.2"
