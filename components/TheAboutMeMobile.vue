@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import type { TheAboutMeType } from "@/type/types";
+import type { AboutMe } from "~/types";
 
-type ComponentProps = {
-	params: TheAboutMeType
-};
-
-defineProps<ComponentProps>();
+defineProps<AboutMe>();
 
 function scrollToTop() {
 	window.scrollTo({ top: 0, behavior: "smooth" });
@@ -15,7 +11,7 @@ function scrollToTop() {
 <template>
 	<section class="about-me-mobile">
 		<div class="about-me-mobile__heading">
-			<h1>{{ params.me["first-name"] }} {{ params.me["last-name"] }}</h1>
+			<h1>{{ firstName }} {{ lastName }}</h1>
 
 			<button aria-label="Back to Top" @click="scrollToTop">
 				<svg
@@ -41,16 +37,9 @@ function scrollToTop() {
 		</div>
 
 		<div class="about-me-mobile__content">
-			<PrismicRichText :field="params.me.description" />
-			<PrismicImage
-				v-if="params.me.image"
-				:field="params.me.image"
-				class="about-me-mobile__content-image"
-			/>
-			<NuxtLink
-				:to="`mailto:${params.me.email}`"
-				class="about-me-mobile__content-contact"
-			>
+			<PrismicRichText :field="description" />
+			<PrismicImage :field="imageOfMe" class="about-me-mobile__content-image" />
+			<NuxtLink :to="`mailto:${email}`" class="about-me-mobile__content-contact">
 				Contact
 			</NuxtLink>
 		</div>
@@ -68,8 +57,8 @@ function scrollToTop() {
 				</NuxtLink>
 			</li>
 			<li
-				v-for="link in params.links"
-				:key="link.id"
+				v-for="link in links"
+				:key="link.name?.toString()"
 				class="about-me-mobile__links-item"
 			>
 				<PrismicLink :field="link.link">

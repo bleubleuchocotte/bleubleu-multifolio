@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Project, TheAboutMeType } from "@/type/types";
+import type { AboutMe, ProjectWithId } from "~/types";
 
 type ComponentProps = {
-	projects: Project[]
-	content: TheAboutMeType
+	projects: ProjectWithId[]
+	aboutMe: AboutMe
 };
 
 defineProps<ComponentProps>();
@@ -18,12 +18,12 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 			<p>My projects</p>
 			<UIBaseAccordion
 				v-for="(project, i) in projects"
-				:key="project.id"
+				:key="project.title?.toString()"
 				ref="accordions"
 				:project="project"
 				:index="i"
 			>
-				<ProjectDetailsMobile
+				<ProjectMobileDetails
 					:project="project"
 					:index="i"
 					:hidden="arrAriaHidden[i] ?? true"
@@ -32,9 +32,7 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 		</main>
 
 		<footer>
-			<TheAboutMeMobile
-				:params="content"
-			/>
+			<TheAboutMeMobile v-bind="aboutMe" />
 		</footer>
 	</div>
 </template>
