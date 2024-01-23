@@ -5,81 +5,6 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for Component | Media duo documents
- */
-interface ComponentMediaDuoDocumentData {
-  /**
-   * Média de gauche field in *Component | Media duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: component_media_duo.media_left
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  media_left: prismic.LinkToMediaField;
-
-  /**
-   * Média de droite field in *Component | Media duo*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: component_media_duo.media_right
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  media_right: prismic.LinkToMediaField;
-}
-
-/**
- * Component | Media duo document from Prismic
- *
- * - **API ID**: `component_media_duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ComponentMediaDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ComponentMediaDuoDocumentData>,
-    "component_media_duo",
-    Lang
-  >;
-
-/**
- * Content for Component | Media Full documents
- */
-interface ComponentMediaFullDocumentData {
-  /**
-   * Média pleine largeur field in *Component | Media Full*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: component_media_full.media_full
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  media_full: prismic.LinkToMediaField;
-}
-
-/**
- * Component | Media Full document from Prismic
- *
- * - **API ID**: `component_media_full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ComponentMediaFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ComponentMediaFullDocumentData>,
-    "component_media_full",
-    Lang
-  >;
-
-/**
  * Content for Page | Legal notice documents
  */
 interface PageLegalNoticeDocumentData {
@@ -454,8 +379,6 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-  | ComponentMediaDuoDocument
-  | ComponentMediaFullDocument
   | PageLegalNoticeDocument
   | ProjetDocument
   | WebsiteDocument;
@@ -570,10 +493,6 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      ComponentMediaDuoDocument,
-      ComponentMediaDuoDocumentData,
-      ComponentMediaFullDocument,
-      ComponentMediaFullDocumentData,
       PageLegalNoticeDocument,
       PageLegalNoticeDocumentData,
       ProjetDocument,
