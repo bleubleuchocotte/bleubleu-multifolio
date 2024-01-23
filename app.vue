@@ -4,14 +4,21 @@ const request = useRequestURL();
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
+if (!options) {
+	throw createError({
+		statusCode: 500,
+		statusMessage: "Could not reach options",
+	});
+}
+
 const cssVariables = [
-	`--accent-color: ${options?.data["accent-color"]}`,
-	`--accent-color-80: ${options?.data["accent-color"]}80`,
-	`--text-accent-color: ${options?.data["text-accent-color"]}`,
-	`--text-color: ${options?.data["text-color"]}`,
-	`--background-color: ${options?.data["background-color"]}`,
-	`--border-color:${options?.data["text-color"]}80`,
-	`--background-color-70: ${options?.data["background-color"]}B3`,
+	`--accent-color: ${options["accent-color"]}`,
+	`--accent-color-80: ${options["accent-color"]}80`,
+	`--text-accent-color: ${options["text-accent-color"]}`,
+	`--text-color: ${options["text-color"]}`,
+	`--background-color: ${options["background-color"]}`,
+	`--border-color:${options["text-color"]}80`,
+	`--background-color-70: ${options["background-color"]}B3`,
 ];
 
 useHead({
@@ -24,13 +31,13 @@ useServerHeadSafe({
 			rel: "icon",
 			type: "image/png",
 			sizes: "16x16",
-			href: options?.data["seo-favicon"].url ?? `${request.origin}/default-favicon-16x16.png`,
+			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-16x16.png`,
 		},
 		{
 			rel: "icon",
 			type: "image/png",
 			sizes: "32x32",
-			href: options?.data["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
+			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
 	],
 });
@@ -45,23 +52,23 @@ useServerSeoMeta({
 	ogLocale: "en_US",
 	twitterCard: "summary",
 
-	colorScheme: options?.data["accent-color"],
-	themeColor: options?.data["accent-color"],
+	colorScheme: options["accent-color"],
+	themeColor: options["accent-color"],
 
-	title: options?.data["seo-title"],
-	description: options?.data["seo-description"],
+	title: options["seo-title"],
+	description: options["seo-description"],
 
-	ogTitle: options?.data["seo-title"],
-	ogDescription: options?.data["seo-description"],
+	ogTitle: options["seo-title"],
+	ogDescription: options["seo-description"],
 	ogUrl: request.origin + request.pathname,
 	ogImage: {
-		url: options?.data["og-image"].url ?? "",
-		secureUrl: options?.data["og-image"].url ?? "",
-		width: options?.data["og-image"].dimensions?.width ?? "",
-		height: options?.data["og-image"].dimensions?.width ?? "",
+		url: options["og-image"].url ?? "",
+		secureUrl: options["og-image"].url ?? "",
+		width: options["og-image"].dimensions?.width ?? "",
+		height: options["og-image"].dimensions?.width ?? "",
 	},
 
-	publisher: `${options?.data["first-name"]} ${options?.data["last-name"]}`,
+	publisher: `${options["first-name"]} ${options["last-name"]}`,
 });
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
@@ -82,10 +89,10 @@ const showContent = ref(false);
 	>
 		<TheLoader
 			v-if="isLoading"
-			:text="`${options?.data['first-name']} ${options?.data['last-name']}`"
+			:text="`${options['first-name']} ${options['last-name']}`"
 			:colors="{
-				start: options?.data['text-color'] ?? '',
-				end: options?.data['accent-color'] ?? '',
+				start: options['text-color'] ?? '',
+				end: options['accent-color'] ?? '',
 			}"
 			@unmount="isLoading = false"
 		/>
@@ -93,11 +100,11 @@ const showContent = ref(false);
 	<Transition mode="out-in" name="translate-in">
 		<div v-show="showContent" class="body">
 			<TheHeader
-				:marquee-text="options?.data['text-header'] ?? ''"
-				:email="options?.data.email ?? ''"
+				:marquee-text="options['text-header']"
+				:email="options.email"
 			/>
 			<NuxtPage />
-			<TheFooter :links="options?.data.links ?? []" class="desktop-only" />
+			<TheFooter :links="options.links" class="desktop-only" />
 		</div>
 	</Transition>
 </template>
