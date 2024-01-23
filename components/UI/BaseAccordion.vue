@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import type { Project } from "@/type/types";
+import type { ProjectWithId } from "~/types";
 
-defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+};
+
+defineProps<ComponentProps>();
 
 const isOpen = ref(false);
 defineExpose({ isOpen });

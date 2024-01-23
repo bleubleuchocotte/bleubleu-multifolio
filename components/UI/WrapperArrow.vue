@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import type { PropType } from "nuxt/dist/app/compat/capi";
-import type { ColorArrow } from "@/type/types";
+import type { ColorArrow } from "@/types";
 
-const props = defineProps({
-	colors: {
-		type: Object as PropType<ColorArrow>,
-		required: true,
-	},
-	lengthArrow: {
-		type: String as PropType<"short" | "long">,
-		required: false,
-		default: "short",
-	},
+type ComponentProps = {
+	colors: ColorArrow
+	lengthArrow?: "short" | "long"
+};
+
+const props = withDefaults(defineProps<ComponentProps>(), {
+	lengthArrow: "short",
 });
 
 const styles = reactive({
@@ -47,3 +43,4 @@ const styles = reactive({
 	}
 }
 </style>
+~/types
