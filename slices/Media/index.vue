@@ -29,28 +29,53 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 };
 
 const isMobile = useMediaQuery("(max-width: 1025px)"); // Client side
+const { isDesktop } = useDevice(); // Server side
 </script>
 
 <template>
-	<template v-if="isMobile">
-		<div class="media-mobile">
-			<img v-if="(responsive_media as LinkToMediaField<'filled'>).kind === 'image'" :key="slice.id + (responsive_media as LinkToMediaField<'filled'>).url" :src="(responsive_media as LinkToMediaField<'filled'>).url" :height="(responsive_media as LinkToMediaField<'filled'>).height ?? ''" :width="(responsive_media as LinkToMediaField<'filled'>).width ?? ''" alt="" class="media-mobile__image">
+	<ClientOnly>
+		<template v-if="isMobile">
+			<div class="media-mobile">
+				<img v-if="(responsive_media as LinkToMediaField<'filled'>).kind === 'image'" :key="slice.id + (responsive_media as LinkToMediaField<'filled'>).url" :src="(responsive_media as LinkToMediaField<'filled'>).url" :height="(responsive_media as LinkToMediaField<'filled'>).height ?? ''" :width="(responsive_media as LinkToMediaField<'filled'>).width ?? ''" alt="" class="media-mobile__image">
 
-			<video v-else :key="(responsive_media as LinkToMediaField<'filled'>).url" ref="videos" v-bind="props.context" class="media-mobile__video">
-				<source :src="(responsive_media as LinkToMediaField<'filled'>).url">
-			</video>
-		</div>
-	</template>
-
-	<UIBaseIntersectionObserver v-else class="media" @is-visible="onVisibilityChanged">
-		<template v-for="field in Object.values(fields as FilledLinkToMediaField<typeof fields>)">
-			<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
-
-			<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
-				<source :src="field.url">
-			</video>
+				<video v-else :key="(responsive_media as LinkToMediaField<'filled'>).url" ref="videos" v-bind="props.context" class="media-mobile__video">
+					<source :src="(responsive_media as LinkToMediaField<'filled'>).url">
+				</video>
+			</div>
 		</template>
-	</UIBaseIntersectionObserver>
+
+		<UIBaseIntersectionObserver v-else class="media" @is-visible="onVisibilityChanged">
+			<template v-for="field in Object.values(fields as FilledLinkToMediaField<typeof fields>)">
+				<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
+
+				<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
+					<source :src="field.url">
+				</video>
+			</template>
+		</UIBaseIntersectionObserver>
+
+		<template #fallback>
+			<UIBaseIntersectionObserver v-if="isDesktop" class="media" @is-visible="onVisibilityChanged">
+				<template v-for="field in Object.values(fields as FilledLinkToMediaField<typeof fields>)">
+					<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
+
+					<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
+						<source :src="field.url">
+					</video>
+				</template>
+			</UIBaseIntersectionObserver>
+
+			<template v-else>
+				<div class="media-mobile">
+					<img v-if="(responsive_media as LinkToMediaField<'filled'>).kind === 'image'" :key="slice.id + (responsive_media as LinkToMediaField<'filled'>).url" :src="(responsive_media as LinkToMediaField<'filled'>).url" :height="(responsive_media as LinkToMediaField<'filled'>).height ?? ''" :width="(responsive_media as LinkToMediaField<'filled'>).width ?? ''" alt="" class="media-mobile__image">
+
+					<video v-else :key="(responsive_media as LinkToMediaField<'filled'>).url" ref="videos" v-bind="props.context" class="media-mobile__video">
+						<source :src="(responsive_media as LinkToMediaField<'filled'>).url">
+					</video>
+				</div>
+			</template>
+		</template>
+	</ClientOnly>
 </template>
 
 <style scoped lang="scss">
