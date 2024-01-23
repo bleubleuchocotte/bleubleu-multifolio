@@ -13,7 +13,7 @@ class PagesModule extends PrismicFactory {
 			}`,
 		}));
 
-		return data.value;
+		return (data.value?.data ?? null) as Pick<Content.WebsiteDocumentData, "about-image" | "description" | "ending-card-image">;
 	}
 
 	async getLegalNotice() {

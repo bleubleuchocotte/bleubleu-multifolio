@@ -24,7 +24,7 @@ class OptionsModule extends PrismicFactory {
 				}`,
 			}));
 
-		return data.value;
+		return (data.value?.data ?? null) as (Omit<Content.WebsiteDocumentData, "about" | "description" | "ending-card-image" > | null);
 	}
 }
 
