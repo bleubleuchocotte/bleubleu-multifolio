@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { MediaType } from "~/type/types";
+import type { Content } from "@prismicio/client";
+import type { MediaHTMLAttributes } from "vue";
+import { components } from "@/slices";
 
 type ComponentProps = {
-	medias: MediaType[]
+	medias: Content.ProjetDocumentDataSlicesSlice[]
 };
 
 defineProps<ComponentProps>();
+
+const mediaAttribute: MediaHTMLAttributes = {
+	controls: true,
+	muted: true,
+};
 </script>
 
 <template>
 	<UIBaseSlider>
-		<UIBaseMedia
-			v-for="(media) in medias" :key="media.id" :media="media" :video-settings="{
-				controls: true,
-				muted: true,
-				autoplay: false,
-				loop: false,
-			}"
-		/>
+		<SliceZone v-for="(media) in medias" :key="media.id" :slices="[media]" :components="components" :context="mediaAttribute" />
 	</UIBaseSlider>
 </template>
