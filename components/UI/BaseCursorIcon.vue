@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CursorIconType } from "@/type/types";
+import type { CursorIconType } from "@/types";
 import IconArrowRight from "@/components/Icon/BaseArrowRight.vue";
 import IconArrowLeft from "@/components/Icon/BaseArrowLeft.vue";
 import IconFullscreen from "@/components/Icon/BaseFullscreen.vue";
@@ -7,13 +7,11 @@ import IconBaseArrowRightUp from "@/components/Icon/BaseArrowRightUp.vue";
 import IconBaseToward from "@/components/Icon/BaseToward.vue";
 import IconBaseTowardReverse from "@/components/Icon/BaseTowardReverse.vue";
 
-const props = defineProps({
-	icon: {
-		type: String as PropType<CursorIconType>,
-		required: false,
-		default: null,
-	},
-});
+type ComponentProps = {
+	icon: CursorIconType
+};
+
+const props = defineProps<ComponentProps>();
 
 const icon = computed(() => {
 	switch (props.icon) {

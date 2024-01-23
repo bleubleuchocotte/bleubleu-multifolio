@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import type { ImageField } from "@prismicio/client";
-import type { Project, TheAboutMeType } from "@/type/types";
+import type { AboutMe, ProjectWithId } from "~/types";
 
 type ComponentProps = {
-	projects: Project[]
-	content: {
-		about: TheAboutMeType
-		endindCardImage: ImageField
-	}
+	projects: ProjectWithId[]
+	aboutMe: AboutMe
+	endingCardImage: ImageField
 };
 
 defineProps<ComponentProps>();
@@ -15,7 +13,7 @@ defineProps<ComponentProps>();
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
-const projectInGallery = ref<Project | null>(null);
+const projectInGallery = ref<ProjectWithId | null>(null);
 
 function callback(id: string, hasToScroll: boolean) {
 	idToProject.value = id;
@@ -30,12 +28,12 @@ function callback(id: string, hasToScroll: boolean) {
 
 <template>
 	<main class="main">
-		<TheAboutMe :params="content.about" />
+		<TheAboutMe v-bind="aboutMe" />
 		<div class="main__left">
 			<section class="main__left-container">
 				<p>My projects</p>
 				<UIBaseLenis orientation="vertical">
-					<ProjectsListVertical
+					<ProjectListVertical
 						:projects="projects"
 						:id-to-active="idToProject"
 						@target="
@@ -52,18 +50,18 @@ function callback(id: string, hasToScroll: boolean) {
 			:target="scrollToProjectId"
 			:request-lenis="true"
 		>
-			<ProjectsListHorizontal
+			<ProjectListHorizontal
 				:projects="projects"
-				@target="(id: string) => callback(id, false)"
-				@target-then-scroll="(id: string) => callback(id, true)"
-				@gallery="(project: Project) => (projectInGallery = project)"
+				@target="(id) => callback(id, false)"
+				@target-then-scroll="(id) => callback(id, true)"
+				@gallery="(project) => (projectInGallery = project)"
 				@go-to-end="() => (scrollToProjectId = `end`)"
 				@go-to-start="() => (scrollToProjectId = 'start')"
 			/>
 
-			<EndingCard
-				:email="content.about.me.email"
-				:ending-card-image="content.endindCardImage"
+			<ProjectEndingCard
+				:email="aboutMe.email"
+				:ending-card-image="endingCardImage"
 				@go-to-start="
 					() => (scrollToProjectId = `[data-project-h-id='${projects[0].id}']`)
 				"

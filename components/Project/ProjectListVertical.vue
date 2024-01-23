@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-const props = defineProps({
-	projects: {
-		type: Array<Project>,
-		required: true,
-	},
+type ComponentProps = {
+	projects: ProjectWithId[]
+	idToActive?: string
+};
 
-	idToActive: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
-});
+const props = defineProps<ComponentProps>();
+
 const emit = defineEmits<{
-	(e: "target", payload: string): void
+	target: [payload: string]
 }>();
 
 const containers = ref<Array<HTMLElement>>([]);
@@ -81,8 +76,8 @@ watch(
 				<UIBaseIndex :index="i + 1" />{{ project.title }}
 			</h2>
 			<div class="projects-list-vertical__element-data">
-				<p>{{ project.date.slice(0, 4) }}</p>
-				<p>{{ project.skills[0]?.name }}</p>
+				<p>{{ project.date?.slice(0, 4) }}</p>
+				<p>{{ project.skills[0]?.skill }}</p>
 			</div>
 		</li>
 	</ul>

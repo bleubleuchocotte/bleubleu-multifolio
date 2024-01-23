@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { KeyTextField } from "@prismicio/client";
 import { useClipboard } from "@vueuse/core";
 
-defineProps({
-	email: {
-		type: String,
-		required: true,
-	},
-});
+type ComponentProps = {
+	email: KeyTextField
+};
+
+defineProps<ComponentProps>();
 
 const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 </script>
@@ -18,7 +18,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 		class="button"
 		:class="{ open: copied }"
 		aria-label="Copy email address to clipboard"
-		@click="copy(email)"
+		@click="copy(email?.toString() ?? '')"
 	>
 		<div class="button__text">
 			<div class="button__text-bg-top">

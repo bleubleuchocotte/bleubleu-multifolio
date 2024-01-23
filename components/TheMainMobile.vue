@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import type { Project, TheAboutMeType } from "@/type/types";
+import type BaseAccordion from "@/components/UI/BaseAccordion.vue";
+import type { AboutMe, ProjectWithId } from "~/types";
 
 type ComponentProps = {
-	projects: Project[]
-	content: TheAboutMeType
+	projects: ProjectWithId[]
+	aboutMe: AboutMe
 };
 
 defineProps<ComponentProps>();
 
-const accordions = ref<any[]>([]);
+const accordions = ref<InstanceType<typeof BaseAccordion>[]>([]);
 const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 </script>
 
@@ -18,23 +19,29 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 			<p>My projects</p>
 			<UIBaseAccordion
 				v-for="(project, i) in projects"
-				:key="project.id"
+				:key="project.title?.toString()"
 				ref="accordions"
-				:project="project"
-				:index="i"
+				:state-key="`Accordion mobile index: ${i}`"
 			>
-				<ProjectDetailsMobile
-					:project="project"
-					:index="i"
-					:hidden="arrAriaHidden[i] ?? true"
-				/>
+				<template #title>
+					<ProjectMobileAccordionHeader
+						:project="project"
+						:index="i"
+						:active="accordions[i]?.isOpen"
+					/>
+				</template>
+				<template #content>
+					<ProjectMobileDetails
+						:project="project"
+						:index="i"
+						:hidden="arrAriaHidden[i] ?? true"
+					/>
+				</template>
 			</UIBaseAccordion>
 		</main>
 
 		<footer>
-			<TheAboutMeMobile
-				:params="content"
-			/>
+			<TheAboutMeMobile v-bind="aboutMe" />
 		</footer>
 	</div>
 </template>

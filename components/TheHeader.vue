@@ -1,14 +1,12 @@
 <script setup lang="ts">
-defineProps({
-	email: {
-		type: String,
-		required: true,
-	},
-	marqueeText: {
-		type: String,
-		required: true,
-	},
-});
+import type { KeyTextField } from "@prismicio/client";
+
+type ComponentProps = {
+	email: KeyTextField
+	marqueeText: KeyTextField
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>

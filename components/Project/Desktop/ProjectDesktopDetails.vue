@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-const props = defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+};
+
+const props = defineProps<ComponentProps>();
 
 const emit = defineEmits<{
-	(e: "target", payload: string): void
-	(e: "next"): void
-	(e: "previous"): void
-	(e: "gallery", payload: Project): void
+	target: [payload: string]
+	next: []
+	previous: []
+	gallery: [payload: ProjectWithId]
 }>();
 
 const target = ref<HTMLElement>();
@@ -61,8 +57,8 @@ useIntersectionObserver(
 					</h2>
 				</div>
 				<div class="project-details__content-tags">
-					<UIBaseTag v-for="skill in project.skills" :key="skill.id">
-						{{ skill.name }}
+					<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+						{{ item.skill }}
 					</UIBaseTag>
 				</div>
 				<PrismicRichText
@@ -101,7 +97,7 @@ useIntersectionObserver(
 
 		<div class="project-details__right">
 			<ProjectMediasSummary
-				:medias="project.medias.slice(0, 2)"
+				:medias="project.slices.slice(0, 2)"
 				role="button"
 				aria-label="View project images"
 				data-icon="IconFullscreen"

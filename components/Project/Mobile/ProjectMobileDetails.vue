@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-	hidden: {
-		type: Boolean,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+	hidden: boolean
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>
@@ -46,12 +39,12 @@ defineProps({
 		</template>
 
 		<div class="project-details-mobile__content-tags">
-			<UIBaseTag v-for="skill in project.skills" :key="skill.id">
-				{{ skill.name }}
+			<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+				{{ item.skill }}
 			</UIBaseTag>
 		</div>
 
-		<ProjectMobileSlider :medias="project.medias" />
+		<ProjectMobileSlider :medias="project.slices" />
 
 		<PrismicRichText
 			:field="project.description"
