@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-const props = defineProps({
-	projects: {
-		type: Array<Project>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	projects: ProjectWithId[]
+};
+
+const props = defineProps<ComponentProps>();
 
 const emits = defineEmits<{
-	(e: "target", payload: string): void
-	(e: "targetThenScroll", payload: string): void
-	(e: "gallery", payload: Project): void
-	(e: "goToEnd"): void
-	(e: "goToStart"): void
+	target: [payload: string]
+	targetThenScroll: [payload: string]
+	gallery: [payload: ProjectWithId]
+	goToEnd: []
+	goToStart: []
 }>();
 
 const currentProjectIndex = ref(0);
@@ -58,7 +57,7 @@ function onTarget(id: string, index: number) {
 </script>
 
 <template>
-	<ProjectDetails
+	<ProjectDesktopDetails
 		v-for="(project, i) in projects"
 		:key="project.id"
 		:project="project"
@@ -70,6 +69,6 @@ function onTarget(id: string, index: number) {
 				? $emit('targetThenScroll', projects[i + 1].id)
 				: $emit('goToEnd')
 		"
-		@gallery="(project: Project) => $emit('gallery', project)"
+		@gallery="(project) => $emit('gallery', project)"
 	/>
 </template>
