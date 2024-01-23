@@ -15,9 +15,4 @@
 	overflow-x: scroll;
 	scroll-snap-type: x mandatory;
 }
-:slotted(*) {
-	scroll-snap-align: center;
-
-	min-width: 75vw;
-}
 </style>
