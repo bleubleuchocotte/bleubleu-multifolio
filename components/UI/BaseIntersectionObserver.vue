@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const props = defineProps({
-	treshold: {
-		type: Number,
-		required: false,
-		default: 0,
-	},
-	rootMargin: {
-		type: String,
-		required: false,
-	},
+type ComponentProps = {
+	threshold?: number
+	rootMargin?: string
+};
+
+const props = withDefaults(defineProps<ComponentProps>(), {
+	threshold: 0,
 });
 
 const emits = defineEmits<{
@@ -22,7 +19,7 @@ useIntersectionObserver(
 		emits("isVisible", isIntersecting);
 	},
 	{
-		threshold: props.treshold,
+		threshold: props.threshold,
 		rootMargin: props.rootMargin,
 	},
 );
