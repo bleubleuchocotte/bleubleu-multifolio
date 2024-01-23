@@ -1,61 +1,41 @@
 <script setup lang="ts">
-import type { HomePageProps, LinkType } from "@/type/types";
+import type { HomepageProps } from "~/types";
 
 const { $api } = useNuxtApp();
 
 const page = await $api.pages.getHome();
 const options = await $api.options.getOptions();
-const projects = await $api.projects.getProjects();
+const projects = await $api.projects.getAllProjects();
 
 if (!options || !page) {
 	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
 }
 
-const isMobile = useMediaQuery("(max-width: 1025px)"); // Client side
+const isMobile = useMediaQuery("(max-width: 1025px)");
 const { isDesktop } = useDevice(); // Server side
 
-const props: HomePageProps = {
+const props: HomepageProps = {
 	desktop: {
 		projects,
-		content: {
-			about: {
-				me: {
-					"first-name": options.data["first-name"] ?? "",
-					"last-name": options.data["last-name"] ?? "",
-					"description": page.data.description,
-					"image": page.data["about-image"],
-					"email": options.data.email ?? "",
-				},
-				links: options.data.links.map((link) => {
-					const linkTyped: LinkType = {
-						id: useUID(),
-						name: link.name ?? "",
-						link: link.link,
-					};
-					return linkTyped;
-				}) ?? [],
-			},
-			endindCardImage: page.data["ending-card-image"],
+		endingCardImage: page["ending-card-image"],
+		aboutMe: {
+			imageOfMe: page["about-image"],
+			description: page.description,
+			email: options.email,
+			links: options.links,
+			firstName: options["first-name"],
+			lastName: options["last-name"],
 		},
 	},
 	mobile: {
 		projects,
-		content: {
-			me: {
-				"first-name": options.data["first-name"] ?? "",
-				"last-name": options.data["last-name"] ?? "",
-				"description": page.data.description,
-				"image": page.data["about-image"],
-				"email": options.data.email ?? "",
-			},
-			links: options.data.links.map((link) => {
-				const linkTyped: LinkType = {
-					id: useUID(),
-					name: link.name ?? "",
-					link: link.link,
-				};
-				return linkTyped;
-			}) ?? [],
+		aboutMe: {
+			imageOfMe: page["about-image"],
+			description: page.description,
+			email: options.email,
+			links: options.links,
+			firstName: options["first-name"],
+			lastName: options["last-name"],
 		},
 	},
 };
@@ -65,18 +45,10 @@ const props: HomePageProps = {
 	<div class="index-page">
 		<ClientOnly>
 			<TheMainMobile v-if="isMobile" v-bind="props.mobile" />
-			<TheMain
-				v-else
-				class="index-page__desktop"
-				v-bind="props.desktop"
-			/>
+			<TheMain v-else class="index-page__desktop" v-bind="props.desktop" />
 
 			<template #fallback>
-				<TheMain
-					v-if="isDesktop"
-					v-bind="props.desktop"
-					class="index-page__desktop"
-				/>
+				<TheMain v-if="isDesktop" v-bind="props.desktop" class="index-page__desktop" />
 				<TheMainMobile v-else v-bind="props.mobile" />
 			</template>
 		</ClientOnly>
