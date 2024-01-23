@@ -43,4 +43,3 @@ const styles = reactive({
 	}
 }
 </style>
-~/types
