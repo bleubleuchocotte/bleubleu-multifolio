@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type BaseAccordion from "@/components/UI/BaseAccordion.vue";
 import type { AboutMe, ProjectWithId } from "~/types";
 
 type ComponentProps = {
@@ -8,7 +9,7 @@ type ComponentProps = {
 
 defineProps<ComponentProps>();
 
-const accordions = ref<any[]>([]);
+const accordions = ref<InstanceType<typeof BaseAccordion>[]>([]);
 const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 </script>
 
@@ -20,14 +21,22 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 				v-for="(project, i) in projects"
 				:key="project.title?.toString()"
 				ref="accordions"
-				:project="project"
-				:index="i"
+				:state-key="`Accordion mobile index: ${i}`"
 			>
-				<ProjectMobileDetails
-					:project="project"
-					:index="i"
-					:hidden="arrAriaHidden[i] ?? true"
-				/>
+				<template #title>
+					<ProjectMobileAccordionHeader
+						:project="project"
+						:index="i"
+						:active="accordions[i]?.isOpen"
+					/>
+				</template>
+				<template #content>
+					<ProjectMobileDetails
+						:project="project"
+						:index="i"
+						:hidden="arrAriaHidden[i] ?? true"
+					/>
+				</template>
 			</UIBaseAccordion>
 		</main>
 

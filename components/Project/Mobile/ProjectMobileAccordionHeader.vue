@@ -4,7 +4,7 @@ import type { ProjectWithId } from "~/types";
 type ComponentProps = {
 	project: ProjectWithId
 	index: number
-	active: boolean
+	active?: boolean
 };
 
 defineProps<ComponentProps>();
