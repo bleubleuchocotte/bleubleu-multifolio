@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-	active: {
-		type: Boolean,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+	active: boolean
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>
@@ -24,8 +17,8 @@ defineProps({
 			{{ project.title }}
 		</h3>
 		<div class="project-list-vertical-item__data">
-			<p>{{ project.date.slice(0, 4) }}</p>
-			<p>{{ project.skills[0]?.name }}</p>
+			<p>{{ project.date?.slice(0, 4) }}</p>
+			<p>{{ project.skills[0]?.skill }}</p>
 		</div>
 	</div>
 </template>
