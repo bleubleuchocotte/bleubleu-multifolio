@@ -1,6 +1,27 @@
-import type { Content } from "@prismicio/client";
+import type { Content, ImageField, KeyTextField, RichTextField } from "@prismicio/client";
 
 export type ProjectWithId = Content.ProjetDocumentData & { id: string };
+
+export type AboutMe = {
+	imageOfMe: ImageField
+	description: RichTextField
+	email: KeyTextField
+	links: Content.WebsiteDocumentDataLinksItem[]
+	firstName: KeyTextField
+	lastName: KeyTextField
+};
+
+export type HomepageProps = {
+	desktop: {
+		projects: ProjectWithId[]
+		endingCardImage: ImageField
+		aboutMe: AboutMe
+	}
+	mobile: {
+		projects: ProjectWithId[]
+		aboutMe: AboutMe
+	}
+};
 
 /**
  * D'après la doc de lenis :
