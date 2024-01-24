@@ -31,5 +31,7 @@ export default defineNuxtConfig({
 	],
 	prismic: {
 		endpoint: process.env.PRISMIC_ENDPOINT,
+		preview: false,
+		toolbar: false,
 	},
 });
