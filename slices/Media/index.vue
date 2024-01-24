@@ -92,6 +92,7 @@ const { isDesktop } = useDevice(); // Server side
 		&__image,
 		&__video {
 			width: 100%;
+			max-height: 75vh;
 			aspect-ratio: 9/16;
 			@include border-radius();
 			object-fit: cover;
