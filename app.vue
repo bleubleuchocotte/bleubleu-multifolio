@@ -99,6 +99,7 @@ const showContent = ref(false);
 	</Transition>
 	<Transition mode="out-in" name="translate-in">
 		<div v-show="showContent" class="body">
+			<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
 			<TheHeader
 				:marquee-text="options['text-header']"
 				:email="options.email"
