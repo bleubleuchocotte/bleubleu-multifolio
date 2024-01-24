@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Content, LinkToMediaField } from "@prismicio/client";
+import type { Content } from "@prismicio/client";
 import type { MediaHTMLAttributes } from "vue";
 
 // The array passed to `getSliceComponentProps` is purely optional.
@@ -12,9 +12,6 @@ const props = defineProps(
 		"context",
 	]),
 );
-type FilledLinkToMediaField<T> = {
-	[K in keyof T]: T[K] extends LinkToMediaField ? LinkToMediaField<"filled"> : T[K];
-};
 
 const { responsive_media, ...fields } = props.slice.primary;
 
@@ -33,21 +30,25 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 	<UIBaseResponsiveContent media-query="(max-width: 1025px)">
 		<template #mobile>
 			<div class="media-mobile">
-				<img v-if="(responsive_media as LinkToMediaField<'filled'>).kind === 'image'" :key="slice.id + (responsive_media as LinkToMediaField<'filled'>).url" :src="(responsive_media as LinkToMediaField<'filled'>).url" :height="(responsive_media as LinkToMediaField<'filled'>).height ?? ''" :width="(responsive_media as LinkToMediaField<'filled'>).width ?? ''" alt="" class="media-mobile__image">
+				<template v-if="('kind' in responsive_media)">
+					<img v-if="responsive_media.kind === 'image'" :key="slice.id + responsive_media.url" :src="responsive_media.url" :height="responsive_media.height ?? ''" :width="responsive_media.width ?? ''" alt="" class="media-mobile__image">
 
-				<video v-else :key="(responsive_media as LinkToMediaField<'filled'>).url" ref="videos" v-bind="props.context" class="media-mobile__video">
-					<source :src="(responsive_media as LinkToMediaField<'filled'>).url">
-				</video>
+					<video v-else :key="responsive_media.url" ref="videos" v-bind="props.context" class="media-mobile__video">
+						<source :src="responsive_media.url">
+					</video>
+				</template>
 			</div>
 		</template>
 		<template #desktop>
 			<UIBaseIntersectionObserver class="media" @is-visible="onVisibilityChanged">
-				<template v-for="field in Object.values(fields as FilledLinkToMediaField<typeof fields>)">
-					<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
+				<template v-for="field in Object.values(fields)">
+					<template v-if="('kind' in field)">
+						<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
 
-					<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
-						<source :src="field.url">
-					</video>
+						<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
+							<source :src="field.url">
+						</video>
+					</template>
 				</template>
 			</UIBaseIntersectionObserver>
 		</template>
