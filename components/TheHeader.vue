@@ -22,6 +22,12 @@ defineProps<ComponentProps>();
 						{{ marqueeText }}
 					</p>
 				</Vue3Marquee>
+
+				<template #fallback>
+					<p style="margin-left: 5em" class="h1">
+						{{ marqueeText }}
+					</p>
+				</template>
 			</ClientOnly>
 		</div>
 
