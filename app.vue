@@ -78,41 +78,22 @@ useServerSeoMeta({
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
-
-const isLoading = ref(true);
-const showContent = ref(false);
 </script>
 
 <template>
 	<ClientOnly>
 		<UIBaseCursor v-if="isPointerAccurate" />
 	</ClientOnly>
-	<Transition
-		name="translate-out"
-		mode="out-in"
-		@after-leave="showContent = true"
-	>
-		<TheLoader
-			v-if="isLoading"
-			:text="`${options['first-name']} ${options['last-name']}`"
-			:colors="{
-				start: options['text-color'] ?? '',
-				end: options['accent-color'] ?? '',
-			}"
-			@unmount="isLoading = false"
+
+	<div class="body">
+		<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
+		<TheHeader
+			:marquee-text="options['text-header']"
+			:email="options.email"
 		/>
-	</Transition>
-	<Transition mode="out-in" name="translate-in">
-		<div v-show="showContent" class="body">
-			<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
-			<TheHeader
-				:marquee-text="options['text-header']"
-				:email="options.email"
-			/>
-			<NuxtPage />
-			<TheFooter :links="options.links" class="desktop-only" />
-		</div>
-	</Transition>
+		<NuxtPage />
+		<TheFooter :links="options.links" class="desktop-only" />
+	</div>
 </template>
 
 <style>
