@@ -23,6 +23,11 @@ const cssVariables = [
 
 useHead({
 	style: [`:root{${cssVariables.join(";")}}`],
+	script: [{
+		src: "https://static.cdn.prismic.io/prismic.js?new=true&repo=multifolio",
+		defer: true,
+		async: true,
+	}],
 });
 
 useServerHeadSafe({
