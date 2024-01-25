@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-	hidden: {
-		type: Boolean,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+	hidden: boolean
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>
@@ -46,16 +39,12 @@ defineProps({
 		</template>
 
 		<div class="project-details-mobile__content-tags">
-			<UIBaseTag v-for="skill in project.skills" :key="skill.id">
-				{{ skill.name }}
+			<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+				{{ item.skill }}
 			</UIBaseTag>
 		</div>
 
-		<PrismicImage
-			v-if="project['image-mobile']"
-			:field="project['image-mobile']"
-			class="project-details-mobile__image"
-		/>
+		<ProjectMobileSlider :medias="project.slices" />
 
 		<PrismicRichText
 			:field="project.description"
@@ -68,9 +57,7 @@ defineProps({
 .project-details-mobile {
 	display: flex;
 	@include gap();
-	min-width: 100vw;
 
-	min-width: initial;
 	flex-direction: column;
 	@include prop("padding-block");
 
@@ -117,12 +104,6 @@ defineProps({
 			@include font("p");
 			@include prop("margin-bottom");
 		}
-	}
-
-	&__image {
-		@include border-radius();
-		width: 100%;
-		aspect-ratio: 9/16;
 	}
 }
 </style>

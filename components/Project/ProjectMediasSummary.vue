@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import type { MediaType } from "@/type/types";
+import type { Content } from "@prismicio/client";
+import type { MediaHTMLAttributes } from "vue";
+
+import { components } from "@/slices";
 
 type ComponentProps = {
-	medias: MediaType[]
+	medias: Content.ProjetDocumentDataSlicesSlice[]
 };
-
 defineProps<ComponentProps>();
+
+const mediaAttribute: MediaHTMLAttributes = {
+	autoplay: true,
+	loop: true,
+	muted: true,
+};
 </script>
 
 <template>
 	<div class="project-images-summary__grid">
 		<template v-for="media in medias" :key="media.id">
 			<div class="project-images-summary__grid-item">
-				<UIBaseMedia :media="media" />
+				<SliceZone :slices="[media]" :components="components" :context="mediaAttribute" />
 			</div>
 		</template>
 	</div>

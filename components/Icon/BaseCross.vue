@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { ColorArrow } from "@/type/types";
+import type { ColorArrow } from "@/types";
 
-defineProps({
-	colors: {
-		type: Object as PropType<ColorArrow>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	colors: ColorArrow
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>

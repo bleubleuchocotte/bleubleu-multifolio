@@ -1,11 +1,9 @@
 <script setup lang="ts">
-defineProps({
-	fill: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
-});
+type ComponentProps = {
+	fill?: string
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>

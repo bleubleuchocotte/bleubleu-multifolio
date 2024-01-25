@@ -1,10 +1,10 @@
+import type { Content } from "@prismicio/client";
 import PrismicFactory from "../factory";
-import type { WebsiteDocument } from "@/prismicio-types";
 
 class OptionsModule extends PrismicFactory {
 	async getOptions() {
-		const { data } = await useAsyncData<WebsiteDocument>("GetGlobalOptions", () =>
-			this.client.getSingle("website", {
+		const { data } = await useAsyncData("GetGlobalOptions", () =>
+			this.client.getSingle<Content.WebsiteDocument>("website", {
 				graphQuery: `{
 					website {
 						accent-color
@@ -24,7 +24,7 @@ class OptionsModule extends PrismicFactory {
 				}`,
 			}));
 
-		return data.value;
+		return (data.value?.data ?? null) as (Omit<Content.WebsiteDocumentData, "about" | "description" | "ending-card-image" > | null);
 	}
 }
 

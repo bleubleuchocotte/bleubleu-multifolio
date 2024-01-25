@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { CursorIconType } from "@/type/types";
+import type { CursorIconType } from "@/types";
 
-const props = defineProps({
-	size: {
-		type: Number,
-		required: false,
-		default: 30,
-	},
+type ComponentProps = {
+	size?: number
+};
+
+const props = withDefaults(defineProps<ComponentProps>(), {
+	size: 30,
 });
 
 const x = ref(0);

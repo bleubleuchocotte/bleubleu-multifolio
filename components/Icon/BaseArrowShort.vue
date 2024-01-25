@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps({
-	fill: {
-		type: String,
-		required: false,
-		default: "currentColor",
-	},
+type ComponentProps = {
+	fill?: string
+};
+
+withDefaults(defineProps<ComponentProps>(), {
+	fill: "currentColor",
 });
 </script>
 
