@@ -33,6 +33,6 @@
 		"nuxt": "^3.9.3",
 		"nuxt-simple-robots": "4.0.0-rc.13",
 		"nuxt-simple-sitemap": "^4.4.1",
-		"slice-machine-ui": "^1.22.2"
+		"slice-machine-ui": "^1.23.1"
 	}
 }
