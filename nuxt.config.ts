@@ -34,4 +34,7 @@ export default defineNuxtConfig({
 		preview: false,
 		toolbar: false,
 	},
+	robots: {
+		disallow: ["/legal-notice"],
+	},
 });

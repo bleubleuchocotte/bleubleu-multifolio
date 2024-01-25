@@ -42,10 +42,6 @@ useServerHeadSafe({
 	],
 });
 
-useSeoMeta({
-	robots: "follow",
-});
-
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
 useServerSeoMeta({
 	ogType: "website",
