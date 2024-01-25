@@ -2,10 +2,6 @@
 const { $api } = useNuxtApp();
 const page = await $api.pages.getLegalNotice();
 
-if (!page) {
-	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
-}
-
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 </script>
 
@@ -23,7 +19,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 			>
 				<PrismicRichText
 					v-for="j in 6" :key="Math.floor(Math.random() * (100 + j))"
-					:field="page.data.content"
+					:field="page?.data.content"
 					class="legal-container__bands-notices"
 					:aria-hidden="!(j === 1 && i === 1)"
 				/>
@@ -31,7 +27,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 		</template>
 
 		<template v-else>
-			<PrismicRichText :field="page.data.content" class="legal-container__bands-notices" />
+			<PrismicRichText :field="page?.data.content" class="legal-container__bands-notices" />
 		</template>
 	</div>
 </template>
