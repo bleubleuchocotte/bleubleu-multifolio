@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import type { ColorArrow } from "@/type/types";
+import type { ColorArrow } from "@/types";
 
-defineProps({
-	colors: {
-		type: Object as PropType<ColorArrow>,
-		required: true,
-	},
+type ComponentProps = {
+	colors: ColorArrow
+	orientation?: "left" | "right"
+	lengthArrow?: "short" | "long"
+};
 
-	orientation: {
-		type: String as PropType<"left" | "right">,
-		required: false,
-		default: "right",
-	},
-
-	lengthArrow: {
-		type: String as PropType<"short" | "long">,
-		required: false,
-		default: "long",
-	},
+withDefaults(defineProps<ComponentProps>(), {
+	orientation: "right",
+	lengthArrow: "long",
 });
 </script>
 

@@ -1,14 +1,12 @@
 <script setup lang="ts">
-defineProps({
-	email: {
-		type: String,
-		required: true,
-	},
-	marqueeText: {
-		type: String,
-		required: true,
-	},
-});
+import type { KeyTextField } from "@prismicio/client";
+
+type ComponentProps = {
+	email: KeyTextField
+	marqueeText: KeyTextField
+};
+
+defineProps<ComponentProps>();
 </script>
 
 <template>
@@ -24,6 +22,12 @@ defineProps({
 						{{ marqueeText }}
 					</p>
 				</Vue3Marquee>
+
+				<template #fallback>
+					<p style="margin-left: 5em" class="h1">
+						{{ marqueeText }}
+					</p>
+				</template>
 			</ClientOnly>
 		</div>
 

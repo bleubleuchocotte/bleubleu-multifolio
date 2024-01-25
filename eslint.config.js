@@ -21,6 +21,6 @@ export default antfu(
 		},
 	},
 	{
-		ignores: ["customtypes/**/*.json", "prismicio-types.d.ts"], // Prismic custom types
+		ignores: ["customtypes/**/*.json", "prismicio-types.d.ts", "slices/**/*.json", "slices/index.ts"], // Prismic custom types
 	},
 );

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-const props = defineProps({
-	width: {
-		type: Number,
-		required: false,
-		default: 1,
-	},
+type ComponentProps = {
+	width: number
+};
+const props = withDefaults(defineProps<ComponentProps>(), {
+	width: 1,
 });
 
 const styles = reactive({
