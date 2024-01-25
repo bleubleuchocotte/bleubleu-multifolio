@@ -161,6 +161,7 @@ useIntersectionObserver(
 		}
 
 		&-more {
+			@include font("cta");
 			color: var(--accent-color);
 			text-decoration: underline;
 		}

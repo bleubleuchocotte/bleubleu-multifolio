@@ -1,3 +1,17 @@
+<script setup lang="ts">
+const event = useRequestEvent();
+setResponseStatus(event, 404, "Page Not Found"); // Permet de réellement avoir une 404
+
+useSeoMeta({
+	title: "404 - Page not found",
+});
+
+// On place ici les propriétés non-réactives
+useServerSeoMeta({
+	robots: "noindex, nofollow",
+});
+</script>
+
 <template>
 	<div class="container-404">
 		<p class="container-404__glitch" data-text="404">

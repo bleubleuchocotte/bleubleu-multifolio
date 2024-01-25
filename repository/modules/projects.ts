@@ -1,4 +1,4 @@
-import type { Content, ContentRelationshipField } from "@prismicio/client";
+import type { Content } from "@prismicio/client";
 import PrismicFactory from "@/repository/factory";
 import type { ProjectWithId } from "~/types";
 
@@ -19,11 +19,9 @@ class ProjectsModule extends PrismicFactory {
 
 		const projectsFromPrismic = data.value?.data.projects ?? [];
 
-		const projects = projectsFromPrismic.map((project) => {
-			const projectTyped = project.project as ContentRelationshipField<string, string, Content.ProjetDocumentData, "filled">;
-
-			if (projectTyped.data) {
-				return (Object.assign(projectTyped.data, { id: projectTyped.id }));
+		const projects = projectsFromPrismic.map((item) => {
+			if (("data" in item.project) && item.project.data) {
+				return (Object.assign(item.project.data, { id: item.project.id }));
 			}
 			else {
 				return null;

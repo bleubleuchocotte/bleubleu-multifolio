@@ -41,10 +41,10 @@ defineProps<ComponentProps>();
 						}"
 					/>
 				</PrismicLink>
-				<NuxtLink to="/legal-notice">
+				<NuxtLink to="/legal-notice" class="footer__right-link">
 					Legal notice
 				</NuxtLink>
-				<span>© {{ new Date().getFullYear() }} Bleubleu Chocotte</span>
+				<UIBaseCopyright />
 			</div>
 		</footer>
 	</div>
@@ -60,9 +60,7 @@ defineProps<ComponentProps>();
 		@include left;
 
 		&-link {
-			display: flex;
 			width: fit-content;
-			align-items: flex-end;
 		}
 	}
 	&__right {
@@ -72,8 +70,13 @@ defineProps<ComponentProps>();
 		justify-content: space-between;
 
 		padding-left: 0;
+	}
 
+	&__left,
+	&__right {
 		&-link {
+			@include font("cta");
+
 			display: flex;
 			align-items: flex-end;
 		}
