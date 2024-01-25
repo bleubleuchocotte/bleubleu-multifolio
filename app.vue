@@ -22,6 +22,9 @@ const cssVariables = [
 ];
 
 useHead({
+	htmlAttrs: {
+		lang: "en",
+	},
 	style: [`:root{${cssVariables.join(";")}}`],
 });
 
