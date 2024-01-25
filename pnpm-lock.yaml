@@ -32,8 +32,8 @@ devDependencies:
     specifier: 3.1.0
     version: 3.1.0(vue@3.4.15)
   '@slicemachine/adapter-nuxt':
-    specifier: ^0.3.32
-    version: 0.3.33(@types/uuid@9.0.7)(nuxt@3.9.3)(uuid@9.0.1)
+    specifier: ^0.3.34
+    version: 0.3.34(@types/uuid@9.0.7)(nuxt@3.9.3)(uuid@9.0.1)
   '@vueuse/core':
     specifier: ^10.7.2
     version: 10.7.2(vue@3.4.15)
@@ -2133,15 +2133,15 @@ packages:
     resolution: {integrity: sha512-rUV5WyJrJLoloD4NDN1V1+LDMDWOa4OTsT4yYJwQNpTU6FWxkxHpL7eu4w+DmiH8x/EAM1otkPE1+LaspIbplw==}
     engines: {node: '>=18'}
 
-  /@slicemachine/adapter-nuxt@0.3.33(@types/uuid@9.0.7)(nuxt@3.9.3)(uuid@9.0.1):
-    resolution: {integrity: sha512-H0OtJ/hIlDNumeNi4SfsD+hMve9N2UeLL5mAHri7plvl7/0ji9/eS/UUfSZs3NRsh+KTPH989YOx5Z2dXWKLVA==}
+  /@slicemachine/adapter-nuxt@0.3.34(@types/uuid@9.0.7)(nuxt@3.9.3)(uuid@9.0.1):
+    resolution: {integrity: sha512-IuoZCnaWdgfP6Eq4atByptvPa8PFn6i5A3jYUZfp82bl7K8HcOLesIFbXjkRdyw8n+SNN5MRH3UJMbseCERPAg==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
       nuxt: ^3.0.0
     dependencies:
       '@prismicio/simulator': 0.1.4
       '@prismicio/types-internal': 2.3.1(@types/uuid@9.0.7)(fp-ts@2.16.2)(io-ts-types@0.5.19)(io-ts@2.2.21)(uuid@9.0.1)
-      '@slicemachine/plugin-kit': 0.4.33
+      '@slicemachine/plugin-kit': 0.4.34
       common-tags: 1.8.2
       fp-ts: 2.16.2
       io-ts: 2.2.21(fp-ts@2.16.2)
@@ -2211,6 +2211,25 @@ packages:
 
   /@slicemachine/plugin-kit@0.4.33:
     resolution: {integrity: sha512-NRLp491klRz40T/kkqB6C2kA2FO4cy576+Te6iJdTFQUbsT86LspXEubpTvjnOt/XEgbxtB0S0TFxy4vpym3ZQ==}
+    engines: {node: '>=14.15.0'}
+    dependencies:
+      common-tags: 1.8.2
+      defu: 6.1.4
+      dotenv: 16.3.1
+      fp-ts: 2.16.2
+      fs-extra: 11.1.1
+      io-ts: 2.2.21(fp-ts@2.16.2)
+      io-ts-reporters: 2.0.1(fp-ts@2.16.2)(io-ts@2.2.21)
+      p-limit: 4.0.0
+      prettier: 3.2.4
+      prismic-ts-codegen: 0.1.19
+    transitivePeerDependencies:
+      - '@prismicio/client'
+      - '@prismicio/types'
+    dev: true
+
+  /@slicemachine/plugin-kit@0.4.34:
+    resolution: {integrity: sha512-B4Rng2NBZknpVLoKg3ll2gj7/46OtH0yRHZgCPafzID4P0xJJfCCa3y2crEBnFFEVmFmwm1A6k+ErgeROVpPGA==}
     engines: {node: '>=14.15.0'}
     dependencies:
       common-tags: 1.8.2
