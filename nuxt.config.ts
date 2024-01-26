@@ -30,6 +30,6 @@ export default defineNuxtConfig({
 		toolbar: false,
 	},
 	robots: {
-		disallow: ["/legal-notice"],
+		disallow: ["/legal-notice", "/wip"],
 	},
 });

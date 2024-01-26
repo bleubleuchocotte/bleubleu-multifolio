@@ -3,12 +3,34 @@ const request = useRequestURL();
 
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
+const state = await $api.options.getWebsiteState();
+const wip = useState("WebsiteStateWIP", () => ref(false));
 
 if (!options) {
 	throw createError({
 		statusCode: 500,
 		statusMessage: "Could not reach options",
 	});
+}
+
+switch (state?.website_state) {
+	case ("Le site est indexable et disponible via la recherche google"):
+		break;
+	case ("Le site n'est pas indexable"):
+		useServerSeoMeta({
+			robots: "noindex, nofollow",
+		});
+		break;
+	case ("Le site n'est pas indexable et présente une page temporaire de WIP"):
+		useServerSeoMeta({
+			robots: "noindex, nofollow",
+		});
+		wip.value = true;
+		break;
+
+	default:
+		wip.value = true;
+		break;
 }
 
 const cssVariables = [
@@ -83,13 +105,14 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 
 	<NuxtLayout>
 		<TheHeader
+			v-if="!wip"
 			:marquee-text="options['text-header']"
 			:email="options.email"
 		/>
 
 		<NuxtPage />
 
-		<TheFooter :links="options.links" class="desktop-only" />
+		<TheFooter v-if="!wip" :links="options.links" class="desktop-only" />
 	</NuxtLayout>
 </template>
 

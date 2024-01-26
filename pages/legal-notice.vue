@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+	middleware: ["check-wip"],
+});
+
 const { $api } = useNuxtApp();
 const page = await $api.pages.getLegalNotice();
 const options = await $api.options.getOptions();

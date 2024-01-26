@@ -1,45 +1,31 @@
 <script setup lang="ts">
-const event = useRequestEvent();
-setResponseStatus(event, 404, "Page Not Found"); // Permet de réellement avoir une 404
-
 definePageMeta({
 	layout: "404",
-	middleware: ["check-wip"],
 });
 
 useSeoMeta({
-	title: "404 - Page not found",
-});
-
-// On place ici les propriétés non-réactives
-useServerSeoMeta({
-	robots: "noindex, nofollow",
+	title: "Work In Progress",
 });
 </script>
 
 <template>
-	<main class="page-404">
-		<h1 class="page-404__glitch" data-text="404">
-			404
+	<main class="page-wip">
+		<h1 class="page-wip__glitch" data-text="Work In Progress">
+			Work In Progress
 		</h1>
-
-		<UIBaseLinkHome>
-			Let's go home
-		</UIBaseLinkHome>
 	</main>
 </template>
 
 <style scoped lang="scss">
-.page-404 {
+.page-wip {
 	position: relative;
 	display: flex;
-	overflow: hidden;
 
 	height: 100%;
 
 	&__glitch {
 		color: var(--text-color);
-		font-size: 45vw;
+		font-size: 10vw;
 		position: relative;
 		line-height: 0.9;
 		margin: auto;

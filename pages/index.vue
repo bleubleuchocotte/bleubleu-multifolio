@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { HomepageProps } from "~/types";
 
+definePageMeta({
+	middleware: ["check-wip"],
+});
+
 const { $api } = useNuxtApp();
 
 const page = await $api.pages.getHome();
