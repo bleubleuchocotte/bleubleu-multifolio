@@ -4,7 +4,6 @@ setResponseStatus(event, 404, "Page Not Found"); // Permet de réellement avoir 
 
 definePageMeta({
 	layout: "404",
-	middleware: ["check-wip"],
 });
 
 useSeoMeta({
