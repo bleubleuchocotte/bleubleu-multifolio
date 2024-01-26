@@ -1,8 +1,13 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
 const page = await $api.pages.getLegalNotice();
+const options = await $api.options.getOptions();
 
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
+
+useSeoMeta({
+	title: options?.["seo-title"],
+});
 </script>
 
 <template>

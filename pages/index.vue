@@ -11,6 +11,10 @@ if (!options || !page) {
 	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
 }
 
+useSeoMeta({
+	title: options["seo-title"],
+});
+
 const props: HomepageProps = {
 	desktop: {
 		projects,
