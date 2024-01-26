@@ -7,9 +7,9 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 
 <template>
 	<div class="legal-container">
-		<UIBaseButtonHome class="legal-container__button">
+		<UIBaseLinkHome>
 			Let's go home
-		</UIBaseButtonHome>
+		</UIBaseLinkHome>
 
 		<template v-if="!isDeviceMobile">
 			<div
@@ -42,27 +42,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 		display: flex;
 		flex-direction: column-reverse;
 		border-bottom: none;
-	}
-
-	&__button {
-		height: 7vw;
-		width: 20vw;
-		z-index: 5;
-		border: 1px solid var(--background-color);
-		position: absolute;
-		top: calc(50% - 3.5vw);
-		left: calc(50% - 10vw);
-		@include font("h2");
-
-		@media #{$mobile-down} {
-			height: 10vw;
-			width: 30vw;
-			position: relative;
-			top: initial;
-			left: initial;
-			@include font("cta");
-			@include margin();
-		}
 	}
 
 	&__bands {

@@ -2,6 +2,10 @@
 const event = useRequestEvent();
 setResponseStatus(event, 404, "Page Not Found"); // Permet de réellement avoir une 404
 
+definePageMeta({
+	layout: "404",
+});
+
 useSeoMeta({
 	title: "404 - Page not found",
 });
@@ -13,21 +17,24 @@ useServerSeoMeta({
 </script>
 
 <template>
-	<div class="container-404">
-		<p class="container-404__glitch" data-text="404">
+	<main class="page-404">
+		<h1 class="page-404__glitch" data-text="404">
 			404
-		</p>
-		<UIBaseButtonHome class="container-404__button">
+		</h1>
+
+		<UIBaseLinkHome>
 			Let's go home
-		</UIBaseButtonHome>
-	</div>
+		</UIBaseLinkHome>
+	</main>
 </template>
 
 <style scoped lang="scss">
-.container-404 {
+.page-404 {
 	position: relative;
 	display: flex;
 	overflow: hidden;
+
+	height: 100%;
 
 	&__glitch {
 		color: var(--text-color);
@@ -78,25 +85,6 @@ useServerSeoMeta({
 					clip: rect(random(800) + px, 9999px, random(800) + px, 0);
 				}
 			}
-		}
-	}
-
-	&__button {
-		height: 7vw;
-		width: 20vw;
-		z-index: 5;
-		border: 1px solid var(--background-color);
-		position: absolute;
-		top: calc(24vw - 7vw);
-		left: calc(50vw - 10vw);
-		@include font("h2");
-
-		@media #{$mobile-down} {
-			height: 10vw;
-			width: 25vw;
-			top: calc(24vw - 10vw);
-			left: calc(50vw - 12.5vw);
-			@include font("cta");
 		}
 	}
 }
