@@ -185,6 +185,21 @@ export interface WebsiteDocumentDataProjectsItem {
  */
 interface WebsiteDocumentData {
   /**
+   * État du site field in *Website*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Quel est l'état du site ?
+   * - **Default Value**: Le site n'est pas indexable
+   * - **API ID Path**: website.website_state
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  website_state: prismic.SelectField<
+    | "Le site n'est pas indexable"
+    | "Le site est indexable et disponible via la recherche google"
+    | "Le site n'est pas indexable et présente une page temporaire de WIP",
+    "filled"
+  > /**
    * email field in *Website*
    *
    * - **Field Type**: Text
@@ -192,7 +207,7 @@ interface WebsiteDocumentData {
    * - **API ID Path**: website.email
    * - **Tab**: options
    * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
+   */;
   email: prismic.KeyTextField;
 
   /**

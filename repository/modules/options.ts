@@ -26,6 +26,19 @@ class OptionsModule extends PrismicFactory {
 
 		return (data.value?.data ?? null) as (Omit<Content.WebsiteDocumentData, "about" | "description" | "ending-card-image" > | null);
 	}
+
+	async getWebsiteState() {
+		const { data } = await useAsyncData("GetWebsiteState", () =>
+			this.client.getSingle<Content.WebsiteDocument>("website", {
+				graphQuery: `{
+				website {
+					website_state
+				}
+			}`,
+			}));
+
+		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "website_state" > | null);
+	}
 }
 
 export default OptionsModule;

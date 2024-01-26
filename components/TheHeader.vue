@@ -18,13 +18,13 @@ defineProps<ComponentProps>();
 					:duration="10"
 					class="header__slider-container"
 				>
-					<p style="margin-left: 5em" class="h1">
+					<p style="margin-left: 1em" class="h1">
 						{{ marqueeText }}
 					</p>
 				</Vue3Marquee>
 
 				<template #fallback>
-					<p style="margin-left: 5em" class="h1">
+					<p style="margin-left: 1em" class="h1">
 						{{ marqueeText }}
 					</p>
 				</template>
