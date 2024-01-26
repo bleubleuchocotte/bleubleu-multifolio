@@ -1,11 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	app: {
-		head: {
-			htmlAttrs: {
-				lang: "en",
-			},
-		},
 		pageTransition: { name: "page", mode: "out-in" },
 	},
 	vite: {
@@ -33,5 +28,8 @@ export default defineNuxtConfig({
 		endpoint: process.env.PRISMIC_ENDPOINT,
 		preview: false,
 		toolbar: false,
+	},
+	robots: {
+		disallow: ["/legal-notice", "/wip"],
 	},
 });
