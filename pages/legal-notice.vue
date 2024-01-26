@@ -1,19 +1,20 @@
 <script setup lang="ts">
 const { $api } = useNuxtApp();
 const page = await $api.pages.getLegalNotice();
-
-if (!page) {
-	throw new Error("Le contenu de la page ou le contenu des options n'a pas pu être récupéré. Vérifier l'url pour le projet prismic et assuré vous d'avoir rempli toutes les informations nécessaires sur Prismic");
-}
+const options = await $api.options.getOptions();
 
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
+
+useSeoMeta({
+	title: options?.["seo-title"],
+});
 </script>
 
 <template>
 	<div class="legal-container">
-		<UIBaseButtonHome class="legal-container__button">
+		<UIBaseLinkHome>
 			Let's go home
-		</UIBaseButtonHome>
+		</UIBaseLinkHome>
 
 		<template v-if="!isDeviceMobile">
 			<div
@@ -23,7 +24,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 			>
 				<PrismicRichText
 					v-for="j in 6" :key="Math.floor(Math.random() * (100 + j))"
-					:field="page.data.content"
+					:field="page?.data.content"
 					class="legal-container__bands-notices"
 					:aria-hidden="!(j === 1 && i === 1)"
 				/>
@@ -31,7 +32,7 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 		</template>
 
 		<template v-else>
-			<PrismicRichText :field="page.data.content" class="legal-container__bands-notices" />
+			<PrismicRichText :field="page?.data.content" class="legal-container__bands-notices" />
 		</template>
 	</div>
 </template>
@@ -46,27 +47,6 @@ const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 		display: flex;
 		flex-direction: column-reverse;
 		border-bottom: none;
-	}
-
-	&__button {
-		height: 7vw;
-		width: 20vw;
-		z-index: 5;
-		border: 1px solid var(--background-color);
-		position: absolute;
-		top: calc(50% - 3.5vw);
-		left: calc(50% - 10vw);
-		@include font("h2");
-
-		@media #{$mobile-down} {
-			height: 10vw;
-			width: 30vw;
-			position: relative;
-			top: initial;
-			left: initial;
-			@include font("cta");
-			@include margin();
-		}
 	}
 
 	&__bands {

@@ -4,6 +4,8 @@ const request = useRequestURL();
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
+const isWIP = useState("WebsiteStateWIP", () => ref(false));
+
 if (!options) {
 	throw createError({
 		statusCode: 500,
@@ -22,6 +24,9 @@ const cssVariables = [
 ];
 
 useHead({
+	htmlAttrs: {
+		lang: "en",
+	},
 	style: [`:root{${cssVariables.join(";")}}`],
 });
 
@@ -40,10 +45,6 @@ useServerHeadSafe({
 			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
 	],
-});
-
-useSeoMeta({
-	robots: "follow",
 });
 
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
@@ -73,41 +74,20 @@ useServerSeoMeta({
 
 // Permet de détecter si un des pointeurs est une souris (Il peut y avoir plusieurs pointeurs notamment sur les écrans tactiles)
 const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
-
-const isLoading = ref(true);
-const showContent = ref(false);
 </script>
 
 <template>
 	<ClientOnly>
 		<UIBaseCursor v-if="isPointerAccurate" />
 	</ClientOnly>
-	<Transition
-		name="translate-out"
-		mode="out-in"
-		@after-leave="showContent = true"
-	>
-		<TheLoader
-			v-if="isLoading"
-			:text="`${options['first-name']} ${options['last-name']}`"
-			:colors="{
-				start: options['text-color'] ?? '',
-				end: options['accent-color'] ?? '',
-			}"
-			@unmount="isLoading = false"
-		/>
-	</Transition>
-	<Transition mode="out-in" name="translate-in">
-		<div v-show="showContent" class="body">
-			<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
-			<TheHeader
-				:marquee-text="options['text-header']"
-				:email="options.email"
-			/>
-			<NuxtPage />
-			<TheFooter :links="options.links" class="desktop-only" />
-		</div>
-	</Transition>
+
+	<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
+
+	<NuxtLayout>
+		<TheHeader v-if="!isWIP" :marquee-text="options['text-header']" :email="options.email" />
+		<NuxtPage />
+		<TheFooter v-if="!isWIP" :links="options.links" class="desktop-only" />
+	</NuxtLayout>
 </template>
 
 <style>
@@ -141,21 +121,5 @@ const showContent = ref(false);
 .translate-in-leave-to {
 	opacity: 0;
 	transform: translateY(80vh);
-}
-</style>
-
-<style scoped lang="scss">
-.body {
-	display: flex;
-	flex-direction: column;
-
-	height: 100vh;
-
-	@media #{$desktop-down} {
-		height: auto;
-		@include gap();
-	}
-
-	justify-content: space-between;
 }
 </style>
