@@ -17,7 +17,6 @@
 	transform: translate3d(-50%, -50%, 0);
 
 	width: 20vw;
-	height: auto;
 	aspect-ratio: 3;
 
 	overflow: hidden;
