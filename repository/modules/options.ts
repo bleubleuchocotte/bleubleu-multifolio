@@ -32,7 +32,7 @@ class OptionsModule extends PrismicFactory {
 			this.client.getSingle<Content.WebsiteDocument>("website", {
 				graphQuery: `{
 				website {
-					website_state-color
+					website_state
 				}
 			}`,
 			}));
