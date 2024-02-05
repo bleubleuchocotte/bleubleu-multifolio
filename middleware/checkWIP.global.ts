@@ -16,15 +16,18 @@ export default defineNuxtRouteMiddleware(async (to) => {
 			useServerSeoMeta({
 				robots: "noindex, nofollow",
 			});
-			isWIP.value = true;
+
+			if (!import.meta.dev) {
+				isWIP.value = true;
+			}
 			break;
 
 		default:
 			break;
 	}
 
-	if (isWIP.value && to.path !== "/wip") {
-		// Si le site est dans l'état "WIP", on redirige toutes les requêtes vers /wip
+	if (isWIP.value && to.path !== "/wip" && !import.meta.dev) {
+		// Si le site est dans l'état "WIP" et en production, on redirige toutes les requêtes vers /wip
 		return navigateTo("/wip", { replace: true });
 	}
 	else if (!isWIP.value && to.path === "/wip") {
