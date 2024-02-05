@@ -25,14 +25,14 @@
 	"devDependencies": {
 		"@antfu/eslint-config": "^2.6.2",
 		"@nuxtjs/prismic": "3.1.0",
+		"@nuxtjs/sitemap": "^5.1.0",
 		"@slicemachine/adapter-nuxt": "^0.3.32",
 		"@vueuse/core": "^10.7.2",
 		"@vueuse/nuxt": "^10.7.2",
 		"eslint": "^8.56.0",
 		"eslint-plugin-format": "^0.1.0",
-		"nuxt": "^3.9.3",
+		"nuxt": "3.10.0",
 		"nuxt-simple-robots": "4.0.0-rc.13",
-		"nuxt-simple-sitemap": "^4.4.1",
 		"slice-machine-ui": "^1.22.2"
 	}
 }

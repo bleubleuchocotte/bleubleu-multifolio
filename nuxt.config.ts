@@ -20,8 +20,8 @@ export default defineNuxtConfig({
 	modules: [
 		"@vueuse/nuxt",
 		"@nuxtjs/prismic",
+		"@nuxtjs/sitemap",
 		"nuxt-simple-robots",
-		"nuxt-simple-sitemap",
 		"@nuxtjs/device",
 	],
 	prismic: {
