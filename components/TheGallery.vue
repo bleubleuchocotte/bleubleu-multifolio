@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
-import type { Project } from "~/type/types";
+import type { MediaHTMLAttributes } from "vue";
+import type { ProjectWithId } from "~/types";
+import { components } from "@/slices";
 
-defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+};
+
+defineProps<ComponentProps>();
 
 const emit = defineEmits<{
-	(e: "close"): void
+	close: []
 }>();
 
-onMounted(() => {
-	document.addEventListener("keydown", callback);
-});
-
-onUnmounted(() => {
-	document.removeEventListener("keydown", callback);
-});
+useEventListener("keydown", callback);
 
 const container = ref(null);
 const ignore = ref(null);
@@ -36,6 +31,10 @@ function callback(e: KeyboardEvent) {
 
 const target = ref();
 useFocusTrap(target, { immediate: true });
+
+const mediaAttribute: MediaHTMLAttributes = {
+	controls: true,
+};
 </script>
 
 <template>
@@ -80,13 +79,13 @@ useFocusTrap(target, { immediate: true });
 				class="gallery__project-description"
 			/>
 
-			<div class="gallery__project-images">
+			<div class="gallery__project-medias">
 				<div
-					v-for="media in project.medias"
+					v-for="media in project.slices"
 					:key="media.id"
-					:data-type="media.type === 'media-duo' ? 'duo' : 'full'"
+					:data-type="media.variation === 'default' ? 'duo' : 'full'"
 				>
-					<UIBaseMedia :media="media" :video-settings="{ controls: true }" />
+					<SliceZone :slices="[media]" :components="components" :context="mediaAttribute" />
 				</div>
 			</div>
 		</UIBaseLenis>
@@ -139,29 +138,16 @@ useFocusTrap(target, { immediate: true });
 			@include prop("padding-bottom");
 		}
 
-		&-images {
+		&-medias {
 			display: flex;
 			flex-direction: column;
 			@include gap();
 			height: 100%;
 
-			img {
-				@include border-radius();
-				min-width: 0;
-			}
 			[data-type="duo"] {
 				display: flex;
 				@include gap();
 				width: 100%;
-
-				img {
-					aspect-ratio: 1;
-				}
-			}
-			[data-type="full"] {
-				img {
-					aspect-ratio: 16/9;
-				}
 			}
 
 			[data-type]:last-of-type {

@@ -1,23 +1,31 @@
+<script setup lang="ts">
+definePageMeta({
+	layout: "404",
+});
+
+useSeoMeta({
+	title: "Work In Progress",
+});
+</script>
+
 <template>
-	<div class="container-404">
-		<p class="container-404__glitch" data-text="404">
-			404
-		</p>
-		<UIBaseButtonHome class="container-404__button">
-			Let's go home
-		</UIBaseButtonHome>
-	</div>
+	<main class="page-wip">
+		<h1 class="page-wip__glitch" data-text="Work In Progress">
+			Work In Progress
+		</h1>
+	</main>
 </template>
 
 <style scoped lang="scss">
-.container-404 {
+.page-wip {
 	position: relative;
 	display: flex;
-	overflow: hidden;
+
+	height: 100%;
 
 	&__glitch {
 		color: var(--text-color);
-		font-size: 45vw;
+		font-size: 10vw;
 		position: relative;
 		line-height: 0.9;
 		margin: auto;
@@ -64,25 +72,6 @@
 					clip: rect(random(800) + px, 9999px, random(800) + px, 0);
 				}
 			}
-		}
-	}
-
-	&__button {
-		height: 7vw;
-		width: 20vw;
-		z-index: 5;
-		border: 1px solid var(--background-color);
-		position: absolute;
-		top: calc(24vw - 7vw);
-		left: calc(50vw - 10vw);
-		@include font("h2");
-
-		@media #{$mobile-down} {
-			height: 10vw;
-			width: 25vw;
-			top: calc(24vw - 10vw);
-			left: calc(50vw - 12.5vw);
-			@include font("cta");
 		}
 	}
 }

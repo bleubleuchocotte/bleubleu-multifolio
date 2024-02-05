@@ -1,16 +1,14 @@
 <script setup lang="ts">
-const props = defineProps({
-	text: {
-		type: String,
-		required: true,
-	},
-	colors: {
-		type: Object as PropType<{ start: string, end: string }>,
-		required: true,
-	},
-});
+type ComponentProps = {
+	text: string
+	colors: { start: string, end: string }
+};
 
-const emit = defineEmits<{ (e: "unmount"): void }>();
+const props = defineProps<ComponentProps>();
+
+const emit = defineEmits<{
+	unmount: []
+}>();
 
 function decodeString(
 	displayString: Ref<string>,

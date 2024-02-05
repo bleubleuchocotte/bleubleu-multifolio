@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import type { NuxtError } from "#app";
+
+type ComponentProps = {
+	error: NuxtError
+};
+
+defineProps<ComponentProps>();
+
 const request = useRequestURL();
 
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
-
-const isWIP = useState("WebsiteStateWIP", () => ref(false));
 
 if (!options) {
 	throw createError({
@@ -80,46 +86,11 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 	<ClientOnly>
 		<UIBaseCursor v-if="isPointerAccurate" />
 	</ClientOnly>
-
-	<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
-
-	<NuxtLayout>
-		<TheHeader v-if="!isWIP" :marquee-text="options['text-header']" :email="options.email" />
-		<NuxtPage />
-		<TheFooter v-if="!isWIP" :links="options.links" class="desktop-only" />
+	<NuxtLayout name="404">
+		<TheHeader :marquee-text="options['text-header']" :email="options.email" />
+		<main>
+			<ErrorDefault :code="error.statusCode ?? -1" />
+		</main>
+		<TheFooter :links="options.links" class="desktop-only" />
 	</NuxtLayout>
 </template>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-	transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-	opacity: 0;
-	filter: blur(1rem);
-}
-
-.translate-out-enter-active,
-.translate-out-leave-active {
-	transition: all 0.4s ease-out;
-}
-
-.translate-out-enter-from,
-.translate-out-leave-to {
-	opacity: 0;
-	transform: translateY(-20vh);
-}
-
-.translate-in-enter-active,
-.translate-in-leave-active {
-	transition: all 0.4s ease-out;
-}
-
-.translate-in-enter-from,
-.translate-in-leave-to {
-	opacity: 0;
-	transform: translateY(80vh);
-}
-</style>

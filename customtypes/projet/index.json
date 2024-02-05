@@ -47,28 +47,15 @@
           "label": "Description du projet"
         }
       },
-      "medias": {
-        "type": "Group",
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "fields": {
+          "choices": {
             "media": {
-              "type": "Link",
-              "config": {
-                "label": "media",
-                "select": "document",
-                "customtypes": ["component_media_duo", "component_media_full"]
-              }
+              "type": "SharedSlice"
             }
-          },
-          "label": "Liste des médias"
-        }
-      },
-      "image-mobile": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Image pour le format responsive"
+          }
         }
       }
     }

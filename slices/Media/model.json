@@ -1,0 +1,70 @@
+{
+  "id": "media",
+  "type": "SharedSlice",
+  "name": "Media",
+  "description": "Media",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Duo",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "left_media": {
+          "type": "Link",
+          "config": {
+            "label": "Média de gauche",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "right_media": {
+          "type": "Link",
+          "config": {
+            "label": "Média de droite",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "responsive_media": {
+          "type": "Link",
+          "config": {
+            "label": "Média pour le format responsive",
+            "placeholder": "",
+            "select": "media"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "full",
+      "name": "Full",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "media": {
+          "type": "Link",
+          "config": {
+            "label": "Média",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "responsive_media": {
+          "type": "Link",
+          "config": {
+            "label": "Média pour le format responsive",
+            "placeholder": "",
+            "select": "media"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

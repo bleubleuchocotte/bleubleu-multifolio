@@ -1,38 +1,29 @@
 <template>
-	<NuxtLink to="/" class="button">
-		<div class="button__text">
-			<div class="button__text-bg-top">
+	<span class="button-effect">
+		<div class="button-effect__text">
+			<div class="button-effect__text-bg-top">
 				<span><slot /></span>
 			</div>
-			<div class="button__text-bg-bottom">
+			<div class="button-effect__text-bg-bottom">
 				<span><slot /></span>
 			</div>
 		</div>
 
-		<div class="button__reveal">
+		<div class="button-effect__reveal">
 			<span>⏎</span>
 		</div>
-	</NuxtLink>
+	</span>
 </template>
 
 <style scoped lang="scss">
-.button {
+.button-effect {
+	display: block;
 	position: relative;
-	overflow: hidden;
 
 	height: 100%;
-	width: fit-content;
+	width: 100%;
 
-	@include border-radius(0.5);
-
-	color: var(--text-accent-color);
-
-	& > * {
-		pointer-events: none;
-	}
-
-	&:hover .button__text-bg,
-	&.open .button__text-bg {
+	&:hover .button-effect__text-bg {
 		&-top {
 			transform: translate3d(0, -100%, 0);
 		}
@@ -102,7 +93,11 @@
 
 		background-color: var(--text-accent-color);
 		color: var(--accent-color);
-		@include border(0.5, var(--accent-color));
+	}
+
+	&__reveal,
+	&__text {
+		pointer-events: none;
 	}
 }
 </style>

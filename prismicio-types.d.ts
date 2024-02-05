@@ -5,95 +5,20 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Content for Component | Media duo documents
- */
-type ComponentMediaDuoDocumentData = {
-	/**
-	 * Média de gauche field in *Component | Media duo*
-	 *
-	 * - **Field Type**: Link to Media
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: component_media_duo.media_left
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	media_left: prismic.LinkToMediaField
-
-	/**
-	 * Média de droite field in *Component | Media duo*
-	 *
-	 * - **Field Type**: Link to Media
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: component_media_duo.media_right
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	media_right: prismic.LinkToMediaField
-};
-
-/**
- * Component | Media duo document from Prismic
- *
- * - **API ID**: `component_media_duo`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ComponentMediaDuoDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ComponentMediaDuoDocumentData>,
-    "component_media_duo",
-    Lang
-  >;
-
-/**
- * Content for Component | Media Full documents
- */
-type ComponentMediaFullDocumentData = {
-	/**
-	 * Média pleine largeur field in *Component | Media Full*
-	 *
-	 * - **Field Type**: Link to Media
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: component_media_full.media_full
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	media_full: prismic.LinkToMediaField
-};
-
-/**
- * Component | Media Full document from Prismic
- *
- * - **API ID**: `component_media_full`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ComponentMediaFullDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ComponentMediaFullDocumentData>,
-    "component_media_full",
-    Lang
-  >;
-
-/**
  * Content for Page | Legal notice documents
  */
-type PageLegalNoticeDocumentData = {
-	/**
-	 * Mentions légales field in *Page | Legal notice*
-	 *
-	 * - **Field Type**: Rich Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: page_legal_notice.content
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-	 */
-	content: prismic.RichTextField
-};
+interface PageLegalNoticeDocumentData {
+  /**
+   * Mentions légales field in *Page | Legal notice*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page_legal_notice.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
 
 /**
  * Page | Legal notice document from Prismic
@@ -114,116 +39,90 @@ export type PageLegalNoticeDocument<Lang extends string = string> =
 /**
  * Item in *Projet → Compétences mise en oeuvre*
  */
-export type ProjetDocumentDataSkillsItem = {
-	/**
-	 * Une compétence field in *Projet → Compétences mise en oeuvre*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.skills[].skill
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	skill: prismic.KeyTextField
-};
+export interface ProjetDocumentDataSkillsItem {
+  /**
+   * Une compétence field in *Projet → Compétences mise en oeuvre*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.skills[].skill
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  skill: prismic.KeyTextField;
+}
 
-/**
- * Item in *Projet → Liste des médias*
- */
-export type ProjetDocumentDataMediasItem = {
-	/**
-	 * media field in *Projet → Liste des médias*
-	 *
-	 * - **Field Type**: Content Relationship
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.medias[].media
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	media: prismic.ContentRelationshipField<
-    "component_media_duo" | "component_media_full"
-  >
-};
+type ProjetDocumentDataSlicesSlice = MediaSlice;
 
 /**
  * Content for Projet documents
  */
-type ProjetDocumentData = {
-	/**
-	 * Titre du projet field in *Projet*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.title
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	title: prismic.KeyTextField
+interface ProjetDocumentData {
+  /**
+   * Titre du projet field in *Projet*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 
-	/**
-	 * Url du projet field in *Projet*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.url
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	url: prismic.LinkField
+  /**
+   * Url du projet field in *Projet*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField;
 
-	/**
-	 * Date de réalisation field in *Projet*
-	 *
-	 * - **Field Type**: Date
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.date
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#date
-	 */
-	date: prismic.DateField
+  /**
+   * Date de réalisation field in *Projet*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date: prismic.DateField;
 
-	/**
-	 * Compétences mise en oeuvre field in *Projet*
-	 *
-	 * - **Field Type**: Group
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.skills[]
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#group
-	 */
-	skills: prismic.GroupField<Simplify<ProjetDocumentDataSkillsItem>>
+  /**
+   * Compétences mise en oeuvre field in *Projet*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.skills[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  skills: prismic.GroupField<Simplify<ProjetDocumentDataSkillsItem>>;
 
-	/**
-	 * Description du projet field in *Projet*
-	 *
-	 * - **Field Type**: Rich Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.description
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-	 */
-	description: prismic.RichTextField
+  /**
+   * Description du projet field in *Projet*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
 
-	/**
-	 * Liste des médias field in *Projet*
-	 *
-	 * - **Field Type**: Group
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.medias[]
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#group
-	 */
-	medias: prismic.GroupField<Simplify<ProjetDocumentDataMediasItem>>
-
-	/**
-	 * Image pour le format responsive field in *Projet*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: projet.image-mobile
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	"image-mobile": prismic.ImageField<never>
-};
+  /**
+   * Slice Zone field in *Projet*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projet.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ProjetDocumentDataSlicesSlice>;
+}
 
 /**
  * Projet document from Prismic
@@ -244,224 +143,239 @@ export type ProjetDocument<Lang extends string = string> =
 /**
  * Item in *Website → Liste de lien*
  */
-export type WebsiteDocumentDataLinksItem = {
-	/**
-	 * Nom field in *Website → Liste de lien*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.links[].name
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	name: prismic.KeyTextField
+export interface WebsiteDocumentDataLinksItem {
+  /**
+   * Nom field in *Website → Liste de lien*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.links[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
 
-	/**
-	 * link field in *Website → Liste de lien*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.links[].link
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	link: prismic.LinkField
-};
+  /**
+   * link field in *Website → Liste de lien*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.links[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
 
 /**
  * Item in *Website → Vos projets présent ici s'afficheront sur votre site*
  */
-export type WebsiteDocumentDataProjectsItem = {
-	/**
-	 * Un projet field in *Website → Vos projets présent ici s'afficheront sur votre site*
-	 *
-	 * - **Field Type**: Content Relationship
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.projects[].project
-	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-	 */
-	project: prismic.ContentRelationshipField<"projet">
-};
+export interface WebsiteDocumentDataProjectsItem {
+  /**
+   * Un projet field in *Website → Vos projets présent ici s'afficheront sur votre site*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.projects[].project
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  project: prismic.ContentRelationshipField<"projet">;
+}
 
 /**
  * Content for Website documents
  */
-type WebsiteDocumentData = {
-	/**
-	 * email field in *Website*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.email
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	email: prismic.KeyTextField
+interface WebsiteDocumentData {
+  /**
+   * État du site field in *Website*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Quel est l'état du site ?
+   * - **Default Value**: Le site n'est pas indexable
+   * - **API ID Path**: website.website_state
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  website_state: prismic.SelectField<
+    | "Le site n'est pas indexable"
+    | "Le site est indexable et disponible via la recherche google"
+    | "Le site n'est pas indexable et présente une page temporaire de WIP",
+    "filled"
+  > /**
+   * email field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.email
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  email: prismic.KeyTextField;
 
-	/**
-	 * accent-color field in *Website*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.accent-color
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#color
-	 */
-	"accent-color": prismic.ColorField
+  /**
+   * accent-color field in *Website*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.accent-color
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  "accent-color": prismic.ColorField;
 
-	/**
-	 * background-color field in *Website*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.background-color
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#color
-	 */
-	"background-color": prismic.ColorField
+  /**
+   * background-color field in *Website*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.background-color
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  "background-color": prismic.ColorField;
 
-	/**
-	 * text-color field in *Website*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.text-color
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#color
-	 */
-	"text-color": prismic.ColorField
+  /**
+   * text-color field in *Website*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.text-color
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  "text-color": prismic.ColorField;
 
-	/**
-	 * text-accent-color field in *Website*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.text-accent-color
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#color
-	 */
-	"text-accent-color": prismic.ColorField
+  /**
+   * text-accent-color field in *Website*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.text-accent-color
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  "text-accent-color": prismic.ColorField;
 
-	/**
-	 * Image de fin des projets field in *Website*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.ending-card-image
-	 * - **Tab**: options
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	"ending-card-image": prismic.ImageField<never> /**
-																																																 * Texte déroulant field in *Website*
-																																																 *
-																																																 * - **Field Type**: Text
-																																																 * - **Placeholder**: *None*
-																																																 * - **API ID Path**: website.text-header
-																																																 * - **Tab**: header
-																																																 * - **Documentation**: https://prismic.io/docs/field#key-text
-																																																 */
-	"text-header": prismic.KeyTextField /**
-																																					 * Liste de lien field in *Website*
-																																					 *
-																																					 * - **Field Type**: Group
-																																					 * - **Placeholder**: *None*
-																																					 * - **API ID Path**: website.links[]
-																																					 * - **Tab**: footer
-																																					 * - **Documentation**: https://prismic.io/docs/field#group
-																																					 */
-	links: prismic.GroupField<Simplify<WebsiteDocumentDataLinksItem>> /**
-																																																																			 * Titre pour le SEO field in *Website*
-																																																																			 *
-																																																																			 * - **Field Type**: Text
-																																																																			 * - **Placeholder**: *None*
-																																																																			 * - **API ID Path**: website.seo-title
-																																																																			 * - **Tab**: seo
-																																																																			 * - **Documentation**: https://prismic.io/docs/field#key-text
-																																																																			 */
-	"seo-title": prismic.KeyTextField
+  /**
+   * Image de fin des projets field in *Website*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.ending-card-image
+   * - **Tab**: options
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  "ending-card-image": prismic.ImageField<never> /**
+   * Texte déroulant field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.text-header
+   * - **Tab**: header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  "text-header": prismic.KeyTextField /**
+   * Liste de lien field in *Website*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.links[]
+   * - **Tab**: footer
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  links: prismic.GroupField<Simplify<WebsiteDocumentDataLinksItem>> /**
+   * Titre pour le SEO field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.seo-title
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  "seo-title": prismic.KeyTextField;
 
-	/**
-	 * Description pour le SEO field in *Website*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.seo-description
-	 * - **Tab**: seo
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	"seo-description": prismic.KeyTextField
+  /**
+   * Description pour le SEO field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.seo-description
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  "seo-description": prismic.KeyTextField;
 
-	/**
-	 * og-image field in *Website*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.og-image
-	 * - **Tab**: seo
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	"og-image": prismic.ImageField<never>
+  /**
+   * og-image field in *Website*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.og-image
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  "og-image": prismic.ImageField<never>;
 
-	/**
-	 * Favicon field in *Website*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.seo-favicon
-	 * - **Tab**: seo
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	"seo-favicon": prismic.ImageField<"small"> /**
-																																												 * Prénom field in *Website*
-																																												 *
-																																												 * - **Field Type**: Text
-																																												 * - **Placeholder**: *None*
-																																												 * - **API ID Path**: website.first-name
-																																												 * - **Tab**: about
-																																												 * - **Documentation**: https://prismic.io/docs/field#key-text
-																																												 */
-	"first-name": prismic.KeyTextField
+  /**
+   * Favicon field in *Website*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.seo-favicon
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  "seo-favicon": prismic.ImageField<"small"> /**
+   * Prénom field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.first-name
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  "first-name": prismic.KeyTextField;
 
-	/**
-	 * Nom field in *Website*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.last-name
-	 * - **Tab**: about
-	 * - **Documentation**: https://prismic.io/docs/field#key-text
-	 */
-	"last-name": prismic.KeyTextField
+  /**
+   * Nom field in *Website*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.last-name
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  "last-name": prismic.KeyTextField;
 
-	/**
-	 * Description field in *Website*
-	 *
-	 * - **Field Type**: Rich Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.description
-	 * - **Tab**: about
-	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-	 */
-	description: prismic.RichTextField
+  /**
+   * Description field in *Website*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.description
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
 
-	/**
-	 * La plus belle photo de vous *_* field in *Website*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: website.about-image
-	 * - **Tab**: about
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	"about-image": prismic.ImageField<never> /**
-																																										 * Vos projets présent ici s'afficheront sur votre site field in *Website*
-																																										 *
-																																										 * - **Field Type**: Group
-																																										 * - **Placeholder**: *None*
-																																										 * - **API ID Path**: website.projects[]
-																																										 * - **Tab**: projects
-																																										 * - **Documentation**: https://prismic.io/docs/field#group
-																																										 */
-	projects: prismic.GroupField<Simplify<WebsiteDocumentDataProjectsItem>>
-};
+  /**
+   * La plus belle photo de vous *_* field in *Website*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.about-image
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  "about-image": prismic.ImageField<never> /**
+   * Vos projets présent ici s'afficheront sur votre site field in *Website*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.projects[]
+   * - **Tab**: projects
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  projects: prismic.GroupField<Simplify<WebsiteDocumentDataProjectsItem>>;
+}
 
 /**
  * Website document from Prismic
@@ -480,37 +394,137 @@ export type WebsiteDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
-	| ComponentMediaDuoDocument
-	| ComponentMediaFullDocument
-	| PageLegalNoticeDocument
-	| ProjetDocument
-	| WebsiteDocument;
+  | PageLegalNoticeDocument
+  | ProjetDocument
+  | WebsiteDocument;
+
+/**
+ * Primary content in *Media → Primary*
+ */
+export interface MediaSliceDefaultPrimary {
+  /**
+   * Média de gauche field in *Media → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.primary.left_media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  left_media: prismic.LinkToMediaField;
+
+  /**
+   * Média de droite field in *Media → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.primary.right_media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  right_media: prismic.LinkToMediaField;
+
+  /**
+   * Média pour le format responsive field in *Media → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.primary.responsive_media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  responsive_media: prismic.LinkToMediaField;
+}
+
+/**
+ * Duo variation for Media Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MediaSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MediaSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Media → Primary*
+ */
+export interface MediaSliceFullPrimary {
+  /**
+   * Média field in *Media → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.primary.media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  media: prismic.LinkToMediaField;
+
+  /**
+   * Média pour le format responsive field in *Media → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.primary.responsive_media
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  responsive_media: prismic.LinkToMediaField;
+}
+
+/**
+ * Full variation for Media Slice
+ *
+ * - **API ID**: `full`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MediaSliceFull = prismic.SharedSliceVariation<
+  "full",
+  Simplify<MediaSliceFullPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Media*
+ */
+type MediaSliceVariation = MediaSliceDefault | MediaSliceFull;
+
+/**
+ * Media Shared Slice
+ *
+ * - **API ID**: `media`
+ * - **Description**: Media
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MediaSlice = prismic.SharedSlice<"media", MediaSliceVariation>;
 
 declare module "@prismicio/client" {
-	type CreateClient = {
-		(
-			repositoryNameOrEndpoint: string,
-			options?: prismic.ClientConfig,
-		): prismic.Client<AllDocumentTypes>
-	};
+  interface CreateClient {
+    (
+      repositoryNameOrEndpoint: string,
+      options?: prismic.ClientConfig,
+    ): prismic.Client<AllDocumentTypes>;
+  }
 
-	namespace Content {
-		export type {
-			ComponentMediaDuoDocument,
-			ComponentMediaDuoDocumentData,
-			ComponentMediaFullDocument,
-			ComponentMediaFullDocumentData,
-			PageLegalNoticeDocument,
-			PageLegalNoticeDocumentData,
-			ProjetDocument,
-			ProjetDocumentData,
-			ProjetDocumentDataSkillsItem,
-			ProjetDocumentDataMediasItem,
-			WebsiteDocument,
-			WebsiteDocumentData,
-			WebsiteDocumentDataLinksItem,
-			WebsiteDocumentDataProjectsItem,
-			AllDocumentTypes,
-		};
-	}
+  namespace Content {
+    export type {
+      PageLegalNoticeDocument,
+      PageLegalNoticeDocumentData,
+      ProjetDocument,
+      ProjetDocumentData,
+      ProjetDocumentDataSkillsItem,
+      ProjetDocumentDataSlicesSlice,
+      WebsiteDocument,
+      WebsiteDocumentData,
+      WebsiteDocumentDataLinksItem,
+      WebsiteDocumentDataProjectsItem,
+      AllDocumentTypes,
+      MediaSlice,
+      MediaSliceDefaultPrimary,
+      MediaSliceFullPrimary,
+      MediaSliceVariation,
+      MediaSliceDefault,
+      MediaSliceFull,
+    };
+  }
 }

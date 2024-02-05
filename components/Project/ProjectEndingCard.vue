@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import type { ImageField } from "@prismicio/client";
+import type { ImageField, KeyTextField } from "@prismicio/client";
 
 type ComponentProps = {
-	email: string
+	email: KeyTextField
 	endingCardImage: ImageField
 };
 
 defineProps<ComponentProps>();
 
-defineEmits<{ (e: "goToStart"): void }>();
+defineEmits<{
+	goToStart: []
+}>();
 </script>
 
 <template>

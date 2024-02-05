@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import type { WebsiteDocumentDataLinksItem } from "@/prismicio-types";
+import type { Content } from "@prismicio/client";
 
 type ComponentProps = {
-	links: WebsiteDocumentDataLinksItem[]
+	links: Content.WebsiteDocumentDataLinksItem[]
 };
 
-const props = defineProps<ComponentProps>();
-
-const _links = computed(() => {
-	return props.links.map((link) => {
-		return {
-			id: useUID(),
-			field: link.link,
-			text: link.name,
-		};
-	});
-});
+defineProps<ComponentProps>();
 </script>
 
 <template>
@@ -38,12 +28,12 @@ const _links = computed(() => {
 			</div>
 			<div class="footer__right">
 				<PrismicLink
-					v-for="link in _links"
-					:key="link.id"
+					v-for="link in links"
+					:key="link.name?.toString()"
 					class="footer__right-link"
-					:field="link.field"
+					:field="link.link"
 				>
-					{{ link.text }}
+					{{ link.name }}
 					<IconBaseArrowLink
 						:colors="{
 							background: 'transparent',
@@ -51,10 +41,10 @@ const _links = computed(() => {
 						}"
 					/>
 				</PrismicLink>
-				<NuxtLink to="/legal-notice">
+				<NuxtLink to="/legal-notice" class="footer__right-link">
 					Legal notice
 				</NuxtLink>
-				<span>© {{ new Date().getFullYear() }} Bleubleu Chocotte</span>
+				<UIBaseCopyright />
 			</div>
 		</footer>
 	</div>
@@ -70,9 +60,7 @@ const _links = computed(() => {
 		@include left;
 
 		&-link {
-			display: flex;
 			width: fit-content;
-			align-items: flex-end;
 		}
 	}
 	&__right {
@@ -82,8 +70,13 @@ const _links = computed(() => {
 		justify-content: space-between;
 
 		padding-left: 0;
+	}
 
+	&__left,
+	&__right {
 		&-link {
+			@include font("cta");
+
 			display: flex;
 			align-items: flex-end;
 		}

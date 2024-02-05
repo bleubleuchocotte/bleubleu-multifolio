@@ -39,13 +39,11 @@
 FONT
 -----------------------------------------------------
 */
-@function pxToVw($size: 1, $breakpoint: 1440) {
-	@return calc($size/$breakpoint) * 100vw;
+@function pxToVw($size, $breakpoint, $coef: 0.8) {
+	@return max(#{$size * $coef}px, ($size / $breakpoint) * 100vw);
 }
 
-@mixin font($font: "p", $i: null) {
-	@include transition(font-size);
-
+@mixin font($font) {
 	@if ($font == "p") {
 		$base-fs: 14;
 

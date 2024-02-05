@@ -1,10 +1,9 @@
 <script setup lang="ts">
-const props = defineProps({
-	index: {
-		type: Number,
-		required: true,
-	},
-});
+type ComponentProps = {
+	index: number
+};
+
+const props = defineProps<ComponentProps>();
 
 const i = ref(props.index < 10 ? `0${props.index}` : props.index.toString());
 </script>

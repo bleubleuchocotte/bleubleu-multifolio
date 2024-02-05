@@ -5,7 +5,21 @@
   "status": true,
   "format": "custom",
   "json": {
-    "Main": {},
+    "Main": {
+      "website_state": {
+        "type": "Select",
+        "config": {
+          "label": "État du site",
+          "placeholder": "Quel est l'état du site ?",
+          "options": [
+            "Le site n'est pas indexable",
+            "Le site est indexable et disponible via la recherche google",
+            "Le site n'est pas indexable et présente une page temporaire de WIP"
+          ],
+          "default_value": "Le site n'est pas indexable"
+        }
+      }
+    },
     "options": {
       "email": {
         "type": "Text",

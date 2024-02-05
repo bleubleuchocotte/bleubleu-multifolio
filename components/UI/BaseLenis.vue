@@ -1,28 +1,16 @@
 <script setup lang="ts">
 import Lenis from "@studio-freight/lenis";
-import type { LenisTarget } from "@/type/types";
+import type { LenisTarget } from "@/types";
 
-const props = defineProps({
-	orientation: {
-		type: String as PropType<"vertical" | "horizontal">,
-		required: false,
-		default: "vertical",
-	},
-	target: {
-		type: [String, Number, Object] as PropType<LenisTarget>,
-		required: false,
-		default: undefined,
-	},
-	requestLenis: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
-	infinite: {
-		type: Boolean,
-		required: false,
-		defautl: false,
-	},
+type ComponentProps = {
+	target?: LenisTarget
+	requestLenis?: boolean
+	orientation?: "vertical" | "horizontal"
+};
+
+const props = withDefaults(defineProps<ComponentProps>(), {
+	requestLenis: false,
+	orientation: "vertical",
 });
 
 const container = ref(null);
@@ -38,7 +26,6 @@ onMounted(() => {
 		wrapper: container.value, // element which has overflow
 		content: container.value, // usually wrapper's direct child
 		orientation: props.orientation,
-		infinite: props.infinite,
 	});
 
 	function raf(time: number) {
