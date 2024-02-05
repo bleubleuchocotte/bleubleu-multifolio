@@ -29,14 +29,12 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 <template>
 	<UIBaseResponsiveContent media-query="(max-width: 1025px)">
 		<template #mobile>
-			<div class="media-mobile">
-				<template v-if="('kind' in responsive_media)">
-					<img v-if="responsive_media.kind === 'image'" :key="slice.id + responsive_media.url" :src="responsive_media.url" :height="responsive_media.height ?? ''" :width="responsive_media.width ?? ''" alt="" class="media-mobile__image">
+			<div v-if="('kind' in responsive_media)" class="media-mobile">
+				<img v-if="responsive_media.kind === 'image'" :key="slice.id + responsive_media.url" :src="responsive_media.url" :height="responsive_media.height ?? ''" :width="responsive_media.width ?? ''" alt="" class="media-mobile__image">
 
-					<video v-else :key="responsive_media.url" ref="videos" v-bind="props.context" class="media-mobile__video">
-						<source :src="responsive_media.url">
-					</video>
-				</template>
+				<video v-else :key="responsive_media.url" ref="videos" v-bind="props.context" class="media-mobile__video">
+					<source :src="responsive_media.url">
+				</video>
 			</div>
 		</template>
 		<template #desktop>
