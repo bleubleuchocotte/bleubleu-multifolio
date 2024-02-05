@@ -50,7 +50,7 @@ devDependencies:
     specifier: ^0.1.0
     version: 0.1.0(eslint@8.56.0)
   nuxt:
-    specifier: ^3.9.3
+    specifier: 3.10.0
     version: 3.10.0(eslint@8.56.0)(sass@1.70.0)(typescript@5.3.3)(vite@5.0.12)
   nuxt-simple-robots:
     specifier: 4.0.0-rc.13
