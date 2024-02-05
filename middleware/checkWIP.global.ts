@@ -28,6 +28,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
 		return navigateTo("/wip", { replace: true });
 	}
 	else if (!isWIP.value && to.path === "/wip") {
-		return navigateTo("/", { replace: true });
+		return abortNavigation();
 	}
 });
