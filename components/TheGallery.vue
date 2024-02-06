@@ -40,26 +40,10 @@ const mediaAttribute: MediaHTMLAttributes = {
 <template>
 	<section ref="target" class="gallery">
 		<div ref="ignore" class="gallery__header">
-			<PrismicLink
-				v-if="project.url"
-				class="gallery__project-heading"
-				:field="project.url"
-			>
-				<h2 class="gallery__project-heading-title">
-					{{ project.title }}
-				</h2>
-				<IconBaseArrowLink
-					:colors="{
-						background: 'var(--accent-color)',
-						arrow: 'var(--background-color)',
-					}"
-				/>
-			</PrismicLink>
-			<div v-else class="gallery__project-heading">
-				<h2 class="gallery__project-heading-title">
-					{{ project.title }}
-				</h2>
-			</div>
+			<ProjectUrl :url="project.url">
+				{{ project.title }}
+			</ProjectUrl>
+
 			<button
 				type="button"
 				aria-label="Close the gallery modal"
