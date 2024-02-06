@@ -102,16 +102,6 @@ const mediaAttribute: MediaHTMLAttributes = {
 	}
 
 	&__project {
-		&-heading {
-			display: flex;
-			@include gap(calc(1 / 3));
-			align-items: center;
-
-			&-title {
-				pointer-events: none;
-			}
-		}
-
 		&-lenis {
 			@include border-radius(1, "top");
 		}
