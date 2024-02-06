@@ -34,7 +34,6 @@ defineProps<ComponentProps>();
 
 <style scoped lang="scss">
 .project-url {
-	@include prop("margin-top");
 	display: flex;
 	@include gap(calc(1 / 3));
 	align-items: center;
