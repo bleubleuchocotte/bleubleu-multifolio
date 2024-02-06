@@ -34,7 +34,9 @@ useIntersectionObserver(
 	<article ref="target" class="project-details" :data-project-h-id="project.id">
 		<div class="project-details__left">
 			<div class="project-details__content">
-				<p>Project #{{ index + 1 }}</p>
+				<p class="project-details__content-index">
+					Project #{{ index + 1 }}
+				</p>
 				<ProjectUrl :url="project.url">
 					{{ project.title }}
 				</ProjectUrl>
@@ -116,6 +118,10 @@ useIntersectionObserver(
 	&__content {
 		@include prop("padding-bottom");
 		border-bottom: 1px solid var(--border-color);
+
+		&-index {
+			@include prop("margin-bottom");
+		}
 
 		&-heading {
 			@include prop("margin-top");
