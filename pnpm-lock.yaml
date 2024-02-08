@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^5.1.0
     version: 5.1.0(@nuxt/devtools@1.0.8)(@vue/compiler-core@3.4.15)(h3@1.10.1)(nuxt@3.10.0)(postcss@8.4.33)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
   '@slicemachine/adapter-nuxt':
-    specifier: ^0.3.32
-    version: 0.3.34(@types/uuid@9.0.8)(nuxt@3.10.0)(uuid@9.0.1)
+    specifier: ^0.3.35
+    version: 0.3.35(@types/uuid@9.0.8)(nuxt@3.10.0)(uuid@9.0.1)
   '@vueuse/core':
     specifier: ^10.7.2
     version: 10.7.2(vue@3.4.15)
@@ -2393,15 +2393,15 @@ packages:
     resolution: {integrity: sha512-rUV5WyJrJLoloD4NDN1V1+LDMDWOa4OTsT4yYJwQNpTU6FWxkxHpL7eu4w+DmiH8x/EAM1otkPE1+LaspIbplw==}
     engines: {node: '>=18'}
 
-  /@slicemachine/adapter-nuxt@0.3.34(@types/uuid@9.0.8)(nuxt@3.10.0)(uuid@9.0.1):
-    resolution: {integrity: sha512-IuoZCnaWdgfP6Eq4atByptvPa8PFn6i5A3jYUZfp82bl7K8HcOLesIFbXjkRdyw8n+SNN5MRH3UJMbseCERPAg==}
+  /@slicemachine/adapter-nuxt@0.3.35(@types/uuid@9.0.8)(nuxt@3.10.0)(uuid@9.0.1):
+    resolution: {integrity: sha512-sJPdMA+3zAHxaTrF5ZRe+cDFrLwGdN0e5xN9N9A8SEjQNsrCFQxeizZ7efHaTgvB0VbInflmtICKgUOk1ynMzw==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
       nuxt: ^3.0.0
     dependencies:
       '@prismicio/simulator': 0.1.4
       '@prismicio/types-internal': 2.3.1(@types/uuid@9.0.8)(fp-ts@2.16.2)(io-ts-types@0.5.19)(io-ts@2.2.21)(uuid@9.0.1)
-      '@slicemachine/plugin-kit': 0.4.34
+      '@slicemachine/plugin-kit': 0.4.35
       common-tags: 1.8.2
       fp-ts: 2.16.2
       io-ts: 2.2.21(fp-ts@2.16.2)
@@ -2471,6 +2471,25 @@ packages:
 
   /@slicemachine/plugin-kit@0.4.34:
     resolution: {integrity: sha512-B4Rng2NBZknpVLoKg3ll2gj7/46OtH0yRHZgCPafzID4P0xJJfCCa3y2crEBnFFEVmFmwm1A6k+ErgeROVpPGA==}
+    engines: {node: '>=14.15.0'}
+    dependencies:
+      common-tags: 1.8.2
+      defu: 6.1.4
+      dotenv: 16.3.1
+      fp-ts: 2.16.2
+      fs-extra: 11.1.1
+      io-ts: 2.2.21(fp-ts@2.16.2)
+      io-ts-reporters: 2.0.1(fp-ts@2.16.2)(io-ts@2.2.21)
+      p-limit: 4.0.0
+      prettier: 3.2.5
+      prismic-ts-codegen: 0.1.19
+    transitivePeerDependencies:
+      - '@prismicio/client'
+      - '@prismicio/types'
+    dev: true
+
+  /@slicemachine/plugin-kit@0.4.35:
+    resolution: {integrity: sha512-RBhjRdMImarZtf5Ll4VJHVm4MNhuHE1Im6J72O6pftvEl9IviwymuJ6sKuxWzRREsjMNsDPU5s99ftWbuRSEzQ==}
     engines: {node: '>=14.15.0'}
     dependencies:
       common-tags: 1.8.2
