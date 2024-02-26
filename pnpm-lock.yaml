@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.1.1
     version: 3.1.1
   '@studio-freight/lenis':
-    specifier: ^1.0.33
-    version: 1.0.34
+    specifier: ^1.0.39
+    version: 1.0.39
   '@vueuse/integrations':
     specifier: ^10.7.2
     version: 10.7.2(focus-trap@7.5.4)(vue@3.4.15)
@@ -2488,8 +2488,8 @@ packages:
       - '@prismicio/types'
     dev: true
 
-  /@studio-freight/lenis@1.0.34:
-    resolution: {integrity: sha512-sEyzEjfAsTlFgDebMYT5G7tlB0ZHhWkHEoJj0g7W0YYZO093Mh4MU65o1qbNKwRacspdU04ZrA+5Wxwt4dsS7Q==}
+  /@studio-freight/lenis@1.0.39:
+    resolution: {integrity: sha512-63LPZD087kFSiNS3lF6Uve8fFeshQwNCXrl7DUocoeUYiElVTzr9a+dLodNBa0Yn5NZ4umAoQQ6LOosB5I6AAQ==}
     dev: false
 
   /@stylistic/eslint-plugin-js@1.5.4(eslint@8.56.0):
