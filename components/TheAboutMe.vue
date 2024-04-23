@@ -1,23 +1,12 @@
 <script lang="ts" setup>
-import type { TheAboutMeType } from "@/type/types";
+import type { AboutMe } from "~/types";
 
-defineProps({
-	params: {
-		type: Object as PropType<TheAboutMeType>,
-		required: true,
-	},
-});
+defineProps<AboutMe>();
 
 const isOpen = ref(false);
 const target = ref();
 
-onMounted(() => {
-	document.addEventListener("keydown", callback);
-});
-
-onUnmounted(() => {
-	document.removeEventListener("keydown", callback);
-});
+useEventListener("keydown", callback);
 
 function callback(e: KeyboardEvent) {
 	if (isOpen.value === true && e.key === "Escape") {
@@ -40,16 +29,12 @@ onClickOutside(target, () => {
 	>
 		<UIBaseLenis class="section__content">
 			<div class="section__content-image">
-				<PrismicImage :field="params.me.image" />
+				<PrismicImage :field="imageOfMe" />
 			</div>
-			<PrismicRichText
-				:field="params.me.description"
-				class="section__content-text"
-			/>
-			<UIBaseButtonContact
-				:email="params.me.email"
-				class="section__content-contact"
-			>
+
+			<PrismicRichText :field="description" class="section__content-text" />
+
+			<UIBaseButtonContact :email="email" class="section__content-contact">
 				Contact
 			</UIBaseButtonContact>
 			<ul class="section__content-links">
@@ -65,8 +50,8 @@ onClickOutside(target, () => {
 					</NuxtLink>
 				</li>
 				<li
-					v-for="link in params.links"
-					:key="link.id"
+					v-for="link in links"
+					:key="link.name?.toString()"
 					class="section__content-links-item"
 				>
 					<PrismicLink :field="link.link">
@@ -94,7 +79,7 @@ onClickOutside(target, () => {
 			@keydown.space.prevent="isOpen = !isOpen"
 		>
 			<h1 class="section__bookmark-heading">
-				{{ params.me["first-name"] }} {{ params.me["last-name"] }}
+				{{ firstName }} {{ lastName }}
 			</h1>
 			<div class="section__bookmark-flex">
 				<div>

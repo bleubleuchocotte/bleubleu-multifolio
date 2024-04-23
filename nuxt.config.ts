@@ -1,11 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	app: {
-		head: {
-			htmlAttrs: {
-				lang: "en",
-			},
-		},
 		pageTransition: { name: "page", mode: "out-in" },
 	},
 	vite: {
@@ -25,13 +20,16 @@ export default defineNuxtConfig({
 	modules: [
 		"@vueuse/nuxt",
 		"@nuxtjs/prismic",
+		"@nuxtjs/sitemap",
 		"nuxt-simple-robots",
-		"nuxt-simple-sitemap",
 		"@nuxtjs/device",
 	],
 	prismic: {
 		endpoint: process.env.PRISMIC_ENDPOINT,
-		toolbar: false,
 		preview: false,
+		toolbar: false,
+	},
+	robots: {
+		disallow: ["/legal-notice", "/wip"],
 	},
 });

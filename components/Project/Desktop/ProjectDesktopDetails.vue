@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import type { Project } from "~/type/types";
+import type { ProjectWithId } from "~/types";
 
-const props = defineProps({
-	project: {
-		type: Object as PropType<Project>,
-		required: true,
-	},
-	index: {
-		type: Number,
-		required: true,
-	},
-});
+type ComponentProps = {
+	project: ProjectWithId
+	index: number
+};
+
+const props = defineProps<ComponentProps>();
 
 const emit = defineEmits<{
-	(e: "target", payload: string): void
-	(e: "next"): void
-	(e: "previous"): void
-	(e: "gallery", payload: Project): void
+	target: [payload: string]
+	next: []
+	previous: []
+	gallery: [payload: ProjectWithId]
 }>();
 
 const target = ref<HTMLElement>();
@@ -38,31 +34,15 @@ useIntersectionObserver(
 	<article ref="target" class="project-details" :data-project-h-id="project.id">
 		<div class="project-details__left">
 			<div class="project-details__content">
-				<p>Project #{{ index + 1 }}</p>
-				<PrismicLink
-					v-if="project.url"
-					class="project-details__content-heading"
-					:field="project.url"
-					data-icon="IconArrowRightUp"
-				>
-					<h2 class="project-details__content-heading-title">
-						{{ project.title }}
-					</h2>
-					<IconBaseArrowLink
-						:colors="{
-							background: 'var(--accent-color)',
-							arrow: 'var(--background-color)',
-						}"
-					/>
-				</PrismicLink>
-				<div v-else class="project-details__content-heading">
-					<h2 class="project-details__content-heading-title">
-						{{ project.title }}
-					</h2>
-				</div>
+				<p class="project-details__content-index">
+					Project #{{ index + 1 }}
+				</p>
+				<ProjectUrl :url="project.url">
+					{{ project.title }}
+				</ProjectUrl>
 				<div class="project-details__content-tags">
-					<UIBaseTag v-for="skill in project.skills" :key="skill.id">
-						{{ skill.name }}
+					<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+						{{ item.skill }}
 					</UIBaseTag>
 				</div>
 				<PrismicRichText
@@ -101,7 +81,7 @@ useIntersectionObserver(
 
 		<div class="project-details__right">
 			<ProjectMediasSummary
-				:medias="project.medias.slice(0, 2)"
+				:medias="project.slices.slice(0, 2)"
 				role="button"
 				aria-label="View project images"
 				data-icon="IconFullscreen"
@@ -139,6 +119,10 @@ useIntersectionObserver(
 		@include prop("padding-bottom");
 		border-bottom: 1px solid var(--border-color);
 
+		&-index {
+			@include prop("margin-bottom");
+		}
+
 		&-heading {
 			@include prop("margin-top");
 			display: flex;
@@ -165,6 +149,7 @@ useIntersectionObserver(
 		}
 
 		&-more {
+			@include font("cta");
 			color: var(--accent-color);
 			text-decoration: underline;
 		}

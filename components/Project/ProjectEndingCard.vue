@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import type { ImageField } from "@prismicio/client";
+import type { ImageField, KeyTextField } from "@prismicio/client";
 
 type ComponentProps = {
-	email: string
+	email: KeyTextField
 	endingCardImage: ImageField
 };
 
 defineProps<ComponentProps>();
 
-defineEmits<{ (e: "goToStart"): void }>();
+defineEmits<{
+	goToStart: []
+}>();
 </script>
 
 <template>
@@ -24,21 +26,8 @@ defineEmits<{ (e: "goToStart"): void }>();
 				:height="endingCardImage.dimensions?.height ?? 500"
 				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
-			<div class="ending-card__content-start-button">
-				<button type="button" @click="$emit('goToStart')">
-					Bring me to start
-				</button>
-				<UIBaseButtonNavigation
-					class="ending-card__content-arrow"
-					:colors="{
-						background: 'var(--text-accent-color)',
-						arrow: 'var(--accent-color)',
-					}"
-					orientation="left"
-					length-arrow="short"
-					@click="$emit('goToStart')"
-				/>
-			</div>
+
+			<ProjectEndingCardButtonStart @click="$emit('goToStart')" />
 
 			<UIBaseButtonContact
 				:email="email"
@@ -91,29 +80,10 @@ defineEmits<{ (e: "goToStart"): void }>();
 			}
 		}
 
-		&-arrow {
-			height: 38px;
-			width: 38px;
-			display: flex;
-			align-items: center;
-		}
-
 		&-image {
 			max-width: 60%;
 			height: auto;
 			margin: auto;
-		}
-
-		&-start-button {
-			display: flex;
-			justify-content: center;
-			@include gap(0.5);
-			cursor: pointer;
-
-			& > button {
-				@include font("h3");
-				text-decoration: underline;
-			}
 		}
 	}
 }
