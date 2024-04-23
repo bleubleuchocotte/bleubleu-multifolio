@@ -13,30 +13,10 @@ defineProps<ComponentProps>();
 <template>
 	<article class="project-details-mobile">
 		<UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
-		<template v-if="project.url">
-			<PrismicLink
-				class="project-details-mobile__content-heading"
-				:field="project.url"
-				:tabindex="hidden ? -1 : 0"
-			>
-				<h3>
-					{{ project.title }}
-				</h3>
-				<IconBaseArrowLink
-					:colors="{
-						background: 'var(--accent-color)',
-						arrow: 'var(--background-color)',
-					}"
-				/>
-			</PrismicLink>
-		</template>
-		<template v-else>
-			<div class="project-details-mobile__content-heading">
-				<h3>
-					{{ project.title }}
-				</h3>
-			</div>
-		</template>
+
+		<ProjectUrl :url="project.url">
+			{{ project.title }}
+		</ProjectUrl>
 
 		<div class="project-details-mobile__content-tags">
 			<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
