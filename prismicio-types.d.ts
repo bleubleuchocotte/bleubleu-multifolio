@@ -166,6 +166,31 @@ export interface WebsiteDocumentDataLinksItem {
 }
 
 /**
+ * Item in *Website → Custom meta tags*
+ */
+export interface WebsiteDocumentDataCustomMetaTagsItem {
+  /**
+   * Meta name field in *Website → Custom meta tags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.custom_meta_tags[].meta_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_name: prismic.KeyTextField;
+
+  /**
+   * Meta content field in *Website → Custom meta tags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.custom_meta_tags[].meta_content
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_content: prismic.KeyTextField;
+}
+
+/**
  * Item in *Website → Vos projets présent ici s'afficheront sur votre site*
  */
 export interface WebsiteDocumentDataProjectsItem {
@@ -323,7 +348,20 @@ interface WebsiteDocumentData {
    * - **Tab**: seo
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  "seo-favicon": prismic.ImageField<"small"> /**
+  "seo-favicon": prismic.ImageField<"small">;
+
+  /**
+   * Custom meta tags field in *Website*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: website.custom_meta_tags[]
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  custom_meta_tags: prismic.GroupField<
+    Simplify<WebsiteDocumentDataCustomMetaTagsItem>
+  > /**
    * Prénom field in *Website*
    *
    * - **Field Type**: Text
@@ -517,6 +555,7 @@ declare module "@prismicio/client" {
       WebsiteDocument,
       WebsiteDocumentData,
       WebsiteDocumentDataLinksItem,
+      WebsiteDocumentDataCustomMetaTagsItem,
       WebsiteDocumentDataProjectsItem,
       AllDocumentTypes,
       MediaSlice,

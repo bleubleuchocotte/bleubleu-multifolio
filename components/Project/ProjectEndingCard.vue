@@ -26,21 +26,8 @@ defineEmits<{
 				:height="endingCardImage.dimensions?.height ?? 500"
 				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
-			<div class="ending-card__content-start-button">
-				<button type="button" @click="$emit('goToStart')">
-					Bring me to start
-				</button>
-				<UIBaseButtonNavigation
-					class="ending-card__content-arrow"
-					:colors="{
-						background: 'var(--text-accent-color)',
-						arrow: 'var(--accent-color)',
-					}"
-					orientation="left"
-					length-arrow="short"
-					@click="$emit('goToStart')"
-				/>
-			</div>
+
+			<ProjectEndingCardButtonStart @click="$emit('goToStart')" />
 
 			<UIBaseButtonContact
 				:email="email"
@@ -93,29 +80,10 @@ defineEmits<{
 			}
 		}
 
-		&-arrow {
-			height: 38px;
-			width: 38px;
-			display: flex;
-			align-items: center;
-		}
-
 		&-image {
 			max-width: 60%;
 			height: auto;
 			margin: auto;
-		}
-
-		&-start-button {
-			display: flex;
-			justify-content: center;
-			@include gap(0.5);
-			cursor: pointer;
-
-			& > button {
-				@include font("h3");
-				text-decoration: underline;
-			}
 		}
 	}
 }

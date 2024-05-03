@@ -34,28 +34,12 @@ useIntersectionObserver(
 	<article ref="target" class="project-details" :data-project-h-id="project.id">
 		<div class="project-details__left">
 			<div class="project-details__content">
-				<p>Project #{{ index + 1 }}</p>
-				<PrismicLink
-					v-if="project.url"
-					class="project-details__content-heading"
-					:field="project.url"
-					data-icon="IconArrowRightUp"
-				>
-					<h2 class="project-details__content-heading-title">
-						{{ project.title }}
-					</h2>
-					<IconBaseArrowLink
-						:colors="{
-							background: 'var(--accent-color)',
-							arrow: 'var(--background-color)',
-						}"
-					/>
-				</PrismicLink>
-				<div v-else class="project-details__content-heading">
-					<h2 class="project-details__content-heading-title">
-						{{ project.title }}
-					</h2>
-				</div>
+				<p class="project-details__content-index">
+					Project #{{ index + 1 }}
+				</p>
+				<ProjectUrl :url="project.url">
+					{{ project.title }}
+				</ProjectUrl>
 				<div class="project-details__content-tags">
 					<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
 						{{ item.skill }}
@@ -134,6 +118,10 @@ useIntersectionObserver(
 	&__content {
 		@include prop("padding-bottom");
 		border-bottom: 1px solid var(--border-color);
+
+		&-index {
+			@include prop("margin-bottom");
+		}
 
 		&-heading {
 			@include prop("margin-top");
