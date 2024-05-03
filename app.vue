@@ -4,6 +4,8 @@ const request = useRequestURL();
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
+const customMetaTags = await $api.options.getCustomMetaTags();
+
 const isWIP = useState("WebsiteStateWIP", () => ref(false));
 
 if (!options) {
@@ -45,6 +47,13 @@ useServerHeadSafe({
 			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
 	],
+
+	meta: customMetaTags?.custom_meta_tags.map((metaTag) => {
+		return {
+			name: metaTag.meta_name?.toString(),
+			content: metaTag.meta_content?.toString(),
+		};
+	}),
 });
 
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
