@@ -17,7 +17,7 @@ defineProps<ComponentProps>();
 					target="_blank"
 					class="footer__left-link"
 				>
-					Lovingly made with bleubleu
+					{{ $t('misc.made-with-love') }}
 					<IconBaseArrowLink
 						:colors="{
 							background: 'transparent',
@@ -42,7 +42,7 @@ defineProps<ComponentProps>();
 					/>
 				</PrismicLink>
 				<NuxtLink to="/legal-notice" class="footer__right-link">
-					Legal notice
+					{{ $t('page.legal-notice.link') }}
 				</NuxtLink>
 				<UIBaseCopyright />
 			</div>

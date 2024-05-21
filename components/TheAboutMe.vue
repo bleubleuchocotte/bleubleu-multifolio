@@ -83,8 +83,8 @@ onClickOutside(target, () => {
 			</h1>
 			<div class="section__bookmark-flex">
 				<div>
-					<p>Explore further</p>
-					<p>Get to know me here</p>
+					<p>{{ $t('misc.about-me-1') }}</p>
+					<p>{{ $t('misc.about-me-2') }}</p>
 				</div>
 				<div class="section__bookmark-arrow">
 					<IconBaseToward />

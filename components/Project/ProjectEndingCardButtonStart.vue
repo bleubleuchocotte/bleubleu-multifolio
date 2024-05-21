@@ -1,7 +1,7 @@
 <template>
 	<button type="button" data-icon="IconArrowLeft" class="project-ending-card-button">
 		<span class="project-ending-card-button__content">
-			Bring me to start
+			{{ $t('project.ending-card.button') }}
 		</span>
 
 		<UIWrapperArrow
