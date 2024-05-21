@@ -18,6 +18,15 @@
           ],
           "default_value": "Le site n'est pas indexable"
         }
+      },
+      "language": {
+        "type": "Select",
+        "config": {
+          "label": "Langue du site",
+          "placeholder": "",
+          "options": ["English", "Français"],
+          "default_value": "English"
+        }
       }
     },
     "options": {

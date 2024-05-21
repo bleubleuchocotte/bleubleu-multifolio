@@ -52,6 +52,19 @@ class OptionsModule extends PrismicFactory {
 
 		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "custom_meta_tags" > | null);
 	}
+
+	async getLanguage() {
+		const { data } = await useAsyncData("GetLanguage", () =>
+			this.client.getSingle<Content.WebsiteDocument>("website", {
+				graphQuery: `{
+				website {
+					language
+				}
+			}`,
+			}));
+
+		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "language" > | null);
+	}
 }
 
 export default OptionsModule;

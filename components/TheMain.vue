@@ -31,7 +31,7 @@ function callback(id: string, hasToScroll: boolean) {
 		<TheAboutMe v-bind="aboutMe" />
 		<div class="main__left">
 			<section class="main__left-container">
-				<p>My projects</p>
+				<p>{{ $t('project.title.vertical') }}</p>
 				<UIBaseLenis orientation="vertical">
 					<ProjectListVertical
 						:projects="projects"

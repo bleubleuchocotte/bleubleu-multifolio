@@ -1,16 +1,40 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
+defineProps<ComponentProps>();
+
+const i18n = useI18n();
+
 type ComponentProps = {
 	error: NuxtError
 };
-
-defineProps<ComponentProps>();
 
 const request = useRequestURL();
 
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
+
+const htmlLang = ref<"fr" | "en" | null>(null);
+const ogLang = ref<"fr_FR" | "en_US" | null>(null);
+
+const languageFromCMS = await $api.options.getLanguage();
+switch (languageFromCMS?.language) {
+	case "English":
+		i18n.setLocale("en");
+		htmlLang.value = "en";
+		ogLang.value = "en_US";
+		break;
+	case "Français":
+		i18n.setLocale("fr");
+		htmlLang.value = "fr";
+		ogLang.value = "fr_FR";
+		break;
+
+	default:
+		htmlLang.value = "en";
+		ogLang.value = "en_US";
+		break;
+}
 
 if (!options) {
 	throw createError({
@@ -31,7 +55,7 @@ const cssVariables = [
 
 useHead({
 	htmlAttrs: {
-		lang: "en",
+		lang: htmlLang.value,
 	},
 	style: [`:root{${cssVariables.join(";")}}`],
 });
@@ -56,7 +80,7 @@ useServerHeadSafe({
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
 useServerSeoMeta({
 	ogType: "website",
-	ogLocale: "en_US",
+	ogLocale: ogLang.value,
 	twitterCard: "summary",
 
 	colorScheme: options["accent-color"],
