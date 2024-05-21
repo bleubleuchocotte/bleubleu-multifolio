@@ -16,7 +16,7 @@ const arrAriaHidden = computed(() => accordions.value.map(el => !el.isOpen));
 <template>
 	<div class="main-mobile">
 		<main>
-			<p>My projects</p>
+			<p>{{ $t('project.title.vertical') }}</p>
 			<UIBaseAccordion
 				v-for="(project, i) in projects"
 				:key="project.title?.toString()"

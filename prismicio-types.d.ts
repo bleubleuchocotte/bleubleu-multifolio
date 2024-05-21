@@ -224,7 +224,19 @@ interface WebsiteDocumentData {
     | "Le site est indexable et disponible via la recherche google"
     | "Le site n'est pas indexable et présente une page temporaire de WIP",
     "filled"
-  > /**
+  >;
+
+  /**
+   * Langue du site field in *Website*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: English
+   * - **API ID Path**: website.language
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  language: prismic.SelectField<"English" | "Français", "filled"> /**
    * email field in *Website*
    *
    * - **Field Type**: Text

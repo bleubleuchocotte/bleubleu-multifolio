@@ -17,8 +17,9 @@ defineEmits<{
 	<article class="ending-card invert-selection">
 		<div class="ending-card__content">
 			<p class="ending-card__content-caption">
-				Finished viewing?<br>
-				Reach out for collaborations or inquiries!
+				{{ $t('project.ending-card.text-1') }}
+				<br>
+				{{ $t('project.ending-card.text-2') }}
 			</p>
 			<PrismicImage
 				class="ending-card__content-image"
@@ -33,7 +34,7 @@ defineEmits<{
 				:email="email"
 				class="ending-card__content-contact-button"
 			>
-				Contact
+				{{ $t('contact.text') }}
 			</UIBaseButtonContact>
 		</div>
 	</article>
