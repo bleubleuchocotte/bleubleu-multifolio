@@ -14,11 +14,17 @@ const request = useRequestURL();
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
+if (!options) {
+	throw createError({
+		statusCode: 500,
+		statusMessage: "Could not reach options",
+	});
+}
+
 const htmlLang = ref<"fr" | "en" | null>(null);
 const ogLang = ref<"fr_FR" | "en_US" | null>(null);
 
-const languageFromCMS = await $api.options.getLanguage();
-switch (languageFromCMS?.language) {
+switch (options.language) {
 	case "English":
 		i18n.setLocale("en");
 		htmlLang.value = "en";
@@ -34,13 +40,6 @@ switch (languageFromCMS?.language) {
 		htmlLang.value = "en";
 		ogLang.value = "en_US";
 		break;
-}
-
-if (!options) {
-	throw createError({
-		statusCode: 500,
-		statusMessage: "Could not reach options",
-	});
 }
 
 const cssVariables = [
