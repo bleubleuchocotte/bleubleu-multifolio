@@ -13,7 +13,7 @@ useSeoMeta({
 <template>
 	<div class="legal-container">
 		<UIBaseLinkHome>
-			Let's go home
+			{{ $t('page.legal-notice.button') }}
 		</UIBaseLinkHome>
 
 		<template v-if="!isDeviceMobile">

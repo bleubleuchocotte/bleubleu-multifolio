@@ -1,0 +1,33 @@
+{
+	"project": {
+		"title": {
+			"horizontal": "Projet",
+			"vertical": "Mes projets"
+		},
+		"ending-card": {
+			"button": "Revenir au début",
+			"text-1": "Oh non c'est déjà fini :(",
+			"text-2": "Contactez-moi pour plus d'informations"
+		},
+		"more": "Plus d'infos"
+	},
+	"contact": {
+		"text": "Contact",
+		"click": "E-mail copié ! ♡",
+		"hover": "Copier mon email ✉"
+	},
+	"misc": {
+		"made-with-love": "Pensé et créé par BleuBleu",
+		"about-me-1": "",
+		"about-me-2": "Apprenez en davantage"
+	},
+	"page": {
+		"error": {
+			"text": "Retour à la page d'accueil"
+		},
+		"legal-notice": {
+			"button": "Retour à la page d'accueil",
+			"link": "Mentions légales"
+		}
+	}
+}
