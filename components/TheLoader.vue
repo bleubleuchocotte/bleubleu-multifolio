@@ -20,8 +20,8 @@ function decodeString(
 
 	const chars = strDecode.concat(strEncode).split("");
 
-	if (chars[i] !== originalString[i]) {
-		chars[i] = originalString[i] ?? "";
+	if (chars[i] !== originalString.charAt(i)) {
+		chars[i] = originalString.charAt(i) ?? "";
 		displayString.value = chars.join("");
 	}
 
