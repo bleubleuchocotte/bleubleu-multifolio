@@ -20,8 +20,8 @@ function decodeString(
 
 	const chars = strDecode.concat(strEncode).split("");
 
-	if (chars[i] !== originalString.at(i)) {
-		chars[i] = originalString.at(i) ?? "";
+	if (chars[i] !== originalString[i]) {
+		chars[i] = originalString[i] ?? "";
 		displayString.value = chars.join("");
 	}
 
@@ -74,8 +74,7 @@ const styles = reactive({
 });
 
 const { pause } = useIntervalFn(() => {
-	// const result = decodeString(displayString, props.text, index);
-	const result = true;
+	const result = decodeString(displayString, props.text, index);
 	index += 1;
 	ratio.value = Math.floor((100 * (index + 1)) / (props.text.length + 1));
 
