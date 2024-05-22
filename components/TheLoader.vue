@@ -10,6 +10,41 @@ const emit = defineEmits<{
 	unmount: []
 }>();
 
+function decodeString(
+	displayString: Ref<string>,
+	originalString: string,
+	i: number,
+) {
+	const strEncode = randomString(originalString.slice(i).length);
+	const strDecode = originalString.slice(0, i);
+
+	const chars = strDecode.concat(strEncode).split("");
+
+	if (chars[i] !== originalString.at(i)) {
+		chars[i] = originalString.at(i) ?? "";
+		displayString.value = chars.join("");
+	}
+
+	if (displayString.value === originalString) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+function randomString(length: number) {
+	let result = "";
+	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/{}<>!@#$%&*|?";
+	const charactersLength = characters.length;
+	let counter = 0;
+	while (counter < length) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		counter += 1;
+	}
+	return result;
+}
+
 function interpolate(color1: string, color2: string, percent: number) {
 	// Convert the hex colors to RGB values
 	const r1 = Number.parseInt(color1.substring(1, 3), 16);
@@ -31,6 +66,7 @@ function interpolate(color1: string, color2: string, percent: number) {
 
 const displayString = ref("Loading...");
 
+let index = 0;
 const ratio = ref(0);
 
 const styles = reactive({
@@ -39,16 +75,15 @@ const styles = reactive({
 
 const { pause } = useIntervalFn(() => {
 	// const result = decodeString(displayString, props.text, index);
-	// index += 1;
-	// ratio.value = Math.floor((100 * (index + 1)) / (props.text.length + 1));
-
-	// styles.color = interpolate(
-	// 	props.colors.start,
-	// 	props.colors.end,
-	// 	ratio.value / 100,
-	// );
-
 	const result = true;
+	index += 1;
+	ratio.value = Math.floor((100 * (index + 1)) / (props.text.length + 1));
+
+	styles.color = interpolate(
+		props.colors.start,
+		props.colors.end,
+		ratio.value / 100,
+	);
 
 	if (result) {
 		pause();
