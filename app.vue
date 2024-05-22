@@ -1,8 +1,36 @@
 <script setup lang="ts">
+const i18n = useI18n();
+
 const request = useRequestURL();
 
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
+
+const customMetaTags = await $api.options.getCustomMetaTags();
+
+const htmlLang = ref<"fr" | "en" | null>(null);
+const ogLang = ref<"fr_FR" | "en_US" | null>(null);
+
+const languageFromCMS = await $api.options.getLanguage();
+
+switch (languageFromCMS?.language) {
+	case "English":
+		await i18n.setLocale("en");
+		htmlLang.value = "en";
+		ogLang.value = "en_US";
+		break;
+	case "Français":
+		await i18n.setLocale("fr");
+		htmlLang.value = "fr";
+		ogLang.value = "fr_FR";
+		break;
+
+	default:
+		await i18n.setLocale("en");
+		htmlLang.value = "en";
+		ogLang.value = "en_US";
+		break;
+}
 
 const isWIP = useState("WebsiteStateWIP", () => ref(false));
 
@@ -25,7 +53,7 @@ const cssVariables = [
 
 useHead({
 	htmlAttrs: {
-		lang: "en",
+		lang: htmlLang.value,
 	},
 	style: [`:root{${cssVariables.join(";")}}`],
 });
@@ -45,12 +73,19 @@ useServerHeadSafe({
 			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
 	],
+
+	meta: customMetaTags?.custom_meta_tags.map((metaTag) => {
+		return {
+			name: metaTag.meta_name?.toString(),
+			content: metaTag.meta_content?.toString(),
+		};
+	}),
 });
 
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
 useServerSeoMeta({
 	ogType: "website",
-	ogLocale: "en_US",
+	ogLocale: ogLang.value,
 	twitterCard: "summary",
 
 	colorScheme: options["accent-color"],

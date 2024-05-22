@@ -23,6 +23,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/sitemap",
 		"nuxt-simple-robots",
 		"@nuxtjs/device",
+		"@nuxtjs/i18n",
 	],
 	prismic: {
 		endpoint: process.env.PRISMIC_ENDPOINT,
@@ -31,5 +32,11 @@ export default defineNuxtConfig({
 	},
 	robots: {
 		disallow: ["/legal-notice", "/wip"],
+	},
+	i18n: {
+		vueI18n: "./i18n.config.ts",
+		locales: ["en", "fr"],
+		strategy: "no_prefix",
+		detectBrowserLanguage: false,
 	},
 });

@@ -17,8 +17,9 @@ defineEmits<{
 	<article class="ending-card invert-selection">
 		<div class="ending-card__content">
 			<p class="ending-card__content-caption">
-				Finished viewing?<br>
-				Reach out for collaborations or inquiries!
+				{{ $t('project.ending-card.text-1') }}
+				<br>
+				{{ $t('project.ending-card.text-2') }}
 			</p>
 			<PrismicImage
 				class="ending-card__content-image"
@@ -26,27 +27,14 @@ defineEmits<{
 				:height="endingCardImage.dimensions?.height ?? 500"
 				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
-			<div class="ending-card__content-start-button">
-				<button type="button" @click="$emit('goToStart')">
-					Bring me to start
-				</button>
-				<UIBaseButtonNavigation
-					class="ending-card__content-arrow"
-					:colors="{
-						background: 'var(--text-accent-color)',
-						arrow: 'var(--accent-color)',
-					}"
-					orientation="left"
-					length-arrow="short"
-					@click="$emit('goToStart')"
-				/>
-			</div>
+
+			<ProjectEndingCardButtonStart @click="$emit('goToStart')" />
 
 			<UIBaseButtonContact
 				:email="email"
 				class="ending-card__content-contact-button"
 			>
-				Contact
+				{{ $t('contact.text') }}
 			</UIBaseButtonContact>
 		</div>
 	</article>
@@ -93,29 +81,10 @@ defineEmits<{
 			}
 		}
 
-		&-arrow {
-			height: 38px;
-			width: 38px;
-			display: flex;
-			align-items: center;
-		}
-
 		&-image {
 			max-width: 60%;
 			height: auto;
 			margin: auto;
-		}
-
-		&-start-button {
-			display: flex;
-			justify-content: center;
-			@include gap(0.5);
-			cursor: pointer;
-
-			& > button {
-				@include font("h3");
-				text-decoration: underline;
-			}
 		}
 	}
 }

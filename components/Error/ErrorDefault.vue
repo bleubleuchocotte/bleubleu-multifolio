@@ -25,7 +25,7 @@ const onClick: () => void = async () => {
 		</h1>
 
 		<UIBaseLinkHome @on-click="onClick">
-			Let's go home
+			{{ $t('page.error.text') }}
 		</UIBaseLinkHome>
 	</main>
 </template>
