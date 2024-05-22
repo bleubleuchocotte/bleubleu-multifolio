@@ -30,7 +30,7 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 	<UIBaseResponsiveContent media-query="(max-width: 1025px)">
 		<template #mobile>
 			<div v-if="('kind' in responsive_media)" class="media-mobile">
-				<img v-if="responsive_media.kind === 'image'" :key="slice.id + responsive_media.url" :src="responsive_media.url" :height="responsive_media.height ?? ''" :width="responsive_media.width ?? ''" alt="" class="media-mobile__image">
+				<img v-if="responsive_media.kind === 'image'" :key="slice.id + responsive_media.url" :src="responsive_media.url" :height="responsive_media.height ?? ''" :width="responsive_media.width ?? ''" alt="" class="media-mobile__image" loading="lazy" decoding="async">
 
 				<video v-else :key="responsive_media.url" ref="videos" v-bind="props.context" class="media-mobile__video">
 					<source :src="responsive_media.url">
@@ -41,7 +41,7 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 			<UIBaseIntersectionObserver class="media" @is-visible="onVisibilityChanged">
 				<template v-for="field in Object.values(fields)">
 					<template v-if="('kind' in field)">
-						<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="">
+						<img v-if="field.kind === 'image'" :key="slice.id + field.url" :src="field.url" :height="field.height ?? ''" :width="field.width ?? ''" class="media__image" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" alt="" loading="lazy" decoding="async">
 
 						<video v-else :key="field.url" ref="videos" class="media__video" :data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'" v-bind="props.context">
 							<source :src="field.url">
