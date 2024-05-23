@@ -31,6 +31,7 @@ const isImageLoaded = ref(false);
 		</template>
 		<template v-else-if="linkToMediaField">
 			<NuxtPicture
+				provider="prismic"
 				loading="lazy"
 
 				:src="linkToMediaField.url"
