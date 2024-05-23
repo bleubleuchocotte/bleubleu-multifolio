@@ -24,6 +24,7 @@ export default defineNuxtConfig({
 		"nuxt-simple-robots",
 		"@nuxtjs/device",
 		"@nuxtjs/i18n",
+		"@nuxt/image",
 	],
 	prismic: {
 		endpoint: process.env.PRISMIC_ENDPOINT,
@@ -38,5 +39,8 @@ export default defineNuxtConfig({
 		locales: ["en", "fr"],
 		strategy: "no_prefix",
 		detectBrowserLanguage: false,
+	},
+	image: {
+		prismic: {},
 	},
 });
