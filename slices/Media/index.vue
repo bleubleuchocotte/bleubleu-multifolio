@@ -15,15 +15,15 @@ const props = defineProps(
 
 const { responsive_media, ...fields } = props.slice.primary;
 
-const videos = ref<HTMLVideoElement[] | null>(null);
-
-const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) => {
-	if (props.context.autoplay) {
-		videos.value?.forEach((video) => {
-			isVisible ? video.play() : video.pause();
-		});
+const isContainerVisible = ref(false);
+const videoState = computed(() => {
+	if (isContainerVisible.value) {
+		return "play";
 	}
-};
+	else {
+		return "pause";
+	}
+});
 </script>
 
 <template>
@@ -37,13 +37,17 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 					:link-to-media-field="responsive_media"
 				/>
 
-				<video v-else ref="videos" v-bind="props.context" class="media-mobile__video">
-					<source :src="responsive_media.url">
-				</video>
+				<UIBaseVideo
+					v-else
+					class="media-mobile__video"
+					:src="responsive_media.url"
+					:context="props.context"
+					state="pause"
+				/>
 			</div>
 		</template>
 		<template #desktop>
-			<UIBaseIntersectionObserver class="media" @is-visible="onVisibilityChanged">
+			<UIBaseIntersectionObserver class="media" @is-visible="(bool) => isContainerVisible = bool">
 				<template v-for="field in Object.values(fields)">
 					<template v-if="('kind' in field)">
 						<UIBasePicture
@@ -54,16 +58,15 @@ const onVisibilityChanged: (isVisible: boolean) => void = (isVisible: boolean) =
 							:link-to-media-field="field"
 						/>
 
-						<video
+						<UIBaseVideo
 							v-else
 							:key="field.url"
-							ref="videos"
 							class="media__video"
 							:data-type="slice.variation === 'default' ? 'media-duo' : 'media-full'"
-							v-bind="props.context"
-						>
-							<source :src="field.url">
-						</video>
+							:context="props.context"
+							:src="field.url"
+							:state="videoState"
+						/>
 					</template>
 				</template>
 			</UIBaseIntersectionObserver>
