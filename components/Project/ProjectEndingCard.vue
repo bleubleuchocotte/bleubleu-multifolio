@@ -21,11 +21,10 @@ defineEmits<{
 				<br>
 				{{ $t('project.ending-card.text-2') }}
 			</p>
-			<PrismicImage
+
+			<UIBasePicture
+				:image="endingCardImage"
 				class="ending-card__content-image"
-				:field="endingCardImage"
-				:height="endingCardImage.dimensions?.height ?? 500"
-				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
 
 			<ProjectEndingCardButtonStart @click="$emit('goToStart')" />
