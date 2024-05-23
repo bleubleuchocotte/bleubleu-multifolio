@@ -12,13 +12,14 @@ const isImageLoaded = ref(false);
 </script>
 
 <template>
-	<div class="picture">
+	<div class="picture" :data-image-loaded="isImageLoaded">
+		<div class="picture__placeholder" />
 		<template v-if="image">
 			<NuxtPicture
 				v-if="image.url"
 
+				:img-attrs="{ class: 'picture__content' }"
 				provider="prismic"
-				loading="lazy"
 
 				:src="image.url"
 				:alt="image.alt ?? ''"
@@ -31,6 +32,8 @@ const isImageLoaded = ref(false);
 		</template>
 		<template v-else-if="linkToMediaField">
 			<NuxtPicture
+				:img-attrs="{ class: 'picture__content' }"
+
 				provider="prismic"
 				loading="lazy"
 
@@ -43,10 +46,28 @@ const isImageLoaded = ref(false);
 				@load="isImageLoaded = true"
 			/>
 		</template>
-
-		<div class="picture__placeholder" :data-image-loaded="isImageLoaded" />
 	</div>
 </template>
+
+<style lang="scss">
+.picture {
+	&__content {
+		transition: opacity 0.3s ease 0.6s;
+	}
+
+	&[data-image-loaded="true"] {
+		.picture__content {
+			opacity: 1;
+		}
+	}
+
+	&[data-image-loaded="false"] {
+		.picture__content {
+			opacity: 0;
+		}
+	}
+}
+</style>
 
 <style scoped lang="scss">
 .picture {
@@ -60,17 +81,10 @@ const isImageLoaded = ref(false);
 		width: 100%;
 		height: 100%;
 
-		transition: all 0.3s ease-out;
-
-		&[data-image-loaded="true"] {
-			background-color: transparent;
-			backdrop-filter: blur(0px);
-		}
-
-		&[data-image-loaded="false"] {
-			background-color: var(--accent-color);
-			backdrop-filter: blur(100px);
-		}
+		background-color: var(--text-color);
+		backdrop-filter: blur(5px);
+		opacity: 0.2;
+		z-index: -1;
 	}
 }
 </style>
