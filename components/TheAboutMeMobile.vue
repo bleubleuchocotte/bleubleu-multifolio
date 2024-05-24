@@ -126,6 +126,7 @@ function scrollToTop() {
 		&-image {
 			aspect-ratio: 16/9;
 			@include border(1, var(--background-color));
+			overflow: hidden;
 		}
 	}
 
