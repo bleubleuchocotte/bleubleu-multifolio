@@ -47,7 +47,9 @@ watch(() => props.state, () => {
 	position: relative;
 
 	video {
+		height: 100%;
 		width: 100%;
+		object-fit: cover;
 		transition: opacity 0.3s ease 0.6s;
 	}
 
