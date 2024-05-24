@@ -42,6 +42,11 @@ export default defineNuxtConfig({
 		detectBrowserLanguage: false,
 	},
 	image: {
-		prismic: {},
+		prismic: {
+			modifiers: {
+				q: 100,
+				auto: false,
+			},
+		},
 	},
 });
