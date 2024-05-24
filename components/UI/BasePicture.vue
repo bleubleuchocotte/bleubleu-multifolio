@@ -9,10 +9,11 @@ type ComponentProps = {
 defineProps<ComponentProps>();
 
 const isImageLoaded = ref(false);
+const container = ref<HTMLDivElement | null>(null);
 </script>
 
 <template>
-	<div class="picture" :data-image-loaded="isImageLoaded">
+	<div ref="container" class="picture" :data-image-loaded="isImageLoaded">
 		<div class="picture__placeholder" :class="{ rounded: linkToMediaField }" />
 		<template v-if="image">
 			<NuxtPicture
@@ -23,8 +24,8 @@ const isImageLoaded = ref(false);
 				:src="image.url"
 				:alt="image.alt ?? ''"
 
-				:height="image.dimensions?.height"
-				:width="image.dimensions?.width"
+				:width="container?.clientWidth"
+				:height="container?.clientHeight"
 
 				@load="isImageLoaded = true"
 			/>
@@ -39,8 +40,8 @@ const isImageLoaded = ref(false);
 				:src="linkToMediaField.url"
 				alt=""
 
-				:height="linkToMediaField.height ?? ''"
-				:width="linkToMediaField.width ?? ''"
+				:height="container?.clientHeight"
+				:width="container?.clientWidth"
 
 				@load="isImageLoaded = true"
 			/>
