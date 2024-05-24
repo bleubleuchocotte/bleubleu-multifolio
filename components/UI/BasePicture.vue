@@ -13,12 +13,11 @@ const isImageLoaded = ref(false);
 
 <template>
 	<div class="picture" :data-image-loaded="isImageLoaded">
-		<div class="picture__placeholder" />
+		<div class="picture__placeholder" :class="{ rounded: linkToMediaField }" />
 		<template v-if="image">
 			<NuxtPicture
 				v-if="image.url"
 
-				:img-attrs="{ class: 'picture__content' }"
 				provider="prismic"
 
 				:src="image.url"
@@ -85,6 +84,10 @@ const isImageLoaded = ref(false);
 		backdrop-filter: blur(5px);
 		opacity: 0.2;
 		z-index: -1;
+
+		&.rounded {
+			@include border-radius();
+		}
 	}
 }
 </style>
