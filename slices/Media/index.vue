@@ -29,7 +29,7 @@ const videoState = computed(() => {
 <template>
 	<UIBaseResponsiveContent media-query="(max-width: 1025px)">
 		<template #mobile>
-			<div v-if="('kind' in responsive_media)" class="media-mobile">
+			<UIBaseIntersectionObserver v-if="('kind' in responsive_media)" class="media-mobile" @is-visible="(bool) => isContainerVisible = bool">
 				<UIBasePicture
 					v-if="responsive_media.kind === 'image'"
 					:key="slice.id + responsive_media.url"
@@ -42,9 +42,9 @@ const videoState = computed(() => {
 					class="media-mobile__video"
 					:src="responsive_media.url"
 					:context="props.context"
-					state="pause"
+					:state="videoState"
 				/>
-			</div>
+			</UIBaseIntersectionObserver>
 		</template>
 		<template #desktop>
 			<UIBaseIntersectionObserver class="media" @is-visible="(bool) => isContainerVisible = bool">
