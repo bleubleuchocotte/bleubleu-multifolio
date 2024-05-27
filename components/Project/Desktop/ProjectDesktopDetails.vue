@@ -41,7 +41,7 @@ useIntersectionObserver(
 					{{ project.title }}
 				</ProjectUrl>
 				<div class="project-details__content-tags">
-					<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+					<UIBaseTag v-for="item in project.skills" :key="project.id + item.skill?.toString()">
 						{{ item.skill }}
 					</UIBaseTag>
 				</div>
