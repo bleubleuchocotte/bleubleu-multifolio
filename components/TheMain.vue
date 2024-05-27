@@ -69,7 +69,7 @@ function callback(id: string, hasToScroll: boolean) {
 		</UIBaseLenis>
 
 		<Transition name="slide-fade">
-			<LazyTheGallery
+			<TheGallery
 				v-if="projectInGallery != null"
 				:project="projectInGallery"
 				@close="projectInGallery = null"

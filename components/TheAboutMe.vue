@@ -28,14 +28,12 @@ onClickOutside(target, () => {
 		:class="{ open: isOpen }"
 	>
 		<UIBaseLenis class="section__content">
-			<div class="section__content-image">
-				<PrismicImage :field="imageOfMe" />
-			</div>
+			<UIBasePicture :image="imageOfMe" class="section__content-image" />
 
 			<PrismicRichText :field="description" class="section__content-text" />
 
 			<UIBaseButtonContact :email="email" class="section__content-contact">
-				Contact
+				{{ $t('contact.text') }}
 			</UIBaseButtonContact>
 			<ul class="section__content-links">
 				<li class="section__content-links-item">

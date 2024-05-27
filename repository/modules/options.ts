@@ -20,6 +20,8 @@ class OptionsModule extends PrismicFactory {
 						text-accent-color
 						text-color
 						text-header
+						custom_meta_tags
+						language
 					}
 				}`,
 			}));
@@ -38,32 +40,6 @@ class OptionsModule extends PrismicFactory {
 			}));
 
 		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "website_state" > | null);
-	}
-
-	async getCustomMetaTags() {
-		const { data } = await useAsyncData("GetCustomMetaTags", () =>
-			this.client.getSingle<Content.WebsiteDocument>("website", {
-				graphQuery: `{
-				website {
-					custom_meta_tags
-				}
-			}`,
-			}));
-
-		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "custom_meta_tags" > | null);
-	}
-
-	async getLanguage() {
-		const { data } = await useAsyncData("GetLanguage", () =>
-			this.client.getSingle<Content.WebsiteDocument>("website", {
-				graphQuery: `{
-				website {
-					language
-				}
-			}`,
-			}));
-
-		return (data.value?.data ?? null) as (Pick<Content.WebsiteDocumentData, "language" > | null);
 	}
 }
 

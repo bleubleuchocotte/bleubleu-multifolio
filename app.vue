@@ -6,14 +6,17 @@ const request = useRequestURL();
 const { $api } = useNuxtApp();
 const options = await $api.options.getOptions();
 
-const customMetaTags = await $api.options.getCustomMetaTags();
+if (!options) {
+	throw createError({
+		statusCode: 500,
+		statusMessage: "Could not reach options",
+	});
+}
 
 const htmlLang = ref<"fr" | "en" | null>(null);
 const ogLang = ref<"fr_FR" | "en_US" | null>(null);
 
-const languageFromCMS = await $api.options.getLanguage();
-
-switch (languageFromCMS?.language) {
+switch (options?.language) {
 	case "English":
 		await i18n.setLocale("en");
 		htmlLang.value = "en";
@@ -33,13 +36,6 @@ switch (languageFromCMS?.language) {
 }
 
 const isWIP = useState("WebsiteStateWIP", () => ref(false));
-
-if (!options) {
-	throw createError({
-		statusCode: 500,
-		statusMessage: "Could not reach options",
-	});
-}
 
 const cssVariables = [
 	`--accent-color: ${options["accent-color"]}`,
@@ -74,7 +70,7 @@ useServerHeadSafe({
 		},
 	],
 
-	meta: customMetaTags?.custom_meta_tags.map((metaTag) => {
+	meta: options.custom_meta_tags.map((metaTag) => {
 		return {
 			name: metaTag.meta_name?.toString(),
 			content: metaTag.meta_content?.toString(),

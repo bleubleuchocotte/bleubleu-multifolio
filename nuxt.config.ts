@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+	devtools: { enabled: false },
 	app: {
 		pageTransition: { name: "page", mode: "out-in" },
 	},
@@ -24,6 +25,7 @@ export default defineNuxtConfig({
 		"nuxt-simple-robots",
 		"@nuxtjs/device",
 		"@nuxtjs/i18n",
+		"@nuxt/image",
 	],
 	prismic: {
 		endpoint: process.env.PRISMIC_ENDPOINT,
@@ -38,5 +40,27 @@ export default defineNuxtConfig({
 		locales: ["en", "fr"],
 		strategy: "no_prefix",
 		detectBrowserLanguage: false,
+	},
+	image: {
+		prismic: {
+			modifiers: {
+				q: 100,
+				auto: false,
+			},
+		},
+
+		screens: {
+			"xs": 640,
+			"sm": 768,
+			"md": 1024,
+			"lg": 1280,
+			"xl": 1536,
+			"xxl": 1536,
+			"2xl": 1536,
+		},
+	},
+
+	experimental: {
+		componentIslands: true,
 	},
 });
