@@ -14,7 +14,7 @@ defineProps<ComponentProps>();
 	<article class="project-details-mobile">
 		<UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
 
-		<ProjectUrl :url="project.url" :aria-hidden="hidden">
+		<ProjectUrl :url="project.url" :tab-index="-1">
 			{{ project.title }}
 		</ProjectUrl>
 
