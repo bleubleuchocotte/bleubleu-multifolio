@@ -46,10 +46,10 @@ const props: HomepageProps = {
 	<div class="index-page">
 		<UIBaseResponsiveContent media-query="(max-width: 1025px)">
 			<template #mobile>
-				<TheMainMobile v-bind="props.mobile" />
+				<LazyTheMainMobile v-bind="props.mobile" />
 			</template>
 			<template #desktop>
-				<TheMain v-bind="props.desktop" class="index-page__desktop" />
+				<LazyTheMain v-bind="props.desktop" class="index-page__desktop" />
 			</template>
 		</UIBaseResponsiveContent>
 	</div>
