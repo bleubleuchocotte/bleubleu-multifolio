@@ -34,11 +34,6 @@
 	@include prop("width");
 }
 
-/**
------------------------------------------------------
-FONT
------------------------------------------------------
-*/
 @function pxToVw($size, $breakpoint, $coef: 0.8) {
 	@return max(#{$size * $coef}px, ($size / $breakpoint) * 100vw);
 }
@@ -185,11 +180,6 @@ FONT
 	}
 }
 
-/**
------------------------------------------------------
-CUSTOM PROPERTY
------------------------------------------------------
-*/
 $base-length: 30px;
 @mixin prop($property, $coef: 1, $important: null) {
 	@media #{$mobile-xs} {
@@ -216,11 +206,6 @@ $base-length: 30px;
 	@include prop("gap", $coef, $important);
 }
 
-/**
------------------------------------------------------
-BORDER
------------------------------------------------------
-*/
 $base-border-radius: 20px;
 @mixin border-radius($coef: 1, $side: "all") {
 	@if $side == "all" {
@@ -295,11 +280,6 @@ $base-border-radius: 20px;
 	@include border-radius($coef);
 }
 
-/**
------------------------------------------------------
-TRANSITION
------------------------------------------------------
-*/
 @mixin transition($property: all, $duration: 0.2s, $v: ease-out) {
 	transition-property: #{$property};
 	transition-duration: $duration;

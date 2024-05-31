@@ -1,0 +1,33 @@
+{
+	"project": {
+		"title": {
+			"vertical": "My projects",
+			"horizontal": "Project"
+		},
+		"more": "More infos",
+		"ending-card": {
+			"text-1": "Finished viewing?",
+			"text-2": "Reach out for collaborations or inquiries!",
+			"button": "Bring me to start"
+		}
+	},
+	"contact": {
+		"text": "Contact",
+		"hover": "Copy my email ✉",
+		"click": "Email copied! ♡"
+	},
+	"page": {
+		"legal-notice": {
+			"link": "Legal notice",
+			"button": "Let's go home"
+		},
+		"error": {
+			"text": "Let's go home"
+		}
+	},
+	"misc": {
+		"made-with-love": "Lovingly made with bleubleu",
+		"about-me-1": "Explore further",
+		"about-me-2": "Get to know me here"
+	}
+}

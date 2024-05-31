@@ -3,13 +3,11 @@ type ComponentProps = {
 	index: number
 };
 
-const props = defineProps<ComponentProps>();
-
-const i = ref(props.index < 10 ? `0${props.index}` : props.index.toString());
+defineProps<ComponentProps>();
 </script>
 
 <template>
-	<span class="project-index">{{ i }}</span>
+	<span class="project-index">{{ index < 10 ? `0${index}` : index.toString() }}</span>
 </template>
 
 <style scoped lang="scss">

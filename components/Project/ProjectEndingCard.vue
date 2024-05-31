@@ -17,14 +17,14 @@ defineEmits<{
 	<article class="ending-card invert-selection">
 		<div class="ending-card__content">
 			<p class="ending-card__content-caption">
-				Finished viewing?<br>
-				Reach out for collaborations or inquiries!
+				{{ $t('project.ending-card.text-1') }}
+				<br>
+				{{ $t('project.ending-card.text-2') }}
 			</p>
-			<PrismicImage
+
+			<UIBasePicture
+				:image="endingCardImage"
 				class="ending-card__content-image"
-				:field="endingCardImage"
-				:height="endingCardImage.dimensions?.height ?? 500"
-				:width="endingCardImage.dimensions?.width ?? 500"
 			/>
 
 			<ProjectEndingCardButtonStart @click="$emit('goToStart')" />
@@ -33,7 +33,7 @@ defineEmits<{
 				:email="email"
 				class="ending-card__content-contact-button"
 			>
-				Contact
+				{{ $t('contact.text') }}
 			</UIBaseButtonContact>
 		</div>
 	</article>

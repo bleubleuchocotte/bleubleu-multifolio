@@ -38,9 +38,10 @@ function scrollToTop() {
 
 		<div class="about-me-mobile__content">
 			<PrismicRichText :field="description" />
-			<PrismicImage :field="imageOfMe" class="about-me-mobile__content-image" />
+			<UIBasePicture :image="imageOfMe" class="about-me-mobile__content-image" />
+
 			<NuxtLink :to="`mailto:${email}`" class="about-me-mobile__content-contact">
-				Contact
+				{{ $t('contact.text') }}
 			</NuxtLink>
 		</div>
 
@@ -125,6 +126,7 @@ function scrollToTop() {
 		&-image {
 			aspect-ratio: 16/9;
 			@include border(1, var(--background-color));
+			overflow: hidden;
 		}
 	}
 

@@ -35,13 +35,13 @@ useIntersectionObserver(
 		<div class="project-details__left">
 			<div class="project-details__content">
 				<p class="project-details__content-index">
-					Project #{{ index + 1 }}
+					{{ $t('project.title.horizontal') }} #{{ index + 1 }}
 				</p>
 				<ProjectUrl :url="project.url">
 					{{ project.title }}
 				</ProjectUrl>
 				<div class="project-details__content-tags">
-					<UIBaseTag v-for="item in project.skills" :key="item.skill?.toString()">
+					<UIBaseTag v-for="item in project.skills" :key="project.id + item.skill?.toString()">
 						{{ item.skill }}
 					</UIBaseTag>
 				</div>
@@ -50,7 +50,7 @@ useIntersectionObserver(
 					class="project-details__content-description"
 				/>
 				<button data-icon="IconFullscreen" class="project-details__content-more" @click="$emit('gallery', project)" @keydown.enter.space="$emit('gallery', project)">
-					More infos
+					{{ $t('project.more') }}
 				</button>
 			</div>
 

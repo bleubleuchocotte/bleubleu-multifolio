@@ -30,7 +30,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 		</div>
 
 		<div class="button__reveal">
-			<span>{{ copied ? "Email copied ! ♡" : "Copy my email ✉" }} </span>
+			<span>{{ copied ? $t('contact.click') : $t('contact.hover') }} </span>
 		</div>
 	</button>
 </template>
