@@ -43,10 +43,6 @@ export default defineNuxtConfig({
 	},
 	image: {
 		prismic: {
-			modifiers: {
-				q: 100,
-				auto: false,
-			},
 		},
 
 		screens: {
@@ -54,9 +50,9 @@ export default defineNuxtConfig({
 			"sm": 768,
 			"md": 1024,
 			"lg": 1280,
-			"xl": 1536,
+			"xl": 1440,
 			"xxl": 1536,
-			"2xl": 1536,
+			"2xl": 2196,
 		},
 	},
 
