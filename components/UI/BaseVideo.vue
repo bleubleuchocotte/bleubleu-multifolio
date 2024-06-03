@@ -73,6 +73,8 @@ watch(() => props.state, () => {
 		backdrop-filter: blur(5px);
 		opacity: 0.2;
 		z-index: -1;
+
+		@include border-radius();
 	}
 }
 </style>
