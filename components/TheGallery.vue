@@ -34,6 +34,7 @@ useFocusTrap(target, { immediate: true });
 
 const mediaAttribute: MediaHTMLAttributes = {
 	controls: true,
+	muted: true,
 };
 </script>
 

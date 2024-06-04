@@ -18,6 +18,15 @@
           ],
           "default_value": "Le site n'est pas indexable"
         }
+      },
+      "language": {
+        "type": "Select",
+        "config": {
+          "label": "Langue du site",
+          "placeholder": "",
+          "options": ["English", "Français"],
+          "default_value": "English"
+        }
       }
     },
     "options": {
@@ -130,6 +139,29 @@
             }
           ],
           "label": "Favicon"
+        }
+      },
+      "custom_meta_tags": {
+        "type": "Group",
+        "config": {
+          "label": "Custom meta tags",
+          "repeat": true,
+          "fields": {
+            "meta_name": {
+              "type": "Text",
+              "config": {
+                "label": "Meta name",
+                "placeholder": ""
+              }
+            },
+            "meta_content": {
+              "type": "Text",
+              "config": {
+                "label": "Meta content",
+                "placeholder": ""
+              }
+            }
+          }
         }
       }
     },

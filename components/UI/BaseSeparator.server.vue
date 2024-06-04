@@ -2,17 +2,13 @@
 type ComponentProps = {
 	width: number
 };
-const props = withDefaults(defineProps<ComponentProps>(), {
+withDefaults(defineProps<ComponentProps>(), {
 	width: 1,
-});
-
-const styles = reactive({
-	"--width": `${props.width}px`,
 });
 </script>
 
 <template>
-	<div :style="styles" />
+	<div :style="`--width: ${width}px`" />
 </template>
 
 <style scoped lang="scss">

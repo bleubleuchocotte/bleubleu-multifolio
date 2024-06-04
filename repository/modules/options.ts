@@ -20,6 +20,8 @@ class OptionsModule extends PrismicFactory {
 						text-accent-color
 						text-color
 						text-header
+						custom_meta_tags
+						language
 					}
 				}`,
 			}));
