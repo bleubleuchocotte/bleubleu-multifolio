@@ -64,12 +64,6 @@ useServerHeadSafe({
 		{
 			rel: "icon",
 			type: "image/png",
-			sizes: "16x16",
-			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-16x16.png`,
-		},
-		{
-			rel: "icon",
-			type: "image/png",
 			sizes: "32x32",
 			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
@@ -109,7 +103,7 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 	<ClientOnly>
 		<UIBaseCursor v-if="isPointerAccurate" />
 	</ClientOnly>
-	<NuxtLayout name="404">
+	<NuxtLayout v-if="options" name="404">
 		<TheHeader :marquee-text="options['text-header']" :email="options.email" />
 		<main>
 			<ErrorDefault :code="error.statusCode ?? -1" />

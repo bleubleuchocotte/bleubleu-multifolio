@@ -14,7 +14,7 @@ const showContent = ref(false);
 </script>
 
 <template>
-	<div>
+	<div v-if="options">
 		<Transition
 			name="translate-out"
 			mode="out-in"

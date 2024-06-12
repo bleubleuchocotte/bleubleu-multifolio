@@ -60,7 +60,7 @@ useServerHeadSafe({
 			rel: "icon",
 			type: "image/png",
 			sizes: "16x16",
-			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-16x16.png`,
+			href: options["seo-favicon"].small.url ?? `${request.origin}/default-favicon-16x16.png`,
 		},
 		{
 			rel: "icon",
@@ -95,9 +95,8 @@ useServerSeoMeta({
 	ogUrl: request.origin + request.pathname,
 	ogImage: {
 		url: options["og-image"].url ?? "",
-		secureUrl: options["og-image"].url ?? "",
 		width: options["og-image"].dimensions?.width ?? "",
-		height: options["og-image"].dimensions?.width ?? "",
+		height: options["og-image"].dimensions?.height ?? "",
 	},
 
 	publisher: `${options["first-name"]} ${options["last-name"]}`,
@@ -114,7 +113,7 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 
 	<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
 
-	<NuxtLayout>
+	<NuxtLayout v-if="options">
 		<TheHeader v-if="!isWIP" :marquee-text="options['text-header']" :email="options.email" />
 		<NuxtPage />
 		<TheFooter v-if="!isWIP" :links="options.links" class="desktop-only" />
