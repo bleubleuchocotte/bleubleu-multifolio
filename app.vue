@@ -59,6 +59,12 @@ useServerHeadSafe({
 		{
 			rel: "icon",
 			type: "image/png",
+			sizes: "16x16",
+			href: options["seo-favicon"].small.url ?? `${request.origin}/default-favicon-16x16.png`,
+		},
+		{
+			rel: "icon",
+			type: "image/png",
 			sizes: "32x32",
 			href: options["seo-favicon"].url ?? `${request.origin}/default-favicon-32x32.png`,
 		},
