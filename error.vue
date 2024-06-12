@@ -103,7 +103,7 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 	<ClientOnly>
 		<UIBaseCursor v-if="isPointerAccurate" />
 	</ClientOnly>
-	<NuxtLayout name="404">
+	<NuxtLayout v-if="options" name="404">
 		<TheHeader :marquee-text="options['text-header']" :email="options.email" />
 		<main>
 			<ErrorDefault :code="error.statusCode ?? -1" />

@@ -113,7 +113,7 @@ const isPointerAccurate = useMediaQuery("(any-pointer: fine)");
 
 	<NuxtLoadingIndicator :throttle="0" color="var(--accent-color)" />
 
-	<NuxtLayout>
+	<NuxtLayout v-if="options">
 		<TheHeader v-if="!isWIP" :marquee-text="options['text-header']" :email="options.email" />
 		<NuxtPage />
 		<TheFooter v-if="!isWIP" :links="options.links" class="desktop-only" />
