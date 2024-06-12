@@ -95,9 +95,8 @@ useServerSeoMeta({
 	ogUrl: request.origin + request.pathname,
 	ogImage: {
 		url: options["og-image"].url ?? "",
-		secureUrl: options["og-image"].url ?? "",
 		width: options["og-image"].dimensions?.width ?? "",
-		height: options["og-image"].dimensions?.width ?? "",
+		height: options["og-image"].dimensions?.height ?? "",
 	},
 
 	publisher: `${options["first-name"]} ${options["last-name"]}`,
