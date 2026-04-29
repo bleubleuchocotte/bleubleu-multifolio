@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "claude-md-improver": {
+      "source": "anthropics/claude-plugins-official",
+      "sourceType": "github",
+      "skillPath": "plugins/claude-md-management/skills/claude-md-improver/SKILL.md",
+      "computedHash": "d6707ed0467d9664d0f9d2c44724c8fb1814475ec6d3c62a5d54bbbe807e0775"
+    },
     "nuxt": {
       "source": "onmax/nuxt-skills",
       "sourceType": "github",
@@ -36,6 +42,12 @@
       "sourceType": "github",
       "skillPath": "skills/vueuse-functions/SKILL.md",
       "computedHash": "fedfc78f035a88fe3e9d823f44725fe8981486c55b966c17fbd0d7c28339e49a"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "ad5b1fc52807e9afa4635e59218a026b164dc58b6c3f41b0f7c644dcd6ccf572"
     }
   }
 }
