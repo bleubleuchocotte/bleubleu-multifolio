@@ -1,6 +1,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: "2026-04-28",
+  typescript: {
+    typeCheck: true,
+    strict: true,
+  },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
   },
@@ -40,9 +44,16 @@ export default defineNuxtConfig({
     preview: false,
     toolbar: false,
   },
+  // `url` and `name` are provided at runtime via the
+  // `NUXT_SITE_URL` / `NUXT_SITE_NAME` env vars — see @nuxtjs/seo docs.
+  site: {
+    defaultLocale: "en",
+  },
   robots: {
     disallow: ["/legal-notice", "/wip"],
   },
+  // The OG image is served from Prismic via `useSeoMeta` in app.vue —
+  // disable the dynamic generation from the @nuxtjs/og-image module.
   ogImage: {
     enabled: false,
   },
@@ -50,6 +61,7 @@ export default defineNuxtConfig({
     enabled: false,
   },
   i18n: {
+    defaultLocale: "en",
     locales: [
       {
         code: "en",
