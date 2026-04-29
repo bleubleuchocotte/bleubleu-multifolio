@@ -1,13 +1,5 @@
 <script setup lang="ts">
-const { $api } = useNuxtApp();
-const options = await $api.options.getOptions();
-
-if (!options) {
-	throw createError({
-		statusCode: 500,
-		statusMessage: "Could not reach options",
-	});
-}
+const options = await useOptions();
 
 const isLoading = ref(true);
 const showContent = ref(false);

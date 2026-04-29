@@ -43,9 +43,8 @@ app/                      Nuxt 4 application root (srcDir)
   components/             Feature-grouped: UI/, Project/{Desktop,Mobile}/, Icon/, Error/
   pages/                  Flat routes: index.vue, legal-notice.vue, wip.vue, [...404].vue
   layouts/                default.vue, 404.vue
-  composables/            Data-fetching composables (new — replaces app/repository/)
-  repository/             LEGACY Prismic factory + modules (pages, projects, options) — being removed
-  plugins/                Vue3Marquee.client.ts (note: api.ts deleted on this branch)
+  composables/            Data-fetching composables wrapping the Prismic client
+  plugins/                Vue3Marquee.client.ts
   middleware/             checkWIP.global.ts
   assets/styles/          SCSS (reset, base, lenis, main — main.scss auto-injected by Vite)
   app.vue                 Root; injects theme CSS variables from Prismic options
@@ -69,18 +68,27 @@ prismicio-types.d.ts      Auto-generated — do not edit
 - **Styling**: `<style scoped lang="scss">`. The Vite config auto-injects `assets/styles/main.scss` into every SCSS block, so global mixins like `@include padding()` and media tokens like `#{$mobile-down}` are available without re-importing. Theme is driven by CSS variables set at runtime from Prismic options: `--border-color`, `--background-color`, `--accent-color`, `--text-color`.
 - **i18n**: strategy is `no_prefix` — both locales share the same URLs and the language is switched via app state. Read keys in templates with `$t('page.x.y')`.
 
-## Data fetching (transitional)
+## Data fetching
 
-**Target pattern** — write a composable in `app/composables/` that wraps the Prismic client and call it with `useAsyncData` for SSR caching. Do not extend `app/repository/`.
+Composables in `app/composables/` wrap the Prismic client and call `useAsyncData` with a stable key so Nuxt deduplicates fetches across the SSR + client lifecycle.
 
-**Legacy pattern** still present in some pages, e.g. [app/pages/legal-notice.vue:2-4](app/pages/legal-notice.vue#L2-L4):
+The Prismic `website` document is the source of truth for site config, the home page content, the projects list and the WIP state. A single fetch is performed by [useWebsite](app/composables/useWebsite.ts); four typed views derive from it without re-fetching:
+
+- [useOptions](app/composables/useOptions.ts) — global config (colors, SEO, links, language). Throws a 500 if the document is unreachable.
+- [useHome](app/composables/useHome.ts) — home page fields (`about-image`, `description`, `ending-card-image`).
+- [useProjects](app/composables/useProjects.ts) — `projects` group mapped to `ProjectWithId[]`.
+- [useWebsiteState](app/composables/useWebsiteState.ts) — `website_state` enum used by the WIP middleware.
+
+The legal notice page lives in its own custom type and has its own composable: [useLegalNotice](app/composables/useLegalNotice.ts).
+
+Usage:
 
 ```ts
-const { $api } = useNuxtApp();
-const page = await $api.pages.getLegalNotice();
+const options = await useOptions();
+const projects = await useProjects();
 ```
 
-This used to be served by `app/plugins/api.ts`, which was **deleted on this branch** (`feat/update-nuxt-to-v4`). Any remaining `$api.*` callsite is currently broken and must be migrated to a composable as part of this branch.
+Do not reintroduce a Nuxt plugin to inject a data layer — auto-imported composables are the canonical pattern.
 
 ## Lint rules to keep in mind
 
@@ -100,4 +108,3 @@ From [eslint.config.mjs](eslint.config.mjs):
 - [nuxt.config.ts](nuxt.config.ts) `compatibilityDate` is `2026-04-28`. Don't lower it.
 - `robots.txt` (via `@nuxtjs/seo`) disallows `/legal-notice` and `/wip`; preserve that when changing routing.
 - `legal-notice.vue` intentionally renders the same Prismic rich-text block many times to build a marquee band on desktop — only the first instance is exposed to assistive tech (`aria-hidden` on the rest). Don't "deduplicate" it.
-- Branch `feat/update-nuxt-to-v4` is mid-migration: prefer adding composables, expect `app/repository/` and remaining `$api` callsites to be removed before merge.

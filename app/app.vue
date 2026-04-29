@@ -3,15 +3,7 @@ const i18n = useI18n();
 
 const request = useRequestURL();
 
-const { $api } = useNuxtApp();
-const options = await $api.options.getOptions();
-
-if (!options) {
-	throw createError({
-		statusCode: 500,
-		statusMessage: "Could not reach options",
-	});
-}
+const options = await useOptions();
 
 const htmlLang = ref<"fr" | "en" | null>(null);
 const ogLang = ref<"fr_FR" | "en_US" | null>(null);

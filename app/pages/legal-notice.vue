@@ -1,7 +1,6 @@
 <script setup lang="ts">
-const { $api } = useNuxtApp();
-const page = await $api.pages.getLegalNotice();
-const options = await $api.options.getOptions();
+const page = await useLegalNotice();
+const options = await useOptions();
 
 const isDeviceMobile = useMediaQuery("(max-width: 768px)");
 
