@@ -22,10 +22,14 @@ export function throwAppError(
 export function isAppError(
 	err: unknown,
 ): err is H3Error<AppErrorData> & { data: AppErrorData } {
+	if (typeof err !== "object" || err === null || !("data" in err)) {
+		return false;
+	}
+	const { data } = err;
 	return (
-		typeof err === "object"
-		&& err !== null
-		&& "data" in err
-		&& typeof (err as { data?: AppErrorData }).data?.code === "string"
+		typeof data === "object"
+		&& data !== null
+		&& "code" in data
+		&& typeof data.code === "string"
 	);
 }

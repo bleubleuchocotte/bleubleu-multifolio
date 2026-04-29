@@ -18,8 +18,8 @@ const delta = reactive({
 const isInvert = ref(false);
 const isExpand = ref(false);
 const isVisible = ref(false);
-const container = ref();
-const containerIcon = ref();
+const container = useTemplateRef("container");
+const containerIcon = useTemplateRef("containerIcon");
 const icon = ref<CursorIconType>(null);
 
 const size = computed(() =>

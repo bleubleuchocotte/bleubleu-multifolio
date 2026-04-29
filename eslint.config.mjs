@@ -5,7 +5,7 @@ export default withNuxt(
   {
     rules: {
       "@typescript-eslint/no-unused-vars": "error",
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-explicit-any": "error",
 
       eqeqeq: ["error", "always"], // Require the use of === and !==
       curly: ["error", "all"], // Enforce consistent brace style for all control statements

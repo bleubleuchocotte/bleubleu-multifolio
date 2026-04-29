@@ -7,12 +7,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
 		case ("Le site est indexable et disponible via la recherche google"):
 			break;
 		case ("Le site n'est pas indexable"):
-			useServerSeoMeta({
+			useSeoMeta({
 				robots: "noindex, nofollow",
 			});
 			break;
 		case ("Le site n'est pas indexable et présente une page temporaire de WIP"):
-			useServerSeoMeta({
+			useSeoMeta({
 				robots: "noindex, nofollow",
 			});
 

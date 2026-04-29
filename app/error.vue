@@ -51,7 +51,7 @@ useHead({
 	style: [`:root{${cssVariables.join(";")}}`],
 });
 
-useServerHeadSafe({
+useHeadSafe({
 	link: [
 		{
 			rel: "icon",
@@ -63,7 +63,7 @@ useServerHeadSafe({
 });
 
 // Tout ce qui n'a pas besoin d'être réactif entre les pages ce met ici
-useServerSeoMeta({
+useSeoMeta({
 	ogType: "website",
 	ogLocale: ogLang.value,
 	twitterCard: "summary",

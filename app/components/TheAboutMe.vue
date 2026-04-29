@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-defineProps<{ props: AboutMe }>();
+const props = defineProps<AboutMe>();
 
 const isOpen = ref(false);
-const target = ref();
+const target = useTemplateRef("target");
 
 useEventListener("keydown", callback);
 

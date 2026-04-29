@@ -26,7 +26,7 @@ function callback(id: string, hasToScroll: boolean) {
 
 <template>
   <main class="main">
-    <TheAboutMe :props="aboutMe" />
+    <TheAboutMe v-bind="aboutMe" />
     <div class="main__left">
       <section class="main__left-container">
         <p>{{ $t("project.title.vertical") }}</p>

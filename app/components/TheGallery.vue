@@ -29,7 +29,7 @@ function callback(e: KeyboardEvent) {
 	}
 }
 
-const target = ref();
+const target = useTemplateRef("target");
 useFocusTrap(target, { immediate: true });
 
 const mediaAttribute: MediaHTMLAttributes = {
