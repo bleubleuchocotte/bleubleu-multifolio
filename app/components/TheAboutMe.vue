@@ -1,5 +1,20 @@
 <script lang="ts" setup>
-const props = defineProps<AboutMe>();
+import type {
+  KeyTextField,
+  ImageField,
+  RichTextField,
+} from "@prismicio/client";
+import type { WebsiteDocumentDataLinksItem } from "~~/prismicio-types";
+
+export type TheAboutMeProps = {
+  imageOfMe: ImageField;
+  description: RichTextField;
+  email: KeyTextField;
+  links: WebsiteDocumentDataLinksItem[];
+  firstName: KeyTextField;
+  lastName: KeyTextField;
+};
+const props = defineProps<TheAboutMeProps>();
 
 const isOpen = ref(false);
 const target = useTemplateRef("target");

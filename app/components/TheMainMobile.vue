@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type BaseAccordion from "@/components/UI/BaseAccordion.vue";
+import type { TheAboutMeProps } from "./TheAboutMe.vue";
 
 type ComponentProps = {
   projects: ProjectWithId[];
-  aboutMe: AboutMe;
+  aboutMe: TheAboutMeProps;
 };
 
 defineProps<ComponentProps>();

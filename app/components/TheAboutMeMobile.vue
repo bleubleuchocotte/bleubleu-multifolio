@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { TheAboutMeProps } from "./TheAboutMe.vue";
+
 defineProps<{
-  data: AboutMe;
+  data: TheAboutMeProps;
 }>();
 
 function scrollToTop() {

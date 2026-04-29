@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { ImageField } from "@prismicio/client";
+import type { TheAboutMeProps } from "./TheAboutMe.vue";
 
 type ComponentProps = {
   projects: ProjectWithId[];
-  aboutMe: AboutMe;
+  aboutMe: TheAboutMeProps;
   endingCardImage: ImageField;
 };
 

@@ -1,20 +1,6 @@
-import type {
-  Content,
-  KeyTextField,
-  ImageField,
-  RichTextField,
-} from "@prismicio/client";
+import type { ProjetDocumentData } from "~~/prismicio-types";
 
-export type ProjectWithId = Content.ProjetDocumentData & { id: string };
-
-export type AboutMe = {
-  imageOfMe: ImageField;
-  description: RichTextField;
-  email: KeyTextField;
-  links: Content.WebsiteDocumentDataLinksItem[];
-  firstName: KeyTextField;
-  lastName: KeyTextField;
-};
+export type ProjectWithId = ProjetDocumentData & { id: string };
 
 export type ColorArrow = {
   background: string;

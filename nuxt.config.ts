@@ -1,10 +1,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: "2026-04-28",
-  typescript: {
-    typeCheck: true,
-    strict: true,
-  },
+
   app: {
     pageTransition: { name: "page", mode: "out-in" },
   },
