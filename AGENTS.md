@@ -22,6 +22,8 @@ mise install
 pnpm install
 ```
 
+`pnpm` and `node` are not on the default shell `PATH` — they are provided by mise. Agents must prefix every invocation with `mise exec --` (e.g. `mise exec -- pnpm lint`, `mise exec -- pnpm tc`) instead of calling `pnpm`/`node` directly.
+
 Required env var: `PRISMIC_ENDPOINT` (Prismic repository name).
 
 Scripts (from [package.json](package.json)):
@@ -32,9 +34,12 @@ Scripts (from [package.json](package.json)):
 - `pnpm preview` — preview built site
 - `pnpm lint` / `pnpm lint:fix` — ESLint
 - `pnpm tc` — typecheck (vue-tsc via `nuxt typecheck`)
+- `pnpm test` — run all Vitest projects (`nuxt` unit + `e2e`)
+- `pnpm test:watch` — Vitest in watch mode
+- `pnpm test:unit` / `pnpm test:e2e` — run a single project
 - `pnpm slicemachine` — open Prismic Slice Machine UI
 
-Run `pnpm lint` and `pnpm tc` before committing.
+Run `pnpm lint`, `pnpm tc` and `pnpm test` before committing.
 
 ## Repository layout
 
@@ -49,9 +54,13 @@ app/                      Nuxt 4 application root (srcDir)
   assets/styles/          SCSS (reset, base, lenis, main — main.scss auto-injected by Vite)
   app.vue                 Root; injects theme CSS variables from Prismic options
 shared/types/index.ts     Shared TS types (re-exports Prismic-generated types)
+shared/errors.ts          AppErrorCode union — typed error codes used across the app
 i18n/locales/             en.json, fr.json
 customtypes/  slices/     Prismic Slice Machine sources
 prismicio-types.d.ts      Auto-generated — do not edit
+test/nuxt/                Vitest specs running in the Nuxt environment (auto-imports, mocks)
+test/e2e/                 SSR / browser specs ($fetch, Playwright)
+vitest.config.ts          Two-project Vitest config (nuxt + e2e)
 ```
 
 ## Conventions
@@ -89,6 +98,54 @@ const projects = await useProjects();
 ```
 
 Do not reintroduce a Nuxt plugin to inject a data layer — auto-imported composables are the canonical pattern.
+
+## Error handling
+
+Typed error codes live in [shared/errors.ts](shared/errors.ts) (`AppErrorCode` union) and are paired with auto-imported helpers in [app/utils/errors.ts](app/utils/errors.ts).
+
+- `throwAppError(code, statusCode, statusMessage)` — the canonical way for composables to abort with a Nuxt error. It builds `createError({ statusCode, statusMessage, data: { code } })`, so `error.value.data.code` is type-narrowed downstream.
+- `isAppError(err)` — type guard for `error.vue` / `404.vue` to display a localized message conditioned by `err.data.code`.
+
+Composables must not call `createError` directly. Add a new variant to `AppErrorCode` instead, then call `throwAppError`:
+
+```ts
+// app/composables/useOptions.ts
+if (error.value || !data.value) {
+  throwAppError("PRISMIC_UNREACHABLE", 500, "Could not reach options");
+}
+```
+
+## Testing
+
+Stack: **Vitest** + **@nuxt/test-utils**. The Nuxt environment provides auto-imports and `mockNuxtImport` for stubbing them.
+
+### Layers
+
+Each behaviour is tested at the **lowest possible level** — only move up if the lower layer cannot cover the case.
+
+| Layer                                      | Tool                              | Covers                                                           |
+| ------------------------------------------ | --------------------------------- | ---------------------------------------------------------------- |
+| Unit (`test/nuxt/*.nuxt.spec.ts`)          | Vitest, `mockNuxtImport`          | Composables (mapping, error throwing), middleware logic, component interactions |
+| SSR (`test/e2e/*.spec.ts` — `$fetch`)      | `@nuxt/test-utils`                | Routes return 200 and contain critical HTML (e.g. `/`, `/legal-notice`, `/wip`) |
+| Browser (`test/e2e/*.spec.ts` — `createPage`) | Playwright                     | Cases that genuinely need a real browser (Lenis scroll, focus-trap, marquee viewport) |
+
+### What to test
+
+- **Business contracts, not static copy.** Asserting that `<h1>` contains a Prismic-driven title is a fragile test against content. Asserting that `useProjects` maps the group to `ProjectWithId[]` with a stable `id` is a contract.
+- **Mapping & error paths** for every composable. The four specs in [test/nuxt/](test/nuxt/) are the templates — copy them when adding a new composable.
+- **Middleware behaviour** (redirect, abortNavigation, SEO meta) — mock `useWebsiteState`, `navigateTo`, `abortNavigation`, `useServerSeoMeta`, and the `useState` cell when relevant.
+
+### Mocking auto-imports
+
+`mockNuxtImport` replaces an auto-imported symbol. Use it at the top of the file (it is hoisted):
+
+```ts
+mockNuxtImport("useWebsite", () => {
+  return () => Promise.resolve({ data: ref({ … }), error: ref(null) });
+});
+```
+
+The factory must return the composable itself — Nuxt calls it once and caches the result.
 
 ## Lint rules to keep in mind
 

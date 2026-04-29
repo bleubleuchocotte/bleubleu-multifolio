@@ -7,30 +7,13 @@ useSeoMeta({
   title: options["seo-title"],
 });
 
-const props: HomepageProps = {
-  desktop: {
-    projects,
-    endingCardImage: page["ending-card-image"],
-    aboutMe: {
-      imageOfMe: page["about-image"],
-      description: page.description,
-      email: options.email,
-      links: options.links,
-      firstName: options["first-name"],
-      lastName: options["last-name"],
-    },
-  },
-  mobile: {
-    projects,
-    aboutMe: {
-      imageOfMe: page["about-image"],
-      description: page.description,
-      email: options.email,
-      links: options.links,
-      firstName: options["first-name"],
-      lastName: options["last-name"],
-    },
-  },
+const aboutMe = {
+  imageOfMe: page["about-image"],
+  description: page.description,
+  email: options.email,
+  links: options.links,
+  firstName: options["first-name"],
+  lastName: options["last-name"],
 };
 </script>
 
@@ -38,10 +21,15 @@ const props: HomepageProps = {
   <div class="index-page">
     <UIBaseResponsiveContent media-query="(max-width: 1025px)">
       <template #mobile>
-        <TheMainMobile v-bind="props.mobile" />
+        <TheMainMobile :projects :about-me />
       </template>
       <template #desktop>
-        <TheMain v-bind="props.desktop" class="index-page__desktop" />
+        <TheMain
+          :projects
+          :ending-card-image="page['ending-card-image']"
+          :about-me
+          class="index-page__desktop"
+        />
       </template>
     </UIBaseResponsiveContent>
   </div>

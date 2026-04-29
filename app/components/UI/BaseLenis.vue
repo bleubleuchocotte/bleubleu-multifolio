@@ -2,7 +2,7 @@
 import Lenis from "lenis";
 
 type ComponentProps = {
-  target?: LenisTarget;
+  target?: number | string | HTMLElement;
   requestLenis?: boolean;
   orientation?: "vertical" | "horizontal";
 };
