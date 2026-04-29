@@ -133,7 +133,7 @@ Each behaviour is tested at the **lowest possible level** — only move up if th
 
 - **Business contracts, not static copy.** Asserting that `<h1>` contains a Prismic-driven title is a fragile test against content. Asserting that `useProjects` maps the group to `ProjectWithId[]` with a stable `id` is a contract.
 - **Mapping & error paths** for every composable. The four specs in [test/nuxt/](test/nuxt/) are the templates — copy them when adding a new composable.
-- **Middleware behaviour** (redirect, abortNavigation, SEO meta) — mock `useWebsiteState`, `navigateTo`, `abortNavigation`, `useServerSeoMeta`, and the `useState` cell when relevant.
+- **Middleware behaviour** (redirect, abortNavigation, SEO meta) — mock `useWebsiteState`, `navigateTo`, `abortNavigation`, `useSeoMeta`, and the `useState` cell when relevant.
 
 ### Mocking auto-imports
 
@@ -151,7 +151,7 @@ The factory must return the composable itself — Nuxt calls it once and caches 
 
 From [eslint.config.mjs](eslint.config.mjs):
 
-- `@typescript-eslint/no-unused-vars: error`, `@typescript-eslint/no-explicit-any: warn`
+- `@typescript-eslint/no-unused-vars: error`, `@typescript-eslint/no-explicit-any: error`
 - `eqeqeq` (always `===`), `curly: all`, `no-nested-ternary`, `prefer-template`, `object-shorthand`
 - `no-await-in-loop`
 - `no-console` (only `warn`/`error`/`info` allowed)
@@ -165,3 +165,35 @@ From [eslint.config.mjs](eslint.config.mjs):
 - [nuxt.config.ts](nuxt.config.ts) `compatibilityDate` is `2026-04-28`. Don't lower it.
 - `robots.txt` (via `@nuxtjs/seo`) disallows `/legal-notice` and `/wip`; preserve that when changing routing.
 - `legal-notice.vue` intentionally renders the same Prismic rich-text block many times to build a marquee band on desktop — only the first instance is exposed to assistive tech (`aria-hidden` on the rest). Don't "deduplicate" it.
+- `useState(key, () => ref(false))` produces a `Ref<Ref<T>>` whose `.value` is always a truthy Ref object. The factory must return the **value**, not a ref: `useState<boolean>(key, () => false)`.
+- For DOM template refs, prefer `useTemplateRef("name")` over `ref<HTMLElement | null>(null)` — the element type is inferred from the template's `ref="name"` binding.
+
+## Deployment
+
+The site targets Netlify but works on any Node host that supports Nuxt 4 SSR or static output.
+
+- **Build command**: `mise exec -- pnpm build` (SSR) or `mise exec -- pnpm generate` (static).
+- **Publish directory**: `.output/public`.
+- **Node version**: `24.15.0` — declare it via the host's config (e.g. `NODE_VERSION` env var on Netlify) so it matches [mise.toml](mise.toml) and `package.json` `engines`.
+- **Required env vars**:
+  - `PRISMIC_ENDPOINT` — Prismic repository name.
+  - `NUXT_SITE_URL` — canonical site URL, consumed by `@nuxtjs/seo` (sitemap, robots, canonical).
+  - `NUXT_SITE_NAME` — site name surfaced in SEO meta.
+
+## Glossary
+
+- **WIP state** — value of the Prismic `website_state` field on the `website` document, with three variants:
+  - `Le site est indexable et disponible via la recherche google` — the site is fully public.
+  - `Le site n'est pas indexable` — the site is reachable but `noindex, nofollow` is forced.
+  - `Le site n'est pas indexable et présente une page temporaire de WIP` — production redirects everything to `/wip`.
+- **Prismic endpoint** — the repository name (without `.cdn.prismic.io`) passed to `@nuxtjs/prismic` via the `PRISMIC_ENDPOINT` env var.
+- **Slice Machine** — the Prismic UI for editing custom types and slices, opened with `pnpm slicemachine`. The generated `prismicio-types.d.ts` and `slices/` are checked in.
+- **`*.server.vue`** — Nuxt server-component suffix. The component renders only on the server and ships zero JS to the client (e.g. [TheFooter.server.vue](app/components/TheFooter.server.vue)).
+- **`useAsyncData` keys** — every composable that fetches Prismic data uses a stable string key so Nuxt deduplicates the call between SSR and client hydration. Don't change a key in a hot path.
+
+## Troubleshooting
+
+- **`mise exec -- not recognized`** — mise isn't installed or isn't on the shell `PATH`. Install via `curl https://mise.run | sh`, then `eval "$(~/.local/bin/mise activate <shell>)"`.
+- **Prismic 404 / "not found"** during fetches — the `website` (or `page_legal_notice`) document is missing or has no UID. Open Prismic and ensure each custom type has at least one published entry, then rebuild.
+- **`endpoint` option is missing and `~/prismic/client` was not found** in dev/test — the `.env` file is absent or `PRISMIC_ENDPOINT` is empty. The Prismic module disables itself silently; data composables will throw a 500 via `throwAppError("PRISMIC_UNREACHABLE", ...)`.
+- **Sitemap / robots not respecting locale** — `@nuxtjs/seo` reads `NUXT_SITE_URL` at runtime. Set it on the host or the canonical URLs and sitemap entries fall back to `localhost`.
