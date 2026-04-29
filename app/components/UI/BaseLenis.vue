@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<ComponentProps>(), {
 });
 
 const container = ref(null);
-let lenis: Lenis;
+let lenis: Lenis | undefined;
+let rafId: number | undefined;
 
 const velocity = ref(0);
 
@@ -29,24 +30,32 @@ onMounted(() => {
   });
 
   function raf(time: number) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
+    lenis?.raf(time);
+    rafId = requestAnimationFrame(raf);
   }
 
   if (props.requestLenis) {
     lenis.on("scroll", () => {
-      velocity.value = lenis.velocity;
+      velocity.value = lenis?.velocity ?? 0;
     });
   }
 
-  requestAnimationFrame(raf);
+  rafId = requestAnimationFrame(raf);
+});
+
+onUnmounted(() => {
+  if (rafId !== undefined) {
+    cancelAnimationFrame(rafId);
+  }
+  lenis?.destroy();
+  lenis = undefined;
 });
 
 watch(
   () => props.target,
   () => {
     if (props.target) {
-      lenis.scrollTo(props.target);
+      lenis?.scrollTo(props.target);
     }
   },
 );

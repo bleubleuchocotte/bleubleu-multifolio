@@ -11,15 +11,7 @@ type ComponentProps = {
 
 const request = useRequestURL();
 
-const { $api } = useNuxtApp();
-const options = await $api.options.getOptions();
-
-if (!options) {
-	throw createError({
-		statusCode: 500,
-		statusMessage: "Could not reach options",
-	});
-}
+const options = await useOptions();
 
 const htmlLang = ref<"fr" | "en" | null>(null);
 const ogLang = ref<"fr_FR" | "en_US" | null>(null);
@@ -89,7 +81,7 @@ useServerSeoMeta({
 		url: options["og-image"].url ?? "",
 		secureUrl: options["og-image"].url ?? "",
 		width: options["og-image"].dimensions?.width ?? "",
-		height: options["og-image"].dimensions?.width ?? "",
+		height: options["og-image"].dimensions?.height ?? "",
 	},
 
 	publisher: `${options["first-name"]} ${options["last-name"]}`,
