@@ -27,7 +27,7 @@ switch (options?.language) {
 		break;
 }
 
-const isWIP = useState("WebsiteStateWIP", () => ref(false));
+const isWIP = useState<boolean>("WebsiteStateWIP", () => false);
 
 const cssVariables = [
 	`--accent-color: ${options["accent-color"]}`,

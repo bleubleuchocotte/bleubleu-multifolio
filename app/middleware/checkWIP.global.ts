@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware(async (to) => {
 	const state = await useWebsiteState();
 
-	const isWIP = useState("WebsiteStateWIP", () => ref(false));
+	const isWIP = useState<boolean>("WebsiteStateWIP", () => false);
 
 	switch (state) {
 		case ("Le site est indexable et disponible via la recherche google"):
