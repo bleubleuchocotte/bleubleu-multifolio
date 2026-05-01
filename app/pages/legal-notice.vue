@@ -21,12 +21,12 @@ useSeoMeta({
     <template v-if="!isDeviceMobile">
       <div
         v-for="i in 2"
-        :key="Math.floor(Math.random() * (100 + i))"
+        :key="`row-${i}`"
         class="flex border-border bg-background w-max border border-l-0 first-of-type:border-b-0"
       >
         <div
           v-for="j in 6"
-          :key="Math.floor(Math.random() * (100 + j))"
+          :key="`cell-${i}-${j}`"
           :aria-hidden="!(j === 1 && i === 1)"
           class="p-fluid flex flex-col gap-[0.6rem]"
         >

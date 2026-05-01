@@ -94,15 +94,15 @@ useIntersectionObserver(
     </div>
 
     <div class="px-fluid min-w-[80vh]">
-      <ProjectMediasSummary
-        :medias="project.data.slices.slice(0, 2)"
-        role="button"
+      <button
+        type="button"
+        class="block h-full w-full"
         aria-label="View project images"
         data-icon="IconFullscreen"
-        tabindex="0"
         @click="$emit('gallery', project)"
-        @keydown.enter.space="$emit('gallery', project)"
-      />
+      >
+        <ProjectMediasSummary :medias="project.data.slices.slice(0, 2)" />
+      </button>
     </div>
   </article>
 </template>

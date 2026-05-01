@@ -92,9 +92,9 @@ function getParentDataIcon(element: HTMLElement, depth: number) {
   while (parent && counter < depth) {
     counter += 1;
 
-    const attr = element.attributes.getNamedItem("data-icon");
-    if (attr?.value) {
-      return attr.value;
+    const parentAttr = parent.attributes.getNamedItem("data-icon");
+    if (parentAttr?.value) {
+      return parentAttr.value;
     }
 
     parent = parent.parentElement;

@@ -87,34 +87,32 @@ onClickOutside(target, () => {
         </li>
       </ul>
     </UIBaseLenis>
-    <div
+    <button
+      type="button"
       class="flex min-w-17.5 justify-between [writing-mode:vertical-rl] rotate-180 *:pointer-events-none p-[calc(var(--spacing-fluid)/3)]"
-      tabindex="0"
-      aria-disabled="false"
-      role="button"
+      :aria-expanded="isOpen"
+      :aria-label="`${props.data['first-name']} ${props.data['last-name']} — about me`"
       :data-icon="isOpen ? 'IconBaseTowardReverse' : 'IconBaseToward'"
       @click="isOpen = !isOpen"
-      @keydown.enter="isOpen = !isOpen"
-      @keydown.space.prevent="isOpen = !isOpen"
     >
-      <h1 class="self-center uppercase">
+      <span class="text-fluid-h1 self-center uppercase">
         {{ props.data["first-name"] }} {{ props.data["last-name"] }}
-      </h1>
-      <div
+      </span>
+      <span
         class="flex items-center justify-center text-right gap-[calc(var(--spacing-fluid)/3)]"
       >
-        <div>
-          <p>{{ $t("misc.about-me-1") }}</p>
-          <p>{{ $t("misc.about-me-2") }}</p>
-        </div>
-        <div
+        <span class="flex flex-col">
+          <span>{{ $t("misc.about-me-1") }}</span>
+          <span>{{ $t("misc.about-me-2") }}</span>
+        </span>
+        <span
           class="bg-text-accent text-accent flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 ease-out"
           :class="isOpen ? 'rotate-0' : 'rotate-180'"
         >
           <IconBaseToward />
-        </div>
-      </div>
-    </div>
+        </span>
+      </span>
+    </button>
   </section>
 </template>
 
