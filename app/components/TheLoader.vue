@@ -93,22 +93,10 @@ const { pause } = useIntervalFn(() => {
 </script>
 
 <template>
-  <div class="loader" :style="styles">
+  <div
+    :style="styles"
+    class="flex h-screen w-screen items-start justify-start uppercase leading-none text-[5vw]"
+  >
     <span>{{ displayString }}_{{ ratio }}%</span>
   </div>
 </template>
-
-<style scoped lang="scss">
-.loader {
-  font-size: 5vw;
-  text-transform: uppercase;
-  line-height: 1;
-
-  height: 100vh;
-  width: 100vw;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-</style>

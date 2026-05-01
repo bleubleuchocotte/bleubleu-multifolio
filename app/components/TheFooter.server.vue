@@ -10,12 +10,12 @@ defineProps<ComponentProps>();
 
 <template>
   <div>
-    <footer class="footer">
-      <div class="footer__left">
+    <footer class="py-fluid flex">
+      <div class="px-fluid flex-[0.3]">
         <NuxtLink
           to="https://bleubleu.studio"
           target="_blank"
-          class="footer__left-link"
+          class="text-fluid-cta flex w-fit items-end"
         >
           {{ $t("misc.made-with-love") }}
           <IconBaseArrowLink
@@ -26,11 +26,11 @@ defineProps<ComponentProps>();
           />
         </NuxtLink>
       </div>
-      <div class="footer__right">
+      <div class="pr-fluid flex flex-[0.7] justify-between">
         <PrismicLink
           v-for="link in links"
           :key="link.name?.toString()"
-          class="footer__right-link"
+          class="text-fluid-cta flex items-end"
           :field="link.link"
         >
           {{ link.name }}
@@ -41,7 +41,7 @@ defineProps<ComponentProps>();
             }"
           />
         </PrismicLink>
-        <NuxtLink to="/legal-notice" class="footer__right-link">
+        <NuxtLink to="/legal-notice" class="text-fluid-cta flex items-end">
           {{ $t("page.legal-notice.link") }}
         </NuxtLink>
         <UIBaseCopyright />
@@ -49,37 +49,3 @@ defineProps<ComponentProps>();
     </footer>
   </div>
 </template>
-
-<style scoped lang="scss">
-.footer {
-  display: flex;
-
-  @include prop("padding-block");
-
-  &__left {
-    @include left;
-
-    &-link {
-      width: fit-content;
-    }
-  }
-  &__right {
-    @include right;
-
-    display: flex;
-    justify-content: space-between;
-
-    padding-left: 0;
-  }
-
-  &__left,
-  &__right {
-    &-link {
-      @include font("cta");
-
-      display: flex;
-      align-items: flex-end;
-    }
-  }
-}
-</style>

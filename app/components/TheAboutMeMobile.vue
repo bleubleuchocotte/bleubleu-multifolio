@@ -11,8 +11,12 @@ function scrollToTop() {
 </script>
 
 <template>
-  <section class="about-me-mobile">
-    <div class="about-me-mobile__heading">
+  <section
+    class="bg-accent text-background gap-fluid rounded-fluid flex flex-col px-[calc(var(--spacing-fluid)/2)] py-[calc(var(--spacing-fluid)*0.75)]"
+  >
+    <div
+      class="border-background flex justify-between border-b py-[calc(var(--spacing-fluid)/2)]"
+    >
       <h1>{{ data["first-name"] }} {{ data["last-name"] }}</h1>
 
       <button aria-label="Back to Top" @click="scrollToTop">
@@ -38,24 +42,30 @@ function scrollToTop() {
       </button>
     </div>
 
-    <div class="about-me-mobile__content">
+    <div class="flex flex-col gap-[calc(var(--spacing-fluid)/2)]">
       <PrismicRichText :field="data.description" />
       <UIBasePicture
         :image="data['about-image']"
-        class="about-me-mobile__content-image"
+        class="border-background rounded-fluid aspect-video overflow-hidden border"
       />
 
       <NuxtLink
         :to="`mailto:${data.email}`"
-        class="about-me-mobile__content-contact"
+        class="border-background p-fluid rounded-fluid border text-center"
       >
         {{ $t("contact.text") }}
       </NuxtLink>
     </div>
 
-    <ul class="about-me-mobile__links">
-      <li class="about-me-mobile__links-item">
-        <NuxtLink to="https://bleubleu.studio" target="_blank">
+    <ul>
+      <li
+        class="border-background not-last:border-b py-[calc(var(--spacing-fluid)/4)]"
+      >
+        <NuxtLink
+          to="https://bleubleu.studio"
+          target="_blank"
+          class="flex items-center justify-between gap-[calc(var(--spacing-fluid)/2)]"
+        >
           Bleubleu.studio
           <IconBaseArrowLink
             :colors="{
@@ -68,9 +78,12 @@ function scrollToTop() {
       <li
         v-for="link in data.links"
         :key="link.name?.toString()"
-        class="about-me-mobile__links-item"
+        class="border-background not-last:border-b py-[calc(var(--spacing-fluid)/4)]"
       >
-        <PrismicLink :field="link.link">
+        <PrismicLink
+          :field="link.link"
+          class="flex items-center justify-between gap-[calc(var(--spacing-fluid)/2)]"
+        >
           {{ link.name }}
           <IconBaseArrowLink
             :colors="{
@@ -81,75 +94,11 @@ function scrollToTop() {
         </PrismicLink>
       </li>
 
-      <li class="about-me-mobile__links-item">
+      <li
+        class="border-background not-last:border-b py-[calc(var(--spacing-fluid)/4)]"
+      >
         <NuxtLink to="/legal-notice"> Legal notice </NuxtLink>
       </li>
     </ul>
   </section>
 </template>
-
-<style scoped lang="scss">
-.about-me-mobile {
-  display: flex;
-  flex-direction: column;
-  @include gap();
-
-  @include border-radius();
-  @include prop("padding-inline", 0.5);
-  @include prop("padding-block", 0.75);
-
-  color: var(--background-color);
-  background-color: var(--accent-color);
-
-  &__heading {
-    display: flex;
-    justify-content: space-between;
-
-    @include prop("padding-block", 0.5);
-
-    border-bottom: 1px solid var(--background-color);
-
-    &-arrow {
-      width: 30px;
-      height: 30px;
-      padding: 1px;
-
-      rotate: -90deg;
-    }
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    @include gap(0.5);
-
-    &-contact {
-      text-align: center;
-      @include padding();
-      @include border(1, var(--background-color));
-    }
-
-    &-image {
-      aspect-ratio: 16/9;
-      @include border(1, var(--background-color));
-      overflow: hidden;
-    }
-  }
-
-  &__links {
-    &-item {
-      &:not(:last-of-type) {
-        border-bottom: 1px solid var(--background-color);
-      }
-      @include prop("padding-block", 0.25);
-
-      & > a {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        @include gap(0.5);
-      }
-    }
-  }
-}
-</style>

@@ -40,8 +40,14 @@ const mediaAttribute: MediaHTMLAttributes = {
 </script>
 
 <template>
-  <section ref="target" class="gallery">
-    <div ref="ignore" class="gallery__header">
+  <section
+    ref="target"
+    class="bg-background-70 pt-fluid fixed inset-0 z-10 flex flex-col gap-[calc(var(--spacing-fluid)/2)] px-[15vw] backdrop-blur-[20px]"
+  >
+    <div
+      ref="ignore"
+      class="flex justify-between border-b pb-[calc(var(--spacing-fluid)/2)]"
+    >
       <ProjectUrl :url="project.data.url">
         {{ project.data.title }}
       </ProjectUrl>
@@ -59,12 +65,12 @@ const mediaAttribute: MediaHTMLAttributes = {
         />
       </button>
     </div>
-    <UIBaseLenis ref="container" class="gallery__project-lenis">
-      <div class="gallery__project-description">
+    <UIBaseLenis ref="container" class="rounded-fluid-t">
+      <div class="pb-fluid max-w-1/2 pl-[calc(var(--spacing-fluid)/4)]">
         <PrismicRichText :field="project.data.description" />
       </div>
 
-      <div class="gallery__project-medias">
+      <div class="gap-fluid gallery-medias flex h-full flex-col">
         <div
           v-for="media in project.data.slices"
           :key="media.id"
@@ -81,58 +87,13 @@ const mediaAttribute: MediaHTMLAttributes = {
   </section>
 </template>
 
-<style scoped lang="scss">
-.gallery {
-  position: fixed;
-  inset: 0;
-
+<style scoped>
+.gallery-medias [data-type="duo"] {
   display: flex;
-  flex-direction: column;
-  @include gap(0.5);
-
-  padding-inline: 15vw;
-  @include prop("padding-top");
-
-  background-color: var(--background-color-70);
-  backdrop-filter: blur(20px);
-
-  z-index: 10;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    @include prop("padding-bottom", 0.5);
-
-    border-bottom: 1px solid;
-  }
-
-  &__project {
-    &-lenis {
-      @include border-radius(1, "top");
-    }
-
-    &-description {
-      max-width: 50%;
-      @include prop("padding-left", 0.25);
-      @include prop("padding-bottom");
-    }
-
-    &-medias {
-      display: flex;
-      flex-direction: column;
-      @include gap();
-      height: 100%;
-
-      [data-type="duo"] {
-        display: flex;
-        @include gap();
-        width: 100%;
-      }
-
-      [data-type]:last-of-type {
-        @include prop("padding-bottom", 2.5);
-      }
-    }
-  }
+  gap: var(--spacing-fluid);
+  width: 100%;
+}
+.gallery-medias [data-type]:last-of-type {
+  padding-bottom: calc(var(--spacing-fluid) * 2.5);
 }
 </style>

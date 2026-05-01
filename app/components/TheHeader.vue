@@ -10,13 +10,15 @@ defineProps<ComponentProps>();
 </script>
 
 <template>
-  <header class="header">
-    <div class="header__slider">
+  <header class="gap-fluid m-fluid flex">
+    <div
+      class="border-border w-full border p-0 transition-all duration-200 ease-out rounded-[calc(var(--radius-fluid)/2)]"
+    >
       <ClientOnly>
         <Vue3Marquee
           direction="normal"
           :duration="10"
-          class="header__slider-container"
+          class="h-full items-center overflow-hidden"
         >
           <p style="margin-left: 1em" class="h1">
             {{ marqueeText }}
@@ -31,35 +33,8 @@ defineProps<ComponentProps>();
       </ClientOnly>
     </div>
 
-    <UIBaseButtonContact :email="email" class="header__button desktop-only">
+    <UIBaseButtonContact :email="email" class="desktop-only min-w-50 flex-1">
       Contact
     </UIBaseButtonContact>
   </header>
 </template>
-
-<style scoped lang="scss">
-.header {
-  display: flex;
-  @include gap();
-  @include margin();
-
-  &__slider {
-    @include transition();
-    @include border(0.5, var(--border-color));
-    padding: 0;
-
-    width: 100%;
-
-    &-container {
-      align-items: center;
-      height: 100%;
-      overflow: hidden;
-    }
-  }
-
-  &__button {
-    min-width: 200px;
-    flex: 1;
-  }
-}
-</style>

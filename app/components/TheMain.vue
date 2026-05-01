@@ -27,10 +27,12 @@ function callback(id: string, hasToScroll: boolean) {
 </script>
 
 <template>
-  <main class="main">
+  <main
+    class="gradient-scroll-right relative flex overflow-hidden max-lg:flex-col max-lg:gap-fluid"
+  >
     <TheAboutMe :data="aboutMe" />
-    <div class="main__left">
-      <section class="main__left-container">
+    <div class="px-fluid flex-[0.3] max-lg:h-[20vh]">
+      <section class="pb-fluid h-full lg:pl-17.5">
         <p>{{ $t("project.title.vertical") }}</p>
         <UIBaseLenis orientation="vertical">
           <ProjectListVertical
@@ -48,7 +50,7 @@ function callback(id: string, hasToScroll: boolean) {
     <UIBaseSeparator :width="1" />
     <UIBaseLenis
       orientation="horizontal"
-      class="main__right"
+      class="relative flex flex-[0.7] max-lg:flex-col max-lg:gap-fluid pr-[calc(var(--spacing-fluid)*2)]"
       :target="scrollToProjectId"
       :request-lenis="true"
     >
@@ -78,50 +80,6 @@ function callback(id: string, hasToScroll: boolean) {
     </Transition>
   </main>
 </template>
-
-<style scoped lang="scss">
-.main {
-  display: flex;
-  position: relative;
-  overflow: hidden;
-
-  @media #{$desktop-down} {
-    flex-direction: column;
-    @include gap();
-  }
-
-  &__left {
-    @include left;
-    @media #{$desktop-down} {
-      height: 20vh;
-    }
-
-    &-container {
-      height: 100%;
-      @media #{$desktop} {
-        padding-left: $bookmark-width;
-      }
-      @include prop("padding-bottom");
-    }
-  }
-
-  &__right {
-    @include right;
-    @include prop("padding-inline", 0);
-    @include prop("padding-right", 2);
-    position: relative;
-    display: flex;
-
-    @media #{$desktop-down} {
-      flex-direction: column;
-      @include gap();
-    }
-  }
-  &::after {
-    @include gradientScroll(right);
-  }
-}
-</style>
 
 <style>
 .slide-fade-enter-active,

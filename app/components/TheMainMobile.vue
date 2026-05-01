@@ -16,7 +16,10 @@ const { data: projects } = await getAllProjects();
 </script>
 
 <template>
-  <div v-if="projects" class="main-mobile">
+  <div
+    v-if="projects"
+    class="px-fluid pb-fluid flex flex-col gap-[calc(var(--spacing-fluid)*2)]"
+  >
     <main>
       <p>{{ $t("project.title.vertical") }}</p>
       <UIBaseAccordion
@@ -47,13 +50,3 @@ const { data: projects } = await getAllProjects();
     </footer>
   </div>
 </template>
-
-<style scoped lang="scss">
-.main-mobile {
-  display: flex;
-  flex-direction: column;
-  @include gap(2);
-  @include prop("padding-inline");
-  @include prop("padding-bottom");
-}
-</style>

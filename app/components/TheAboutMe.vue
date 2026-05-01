@@ -28,28 +28,34 @@ onClickOutside(target, () => {
 <template>
   <section
     ref="target"
-    class="section invert-selection"
-    :class="{ open: isOpen }"
+    class="invert-selection bg-accent text-text-accent rounded-fluid-r about-section absolute left-0 z-10 flex h-full w-[30vw] transition-transform duration-300 ease-out translate-x-[calc(70px-30vw)]"
+    :class="{ 'translate-x-0!': isOpen }"
   >
-    <UIBaseLenis class="section__content">
+    <UIBaseLenis class="border-text-accent p-fluid w-full border-r">
       <UIBasePicture
         :image="props.data['about-image']"
-        class="section__content-image"
+        class="border-text-accent rounded-fluid mb-fluid aspect-video overflow-hidden border"
       />
 
-      <div class="section__content-text">
+      <div class="text-fluid-h2 mb-fluid">
         <PrismicRichText :field="props.data.description" />
       </div>
 
       <UIBaseButtonContact
         :email="props.data.email"
-        class="section__content-contact"
+        class="about-section__contact-button border-text-accent text-fluid-h2 mb-fluid z-0 h-[10%] w-full border"
       >
         {{ $t("contact.text") }}
       </UIBaseButtonContact>
-      <ul class="section__content-links">
-        <li class="section__content-links-item">
-          <NuxtLink to="https://bleubleu.studio" target="_blank">
+      <ul>
+        <li
+          class="border-text-accent about-section__link not-last:border-b py-[calc(var(--spacing-fluid)/4)]"
+        >
+          <NuxtLink
+            to="https://bleubleu.studio"
+            target="_blank"
+            class="flex items-center justify-between gap-[calc(var(--spacing-fluid)/2)]"
+          >
             <span> Bleubleu.studio </span>
             <IconBaseArrowLink
               :colors="{
@@ -62,9 +68,12 @@ onClickOutside(target, () => {
         <li
           v-for="link in props.data.links"
           :key="String(link.name)"
-          class="section__content-links-item"
+          class="border-text-accent about-section__link not-last:border-b py-[calc(var(--spacing-fluid)/4)]"
         >
-          <PrismicLink :field="link.link">
+          <PrismicLink
+            :field="link.link"
+            class="flex items-center justify-between gap-[calc(var(--spacing-fluid)/2)]"
+          >
             <span>
               {{ link.name }}
             </span>
@@ -79,7 +88,7 @@ onClickOutside(target, () => {
       </ul>
     </UIBaseLenis>
     <div
-      class="section__bookmark"
+      class="flex min-w-17.5 justify-between [writing-mode:vertical-rl] rotate-180 *:pointer-events-none p-[calc(var(--spacing-fluid)/3)]"
       tabindex="0"
       aria-disabled="false"
       role="button"
@@ -88,15 +97,20 @@ onClickOutside(target, () => {
       @keydown.enter="isOpen = !isOpen"
       @keydown.space.prevent="isOpen = !isOpen"
     >
-      <h1 class="section__bookmark-heading">
+      <h1 class="self-center uppercase">
         {{ props.data["first-name"] }} {{ props.data["last-name"] }}
       </h1>
-      <div class="section__bookmark-flex">
+      <div
+        class="flex items-center justify-center text-right gap-[calc(var(--spacing-fluid)/3)]"
+      >
         <div>
           <p>{{ $t("misc.about-me-1") }}</p>
           <p>{{ $t("misc.about-me-2") }}</p>
         </div>
-        <div class="section__bookmark-arrow">
+        <div
+          class="bg-text-accent text-accent flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 ease-out"
+          :class="isOpen ? 'rotate-0' : 'rotate-180'"
+        >
           <IconBaseToward />
         </div>
       </div>
@@ -104,141 +118,20 @@ onClickOutside(target, () => {
   </section>
 </template>
 
-<style scoped lang="scss">
-.section {
-  transition: transform 0.3s ease-out;
-  transform: translate(calc($bookmark-width - 30vw));
+<style scoped>
+/* Pierce into BaseButtonContact's reveal layer to drop the rounded border. */
+.about-section__contact-button :deep(.button) {
+  border-radius: 0;
+}
+.about-section__contact-button :deep(.button > div:last-of-type) {
+  border-radius: 0;
+  border: none;
+}
 
-  &.open {
-    transform: translate(0);
-
-    .section__bookmark-arrow {
-      transform: rotate(0);
-    }
-  }
-
-  display: flex;
-
-  position: absolute;
-  z-index: 10;
-  left: 0;
-
-  height: 100%;
-  width: 30vw;
-
-  background-color: var(--accent-color);
-  color: var(--text-accent-color);
-  @include border-radius(1, "right");
-
-  &__content {
-    width: 100%;
-    @include padding();
-
-    border-right: 1px solid var(--text-accent-color);
-
-    & > p {
-      @include font("h2");
-    }
-
-    &-text {
-      @include prop("margin-bottom");
-    }
-
-    &-contact {
-      height: 10%;
-      width: 100%;
-      z-index: 0;
-      border: 1px solid var(--text-accent-color);
-
-      @include prop("margin-bottom");
-      @include font("h2");
-
-      &:deep(.button__reveal) {
-        border-radius: 0;
-        border: unset;
-      }
-    }
-
-    &-image {
-      overflow: hidden;
-      aspect-ratio: calc(
-        16 / 9
-      ); // Permet d'avoir le même ration que l'image prismic
-      @include prop("margin-bottom");
-
-      border: 1px solid var(--text-accent-color);
-      @include border-radius();
-    }
-
-    &-links {
-      &-item {
-        &:not(:last-of-type) {
-          border-bottom: 1px solid var(--text-accent-color);
-        }
-
-        @include prop("padding-block", 0.25);
-
-        & > a {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          @include gap(0.5);
-
-          span {
-            pointer-events: none;
-            transition: transform 0.2s ease-out;
-          }
-
-          &:hover span {
-            transform: translate3d(5px, 0, 0);
-          }
-        }
-      }
-    }
-  }
-
-  &__bookmark {
-    writing-mode: vertical-rl;
-    rotate: 180deg;
-
-    display: flex;
-    justify-content: space-between;
-    @include padding(calc(1 / 3));
-
-    min-width: $bookmark-width;
-
-    & > * {
-      pointer-events: none;
-    }
-
-    &-heading {
-      text-transform: uppercase;
-      align-self: center;
-    }
-
-    &-flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      @include gap(calc(1 / 3));
-
-      text-align: right;
-    }
-
-    &-arrow {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: var(--text-accent-color);
-
-      color: var(--accent-color);
-      transform: rotate(180deg);
-    }
-  }
+.about-section__link a span {
+  transition: transform 0.2s ease-out;
+}
+.about-section__link a:hover span {
+  transform: translate3d(5px, 0, 0);
 }
 </style>
