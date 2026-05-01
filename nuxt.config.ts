@@ -38,8 +38,6 @@ export default defineNuxtConfig({
   ],
   prismic: {
     endpoint: process.env.PRISMIC_ENDPOINT,
-    preview: false,
-    toolbar: false,
   },
   // `url` and `name` are provided at runtime via the
   // `NUXT_SITE_URL` / `NUXT_SITE_NAME` env vars — see @nuxtjs/seo docs.

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { ImageField } from "@prismicio/client";
 import type { TheAboutMeProps } from "./TheAboutMe.vue";
+import type { ProjetDocument } from "~~/prismicio-types";
 
 type ComponentProps = {
-  projects: ProjectWithId[];
   aboutMe: TheAboutMeProps;
   endingCardImage: ImageField;
+  projects?: ProjetDocument[];
 };
 
 defineProps<ComponentProps>();
@@ -13,7 +14,7 @@ defineProps<ComponentProps>();
 const scrollToProjectId = ref<string>();
 const idToProject = ref<string>();
 
-const projectInGallery = ref<ProjectWithId | null>(null);
+const projectInGallery = ref<ProjetDocument | null>(null);
 
 function callback(id: string, hasToScroll: boolean) {
   idToProject.value = id;
@@ -27,13 +28,14 @@ function callback(id: string, hasToScroll: boolean) {
 
 <template>
   <main class="main">
-    <TheAboutMe v-bind="aboutMe" />
+    <TheAboutMe :data="aboutMe" />
     <div class="main__left">
       <section class="main__left-container">
         <p>{{ $t("project.title.vertical") }}</p>
         <UIBaseLenis orientation="vertical">
           <ProjectListVertical
-            :projects="projects"
+            v-if="projects"
+            :projects
             :id-to-active="idToProject"
             @target="
               (id: string) =>
@@ -51,6 +53,7 @@ function callback(id: string, hasToScroll: boolean) {
       :request-lenis="true"
     >
       <ProjectListHorizontal
+        v-if="projects"
         :projects
         @target="(id) => callback(id, false)"
         @target-then-scroll="(id) => callback(id, true)"
@@ -62,9 +65,7 @@ function callback(id: string, hasToScroll: boolean) {
       <ProjectEndingCard
         :email="aboutMe.email"
         :ending-card-image="endingCardImage"
-        @go-to-start="
-          () => (scrollToProjectId = `[data-project-h-id='${projects[0]?.id}']`)
-        "
+        @go-to-start="() => (scrollToProjectId = 'start')"
       />
     </UIBaseLenis>
 

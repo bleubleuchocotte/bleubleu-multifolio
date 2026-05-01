@@ -1,7 +1,3 @@
-import type { ProjetDocumentData } from "~~/prismicio-types";
-
-export type ProjectWithId = ProjetDocumentData & { id: string };
-
 export type ColorArrow = {
   background: string;
   arrow: string;

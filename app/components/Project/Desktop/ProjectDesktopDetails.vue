@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { ProjetDocument } from "~~/prismicio-types";
+
 type ComponentProps = {
-  project: ProjectWithId;
+  project: ProjetDocument;
   index: number;
 };
 
@@ -10,7 +12,7 @@ const emit = defineEmits<{
   target: [payload: string];
   next: [];
   previous: [];
-  gallery: [payload: ProjectWithId];
+  gallery: [payload: ProjetDocument];
 }>();
 
 const target = ref<HTMLElement>();
@@ -35,21 +37,21 @@ useIntersectionObserver(
         <p class="project-details__content-index">
           {{ $t("project.title.horizontal") }} #{{ index + 1 }}
         </p>
-        <ProjectUrl :url="project.url">
-          {{ project.title }}
+        <ProjectUrl :url="project.data.url">
+          {{ project.data.title }}
         </ProjectUrl>
         <div class="project-details__content-tags">
           <UIBaseTag
-            v-for="item in project.skills"
+            v-for="item in project.data.skills"
             :key="project.id + item.skill?.toString()"
           >
             {{ item.skill }}
           </UIBaseTag>
         </div>
-        <PrismicRichText
-          :field="project.description"
-          class="project-details__content-description"
-        />
+        <div class="project-details__content-description">
+          <PrismicRichText :field="project.data.description" />
+        </div>
+
         <button
           data-icon="IconFullscreen"
           class="project-details__content-more"
@@ -87,7 +89,7 @@ useIntersectionObserver(
 
     <div class="project-details__right">
       <ProjectMediasSummary
-        :medias="project.slices.slice(0, 2)"
+        :medias="project.data.slices.slice(0, 2)"
         role="button"
         aria-label="View project images"
         data-icon="IconFullscreen"
@@ -101,12 +103,11 @@ useIntersectionObserver(
 
 <style scoped lang="scss">
 .project-details {
-  display: flex;
   @include gap();
+  @include prop("padding-left");
+  display: flex;
 
   height: 100%;
-
-  @include prop("padding-left");
 
   &__left {
     display: flex;
@@ -117,8 +118,8 @@ useIntersectionObserver(
   }
 
   &__right {
-    min-width: 80vh;
     @include prop("padding-inline");
+    min-width: 80vh;
   }
 
   &__content {
@@ -131,8 +132,8 @@ useIntersectionObserver(
 
     &-heading {
       @include prop("margin-top");
-      display: flex;
       @include gap(calc(1 / 3));
+      display: flex;
       align-items: center;
       width: fit-content;
 
@@ -142,10 +143,10 @@ useIntersectionObserver(
     }
 
     &-tags {
-      display: flex;
-      flex-wrap: wrap;
       @include gap(calc(1 / 6));
       @include prop("margin-block", 0.5);
+      display: flex;
+      flex-wrap: wrap;
     }
 
     &-description {
@@ -162,11 +163,11 @@ useIntersectionObserver(
   }
 
   &__utils {
+    @include gap(0.5);
     display: flex;
     @media #{$desktop} {
       flex-direction: column;
     }
-    @include gap(0.5);
 
     &-index {
       @include font("enormous");
@@ -175,8 +176,8 @@ useIntersectionObserver(
     }
 
     &-button {
-      display: flex;
       @include gap(0.5);
+      display: flex;
     }
   }
 }
