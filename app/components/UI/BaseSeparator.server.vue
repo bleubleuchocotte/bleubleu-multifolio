@@ -8,20 +8,8 @@ withDefaults(defineProps<ComponentProps>(), {
 </script>
 
 <template>
-  <div :style="`--width: ${width}px`" />
+  <div
+    :style="`--width: ${width}px`"
+    class="bg-border gradient-scroll-left relative h-full w-[var(--width)]"
+  />
 </template>
-
-<style scoped lang="scss">
-div {
-  position: relative;
-
-  height: 100%;
-  width: var(--width);
-
-  background-color: var(--border-color);
-
-  &::before {
-    @include gradientScroll(left);
-  }
-}
-</style>

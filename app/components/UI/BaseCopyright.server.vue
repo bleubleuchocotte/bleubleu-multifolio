@@ -1,11 +1,5 @@
 <template>
-  <span class="copyright"
+  <span class="text-fluid-cta"
     >© {{ new Date().getFullYear() }} Bleubleu Chocotte</span
   >
 </template>
-
-<style scoped lang="scss">
-.copyright {
-  @include font("cta");
-}
-</style>

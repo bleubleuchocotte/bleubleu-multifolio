@@ -1,17 +1,7 @@
 <template>
-  <span class="tag__text">
+  <span
+    class="border-border text-fluid-p border p-[calc(var(--spacing-fluid)/3)] rounded-[calc(var(--radius-fluid)/2)]"
+  >
     <slot />
   </span>
 </template>
-
-<style scoped lang="scss">
-.tag {
-  &__text {
-    @include padding(calc(1 / 3));
-    border: 1px solid var(--border-color);
-    @include border-radius(0.5);
-
-    @include font("p");
-  }
-}
-</style>

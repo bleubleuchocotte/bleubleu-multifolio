@@ -1,18 +1,7 @@
 <template>
-  <div class="slider">
+  <div
+    class="gap-fluid flex h-full w-full snap-x snap-mandatory overflow-x-scroll"
+  >
     <slot />
   </div>
 </template>
-
-<style scoped lang="scss">
-.slider {
-  display: flex;
-  @include gap();
-
-  width: 100%;
-  height: 100%;
-
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-}
-</style>

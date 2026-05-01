@@ -190,6 +190,42 @@
   border-radius: 0 var(--radius-fluid) var(--radius-fluid) 0;
 }
 
+/* Gradient overlays for scroll edges (port of @mixin gradientScroll). */
+@utility gradient-scroll-left {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    height: 100%;
+    width: var(--spacing-fluid);
+    background: linear-gradient(
+      270deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: darken;
+  }
+}
+@utility gradient-scroll-right {
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: var(--spacing-fluid);
+    background: linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: darken;
+  }
+}
+
 /* Base layer — port of 1-base/_base-default.scss */
 @layer base {
   @font-face {

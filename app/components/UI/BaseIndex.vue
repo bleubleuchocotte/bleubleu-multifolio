@@ -7,15 +7,7 @@ defineProps<ComponentProps>();
 </script>
 
 <template>
-  <span class="project-index">{{
+  <span class="mr-fluid inline-block tabular-nums">{{
     index < 10 ? `0${index}` : index.toString()
   }}</span>
 </template>
-
-<style scoped lang="scss">
-.project-index {
-  display: inline-block;
-  @include prop("margin-right");
-  font-variant-numeric: tabular-nums;
-}
-</style>

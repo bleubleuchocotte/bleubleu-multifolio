@@ -62,17 +62,12 @@ watch(
 </script>
 
 <template>
-  <div ref="container" data-lenis :style="`--v: ${velocity}`">
+  <div
+    ref="container"
+    data-lenis
+    :style="`--v: ${velocity}`"
+    class="pointer-coarse:overflow-[overlay] h-full overflow-hidden"
+  >
     <slot />
   </div>
 </template>
-
-<style scoped lang="scss">
-div[data-lenis] {
-  height: 100%;
-  overflow: hidden;
-  @media #{$low-accuracy} {
-    overflow: overlay;
-  }
-}
-</style>

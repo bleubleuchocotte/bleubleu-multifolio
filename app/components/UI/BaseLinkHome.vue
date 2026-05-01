@@ -1,40 +1,10 @@
 <template>
-  <NuxtLink to="/" class="link-to-home">
+  <NuxtLink
+    to="/"
+    class="text-text-accent text-fluid-h2 max-sm:text-fluid-cta hover:border-accent absolute top-1/2 left-1/2 aspect-3 w-[20vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden border transition-[border-color] duration-300 ease-out rounded-[calc(var(--radius-fluid)/2)] max-sm:w-[25vw]"
+  >
     <UIBaseButtonEffect>
       <slot />
     </UIBaseButtonEffect>
   </NuxtLink>
 </template>
-
-<style scoped lang="scss">
-.link-to-home {
-  @include font("h2");
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  transform: translate3d(-50%, -50%, 0);
-
-  width: 20vw;
-  aspect-ratio: 3;
-
-  overflow: hidden;
-
-  border: 1px solid;
-  @include border-radius(0.5);
-
-  color: var(--text-accent-color);
-  transition: border-color 0.3s ease-out;
-
-  &:hover {
-    border-color: var(--accent-color);
-  }
-
-  @media #{$mobile-down} {
-    @include font("cta");
-
-    width: 25vw;
-  }
-}
-</style>

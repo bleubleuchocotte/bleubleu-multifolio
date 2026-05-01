@@ -36,8 +36,10 @@ watch(
 </script>
 
 <template>
-  <div class="video" :data-video-loaded="isVideoLoaded">
-    <div class="video__placeholder" />
+  <div class="video relative" :data-video-loaded="isVideoLoaded">
+    <div
+      class="rounded-fluid bg-text absolute inset-0 -z-10 opacity-20 backdrop-blur-[5px]"
+    />
 
     <video ref="video" v-bind="context">
       <source :src="src" />
@@ -45,39 +47,17 @@ watch(
   </div>
 </template>
 
-<style scoped lang="scss">
-.video {
-  position: relative;
-
-  video {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease 0.6s;
-  }
-
-  &[data-video-loaded="true"] video {
-    opacity: 1;
-  }
-
-  &[data-video-loaded="false"] video {
-    opacity: 0;
-  }
-
-  &__placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: var(--text-color);
-    backdrop-filter: blur(5px);
-    opacity: 0.2;
-    z-index: -1;
-
-    @include border-radius();
-  }
+<style scoped>
+.video video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease 0.6s;
+}
+.video[data-video-loaded="true"] video {
+  opacity: 1;
+}
+.video[data-video-loaded="false"] video {
+  opacity: 0;
 }
 </style>
