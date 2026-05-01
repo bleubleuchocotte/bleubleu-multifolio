@@ -34,11 +34,5 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <component :is="icon" v-if="icon" class="cursor-icon" />
+  <component :is="icon" v-if="icon" class="text-background" />
 </template>
-
-<style scoped lang="scss">
-.cursor-icon {
-  color: var(--background-color);
-}
-</style>

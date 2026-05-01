@@ -13,7 +13,8 @@ withDefaults(defineProps<ComponentProps>(), {
 
 <template>
   <button
-    :class="{ rotate: orientation === 'left' }"
+    class="h-18.75 w-18.75"
+    :class="{ 'rotate-180': orientation === 'left' }"
     :aria-label="
       orientation === 'left' ? 'Go to previous project' : 'Go to next project'
     "
@@ -22,14 +23,3 @@ withDefaults(defineProps<ComponentProps>(), {
     <UIWrapperArrow :colors="colors" :length-arrow="lengthArrow" />
   </button>
 </template>
-
-<style scoped lang="scss">
-button {
-  width: 75px;
-  height: 75px;
-
-  &.rotate {
-    transform: rotate(180deg);
-  }
-}
-</style>

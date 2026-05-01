@@ -35,13 +35,13 @@ function updateHeight() {
 </script>
 
 <template>
-  <div class="accordion" :style="`--accordion-height: ${height}px`">
+  <div :style="`--accordion-height: ${height}px`">
     <button
       :id="id.header"
       type="button"
       :aria-expanded="isOpen ? 'true' : 'false'"
       :aria-controls="id.content"
-      class="accordion__button"
+      class="w-full cursor-pointer appearance-none border-0 bg-transparent p-0"
       @click="toggleAccordion"
       @focus="isButtonFocused = true"
       @blur="isButtonFocused = false"
@@ -54,35 +54,9 @@ function updateHeight() {
       role="region"
       :aria-labelledby="id.header"
       :aria-hidden="isOpen ? 'false' : 'true'"
-      class="accordion__content"
+      class="max-h-0 overflow-hidden transition-all duration-200 ease-out aria-[hidden=false]:max-h-(--accordion-height)"
     >
       <slot name="content" />
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.accordion {
-  &__button {
-    appearance: none;
-    background-color: transparent;
-    border: unset;
-    padding: 0;
-
-    cursor: pointer;
-
-    width: 100%;
-  }
-
-  &__content {
-    max-height: 0;
-    overflow: hidden;
-
-    @include transition();
-
-    &[aria-hidden="false"] {
-      max-height: var(--accordion-height);
-    }
-  }
-}
-</style>

@@ -15,7 +15,10 @@ const styles = reactive({
 </script>
 
 <template>
-  <div class="wrapper-arrow__container" :style="styles">
+  <div
+    :style="styles"
+    class="flex h-full w-full items-center justify-center rounded-full border border-transparent"
+  >
     <template v-if="lengthArrow === 'short'">
       <IconBaseArrowShort :fill="colors.arrow" />
     </template>
@@ -24,20 +27,3 @@ const styles = reactive({
     </template>
   </div>
 </template>
-
-<style scoped lang="scss">
-.wrapper-arrow {
-  &__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 100%;
-    width: 100%;
-
-    border: 1px solid;
-    border-color: transparent;
-    border-radius: 50%;
-  }
-}
-</style>

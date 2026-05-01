@@ -15,113 +15,45 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
   <button
     :data-email="email"
     type="button"
-    class="button"
+    class="button text-text-accent text-fluid-cta relative h-full w-fit overflow-hidden rounded-[calc(var(--radius-fluid)/2)]"
     :class="{ open: copied }"
     aria-label="Copy email address to clipboard"
     @click="copy(email?.toString() ?? '')"
   >
-    <div class="button__text">
-      <div class="button__text-bg-top">
-        <span><slot /></span>
+    <div class="absolute top-0 z-1 h-full w-full">
+      <div
+        class="bg-accent button__text-bg-top relative h-1/2 w-full overflow-hidden transition-transform duration-300 ease-out"
+      >
+        <span
+          class="absolute bottom-0 left-0 w-full translate-y-1/2 text-center"
+          ><slot
+        /></span>
       </div>
-      <div class="button__text-bg-bottom" aria-hidden="true">
-        <span><slot /></span>
+      <div
+        class="bg-accent button__text-bg-bottom relative h-1/2 w-full overflow-hidden transition-transform duration-300 ease-out"
+        aria-hidden="true"
+      >
+        <span class="absolute top-0 left-0 w-full -translate-y-1/2 text-center"
+          ><slot
+        /></span>
       </div>
     </div>
 
-    <div class="button__reveal">
+    <div
+      class="bg-text-accent text-accent border-accent absolute top-0 left-0 flex h-full w-full items-center justify-center border rounded-[calc(var(--radius-fluid)/2)]"
+    >
       <span>{{ copied ? $t("contact.click") : $t("contact.hover") }} </span>
     </div>
   </button>
 </template>
 
-<style scoped lang="scss">
-.button {
-  @include font("cta");
-
-  position: relative;
-  overflow: hidden;
-
-  height: 100%;
-  width: fit-content;
-
-  @include border-radius(0.5);
-
-  color: var(--text-accent-color);
-
-  &:hover .button__text-bg,
-  &.open .button__text-bg {
-    &-top {
-      transform: translate3d(0, -100%, 0);
-    }
-    &-bottom {
-      transform: translate3d(0, 100%, 0);
-    }
-  }
-
-  &__text {
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-    top: 0;
-    z-index: 1;
-
-    &-bg-top,
-    &-bg-bottom {
-      width: 100%;
-      height: 50%;
-
-      background-color: var(--accent-color);
-
-      position: relative;
-
-      overflow: hidden;
-      transition: transform 0.3s ease-out;
-
-      span {
-        width: 100%;
-        position: absolute;
-
-        left: 0;
-
-        text-align: center;
-      }
-    }
-
-    &-bg-top {
-      span {
-        bottom: 0;
-
-        transform: translate3d(0, 50%, 0);
-      }
-    }
-
-    &-bg-bottom {
-      span {
-        top: 0;
-
-        transform: translate3d(0, -50%, 0);
-      }
-    }
-  }
-
-  &__reveal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 100%;
-    width: 100%;
-
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    background-color: var(--text-accent-color);
-    color: var(--accent-color);
-
-    @include border(0.5, var(--accent-color));
-  }
+<style scoped>
+.button:hover .button__text-bg-top,
+.button.open .button__text-bg-top {
+  transform: translate3d(0, -100%, 0);
+}
+.button:hover .button__text-bg-bottom,
+.button.open .button__text-bg-bottom {
+  transform: translate3d(0, 100%, 0);
 }
 </style>
