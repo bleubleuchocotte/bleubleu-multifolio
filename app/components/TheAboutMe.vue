@@ -1,20 +1,11 @@
 <script lang="ts" setup>
-import type {
-  KeyTextField,
-  ImageField,
-  RichTextField,
-} from "@prismicio/client";
-import type { WebsiteDocumentDataLinksItem } from "~~/prismicio-types";
+import type { WebsiteDocumentData } from "~~/prismicio-types";
 
-export type TheAboutMeProps = {
-  imageOfMe: ImageField;
-  description: RichTextField;
-  email: KeyTextField;
-  links: WebsiteDocumentDataLinksItem[];
-  firstName: KeyTextField;
-  lastName: KeyTextField;
-};
-const props = defineProps<TheAboutMeProps>();
+export type TheAboutMeProps = Pick<
+  WebsiteDocumentData,
+  "about-image" | "description" | "email" | "links" | "first-name" | "last-name"
+>;
+const props = defineProps<{ data: TheAboutMeProps }>();
 
 const isOpen = ref(false);
 const target = useTemplateRef("target");
@@ -41,15 +32,17 @@ onClickOutside(target, () => {
     :class="{ open: isOpen }"
   >
     <UIBaseLenis class="section__content">
-      <UIBasePicture :image="props.imageOfMe" class="section__content-image" />
-
-      <PrismicRichText
-        :field="props.description"
-        class="section__content-text"
+      <UIBasePicture
+        :image="props.data['about-image']"
+        class="section__content-image"
       />
 
+      <div class="section__content-text">
+        <PrismicRichText :field="props.data.description" />
+      </div>
+
       <UIBaseButtonContact
-        :email="props.email"
+        :email="props.data.email"
         class="section__content-contact"
       >
         {{ $t("contact.text") }}
@@ -67,8 +60,8 @@ onClickOutside(target, () => {
           </NuxtLink>
         </li>
         <li
-          v-for="link in props.links"
-          :key="link.name?.toString()"
+          v-for="link in props.data.links"
+          :key="String(link.name)"
           class="section__content-links-item"
         >
           <PrismicLink :field="link.link">
@@ -96,7 +89,7 @@ onClickOutside(target, () => {
       @keydown.space.prevent="isOpen = !isOpen"
     >
       <h1 class="section__bookmark-heading">
-        {{ props.firstName }} {{ props.lastName }}
+        {{ props.data["first-name"] }} {{ props.data["last-name"] }}
       </h1>
       <div class="section__bookmark-flex">
         <div>

@@ -36,27 +36,27 @@ Créer ensuite un fichier `.env` à partir de [`.env.example`](.env.example) ave
 
 ## Scripts
 
-| Commande | Description |
-| --- | --- |
-| `mise exec -- pnpm dev` | Serveur de développement Nuxt |
-| `mise exec -- pnpm build` | Build de production (SSR) |
-| `mise exec -- pnpm generate` | Génération statique du site |
-| `mise exec -- pnpm preview` | Preview du build local |
-| `mise exec -- pnpm lint` / `lint:fix` | ESLint |
-| `mise exec -- pnpm tc` | Typecheck (`nuxt typecheck` / vue-tsc) |
-| `mise exec -- pnpm test` | Tous les projets Vitest (unit + e2e) |
-| `mise exec -- pnpm test:unit` / `test:e2e` | Un seul projet Vitest |
-| `mise exec -- pnpm slicemachine` | UI Prismic Slice Machine |
+| Commande                                   | Description                            |
+| ------------------------------------------ | -------------------------------------- |
+| `mise exec -- pnpm dev`                    | Serveur de développement Nuxt          |
+| `mise exec -- pnpm build`                  | Build de production (SSR)              |
+| `mise exec -- pnpm generate`               | Génération statique du site            |
+| `mise exec -- pnpm preview`                | Preview du build local                 |
+| `mise exec -- pnpm lint` / `lint:fix`      | ESLint                                 |
+| `mise exec -- pnpm tc`                     | Typecheck (`nuxt typecheck` / vue-tsc) |
+| `mise exec -- pnpm test`                   | Tous les projets Vitest (unit + e2e)   |
+| `mise exec -- pnpm test:unit` / `test:e2e` | Un seul projet Vitest                  |
+| `mise exec -- pnpm slicemachine`           | UI Prismic Slice Machine               |
 
 Avant chaque commit : `pnpm lint`, `pnpm tc`, `pnpm test`.
 
 ## Variables d'environnement
 
-| Variable | Obligatoire | Rôle |
-| --- | --- | --- |
-| `PRISMIC_ENDPOINT` | ✅ | Nom du repository Prismic (sans le `.cdn.prismic.io`). |
-| `NUXT_SITE_URL` | en prod | URL canonique du site, utilisée par `@nuxtjs/seo` (sitemap, robots, canonical). |
-| `NUXT_SITE_NAME` | recommandé | Nom du site exposé dans les meta SEO. |
+| Variable           | Obligatoire | Rôle                                                                            |
+| ------------------ | ----------- | ------------------------------------------------------------------------------- |
+| `PRISMIC_ENDPOINT` | ✅          | Nom du repository Prismic (sans le `.cdn.prismic.io`).                          |
+| `NUXT_SITE_URL`    | en prod     | URL canonique du site, utilisée par `@nuxtjs/seo` (sitemap, robots, canonical). |
+| `NUXT_SITE_NAME`   | recommandé  | Nom du site exposé dans les meta SEO.                                           |
 
 Voir [`.env.example`](.env.example) pour le template.
 

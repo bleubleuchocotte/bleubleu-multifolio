@@ -13,7 +13,7 @@ function scrollToTop() {
 <template>
   <section class="about-me-mobile">
     <div class="about-me-mobile__heading">
-      <h1>{{ data.firstName }} {{ data.lastName }}</h1>
+      <h1>{{ data["first-name"] }} {{ data["last-name"] }}</h1>
 
       <button aria-label="Back to Top" @click="scrollToTop">
         <svg
@@ -41,7 +41,7 @@ function scrollToTop() {
     <div class="about-me-mobile__content">
       <PrismicRichText :field="data.description" />
       <UIBasePicture
-        :image="data.imageOfMe"
+        :image="data['about-image']"
         class="about-me-mobile__content-image"
       />
 

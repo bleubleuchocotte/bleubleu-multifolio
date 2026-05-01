@@ -1,0 +1,10 @@
+# Ignore IA Agents 
+.claude
+.agents
+
+# Ignore generated
+slices
+customtypes
+pnpm-lock.yaml
+skills-lock.json
+prismicio-types.d.ts
