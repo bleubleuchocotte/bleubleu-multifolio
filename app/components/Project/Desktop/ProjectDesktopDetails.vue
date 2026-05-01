@@ -31,16 +31,22 @@ useIntersectionObserver(
 </script>
 
 <template>
-  <article ref="target" class="project-details" :data-project-h-id="project.id">
-    <div class="project-details__left">
-      <div class="project-details__content">
-        <p class="project-details__content-index">
+  <article
+    ref="target"
+    class="gap-fluid pl-fluid flex h-full"
+    :data-project-h-id="project.id"
+  >
+    <div class="flex min-w-125 flex-col justify-between">
+      <div class="border-border pb-fluid border-b">
+        <p class="mb-fluid">
           {{ $t("project.title.horizontal") }} #{{ index + 1 }}
         </p>
         <ProjectUrl :url="project.data.url">
           {{ project.data.title }}
         </ProjectUrl>
-        <div class="project-details__content-tags">
+        <div
+          class="flex flex-wrap gap-[calc(var(--spacing-fluid)/6)] my-[calc(var(--spacing-fluid)/2)]"
+        >
           <UIBaseTag
             v-for="item in project.data.skills"
             :key="project.id + item.skill?.toString()"
@@ -48,13 +54,13 @@ useIntersectionObserver(
             {{ item.skill }}
           </UIBaseTag>
         </div>
-        <div class="project-details__content-description">
+        <div class="text-fluid-p line-clamp-3">
           <PrismicRichText :field="project.data.description" />
         </div>
 
         <button
           data-icon="IconFullscreen"
-          class="project-details__content-more"
+          class="text-fluid-cta text-accent underline"
           @click="$emit('gallery', project)"
           @keydown.enter.space="$emit('gallery', project)"
         >
@@ -62,11 +68,11 @@ useIntersectionObserver(
         </button>
       </div>
 
-      <div class="project-details__utils">
-        <span class="project-details__utils-index">
+      <div class="flex gap-[calc(var(--spacing-fluid)/2)] lg:flex-col">
+        <span class="text-fluid-enormous text-accent leading-none">
           <UIBaseIndex :index="index + 1" />
         </span>
-        <div class="project-details__utils-button">
+        <div class="flex gap-[calc(var(--spacing-fluid)/2)]">
           <UIBaseButtonNavigation
             :colors="{
               background: 'transparent',
@@ -87,7 +93,7 @@ useIntersectionObserver(
       </div>
     </div>
 
-    <div class="project-details__right">
+    <div class="px-fluid min-w-[80vh]">
       <ProjectMediasSummary
         :medias="project.data.slices.slice(0, 2)"
         role="button"
@@ -100,85 +106,3 @@ useIntersectionObserver(
     </div>
   </article>
 </template>
-
-<style scoped lang="scss">
-.project-details {
-  @include gap();
-  @include prop("padding-left");
-  display: flex;
-
-  height: 100%;
-
-  &__left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    min-width: 500px;
-  }
-
-  &__right {
-    @include prop("padding-inline");
-    min-width: 80vh;
-  }
-
-  &__content {
-    @include prop("padding-bottom");
-    border-bottom: 1px solid var(--border-color);
-
-    &-index {
-      @include prop("margin-bottom");
-    }
-
-    &-heading {
-      @include prop("margin-top");
-      @include gap(calc(1 / 3));
-      display: flex;
-      align-items: center;
-      width: fit-content;
-
-      &-title {
-        pointer-events: none;
-      }
-    }
-
-    &-tags {
-      @include gap(calc(1 / 6));
-      @include prop("margin-block", 0.5);
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    &-description {
-      @include font("p");
-
-      @include line-clamp(3);
-    }
-
-    &-more {
-      @include font("cta");
-      color: var(--accent-color);
-      text-decoration: underline;
-    }
-  }
-
-  &__utils {
-    @include gap(0.5);
-    display: flex;
-    @media #{$desktop} {
-      flex-direction: column;
-    }
-
-    &-index {
-      @include font("enormous");
-      color: var(--accent-color);
-      line-height: 1;
-    }
-
-    &-button {
-      @include gap(0.5);
-      display: flex;
-    }
-  }
-}
-</style>

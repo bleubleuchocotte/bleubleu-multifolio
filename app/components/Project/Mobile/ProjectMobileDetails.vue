@@ -11,14 +11,19 @@ defineProps<ComponentProps>();
 </script>
 
 <template>
-  <article class="project-details-mobile">
-    <UIBaseIndex :index="index + 1" class="project-details-mobile__index" />
+  <article
+    class="gap-fluid py-fluid after:bg-border relative flex h-full flex-col after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:content-['']"
+  >
+    <UIBaseIndex
+      :index="index + 1"
+      class="text-fluid-enormous text-accent leading-none"
+    />
 
     <ProjectUrl :url="project.data.url" tabindex="-1">
       {{ project.data.title }}
     </ProjectUrl>
 
-    <div class="project-details-mobile__content-tags">
+    <div class="flex flex-wrap gap-[calc(var(--spacing-fluid)/6)]">
       <UIBaseTag
         v-for="item in project.data.skills"
         :key="item.skill?.toString()"
@@ -31,62 +36,7 @@ defineProps<ComponentProps>();
 
     <PrismicRichText
       :field="project.data.description"
-      class="project-details-mobile__content-description"
+      class="text-fluid-p mb-fluid"
     />
   </article>
 </template>
-
-<style scoped lang="scss">
-.project-details-mobile {
-  display: flex;
-  @include gap();
-
-  flex-direction: column;
-  @include prop("padding-block");
-
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    background-color: var(--border-color);
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 1px;
-  }
-
-  height: 100%;
-
-  &__index {
-    @include font("enormous");
-    color: var(--accent-color);
-    line-height: 1;
-  }
-
-  &__content {
-    &-heading {
-      display: flex;
-      align-items: center;
-      @include gap(calc(1 / 3));
-      @include prop("margin-top");
-
-      & > h3 {
-        @include font("h2");
-      }
-    }
-
-    &-tags {
-      display: flex;
-      flex-wrap: wrap;
-      @include gap(calc(1 / 6));
-    }
-
-    &-description {
-      @include font("p");
-      @include prop("margin-bottom");
-    }
-  }
-}
-</style>
