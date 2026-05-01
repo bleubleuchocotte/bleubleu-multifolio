@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import Lenis from "lenis";
+import type { LenisOptions } from "lenis";
+import type { VueLenis } from "lenis/vue";
+import "lenis/dist/lenis.css";
 
 type ComponentProps = {
   target?: number | string | HTMLElement;
   requestLenis?: boolean;
-  orientation?: "vertical" | "horizontal";
+  orientation?: LenisOptions["orientation"];
 };
 
 const props = withDefaults(defineProps<ComponentProps>(), {
@@ -13,61 +15,44 @@ const props = withDefaults(defineProps<ComponentProps>(), {
   target: undefined,
 });
 
-const container = ref(null);
-let lenis: Lenis | undefined;
-let rafId: number | undefined;
-
+const lenisRef = useTemplateRef<InstanceType<typeof VueLenis>>("lenis");
 const velocity = ref(0);
 
-onMounted(() => {
-  if (container.value === null) {
+const options = computed<LenisOptions>(() => ({
+  orientation: props.orientation,
+}));
+
+const wrapperProps = computed(() => ({
+  style: `--v: ${velocity.value}`,
+  class:
+    "pointer-coarse:overflow-[overlay] h-full overflow-hidden [&>div]:contents",
+}));
+
+watchEffect(() => {
+  const lenis = lenisRef.value?.lenis;
+  if (!lenis || !props.requestLenis) {
     return;
   }
-  lenis = new Lenis({
-    wrapper: container.value, // element which has overflow
-    content: container.value, // usually wrapper's direct child
-    orientation: props.orientation,
-  });
-
-  function raf(time: number) {
-    lenis?.raf(time);
-    rafId = requestAnimationFrame(raf);
-  }
-
-  if (props.requestLenis) {
-    lenis.on("scroll", () => {
-      velocity.value = lenis?.velocity ?? 0;
-    });
-  }
-
-  rafId = requestAnimationFrame(raf);
-});
-
-onUnmounted(() => {
-  if (rafId !== undefined) {
-    cancelAnimationFrame(rafId);
-  }
-  lenis?.destroy();
-  lenis = undefined;
+  const onScroll = () => {
+    velocity.value = lenis.velocity;
+  };
+  lenis.on("scroll", onScroll);
+  onWatcherCleanup(() => lenis.off("scroll", onScroll));
 });
 
 watch(
   () => props.target,
-  () => {
-    if (props.target) {
-      lenis?.scrollTo(props.target);
+  (target) => {
+    if (target === undefined) {
+      return;
     }
+    lenisRef.value?.lenis?.scrollTo(target);
   },
 );
 </script>
 
 <template>
-  <div
-    ref="container"
-    data-lenis
-    :style="`--v: ${velocity}`"
-    class="pointer-coarse:overflow-[overlay] h-full overflow-hidden"
-  >
+  <VueLenis ref="lenis" :options :props="wrapperProps">
     <slot />
-  </div>
+  </VueLenis>
 </template>
