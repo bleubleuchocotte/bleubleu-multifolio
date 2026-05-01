@@ -4,20 +4,25 @@ import type { FilledLinkToMediaField, ImageField } from "@prismicio/client";
 type ComponentProps = {
   image?: ImageField;
   linkToMediaField?: FilledLinkToMediaField;
+  sizes?: string;
+  loading?: "eager" | "lazy";
 };
 
-defineProps<ComponentProps>();
+const props = withDefaults(defineProps<ComponentProps>(), {
+  image: undefined,
+  linkToMediaField: undefined,
+  sizes: "100vw sm:100vw md:100vw lg:80vw xl:1440px",
+  loading: "lazy",
+});
 
 const isImageLoaded = ref(false);
-const container = ref<HTMLDivElement | null>(null);
+
+const imageWidth = computed(() => props.image?.dimensions?.width);
+const imageHeight = computed(() => props.image?.dimensions?.height);
 </script>
 
 <template>
-  <div
-    ref="container"
-    class="picture relative"
-    :data-image-loaded="isImageLoaded"
-  >
+  <div class="picture relative" :data-image-loaded="isImageLoaded">
     <div
       class="bg-text absolute inset-0 -z-10 opacity-20 backdrop-blur-[5px]"
       :class="{ 'rounded-fluid': linkToMediaField }"
@@ -28,8 +33,10 @@ const container = ref<HTMLDivElement | null>(null);
         provider="prismic"
         :src="image.url"
         :alt="image.alt ?? ''"
-        :width="container?.clientWidth"
-        :height="container?.clientHeight"
+        :sizes
+        :loading
+        :width="imageWidth"
+        :height="imageHeight"
         @load="isImageLoaded = true"
       />
     </template>
@@ -37,11 +44,10 @@ const container = ref<HTMLDivElement | null>(null);
       <NuxtPicture
         :img-attrs="{ class: 'picture__content' }"
         provider="prismic"
-        loading="lazy"
+        :loading
+        :sizes
         :src="linkToMediaField.url"
         alt=""
-        :height="container?.clientHeight"
-        :width="container?.clientWidth"
         @load="isImageLoaded = true"
       />
     </template>

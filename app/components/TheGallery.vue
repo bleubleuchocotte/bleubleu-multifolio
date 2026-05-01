@@ -42,13 +42,16 @@ const mediaAttribute: MediaHTMLAttributes = {
 <template>
   <section
     ref="target"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="gallery-title"
     class="bg-background-70 pt-fluid fixed inset-0 z-10 flex flex-col gap-[calc(var(--spacing-fluid)/2)] px-[15vw] backdrop-blur-[20px]"
   >
     <div
       ref="ignore"
       class="flex justify-between border-b pb-[calc(var(--spacing-fluid)/2)]"
     >
-      <ProjectUrl :url="project.data.url">
+      <ProjectUrl id="gallery-title" :url="project.data.url">
         {{ project.data.title }}
       </ProjectUrl>
 
