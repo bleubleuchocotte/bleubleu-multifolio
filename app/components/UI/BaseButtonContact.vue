@@ -20,30 +20,30 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
     aria-label="Copy email address to clipboard"
     @click="copy(email?.toString() ?? '')"
   >
-    <div class="absolute top-0 z-1 h-full w-full">
-      <div
+    <span class="absolute top-0 z-1 h-full w-full">
+      <span
         class="bg-accent button__text-bg-top relative h-1/2 w-full overflow-hidden transition-transform duration-300 ease-out"
       >
         <span
           class="absolute bottom-0 left-0 w-full translate-y-1/2 text-center"
           ><slot
         /></span>
-      </div>
-      <div
+      </span>
+      <span
         class="bg-accent button__text-bg-bottom relative h-1/2 w-full overflow-hidden transition-transform duration-300 ease-out"
         aria-hidden="true"
       >
         <span class="absolute top-0 left-0 w-full -translate-y-1/2 text-center"
           ><slot
         /></span>
-      </div>
-    </div>
+      </span>
+    </span>
 
-    <div
+    <span
       class="bg-text-accent text-accent border-accent absolute top-0 left-0 flex h-full w-full items-center justify-center border rounded-[calc(var(--radius-fluid)/2)]"
     >
       <span>{{ copied ? $t("contact.click") : $t("contact.hover") }} </span>
-    </div>
+    </span>
   </button>
 </template>
 

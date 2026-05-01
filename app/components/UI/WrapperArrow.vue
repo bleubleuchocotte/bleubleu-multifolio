@@ -15,7 +15,7 @@ const styles = reactive({
 </script>
 
 <template>
-  <div
+  <span
     :style="styles"
     class="flex h-full w-full items-center justify-center rounded-full border border-transparent"
   >
@@ -25,5 +25,5 @@ const styles = reactive({
     <template v-else>
       <IconBaseArrowLong :fill="colors.arrow" />
     </template>
-  </div>
+  </span>
 </template>
