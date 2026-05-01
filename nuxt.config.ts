@@ -13,7 +13,6 @@ export default defineNuxtConfig({
       include: [
         "@vue/devtools-core",
         "@vue/devtools-kit",
-        "vue3-marquee",
         "@vueuse/integrations/useFocusTrap",
         "lenis",
       ],

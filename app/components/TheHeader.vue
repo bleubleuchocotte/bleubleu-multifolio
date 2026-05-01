@@ -7,6 +7,10 @@ type ComponentProps = {
 };
 
 defineProps<ComponentProps>();
+
+const Vue3Marquee = defineAsyncComponent(() =>
+  import("vue3-marquee").then((m) => m.Vue3Marquee),
+);
 </script>
 
 <template>
