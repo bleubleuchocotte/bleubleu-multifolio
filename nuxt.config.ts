@@ -40,6 +40,10 @@ export default defineNuxtConfig({
   robots: {
     disallow: ["/legal-notice", "/wip"],
   },
+  routeRules: {
+    "/": { swr: 600 },
+    "/legal-notice": { swr: 3600 },
+  },
   // The OG image is served from Prismic via `useSeoMeta` in app.vue —
   // disable the dynamic generation from the @nuxtjs/og-image module.
   ogImage: {

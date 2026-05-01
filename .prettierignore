@@ -3,7 +3,8 @@
 .agents
 
 # Ignore generated
-slices
+slices/index.ts
+slices/**/*.json
 customtypes
 pnpm-lock.yaml
 skills-lock.json

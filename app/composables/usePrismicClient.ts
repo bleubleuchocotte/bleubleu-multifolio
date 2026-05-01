@@ -11,5 +11,11 @@ export const usePrismicClient = () => {
     });
   };
 
-  return { getAllProjects, getWebsite };
+  const getPageLegalNotice = () => {
+    return useAsyncData("page_legal_notice", () =>
+      client.getSingle("page_legal_notice"),
+    );
+  };
+
+  return { getAllProjects, getWebsite, getPageLegalNotice };
 };
