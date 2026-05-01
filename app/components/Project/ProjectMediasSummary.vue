@@ -17,9 +17,13 @@ const mediaAttribute: MediaHTMLAttributes = {
 </script>
 
 <template>
-  <div class="project-images-summary__grid">
+  <div
+    class="medias-summary flex h-full cursor-pointer flex-col gap-[calc(var(--spacing-fluid)*0.8)]"
+  >
     <template v-for="media in medias" :key="media.id">
-      <div class="project-images-summary__grid-item">
+      <div
+        class="medias-summary__item flex flex-1 overflow-hidden transition-transform duration-100 ease-out"
+      >
         <SliceZone
           :slices="[media]"
           :components="components"
@@ -30,32 +34,13 @@ const mediaAttribute: MediaHTMLAttributes = {
   </div>
 </template>
 
-<style scoped lang="scss">
-.project-images-summary {
-  &__grid {
-    height: 100%;
-    cursor: pointer;
-
-    display: flex;
-    flex-direction: column;
-    @include prop("gap", 0.8);
-
-    &-item {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-      transition: transform 0.1s ease-out;
-
-      &:first-of-type {
-        transform: translate3d(calc(var(--v) * 1.5px), 0, 0)
-          skewX(calc(var(--v) * -0.02deg));
-      }
-
-      &:last-of-type {
-        transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
-          skewX(calc(var(--v) * -0.02deg));
-      }
-    }
-  }
+<style scoped>
+.medias-summary__item:first-of-type {
+  transform: translate3d(calc(var(--v) * 1.5px), 0, 0)
+    skewX(calc(var(--v) * -0.02deg));
+}
+.medias-summary__item:last-of-type {
+  transform: translate3d(calc(var(--v) * 0.75px), 0, 0)
+    skewX(calc(var(--v) * -0.02deg));
 }
 </style>

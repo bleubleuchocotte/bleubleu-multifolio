@@ -11,11 +11,11 @@ defineProps<ComponentProps>();
 <template>
   <PrismicLink
     v-if="url"
-    class="project-url"
+    class="flex w-fit items-center gap-[calc(var(--spacing-fluid)/3)]"
     :field="url"
     data-icon="IconArrowRightUp"
   >
-    <h2 class="project-url__name">
+    <h2 class="pointer-events-none max-lg:text-fluid-h3">
       <slot />
     </h2>
     <IconBaseArrowLink
@@ -25,26 +25,12 @@ defineProps<ComponentProps>();
       }"
     />
   </PrismicLink>
-  <div v-else class="project-url">
-    <h2 class="project-url__name">
+  <div
+    v-else
+    class="flex w-fit items-center gap-[calc(var(--spacing-fluid)/3)]"
+  >
+    <h2 class="pointer-events-none max-lg:text-fluid-h3">
       <slot />
     </h2>
   </div>
 </template>
-
-<style scoped lang="scss">
-.project-url {
-  display: flex;
-  @include gap(calc(1 / 3));
-  align-items: center;
-  width: fit-content;
-
-  &__name {
-    pointer-events: none;
-
-    @media #{$desktop-down} {
-      @include font("h3");
-    }
-  }
-}
-</style>

@@ -64,92 +64,37 @@ watch(
 </script>
 
 <template>
-  <ul class="projects-list-vertical">
+  <ul class="h-full pt-fluid max-lg:pt-0! list-vertical">
     <li
       v-for="(project, i) in projects"
       ref="containers"
       :key="project.id"
       :data-project-v-id="project.id"
-      class="projects-list-vertical__element"
+      class="list-vertical__element border-border flex cursor-pointer justify-between border-b transition-all duration-200 ease-[cubic-bezier(0.63,0,0.78,0.99)] gap-[calc(var(--spacing-fluid)/2)] py-[calc(var(--spacing-fluid)/2)] hover:text-accent hover:border-current focus-within:text-accent focus-within:border-current"
       tabindex="0"
       @click="(e) => callback(e, project.id)"
       @keypress.enter="(e) => callback(e, project.id)"
     >
-      <h2 class="projects-list-vertical__element-name">
+      <h2
+        class="text-fluid-h3 element-name pointer-events-none flex self-end whitespace-nowrap uppercase before:bg-accent before:content-[''] before:h-px before:w-0 before:self-center before:transition-all before:duration-200 before:ease-[cubic-bezier(0.63,0,0.78,0.99)]"
+      >
         <UIBaseIndex :index="i + 1" />{{ project.data.title }}
       </h2>
-      <div class="projects-list-vertical__element-data">
-        <p>{{ project.data.date?.slice(0, 4) }}</p>
+      <div class="pointer-events-none text-right">
+        <p class="text-fluid-small">{{ project.data.date?.slice(0, 4) }}</p>
         <!-- <p>{{ project.skills[0]?.skill }}</p> -->
       </div>
     </li>
   </ul>
 </template>
 
-<style scoped lang="scss">
-.projects-list-vertical {
-  height: 100%;
-  @include prop("padding-top");
-
-  @media #{$desktop-down} {
-    @include prop("padding-top", 0, !important);
-  }
-
-  &__element {
-    @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
-    display: flex;
-    justify-content: space-between;
-    @include gap(0.5);
-    border-bottom: 1px solid var(--border-color);
-
-    @include prop("padding-block", 0.5);
-
-    cursor: pointer;
-
-    &:hover,
-    &:focus-within,
-    &.active {
-      color: var(--accent-color);
-      border-bottom: 1px solid;
-    }
-
-    &.active &-name:before {
-      width: 10px;
-      margin-right: 5px;
-    }
-
-    &-name,
-    &-data {
-      pointer-events: none;
-    }
-
-    &-name {
-      display: flex;
-      text-transform: uppercase;
-      align-self: flex-end;
-
-      white-space: nowrap;
-
-      @include font("h3");
-
-      &::before {
-        @include transition(all, 0.2s, cubic-bezier(0.63, 0, 0.78, 0.99));
-        content: "";
-        height: 1px;
-        width: 0;
-        margin-right: 0;
-        background-color: var(--accent-color);
-
-        align-self: center;
-      }
-    }
-
-    &-data {
-      text-align: right;
-      & > p {
-        @include font("small");
-      }
-    }
-  }
+<style scoped>
+.list-vertical__element.active {
+  color: var(--accent-color);
+  border-bottom-color: currentColor;
+}
+.list-vertical__element.active .element-name::before {
+  width: 10px;
+  margin-right: 5px;
 }
 </style>

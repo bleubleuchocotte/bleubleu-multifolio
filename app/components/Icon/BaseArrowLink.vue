@@ -13,6 +13,7 @@ defineProps<ComponentProps>();
     height="20"
     viewBox="0 0 20 20"
     fill="none"
+    class="pointer-events-none"
   >
     <circle cx="10" cy="10.104" r="9.7207" :fill="colors.background" />
     <path
@@ -21,9 +22,3 @@ defineProps<ComponentProps>();
     />
   </svg>
 </template>
-
-<style scoped lang="scss">
-svg {
-  pointer-events: none;
-}
-</style>

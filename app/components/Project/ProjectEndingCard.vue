@@ -14,9 +14,15 @@ defineEmits<{
 </script>
 
 <template>
-  <article class="ending-card invert-selection">
-    <div class="ending-card__content">
-      <p class="ending-card__content-caption">
+  <article
+    class="ending-card invert-selection -mr-(--spacing-fluid) h-full min-w-[40vw]"
+  >
+    <div
+      class="bg-accent border-accent text-text-accent rounded-fluid gap-fluid flex h-full flex-col justify-center border-0 text-center p-[calc(var(--spacing-fluid)/2)]"
+    >
+      <p
+        class="text-left pt-[calc(var(--spacing-fluid)/4)] pl-[calc(var(--spacing-fluid)/2)]"
+      >
         {{ $t("project.ending-card.text-1") }}
         <br />
         {{ $t("project.ending-card.text-2") }}
@@ -24,14 +30,14 @@ defineEmits<{
 
       <UIBasePicture
         :image="endingCardImage"
-        class="ending-card__content-image"
+        class="m-auto h-auto max-w-[60%]"
       />
 
       <ProjectEndingCardButtonStart @click="$emit('goToStart')" />
 
       <UIBaseButtonContact
         :email="email"
-        class="ending-card__content-contact-button"
+        class="ending-card__contact-button border-text-accent text-fluid-h2 z-0 h-[18%] w-full border"
       >
         {{ $t("contact.text") }}
       </UIBaseButtonContact>
@@ -39,52 +45,13 @@ defineEmits<{
   </article>
 </template>
 
-<style scoped lang="scss">
-.ending-card {
-  @include prop("margin-right", -1);
-  min-width: 40vw;
-  height: 100%;
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-    @include padding(0.5);
-    @include gap();
-
-    color: var(--text-accent-color);
-
-    background-color: var(--accent-color);
-    border: 0 solid var(--accent-color);
-    @include border-radius();
-
-    &-caption {
-      @include prop("padding-left", 0.5);
-      @include prop("padding-top", 0.25);
-      text-align: left;
-    }
-
-    &-contact-button {
-      height: 18%;
-      width: 100%;
-      z-index: 0;
-      border: 1px solid var(--text-accent-color);
-
-      @include font("h2");
-
-      &:deep(.button__reveal) {
-        border-radius: 0;
-        border: unset;
-      }
-    }
-
-    &-image {
-      max-width: 60%;
-      height: auto;
-      margin: auto;
-    }
-  }
+<style scoped>
+/* Pierce into BaseButtonContact's reveal layer to drop the rounded border. */
+.ending-card__contact-button :deep(.button) {
+  border-radius: 0;
+}
+.ending-card__contact-button :deep(.button > div:last-of-type) {
+  border-radius: 0;
+  border: none;
 }
 </style>
