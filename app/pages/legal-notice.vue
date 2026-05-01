@@ -12,7 +12,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="legal-container">
+  <div
+    class="border-border relative overflow-hidden border-b max-sm:flex max-sm:flex-col-reverse max-sm:border-b-0"
+  >
     <UIBaseLinkHome>
       {{ $t("page.legal-notice.button") }}
     </UIBaseLinkHome>
@@ -21,13 +23,13 @@ useSeoMeta({
       <div
         v-for="i in 2"
         :key="Math.floor(Math.random() * (100 + i))"
-        class="legal-container__bands"
+        class="border-border bg-background flex w-max border border-l-0 first-of-type:border-b-0"
       >
         <PrismicRichText
           v-for="j in 6"
           :key="Math.floor(Math.random() * (100 + j))"
           :field="page?.data.content"
-          class="legal-container__bands-notices"
+          class="p-fluid flex flex-col gap-[0.6rem]"
           :aria-hidden="!(j === 1 && i === 1)"
         />
       </div>
@@ -36,41 +38,8 @@ useSeoMeta({
     <template v-else>
       <PrismicRichText
         :field="page?.data.content"
-        class="legal-container__bands-notices"
+        class="p-fluid flex flex-col gap-[0.6rem]"
       />
     </template>
   </div>
 </template>
-
-<style scoped lang="scss">
-.legal-container {
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border-color);
-
-  @media #{$mobile-down} {
-    display: flex;
-    flex-direction: column-reverse;
-    border-bottom: none;
-  }
-
-  &__bands {
-    width: max-content;
-    display: flex;
-    border: 1px solid var(--border-color);
-    background-color: var(--background-color);
-
-    &:first-of-type {
-      border-bottom: unset;
-    }
-    border-left: none;
-
-    &-notices {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      @include padding();
-    }
-  }
-}
-</style>

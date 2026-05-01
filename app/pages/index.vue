@@ -10,7 +10,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="index-page">
+  <div class="min-h-0">
     <UIBaseResponsiveContent media-query="(max-width: 1025px)">
       <template #mobile>
         <TheMainMobile
@@ -38,19 +38,9 @@ useSeoMeta({
             links: page?.data.links,
           }"
           :projects
-          class="index-page__desktop"
+          class="h-full"
         />
       </template>
     </UIBaseResponsiveContent>
   </div>
 </template>
-
-<style scoped lang="scss">
-.index-page {
-  min-height: 0;
-
-  &__desktop {
-    height: 100%;
-  }
-}
-</style>

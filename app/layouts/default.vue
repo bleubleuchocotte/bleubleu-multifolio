@@ -24,25 +24,12 @@ const showContent = ref(false);
       />
     </Transition>
     <Transition mode="out-in" name="translate-in">
-      <div v-show="showContent" class="body">
+      <div
+        v-show="showContent"
+        class="flex h-screen flex-col justify-between max-lg:h-auto max-lg:gap-fluid"
+      >
         <slot />
       </div>
     </Transition>
   </div>
 </template>
-
-<style scoped lang="scss">
-.body {
-  display: flex;
-  flex-direction: column;
-
-  height: 100vh;
-
-  @media #{$desktop-down} {
-    height: auto;
-    @include gap();
-  }
-
-  justify-content: space-between;
-}
-</style>

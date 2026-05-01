@@ -1,20 +1,7 @@
 <template>
-  <div class="body">
+  <div
+    class="flex h-screen flex-col justify-between max-lg:h-auto max-lg:gap-fluid"
+  >
     <slot />
   </div>
 </template>
-
-<style scoped lang="scss">
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 100vh;
-
-  @media #{$desktop-down} {
-    height: auto;
-    @include gap();
-  }
-}
-</style>
