@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxt/image",
     "@nuxt/eslint",
+    "@nuxt/hints",
   ],
   prismic: {
     endpoint: process.env.PRISMIC_ENDPOINT,

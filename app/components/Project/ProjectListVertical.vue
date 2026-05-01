@@ -82,7 +82,7 @@ watch(
       </h2>
       <div class="pointer-events-none text-right">
         <p class="text-fluid-small">{{ project.data.date?.slice(0, 4) }}</p>
-        <!-- <p>{{ project.skills[0]?.skill }}</p> -->
+        <p>{{ project.data.skills[0]?.skill }}</p>
       </div>
     </li>
   </ul>
