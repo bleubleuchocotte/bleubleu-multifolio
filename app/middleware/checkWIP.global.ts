@@ -27,7 +27,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   if (isWIP.value && to.path !== "/wip" && !import.meta.dev) {
-    // Si le site est dans l'état "WIP" et en production, on redirige toutes les requêtes vers /wip
+    // In production, when the WIP state is active, redirect every request to /wip.
     return navigateTo("/wip", { replace: true });
   } else if (!isWIP.value && to.path === "/wip") {
     return abortNavigation();

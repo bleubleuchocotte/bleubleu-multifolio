@@ -1,22 +1,20 @@
 <script setup lang="ts">
 type ComponentProps = {
   /**
-   * The key used for managing the state in the component. It must be **unique** through the whole app.
+   * Optional key kept for API compatibility with previous usages. The
+   * accordion no longer needs a globally unique state key — Vue 3.5
+   * `useId()` produces an SSR-stable id per instance.
    */
-  stateKey: string;
+  stateKey?: string;
 };
 
-const props = defineProps<ComponentProps>();
+defineProps<ComponentProps>();
 
 const isOpen = ref(false);
 defineExpose({ isOpen, updateHeight });
 
-const id = useState(props.stateKey, () => {
-  return {
-    header: `accordion-header-${Math.random().toString(36).substring(2, 9)}`,
-    content: `accordion-content-${Math.random().toString(36).substring(2, 9)}`,
-  };
-});
+const headerId = useId();
+const contentId = useId();
 
 const toggleAccordion = useThrottleFn(() => {
   updateHeight();
@@ -24,7 +22,7 @@ const toggleAccordion = useThrottleFn(() => {
 }, 100);
 
 const isButtonFocused = ref(false);
-const target = ref<HTMLDivElement | null>(null);
+const target = useTemplateRef<HTMLDivElement>("target");
 const height = ref(0);
 
 function updateHeight() {
@@ -37,10 +35,10 @@ function updateHeight() {
 <template>
   <div :style="`--accordion-height: ${height}px`">
     <button
-      :id="id.header"
+      :id="headerId"
       type="button"
       :aria-expanded="isOpen ? 'true' : 'false'"
-      :aria-controls="id.content"
+      :aria-controls="contentId"
       class="w-full cursor-pointer appearance-none border-0 bg-transparent p-0"
       @click="toggleAccordion"
       @focus="isButtonFocused = true"
@@ -49,10 +47,10 @@ function updateHeight() {
       <slot name="title" :focus="isButtonFocused || isOpen" />
     </button>
     <div
-      :id="id.content"
+      :id="contentId"
       ref="target"
       role="region"
-      :aria-labelledby="id.header"
+      :aria-labelledby="headerId"
       :aria-hidden="isOpen ? 'false' : 'true'"
       class="max-h-0 overflow-hidden transition-all duration-200 ease-out aria-[hidden=false]:max-h-(--accordion-height)"
     >

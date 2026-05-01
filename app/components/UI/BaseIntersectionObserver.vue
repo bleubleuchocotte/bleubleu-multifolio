@@ -13,7 +13,7 @@ const emits = defineEmits<{
   isVisible: [payload: boolean];
 }>();
 
-const container = ref<HTMLElement>();
+const container = useTemplateRef<HTMLElement>("container");
 useIntersectionObserver(
   container,
   ([entry]) => {

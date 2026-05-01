@@ -15,7 +15,7 @@ const emit = defineEmits<{
   gallery: [payload: ProjetDocument];
 }>();
 
-const target = ref<HTMLElement>();
+const target = useTemplateRef<HTMLElement>("target");
 
 useIntersectionObserver(
   target,

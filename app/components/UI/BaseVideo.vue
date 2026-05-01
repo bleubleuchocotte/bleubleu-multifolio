@@ -9,27 +9,27 @@ type ComponentProps = {
 
 const props = defineProps<ComponentProps>();
 
-const video = ref<HTMLVideoElement | null>(null);
+const video = useTemplateRef<HTMLVideoElement>("video");
 const isVideoLoaded = ref(false);
 
 watch(
   () => props.state,
   () => {
-    if (video.value) {
-      switch (props.state) {
-        case "play":
-          video.value.play();
-          if (!isVideoLoaded.value) {
-            isVideoLoaded.value = true;
-          }
-          break;
-        case "pause":
-          video.value.pause();
-          break;
-
-        default:
-          break;
-      }
+    if (!video.value) {
+      return;
+    }
+    switch (props.state) {
+      case "play":
+        // Browsers may reject autoplay (Safari, low-power mode); swallow the
+        // rejection so it does not surface as an unhandled promise warning.
+        video.value.play().catch(() => {});
+        if (!isVideoLoaded.value) {
+          isVideoLoaded.value = true;
+        }
+        break;
+      case "pause":
+        video.value.pause();
+        break;
     }
   },
 );
@@ -41,7 +41,7 @@ watch(
       class="rounded-fluid bg-text absolute inset-0 -z-10 opacity-20 backdrop-blur-[5px]"
     />
 
-    <video ref="video" v-bind="context">
+    <video ref="video" playsinline v-bind="context">
       <source :src="src" />
     </video>
   </div>

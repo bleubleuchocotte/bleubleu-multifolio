@@ -24,7 +24,7 @@ const size = computed(() =>
   isExpand.value && icon.value ? props.size * 2 : props.size,
 );
 
-function callback(e: MouseEvent) {
+const callback = useThrottleFn((e: MouseEvent) => {
   x.value = e.clientX;
   y.value = e.clientY;
 
@@ -50,7 +50,7 @@ function callback(e: MouseEvent) {
   } else {
     isExpand.value = false;
   }
-}
+}, 16);
 
 function typeDataIconAttribute(str: string | null): CursorIconType {
   if (!str) {
