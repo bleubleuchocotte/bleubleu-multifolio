@@ -32,14 +32,12 @@ Scripts (from [package.json](package.json)):
 - `pnpm build` — production build (SSR)
 - `pnpm generate` — static site generation
 - `pnpm preview` — preview built site
-- `pnpm lint` / `pnpm lint:fix` — ESLint
+- `pnpm lint` / `pnpm lint:fix` — ESLint (`lint` reports, `lint:fix` autofixes)
+- `pnpm format` — Prettier on the whole repo (config: 2-space indent, trailing commas; ignores in [.prettierignore](.prettierignore))
 - `pnpm tc` — typecheck (vue-tsc via `nuxt typecheck`)
-- `pnpm test` — run all Vitest projects (`nuxt` unit + `e2e`)
-- `pnpm test:watch` — Vitest in watch mode
-- `pnpm test:unit` / `pnpm test:e2e` — run a single project
 - `pnpm slicemachine` — open Prismic Slice Machine UI
 
-Run `pnpm lint`, `pnpm tc` and `pnpm test` before committing.
+Run `pnpm format`, `pnpm lint` and `pnpm tc` before committing. There is no automated test suite — verify changes manually in the browser.
 
 ## Repository layout
 
@@ -48,19 +46,15 @@ app/                      Nuxt 4 application root (srcDir)
   components/             Feature-grouped: UI/, Project/{Desktop,Mobile}/, Icon/, Error/
   pages/                  Flat routes: index.vue, legal-notice.vue, wip.vue, [...404].vue
   layouts/                default.vue, 404.vue
-  composables/            Data-fetching composables wrapping the Prismic client
+  composables/            usePrismicClient (data fetching) + useLegalNotice
   plugins/                Vue3Marquee.client.ts
   middleware/             checkWIP.global.ts
   assets/styles/          SCSS (reset, base, lenis, main — main.scss auto-injected by Vite)
   app.vue                 Root; injects theme CSS variables from Prismic options
 shared/types/index.ts     Shared TS types (re-exports Prismic-generated types)
-shared/errors.ts          AppErrorCode union — typed error codes used across the app
 i18n/locales/             en.json, fr.json
 customtypes/  slices/     Prismic Slice Machine sources
 prismicio-types.d.ts      Auto-generated — do not edit
-test/nuxt/                Vitest specs running in the Nuxt environment (auto-imports, mocks)
-test/e2e/                 SSR / browser specs ($fetch, Playwright)
-vitest.config.ts          Two-project Vitest config (nuxt + e2e)
 ```
 
 ## Conventions
@@ -81,71 +75,30 @@ vitest.config.ts          Two-project Vitest config (nuxt + e2e)
 
 Composables in `app/composables/` wrap the Prismic client and call `useAsyncData` with a stable key so Nuxt deduplicates fetches across the SSR + client lifecycle.
 
-The Prismic `website` document is the source of truth for site config, the home page content, the projects list and the WIP state. A single fetch is performed by [useWebsite](app/composables/useWebsite.ts); four typed views derive from it without re-fetching:
+The single entry point is [usePrismicClient](app/composables/usePrismicClient.ts), which exposes two methods:
 
-- [useOptions](app/composables/useOptions.ts) — global config (colors, SEO, links, language). Throws a 500 if the document is unreachable.
-- [useHome](app/composables/useHome.ts) — home page fields (`about-image`, `description`, `ending-card-image`).
-- [useProjects](app/composables/useProjects.ts) — `projects` group mapped to `ProjectWithId[]`.
-- [useWebsiteState](app/composables/useWebsiteState.ts) — `website_state` enum used by the WIP middleware.
+- `getWebsite()` — fetches the `website` Prismic document (source of truth for site config, home content, projects list and WIP state). Returns `useAsyncData(...)` transformed to the first result, so consumers read from `data.value?.data.<field>`.
+- `getAllProjects()` — fetches every `projet` document.
 
 The legal notice page lives in its own custom type and has its own composable: [useLegalNotice](app/composables/useLegalNotice.ts).
 
 Usage:
 
 ```ts
-const options = await useOptions();
-const projects = await useProjects();
+const { getWebsite, getAllProjects } = usePrismicClient();
+const { data: options } = await getWebsite();
+const { data: projects } = await getAllProjects();
+
+// Access fields through the Prismic document shape:
+options.value?.data["accent-color"];
 ```
 
-Do not reintroduce a Nuxt plugin to inject a data layer — auto-imported composables are the canonical pattern.
+The same `useAsyncData` keys (`"GetWebsite"`, `"GetAllProjects"`, `"page_legal_notice"`) are used everywhere — keep them stable so Nuxt deduplicates between SSR and client hydration. Do not reintroduce a Nuxt plugin to inject a data layer — auto-imported composables are the canonical pattern.
 
-## Error handling
+## Formatting & lint
 
-Typed error codes live in [shared/errors.ts](shared/errors.ts) (`AppErrorCode` union) and are paired with auto-imported helpers in [app/utils/errors.ts](app/utils/errors.ts).
-
-- `throwAppError(code, statusCode, statusMessage)` — the canonical way for composables to abort with a Nuxt error. It builds `createError({ statusCode, statusMessage, data: { code } })`, so `error.value.data.code` is type-narrowed downstream.
-- `isAppError(err)` — type guard for `error.vue` / `404.vue` to display a localized message conditioned by `err.data.code`.
-
-Composables must not call `createError` directly. Add a new variant to `AppErrorCode` instead, then call `throwAppError`:
-
-```ts
-// app/composables/useOptions.ts
-if (error.value || !data.value) {
-  throwAppError("PRISMIC_UNREACHABLE", 500, "Could not reach options");
-}
-```
-
-## Testing
-
-Stack: **Vitest** + **@nuxt/test-utils**. The Nuxt environment provides auto-imports and `mockNuxtImport` for stubbing them.
-
-### Layers
-
-Each behaviour is tested at the **lowest possible level** — only move up if the lower layer cannot cover the case.
-
-| Layer                                      | Tool                              | Covers                                                           |
-| ------------------------------------------ | --------------------------------- | ---------------------------------------------------------------- |
-| Unit (`test/nuxt/*.nuxt.spec.ts`)          | Vitest, `mockNuxtImport`          | Composables (mapping, error throwing), middleware logic, component interactions |
-| SSR (`test/e2e/*.spec.ts` — `$fetch`)      | `@nuxt/test-utils`                | Routes return 200 and contain critical HTML (e.g. `/`, `/legal-notice`, `/wip`) |
-| Browser (`test/e2e/*.spec.ts` — `createPage`) | Playwright                     | Cases that genuinely need a real browser (Lenis scroll, focus-trap, marquee viewport) |
-
-### What to test
-
-- **Business contracts, not static copy.** Asserting that `<h1>` contains a Prismic-driven title is a fragile test against content. Asserting that `useProjects` maps the group to `ProjectWithId[]` with a stable `id` is a contract.
-- **Mapping & error paths** for every composable. The four specs in [test/nuxt/](test/nuxt/) are the templates — copy them when adding a new composable.
-- **Middleware behaviour** (redirect, abortNavigation, SEO meta) — mock `useWebsiteState`, `navigateTo`, `abortNavigation`, `useSeoMeta`, and the `useState` cell when relevant.
-
-### Mocking auto-imports
-
-`mockNuxtImport` replaces an auto-imported symbol. Use it at the top of the file (it is hoisted):
-
-```ts
-mockNuxtImport("useWebsite", () => {
-  return () => Promise.resolve({ data: ref({ … }), error: ref(null) });
-});
-```
-
-The factory must return the composable itself — Nuxt calls it once and caches the result.
+- **Prettier** is the formatter — run `pnpm format` to apply (2-space indent, trailing commas). Ignore patterns are in [.prettierignore](.prettierignore) (`.claude`, `.agents`, `slices`, `customtypes`, `pnpm-lock.yaml`, `prismicio-types.d.ts`).
+- **ESLint** is configured in [eslint.config.mjs](eslint.config.mjs); run `pnpm lint` to report issues or `pnpm lint:fix` to apply autofixes.
 
 ## Lint rules to keep in mind
 
@@ -195,5 +148,5 @@ The site targets Netlify but works on any Node host that supports Nuxt 4 SSR or 
 
 - **`mise exec -- not recognized`** — mise isn't installed or isn't on the shell `PATH`. Install via `curl https://mise.run | sh`, then `eval "$(~/.local/bin/mise activate <shell>)"`.
 - **Prismic 404 / "not found"** during fetches — the `website` (or `page_legal_notice`) document is missing or has no UID. Open Prismic and ensure each custom type has at least one published entry, then rebuild.
-- **`endpoint` option is missing and `~/prismic/client` was not found** in dev/test — the `.env` file is absent or `PRISMIC_ENDPOINT` is empty. The Prismic module disables itself silently; data composables will throw a 500 via `throwAppError("PRISMIC_UNREACHABLE", ...)`.
+- **`endpoint` option is missing and `~/prismic/client` was not found** in dev — the `.env` file is absent or `PRISMIC_ENDPOINT` is empty. The Prismic module disables itself silently; `usePrismicClient()` will fail because `usePrismic()` has no client.
 - **Sitemap / robots not respecting locale** — `@nuxtjs/seo` reads `NUXT_SITE_URL` at runtime. Set it on the host or the canonical URLs and sitemap entries fall back to `localhost`.
