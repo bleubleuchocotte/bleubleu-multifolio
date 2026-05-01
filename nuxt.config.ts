@@ -1,3 +1,5 @@
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: "2026-04-28",
@@ -6,6 +8,7 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
   },
   vite: {
+    plugins: [tailwindcss()],
     css: {
       preprocessorOptions: {
         scss: {
@@ -23,11 +26,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: [
-    "@/assets/styles/reset.css",
-    "@/assets/styles/lenis.css",
-    "@/assets/styles/1-base/_base-default.scss",
-  ],
+  css: ["@/assets/styles/tailwind.css", "@/assets/styles/lenis.css"],
   modules: [
     "@vueuse/nuxt",
     "@nuxtjs/prismic",

@@ -38,10 +38,12 @@
     "@nuxt/test-utils": "^4.0.0",
     "@prismicio/client": "^7.21.8",
     "@slicemachine/adapter-nuxt": "^0.3.95",
+    "@tailwindcss/vite": "^4.2.4",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^10.2.1",
     "prettier": "^3.8.3",
     "slice-machine-ui": "^2.21.2",
+    "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.2.7"
   }
