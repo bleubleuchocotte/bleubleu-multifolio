@@ -35,9 +35,6 @@ importers:
       nuxt:
         specifier: ^4.4.2
         version: 4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@parcel/watcher@2.5.6)(@types/node@20.11.16)(@vue/compiler-sfc@3.5.33)(cac@6.7.14)(db0@0.3.4)(encoding@0.1.13)(eslint@10.2.1(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(rollup-plugin-visualizer@7.0.1(rollup@4.60.2))(rollup@4.60.2)(sass@1.70.0)(terser@5.27.0)(typescript@6.0.3)(vite@7.3.2(@types/node@20.11.16)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.27.0)(yaml@2.8.3))(vue-tsc@3.2.7(typescript@6.0.3))(yaml@2.8.3)
-      sass:
-        specifier: ^1.70.0
-        version: 1.70.0
       vue:
         specifier: ^3.5.30
         version: 3.5.33(typescript@6.0.3)
@@ -11761,7 +11758,8 @@ snapshots:
 
   baseline-browser-mapping@2.10.23: {}
 
-  binary-extensions@2.2.0: {}
+  binary-extensions@2.2.0:
+    optional: true
 
   bindings@1.5.0:
     dependencies:
@@ -11918,6 +11916,7 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   chokidar@4.0.3:
     dependencies:
@@ -13230,7 +13229,8 @@ snapshots:
 
   imgix-url-builder@0.0.6: {}
 
-  immutable@4.3.5: {}
+  immutable@4.3.5:
+    optional: true
 
   impound@1.1.5:
     dependencies:
@@ -13331,6 +13331,7 @@ snapshots:
   is-binary-path@2.1.0:
     dependencies:
       binary-extensions: 2.2.0
+    optional: true
 
   is-builtin-module@5.0.0:
     dependencies:
@@ -15417,6 +15418,7 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
+    optional: true
 
   readdirp@4.1.2: {}
 
@@ -15553,6 +15555,7 @@ snapshots:
       chokidar: 3.5.3
       immutable: 4.3.5
       source-map-js: 1.0.2
+    optional: true
 
   sax@1.6.0: {}
 
@@ -15790,7 +15793,8 @@ snapshots:
 
   smob@1.4.1: {}
 
-  source-map-js@1.0.2: {}
+  source-map-js@1.0.2:
+    optional: true
 
   source-map-js@1.2.1: {}
 

@@ -30,19 +30,19 @@ const videoState = computed(() => {
     <template #mobile>
       <UIBaseIntersectionObserver
         v-if="'kind' in responsive_media"
-        class="media-mobile"
+        class="media-mobile h-full min-w-[75vw] snap-center"
         @is-visible="(bool) => (isContainerVisible = bool)"
       >
         <UIBasePicture
           v-if="responsive_media.kind === 'image'"
           :key="slice.id + responsive_media.url"
-          class="media-mobile__image"
+          class="rounded-fluid aspect-9/16 max-h-[75vh] w-full overflow-hidden object-cover"
           :link-to-media-field="responsive_media"
         />
 
         <UIBaseVideo
           v-else
-          class="media-mobile__video"
+          class="rounded-fluid aspect-9/16 max-h-[75vh] w-full overflow-hidden object-cover"
           :src="responsive_media.url"
           :context="props.context"
           :state="videoState"
@@ -51,7 +51,7 @@ const videoState = computed(() => {
     </template>
     <template #desktop>
       <UIBaseIntersectionObserver
-        class="media"
+        class="flex w-full gap-[calc(var(--spacing-fluid)*0.8)]"
         @is-visible="(bool) => (isContainerVisible = bool)"
       >
         <template v-for="field in Object.values(fields)">
@@ -59,7 +59,7 @@ const videoState = computed(() => {
             <UIBasePicture
               v-if="field.kind === 'image'"
               :key="slice.id + field.url"
-              class="media__image"
+              class="rounded-fluid h-full w-full min-w-0 overflow-hidden object-cover data-[type=media-full]:aspect-video data-[type=media-duo]:aspect-square"
               :data-type="
                 slice.variation === 'default' ? 'media-duo' : 'media-full'
               "
@@ -69,7 +69,7 @@ const videoState = computed(() => {
             <UIBaseVideo
               v-else
               :key="field.url"
-              class="media__video"
+              class="rounded-fluid h-full w-full min-w-0 overflow-hidden object-cover data-[type=media-full]:aspect-video data-[type=media-duo]:aspect-square"
               :data-type="
                 slice.variation === 'default' ? 'media-duo' : 'media-full'
               "
@@ -83,46 +83,3 @@ const videoState = computed(() => {
     </template>
   </UIBaseResponsiveContent>
 </template>
-
-<style scoped lang="scss">
-.media {
-  display: flex;
-  @include prop("gap", 0.8);
-  width: 100%;
-
-  &-mobile {
-    scroll-snap-align: center;
-    min-width: 75vw;
-    height: 100%;
-
-    &__image,
-    &__video {
-      width: 100%;
-      max-height: 75vh;
-      aspect-ratio: 9/16;
-      @include border-radius();
-      overflow: hidden;
-      object-fit: cover;
-    }
-  }
-
-  &__image,
-  &__video {
-    width: 100%;
-    min-width: 0;
-    height: 100%;
-    object-fit: cover;
-    @include border-radius();
-
-    overflow: hidden;
-
-    &[data-type="media-full"] {
-      aspect-ratio: 16/9;
-    }
-
-    &[data-type="media-duo"] {
-      aspect-ratio: 1;
-    }
-  }
-}
-</style>

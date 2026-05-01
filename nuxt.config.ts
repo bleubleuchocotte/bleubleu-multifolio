@@ -9,13 +9,6 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/assets/styles/main.scss";',
-        },
-      },
-    },
     optimizeDeps: {
       include: [
         "@vue/devtools-core",

@@ -4,13 +4,14 @@ Guide for AI agents (Claude Code, Cursor, Copilot, Codex…) working on this rep
 
 ## Project
 
-**bleubleu-multifolio** — a Nuxt 4 multi-portfolio site for the Bleubleu studio. Content is sourced from Prismic CMS, the UI is bilingual (EN/FR), styling is SCSS, and scrolling/animations rely on Lenis and `vue3-marquee`.
+**bleubleu-multifolio** — a Nuxt 4 multi-portfolio site for the Bleubleu studio. Content is sourced from Prismic CMS, the UI is bilingual (EN/FR), styling is Tailwind CSS v4, and scrolling/animations rely on Lenis and `vue3-marquee`.
 
 ## Tech stack
 
 - **Nuxt** 4.4 / **Vue** 3.5 / **TypeScript** 6
 - **Node** 24.15.0, **pnpm** 10.33.2 — versions pinned in [mise.toml](mise.toml) and [package.json](package.json) `engines`
 - **Modules**: `@nuxtjs/prismic`, `@nuxtjs/i18n`, `@nuxtjs/seo`, `@nuxt/image`, `@nuxt/eslint`, `@vueuse/nuxt`
+- **Styling**: Tailwind CSS v4 via `@tailwindcss/vite` (CSS-first, no `tailwind.config.js`)
 - **Runtime libs**: `lenis` (smooth scroll), `vue3-marquee`, `focus-trap`
 
 ## Setup & commands
@@ -49,7 +50,7 @@ app/                      Nuxt 4 application root (srcDir)
   composables/            usePrismicClient (data fetching) + useLegalNotice
   plugins/                Vue3Marquee.client.ts
   middleware/             checkWIP.global.ts
-  assets/styles/          SCSS (reset, base, lenis, main — main.scss auto-injected by Vite)
+  assets/styles/          tailwind.css (theme + utilities + base layer) and lenis.css
   app.vue                 Root; injects theme CSS variables from Prismic options
 shared/types/index.ts     Shared TS types (re-exports Prismic-generated types)
 i18n/locales/             en.json, fr.json
@@ -68,7 +69,8 @@ prismicio-types.d.ts      Auto-generated — do not edit
   - `Icon*` — SVG icons
 - **Server components**: use the `*.server.vue` suffix (e.g. `TheFooter.server.vue`).
 - **State**: no Pinia. Use `useState(key, init)` for shared state — see [app/components/UI/BaseAccordion.vue](app/components/UI/BaseAccordion.vue).
-- **Styling**: `<style scoped lang="scss">`. The Vite config auto-injects `assets/styles/main.scss` into every SCSS block, so global mixins like `@include padding()` and media tokens like `#{$mobile-down}` are available without re-importing. Theme is driven by CSS variables set at runtime from Prismic options: `--border-color`, `--background-color`, `--accent-color`, `--text-color`.
+- **Styling**: Tailwind CSS v4, configured CSS-first in [app/assets/styles/tailwind.css](app/assets/styles/tailwind.css). Theme tokens (`text-accent`, `bg-background`, `border-border`, etc.) are bridged via `@theme inline` to runtime CSS variables (`--accent-color`, `--text-color`, `--background-color`, `--border-color`, …) injected from Prismic in [app.vue](app/app.vue) — change a Prismic color and every Tailwind class re-resolves. Fluid spacing/typography from the legacy SCSS are preserved as `--spacing-fluid`, `--radius-fluid`, `--font-fluid-*` cascading per breakpoint, exposed as `p-fluid`, `gap-fluid`, `m-fluid` (+ directional variants), `text-fluid-{p,h1..h4,cta,small,big,enormous}`, `rounded-fluid`. Custom variant `pointer-coarse:` matches `(pointer: coarse)`. Reach for `<style scoped>` only when Tailwind cannot reach the target (`:deep()` into a child component, `@keyframes`, `::before`/`::after` cascade).
+- **Breakpoints**: aligned with the legacy SCSS — `xs` 480px, `sm` 768px, `md` 1024px, `lg` 1025px. Use `lg:` for "desktop only" and `max-lg:` / `max-sm:` for "mobile/tablet only".
 - **i18n**: strategy is `no_prefix` — both locales share the same URLs and the language is switched via app state. Read keys in templates with `$t('page.x.y')`.
 
 ## Data fetching
@@ -114,7 +116,9 @@ From [eslint.config.mjs](eslint.config.mjs):
 
 ## Gotchas
 
-- `assets/styles/main.scss` is auto-injected — re-importing it inside a component breaks builds with duplicate-symbol errors.
+- All theme colors come from Prismic at runtime via [app.vue](app/app.vue) — never hard-code hex values. Use `text-accent` / `bg-background` / `border-border` etc. so the tokens stay live.
+- The fluid scale is exposed only as `*-fluid` utilities and the underlying CSS vars (`var(--spacing-fluid)`, `var(--radius-fluid)`). For partial coefficients, write arbitrary values like `p-[calc(var(--spacing-fluid)/2)]`; do **not** reach for the raw Tailwind spacing scale (`p-4`, `gap-6`) for layout — it breaks the responsive coefficient story.
+- The keyframes `noise-anim` / `noise-anim-2` are declared once in [tailwind.css](app/assets/styles/tailwind.css) and consumed by `pages/wip.vue` and `Error/ErrorDefault.vue`. Don't redefine them locally.
 - [nuxt.config.ts](nuxt.config.ts) `compatibilityDate` is `2026-04-28`. Don't lower it.
 - `robots.txt` (via `@nuxtjs/seo`) disallows `/legal-notice` and `/wip`; preserve that when changing routing.
 - `legal-notice.vue` intentionally renders the same Prismic rich-text block many times to build a marquee band on desktop — only the first instance is exposed to assistive tech (`aria-hidden` on the rest). Don't "deduplicate" it.
