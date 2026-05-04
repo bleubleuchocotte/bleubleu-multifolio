@@ -8,15 +8,13 @@ const LANG_MAP: Record<string, { html: LangCode; og: OgLocale }> = {
   English: { html: "en", og: "en_US" },
 };
 
-export async function useSiteHead(options: WebsiteDocument | undefined) {
+export function useSiteHead(options: WebsiteDocument | undefined) {
   const i18n = useI18n();
   const request = useRequestURL();
 
   const data = options?.data;
   const { html: htmlLang, og: ogLang } =
     LANG_MAP[data?.language ?? "English"] ?? LANG_MAP.English!;
-
-  await i18n.setLocale(htmlLang);
 
   const cssVariables = [
     `--accent-color: ${data?.["accent-color"]}`,
@@ -89,4 +87,9 @@ export async function useSiteHead(options: WebsiteDocument | undefined) {
 
     publisher: `${data?.["first-name"]} ${data?.["last-name"]}`,
   });
+
+  // Switch the locale last: i18n.setLocale() is async and awaiting it inside
+  // setup loses the Nuxt instance context for any composable called after
+  // (visible as "useNuxtApp called outside" when SWR re-renders the route).
+  return i18n.setLocale(htmlLang);
 }
