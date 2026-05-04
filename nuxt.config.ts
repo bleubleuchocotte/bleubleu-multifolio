@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     "@nuxtjs/prismic",
     "@nuxtjs/seo",
     "@nuxtjs/i18n",
+    "@nuxtjs/device",
     "@nuxt/image",
     "@nuxt/eslint",
     "@nuxt/hints",

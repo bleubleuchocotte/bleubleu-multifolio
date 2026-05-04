@@ -26,7 +26,7 @@ const videoState = computed(() => {
 </script>
 
 <template>
-  <UIBaseResponsiveContent media-query="(max-width: 1025px)">
+  <UIBaseResponsiveContent>
     <template #mobile>
       <UIBaseIntersectionObserver
         v-if="'kind' in responsive_media"

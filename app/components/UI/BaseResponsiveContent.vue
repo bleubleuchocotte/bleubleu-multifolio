@@ -1,22 +1,20 @@
 <script setup lang="ts">
 type ComponentProps = {
-  mediaQuery: string;
+  /**
+   * Min-width media query used after hydration to detect viewport changes.
+   * Defaults to the project's lg breakpoint (1025px).
+   */
+  minWidth?: string;
 };
 
-const props = defineProps<ComponentProps>();
+const props = withDefaults(defineProps<ComponentProps>(), {
+  minWidth: "(min-width: 1025px)",
+});
 
-const isMobileClientSide = useMediaQuery(props.mediaQuery);
-// TODO: Update
+const isDesktop = useIsDesktop({ minWidth: props.minWidth });
 </script>
 
 <template>
-  <ClientOnly>
-    <slot v-if="isMobileClientSide" name="mobile" />
-    <slot v-else name="desktop" />
-
-    <template #fallback>
-      <slot v-if="isMobileClientSide" name="mobile" />
-      <slot v-else name="desktop" />
-    </template>
-  </ClientOnly>
+  <slot v-if="isDesktop" name="desktop" />
+  <slot v-else name="mobile" />
 </template>

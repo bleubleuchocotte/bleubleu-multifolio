@@ -3,7 +3,7 @@ const { getWebsite, getPageLegalNotice } = usePrismicClient();
 const { data: options } = await getWebsite();
 const { data: page } = await getPageLegalNotice();
 
-const isDeviceMobile = useMediaQuery("(max-width: 768px)");
+const isDesktop = useIsDesktop({ minWidth: "(min-width: 769px)" });
 
 useSeoMeta({
   title: options.value?.data["seo-title"],
@@ -18,7 +18,7 @@ useSeoMeta({
       {{ $t("page.legal-notice.button") }}
     </UIBaseLinkHome>
 
-    <template v-if="!isDeviceMobile">
+    <template v-if="isDesktop">
       <div
         v-for="i in 2"
         :key="`row-${i}`"

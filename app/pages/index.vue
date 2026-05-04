@@ -10,7 +10,7 @@ useSeoMeta({
 
 <template>
   <div class="min-h-0">
-    <UIBaseResponsiveContent media-query="(max-width: 1025px)">
+    <UIBaseResponsiveContent>
       <template #mobile>
         <TheMainMobile
           v-if="page"

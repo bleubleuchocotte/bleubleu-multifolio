@@ -35,6 +35,7 @@
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/hints": "^1.0.2",
     "@nuxt/test-utils": "^4.0.0",
+    "@nuxtjs/device": "^4.0.0",
     "@prismicio/client": "^7.21.8",
     "@slicemachine/adapter-nuxt": "^0.3.95",
     "@tailwindcss/vite": "^4.2.4",
