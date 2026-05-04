@@ -1,85 +1,84 @@
 # Multifolio 💙
 
+Site Nuxt 4 multi-portfolios pour le studio Bleubleu. Le contenu est piloté depuis Prismic, l'UI est bilingue (EN/FR), et les animations s'appuient sur Lenis et `vue3-marquee`.
+
+> Pour les conventions techniques (Vue, TypeScript, tests, error handling…), se référer à [AGENTS.md](AGENTS.md). Ce fichier couvre uniquement la prise en main et le déploiement.
+
 ## Sommaire
-1. Introduction
-2. Nouveaux utilisateurs
-   - Prismic
-   - GitHub
-   - Netlify / Autre Hébergeur
-3. Utilisateurs ayant déjà fais le setup
-   - Prismic
-   - GitHub
-   - Netlify / Autre Hébergeur
 
-## Introduction
-Bienvenue dans le projet Multifolio ! Ce README vous guidera à travers les différentes étapes pour créer ou mettre à jour votre template du mutlifolio.
+1. [Prérequis](#prérequis)
+2. [Setup](#setup)
+3. [Scripts](#scripts)
+4. [Variables d'environnement](#variables-denvironnement)
+5. [Workflow Prismic / GitHub / Hébergeur](#workflow-prismic--github--hébergeur)
+6. [Déploiement](#déploiement)
 
-## Nouveaux utilisateurs
+## Prérequis
 
-### Prismic
-1. Créez un compte sur [Prismic](https://prismic.io/) et configurez votre espace.
-2. Clonez tous les types dans votre repo prismic depuis le repo officiel du multifolio.
-3. Créez et remplissez au moins 1 fichier de chaque type.
+- [mise](https://mise.jdx.dev) pour piloter les versions de Node et pnpm.
+- Un compte [Prismic](https://prismic.io/) avec accès au repo Multifolio.
 
-### GitHub
-1. Créez une branch `website/prenom-nom` depuis la dernière release en date.
+Les versions sont épinglées dans [mise.toml](mise.toml) et [package.json](package.json) (`engines`) :
 
-### Netlify / Autre Hébergeur
-1. Déployez votre application sur [Netlify](https://www.netlify.com/) ou tout autre hébergeur de votre choix depuis votre branch `website/prenom-nom`.
-2. Configurez les variables d'environnement nécessaires, y compris celles liées à Prismic. Se référer au fichier `.env.example` pour savoir les variables nécessaires au fonctionnement du projet.
-
-## Utilisateurs ayant déjà fais le setup
-
-### Prismic
-1. Mettez à jour les types de contenu dans votre espace Prismic si nécessaire.
-
-### GitHub
-1. Mettre à jour la branch `website/prenom-nom` avec la dernière release en date.
-
-### Netlify / Autre Hébergeur
-Aucune actions requises
-
----
-
-# Nuxt 3 Minimal Starter
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- Node `24.15.0`
+- pnpm `10.33.2`
 
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
+mise install        # installe Node + pnpm aux versions épinglées
+mise exec -- pnpm install
 ```
 
-## Development Server
+`pnpm` et `node` ne sont pas sur le `PATH` par défaut — ils sont fournis par mise. Préfixer toutes les commandes par `mise exec --`.
 
-Start the development server on `http://localhost:3000`
+Créer ensuite un fichier `.env` à partir de [`.env.example`](.env.example) avec votre `PRISMIC_ENDPOINT`.
 
-```bash
-npm run dev
-```
+## Scripts
 
-## Production
+| Commande                                   | Description                            |
+| ------------------------------------------ | -------------------------------------- |
+| `mise exec -- pnpm dev`                    | Serveur de développement Nuxt          |
+| `mise exec -- pnpm build`                  | Build de production (SSR)              |
+| `mise exec -- pnpm generate`               | Génération statique du site            |
+| `mise exec -- pnpm preview`                | Preview du build local                 |
+| `mise exec -- pnpm lint` / `lint:fix`      | ESLint                                 |
+| `mise exec -- pnpm tc`                     | Typecheck (`nuxt typecheck` / vue-tsc) |
+| `mise exec -- pnpm test`                   | Tous les projets Vitest (unit + e2e)   |
+| `mise exec -- pnpm test:unit` / `test:e2e` | Un seul projet Vitest                  |
+| `mise exec -- pnpm slicemachine`           | UI Prismic Slice Machine               |
 
-Build the application for production:
+Avant chaque commit : `pnpm lint`, `pnpm tc`, `pnpm test`.
 
-```bash
-npm run build
-```
+## Variables d'environnement
 
-Locally preview production build:
+| Variable           | Obligatoire | Rôle                                                                            |
+| ------------------ | ----------- | ------------------------------------------------------------------------------- |
+| `PRISMIC_ENDPOINT` | ✅          | Nom du repository Prismic (sans le `.cdn.prismic.io`).                          |
+| `NUXT_SITE_URL`    | en prod     | URL canonique du site, utilisée par `@nuxtjs/seo` (sitemap, robots, canonical). |
+| `NUXT_SITE_NAME`   | recommandé  | Nom du site exposé dans les meta SEO.                                           |
 
-```bash
-npm run preview
-```
+Voir [`.env.example`](.env.example) pour le template.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Workflow Prismic / GitHub / Hébergeur
+
+### Première installation
+
+1. **Prismic** — créer un espace, cloner les `customtypes` depuis le repo officiel, et remplir au moins une entrée de chaque type.
+2. **GitHub** — créer une branche `website/prenom-nom` depuis la dernière release.
+3. **Hébergeur** — déployer la branche, configurer les variables d'environnement (cf. tableau ci-dessus).
+
+### Mise à jour d'un site existant
+
+1. **Prismic** — synchroniser les `customtypes` si la release change la structure.
+2. **GitHub** — rebaser la branche `website/prenom-nom` sur la dernière release.
+3. **Hébergeur** — aucune action particulière, le redéploiement se déclenche au push.
+
+## Déploiement
+
+Le projet est conçu pour Netlify mais reste compatible avec n'importe quel hébergeur Node compatible Nuxt.
+
+- **Build command** : `mise exec -- pnpm build` (SSR) ou `mise exec -- pnpm generate` (statique).
+- **Publish directory** : `.output/public` (SSR) ou `.output/public` (statique également pour Nuxt).
+- **Variables d'environnement** : `PRISMIC_ENDPOINT` (obligatoire), `NUXT_SITE_URL`, `NUXT_SITE_NAME`.
+- **Node version** : `24.15.0` (déclarer via le fichier de config de l'hébergeur ou la variable `NODE_VERSION`).

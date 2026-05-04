@@ -1,0 +1,445 @@
+@import "tailwindcss";
+
+/* Theme tokens — `inline` keeps the var() reference live, so colors driven
+   from Prismic at runtime (see app.vue) flow through Tailwind classes. */
+@theme inline {
+  --color-accent: var(--accent-color);
+  --color-accent-80: var(--accent-color-80);
+  --color-text-accent: var(--text-accent-color);
+  --color-text: var(--text-color);
+  --color-background: var(--background-color);
+  --color-background-70: var(--background-color-70);
+  --color-border: var(--border-color);
+
+  --font-sans: "Manrope", sans-serif;
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 48rem;
+  --breakpoint-md: 64rem;
+  --breakpoint-lg: 64.0625rem;
+}
+
+@custom-variant pointer-coarse (@media (pointer: coarse));
+
+/* Fluid scaling driven by CSS variables so utilities and arbitrary values
+   ({@code p-[calc(var(--spacing-fluid)/2)]}) share the same source of truth.
+   Mirrors the SCSS coefficients (0.75 / 0.8 / 0.9 / 1) on a 30px base. */
+:root {
+  --spacing-fluid: 22.5px;
+  --radius-fluid: 10px;
+
+  --font-fluid-p: max(11.2px, calc(100vw * 14 / 390));
+  --font-fluid-h1: max(22.4px, calc(100vw * 28 / 390));
+  --font-fluid-h2: max(17.6px, calc(100vw * 22 / 390));
+  --font-fluid-h3: max(16px, calc(100vw * 20 / 390));
+  --font-fluid-h4: max(16px, calc(100vw * 20 / 390));
+  --font-fluid-cta: max(9.6px, calc(100vw * 12 / 390));
+  --font-fluid-small: max(9.6px, calc(100vw * 12 / 390));
+  --font-fluid-big: max(32px, calc(100vw * 40 / 390));
+  --font-fluid-enormous: max(80px, calc(100vw * 100 / 390));
+}
+
+@media (min-width: 481px) {
+  :root {
+    --spacing-fluid: 24px;
+
+    --font-fluid-p: max(11.2px, calc(100vw * 14 / 768));
+    --font-fluid-h1: max(22.4px, calc(100vw * 28 / 768));
+    --font-fluid-h2: max(17.6px, calc(100vw * 22 / 768));
+    --font-fluid-h3: max(16px, calc(100vw * 20 / 768));
+    --font-fluid-h4: max(16px, calc(100vw * 20 / 768));
+    --font-fluid-cta: max(9.6px, calc(100vw * 12 / 768));
+    --font-fluid-small: max(9.6px, calc(100vw * 12 / 768));
+    --font-fluid-big: max(32px, calc(100vw * 40 / 768));
+    --font-fluid-enormous: max(160px, calc(100vw * 200 / 768));
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --spacing-fluid: 27px;
+    --radius-fluid: 15px;
+
+    --font-fluid-p: max(11.2px, calc(100vw * 14 / 1024));
+    --font-fluid-h1: max(22.4px, calc(100vw * 28 / 1024));
+    --font-fluid-h2: max(17.6px, calc(100vw * 22 / 1024));
+    --font-fluid-h3: max(16px, calc(100vw * 20 / 1024));
+    --font-fluid-h4: max(16px, calc(100vw * 20 / 1024));
+    --font-fluid-cta: max(9.6px, calc(100vw * 12 / 1024));
+    --font-fluid-small: max(9.6px, calc(100vw * 12 / 1024));
+    --font-fluid-big: max(32px, calc(100vw * 40 / 1024));
+    --font-fluid-enormous: max(160px, calc(100vw * 200 / 1024));
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --spacing-fluid: 30px;
+    --radius-fluid: 20px;
+
+    --font-fluid-p: max(11.2px, calc(100vw * 14 / 1440));
+    --font-fluid-h1: max(22.4px, calc(100vw * 28 / 1440));
+    --font-fluid-h2: max(17.6px, calc(100vw * 22 / 1440));
+    --font-fluid-h3: max(16px, calc(100vw * 20 / 1440));
+    --font-fluid-h4: max(16px, calc(100vw * 20 / 1440));
+    --font-fluid-cta: max(9.6px, calc(100vw * 12 / 1440));
+    --font-fluid-small: max(9.6px, calc(100vw * 12 / 1440));
+    --font-fluid-big: max(32px, calc(100vw * 40 / 1440));
+    --font-fluid-enormous: max(160px, calc(100vw * 200 / 1440));
+  }
+}
+
+/* Spacing utilities */
+@utility p-fluid {
+  padding: var(--spacing-fluid);
+}
+@utility px-fluid {
+  padding-inline: var(--spacing-fluid);
+}
+@utility py-fluid {
+  padding-block: var(--spacing-fluid);
+}
+@utility pt-fluid {
+  padding-top: var(--spacing-fluid);
+}
+@utility pb-fluid {
+  padding-bottom: var(--spacing-fluid);
+}
+@utility pl-fluid {
+  padding-left: var(--spacing-fluid);
+}
+@utility pr-fluid {
+  padding-right: var(--spacing-fluid);
+}
+
+@utility m-fluid {
+  margin: var(--spacing-fluid);
+}
+@utility mx-fluid {
+  margin-inline: var(--spacing-fluid);
+}
+@utility my-fluid {
+  margin-block: var(--spacing-fluid);
+}
+@utility mt-fluid {
+  margin-top: var(--spacing-fluid);
+}
+@utility mb-fluid {
+  margin-bottom: var(--spacing-fluid);
+}
+@utility ml-fluid {
+  margin-left: var(--spacing-fluid);
+}
+@utility mr-fluid {
+  margin-right: var(--spacing-fluid);
+}
+
+@utility gap-fluid {
+  gap: var(--spacing-fluid);
+}
+@utility gap-x-fluid {
+  column-gap: var(--spacing-fluid);
+}
+@utility gap-y-fluid {
+  row-gap: var(--spacing-fluid);
+}
+
+/* Typography */
+@utility text-fluid-p {
+  font-size: var(--font-fluid-p);
+}
+@utility text-fluid-h1 {
+  font-size: var(--font-fluid-h1);
+}
+@utility text-fluid-h2 {
+  font-size: var(--font-fluid-h2);
+}
+@utility text-fluid-h3 {
+  font-size: var(--font-fluid-h3);
+}
+@utility text-fluid-h4 {
+  font-size: var(--font-fluid-h4);
+  font-weight: 500;
+}
+@utility text-fluid-cta {
+  font-size: var(--font-fluid-cta);
+}
+@utility text-fluid-small {
+  font-size: var(--font-fluid-small);
+  font-weight: 482;
+}
+@utility text-fluid-big {
+  font-size: var(--font-fluid-big);
+}
+@utility text-fluid-enormous {
+  font-size: var(--font-fluid-enormous);
+  font-weight: 200;
+}
+
+/* Border radius */
+@utility rounded-fluid {
+  border-radius: var(--radius-fluid);
+}
+@utility rounded-fluid-t {
+  border-radius: var(--radius-fluid) var(--radius-fluid) 0 0;
+}
+@utility rounded-fluid-b {
+  border-radius: 0 0 var(--radius-fluid) var(--radius-fluid);
+}
+@utility rounded-fluid-r {
+  border-radius: 0 var(--radius-fluid) var(--radius-fluid) 0;
+}
+
+/* Gradient overlays for scroll edges (port of @mixin gradientScroll). */
+@utility gradient-scroll-left {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    height: 100%;
+    width: var(--spacing-fluid);
+    background: linear-gradient(
+      270deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: darken;
+  }
+}
+@utility gradient-scroll-right {
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: var(--spacing-fluid);
+    background: linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0),
+      var(--background-color)
+    );
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: darken;
+  }
+}
+
+/* Glitch noise keyframes shared by wip.vue and ErrorDefault.vue.
+   Pre-baked from the SCSS @for loop that randomized clip rects per step. */
+@keyframes noise-anim {
+  0% {
+    clip: rect(116px, 9999px, 532px, 0);
+  }
+  5% {
+    clip: rect(674px, 9999px, 38px, 0);
+  }
+  10% {
+    clip: rect(420px, 9999px, 762px, 0);
+  }
+  15% {
+    clip: rect(289px, 9999px, 184px, 0);
+  }
+  20% {
+    clip: rect(7px, 9999px, 351px, 0);
+  }
+  25% {
+    clip: rect(615px, 9999px, 470px, 0);
+  }
+  30% {
+    clip: rect(248px, 9999px, 89px, 0);
+  }
+  35% {
+    clip: rect(742px, 9999px, 304px, 0);
+  }
+  40% {
+    clip: rect(53px, 9999px, 681px, 0);
+  }
+  45% {
+    clip: rect(389px, 9999px, 153px, 0);
+  }
+  50% {
+    clip: rect(572px, 9999px, 416px, 0);
+  }
+  55% {
+    clip: rect(126px, 9999px, 749px, 0);
+  }
+  60% {
+    clip: rect(723px, 9999px, 67px, 0);
+  }
+  65% {
+    clip: rect(341px, 9999px, 538px, 0);
+  }
+  70% {
+    clip: rect(94px, 9999px, 213px, 0);
+  }
+  75% {
+    clip: rect(481px, 9999px, 657px, 0);
+  }
+  80% {
+    clip: rect(208px, 9999px, 32px, 0);
+  }
+  85% {
+    clip: rect(596px, 9999px, 459px, 0);
+  }
+  90% {
+    clip: rect(75px, 9999px, 287px, 0);
+  }
+  95% {
+    clip: rect(364px, 9999px, 612px, 0);
+  }
+  100% {
+    clip: rect(157px, 9999px, 498px, 0);
+  }
+}
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(517px, 9999px, 264px, 0);
+  }
+  5% {
+    clip: rect(81px, 9999px, 705px, 0);
+  }
+  10% {
+    clip: rect(393px, 9999px, 178px, 0);
+  }
+  15% {
+    clip: rect(626px, 9999px, 471px, 0);
+  }
+  20% {
+    clip: rect(204px, 9999px, 39px, 0);
+  }
+  25% {
+    clip: rect(719px, 9999px, 587px, 0);
+  }
+  30% {
+    clip: rect(132px, 9999px, 359px, 0);
+  }
+  35% {
+    clip: rect(458px, 9999px, 232px, 0);
+  }
+  40% {
+    clip: rect(675px, 9999px, 102px, 0);
+  }
+  45% {
+    clip: rect(241px, 9999px, 537px, 0);
+  }
+  50% {
+    clip: rect(496px, 9999px, 61px, 0);
+  }
+  55% {
+    clip: rect(168px, 9999px, 743px, 0);
+  }
+  60% {
+    clip: rect(602px, 9999px, 281px, 0);
+  }
+  65% {
+    clip: rect(85px, 9999px, 419px, 0);
+  }
+  70% {
+    clip: rect(347px, 9999px, 174px, 0);
+  }
+  75% {
+    clip: rect(712px, 9999px, 593px, 0);
+  }
+  80% {
+    clip: rect(46px, 9999px, 318px, 0);
+  }
+  85% {
+    clip: rect(429px, 9999px, 651px, 0);
+  }
+  90% {
+    clip: rect(257px, 9999px, 96px, 0);
+  }
+  95% {
+    clip: rect(584px, 9999px, 372px, 0);
+  }
+  100% {
+    clip: rect(123px, 9999px, 487px, 0);
+  }
+}
+
+/* Base layer — port of 1-base/_base-default.scss */
+@layer base {
+  @font-face {
+    font-family: "Manrope";
+    src:
+      url("/font/Manrope-VariableFont_wght.woff2") format("woff2"),
+      url("/font/Manrope-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  body {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-family: "Manrope", sans-serif;
+  }
+
+  @media (min-width: 1025px) {
+    body {
+      overflow: hidden;
+    }
+  }
+
+  h1,
+  .h1 {
+    font-size: var(--font-fluid-h1);
+  }
+  h2 {
+    font-size: var(--font-fluid-h2);
+  }
+  h3 {
+    font-size: var(--font-fluid-h3);
+  }
+  h4 {
+    font-size: var(--font-fluid-h4);
+    font-weight: 500;
+  }
+  p {
+    font-size: var(--font-fluid-p);
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  div[role="button"]:focus-visible {
+    outline: 2px solid var(--accent-color);
+    padding: calc(var(--spacing-fluid) / 4);
+  }
+
+  .invert-selection button:focus-visible,
+  .invert-selection a:focus-visible,
+  .invert-selection div[role="button"]:focus-visible {
+    outline: 2px solid var(--background-color);
+  }
+
+  button,
+  div[role="button"] {
+    cursor: pointer;
+  }
+  button > *,
+  div[role="button"] > * {
+    pointer-events: none;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ::selection {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+  }
+
+  .invert-selection *::selection {
+    background-color: var(--background-color);
+    color: var(--accent-color);
+  }
+
+  .desktop-only {
+    @media (max-width: 1025px) {
+      display: none;
+    }
+  }
+}

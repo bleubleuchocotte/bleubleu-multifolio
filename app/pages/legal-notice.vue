@@ -1,0 +1,44 @@
+<script setup lang="ts">
+const { getWebsite, getPageLegalNotice } = usePrismicClient();
+const { data: options } = await getWebsite();
+const { data: page } = await getPageLegalNotice();
+
+const isDesktop = useIsDesktop({ minWidth: "(min-width: 769px)" });
+
+useSeoMeta({
+  title: options.value?.data["seo-title"],
+});
+</script>
+
+<template>
+  <div
+    class="border-border relative overflow-hidden border-b max-sm:flex max-sm:flex-col-reverse max-sm:border-b-0"
+  >
+    <UIBaseLinkHome>
+      {{ $t("page.legal-notice.button") }}
+    </UIBaseLinkHome>
+
+    <template v-if="isDesktop">
+      <div
+        v-for="i in 2"
+        :key="`row-${i}`"
+        class="flex border-border bg-background w-max border border-l-0 first-of-type:border-b-0"
+      >
+        <div
+          v-for="j in 6"
+          :key="`cell-${i}-${j}`"
+          :aria-hidden="!(j === 1 && i === 1)"
+          class="p-fluid flex flex-col gap-[0.6rem]"
+        >
+          <PrismicRichText :field="page?.data.content" />
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="p-fluid flex flex-col gap-[0.6rem]">
+        <PrismicRichText :field="page?.data.content" />
+      </div>
+    </template>
+  </div>
+</template>
